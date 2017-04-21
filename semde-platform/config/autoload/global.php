@@ -12,5 +12,13 @@
  */
 
 return [
-    // ...
+    'db' => [
+        'driver' => 'Pdo',
+        'dsn' => 'mysql:dbname=semde_authentication;host=localhost;',
+        'driver_options' => [
+               PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES \'UTF8\''
+        ],
+        'username' => 'manuel',
+        'password' => 'Manuel123@',
+    ],
 ];

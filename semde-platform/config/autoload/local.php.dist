@@ -12,4 +12,8 @@
  */
 
 return [
+    'db' => [
+        'driver' => 'Pdo_Mysql',
+        'mysql:dbname=semde_authentication;host=localhost;charset=utf8;username=root;password=manuel'
+    ],
 ];

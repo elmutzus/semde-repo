@@ -1,30 +1,28 @@
 <?php
 namespace Authentication;
 
+use Zend\Router\Http\Literal;
+use Zend\Router\Http\Segment;
 use Zend\ServiceManager\Factory\InvokableFactory;
+use Doctrine\DBAL\Driver\PDOMySql\Driver as PDOMySqlDriver;
+use Doctrine\ORM\Mapping\Driver\AnnotationDriver;
 
 return [
     'controllers' => [
         'factories' => [
-            Controller\SkeletonController::class => InvokableFactory::class,
+            Controller\AuthenticationController::class => Controller\Factory\AuthenticationControllerFactory::class,
         ],
     ],
     'router' => [
         'routes' => [
-            'module-name-here' => [
-                'type'    => 'Literal',
+            'performAuthentication' => [
+                'type' => Literal::class,
                 'options' => [
-                    // Change this to something specific to your module
-                    'route'    => '/module-specific-root',
+                    'route' => '/performAuthentication',
                     'defaults' => [
-                        'controller'    => Controller\SkeletonController::class,
-                        'action'        => 'index',
+                        'controller' => Controller\AuthenticationController::class,
+                        'action' => 'performAuthentication',
                     ],
-                ],
-                'may_terminate' => true,
-                'child_routes' => [
-                    // You can place additional routes that match under the
-                    // route defined above here.
                 ],
             ],
         ],
@@ -32,6 +30,36 @@ return [
     'view_manager' => [
         'template_path_stack' => [
             'Authentication' => __DIR__ . '/../view',
+        ],
+    ],
+    'doctrine' => [
+        'connection' => [
+            'orm_default' => [
+                'driverClass' => PDOMySqlDriver::class,
+                'params' => [
+                    'host'     => 'localhost',                    
+                    'user'     => 'manuel',
+                    'password' => 'Manuel123@',
+                    'dbname'   => 'semde_authentication',
+                ]
+            ], 
+        ],
+        'driver' => [
+            __NAMESPACE__ . '_driver' => [
+                'class' => AnnotationDriver::class,
+                'cache' => 'array',
+                'paths' => [__DIR__ . '/../src/Entity']
+            ],
+            'orm_default' => [
+                'drivers' => [
+                    __NAMESPACE__ . '\Entity' => __NAMESPACE__ . '_driver'
+                ]
+            ]
+        ]
+    ],
+    'service_manager' => [
+        'factories' => [
+            Service\UserManager::class => Service\Factory\UserManagerFactory::class,
         ],
     ],
 ];
