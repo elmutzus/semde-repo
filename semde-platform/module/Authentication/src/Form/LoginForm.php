@@ -10,11 +10,11 @@ namespace Authentication\Form;
 use Zend\Form\Form;
 
 /**
- * Description of AuthenticationForm
+ * Description of LoginForm
  *
  * @author manuel
  */
-class AuthenticationForm extends Form
+class LoginForm extends Form
 {
 
     //put your code here
@@ -22,12 +22,12 @@ class AuthenticationForm extends Form
     public function __construct()
     {
         // Define form name
-        parent::__construct('authentication-form');
+        parent::__construct('login-form');
 
         // Set POST method
         $this->setAttribute('method', 'post');
         // Set action attribute
-        $this->setAttribute('action', '/authentication/performAuthentication');
+        $this->setAttribute('action', '/login');
 
         // Add form elements
         $this->addElements();

@@ -18,11 +18,14 @@ use Authentication\Service\UserManager;
  * @author manuel
  */
 class UserManagerFactory implements FactoryInterface
-{ 
-    public function __invoke(ContainerInterface $container, $requestedName, array $options = null){
+{
+
+    public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
+    {
         $entityManager = $container->get('doctrine.entitymanager.orm_default');
-        
+
         // Instantiate the service and inject the dependencies
         return new UserManager($entityManager);
     }
+
 }

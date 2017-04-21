@@ -10,7 +10,7 @@ namespace Authentication\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
-use Authentication\Form\AuthenticationForm;
+use Authentication\Form\LoginForm;
 
 class AuthenticationController extends AbstractActionController
 {
@@ -29,11 +29,11 @@ class AuthenticationController extends AbstractActionController
         return [];
     }
 
-    public function performAuthenticationAction()
+    public function loginAction()
     {
         if ($this->getRequest()->isPost())
         {
-            $form = new AuthenticationForm();
+            $form = new LoginForm();
 
             if ($this->getRequest()->isPost())
             {
@@ -41,31 +41,24 @@ class AuthenticationController extends AbstractActionController
                 $data = $this->params()->fromPost();
                 $form->setData($data);
 
-                /*// Validate form
+                // Validate form
                 if ($form->isValid())
                 {
                     // Get filtered and validated data
                     $data = $form->getData();
-
-                    $layout = $this->layout();
-                    $layout->setTemplate('layout/roleSelectionLayout');
-
-                    // Send the data to the view
-                    $viewModel = new ViewModel([
-                        'userName' => $data['userName'],
-                        'userPassword' => $data['userPassword'],
-                        'users' => count($this->userManager->getUsers()),
-                    ]);
-
-                    $layout->setVariable('currentUser', $data['userName']);
-
-                    return $viewModel;
-                }*/
-                
-                
-                
-                return new ViewModel();
+                    
+                    if($data['userName'] == 'manuelito'){
+                        return $this->redirect()->toRoute('home');
+                    } else {
+                        return $this->redirect()->toRoute('loginRoute');
+                    }
+                }
             }
+
+            return new ViewModel([
+                'form' => $form,
+                'error' => 'Usuario no encontrado.'
+            ]);
         }
     }
 

@@ -18,7 +18,7 @@ use Authentication\Controller\AuthenticationController;
  *
  * @author manuel
  */
-class IndexControllerFactory implements FactoryInterface
+class AuthenticationControllerFactory implements FactoryInterface
 {
     public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {

@@ -1,0 +1,71 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Apr 20, 2017, 7:55:37 PM
+    Author     : manuel
+*/
+
+.nav,
+.navbar,
+.navbar-brand,
+.navbar-header,
+.navbar-right,
+.navbar-fixed-top {
+    background-color: #1D243D;
+    color: white;
+}
+
+a.dropdown-toggle {
+    color: white;
+}
+
+.nav > .dropdown > a:hover,
+.nav > .dropdown > a:visited,
+.nav > .dropdown > a:focus{
+    color: white;
+    background: rgba(255,255,255,0.2);
+}
+
+body {
+    margin-top: 55px;
+}
+
+.form-small {
+    max-width: 450px;
+    padding: 15px;
+    margin: 0 auto;
+}
+
+.form-large {
+    max-width: 900px;
+    padding: 15px;
+    margin: 0 auto;
+}
+
+.text-right
+{
+    text-align: right !important;
+}
+
+.text-center
+{
+    text-align: center !important;
+}
+
+.text-left
+{
+    text-align: left !important;
+}
+
+.text-left-margin {
+    margin-left: 10px;
+}
+
+.chart {
+    width: 95%;
+}
+
+

@@ -8,23 +8,23 @@ use Doctrine\DBAL\Driver\PDOMySql\Driver as PDOMySqlDriver;
 use Doctrine\ORM\Mapping\Driver\AnnotationDriver;
 
 return [
-    'controllers' => [
-        'factories' => [
-            Controller\AuthenticationController::class => Controller\Factory\AuthenticationControllerFactory::class,
-        ],
-    ],
     'router' => [
         'routes' => [
-            'performAuthentication' => [
+            'loginRoute' => [
                 'type' => Literal::class,
                 'options' => [
-                    'route' => '/performAuthentication',
+                    'route' => '/login',
                     'defaults' => [
                         'controller' => Controller\AuthenticationController::class,
-                        'action' => 'performAuthentication',
+                        'action' => 'login',
                     ],
                 ],
             ],
+        ],
+    ],
+    'controllers' => [
+        'factories' => [
+            Controller\AuthenticationController::class => Controller\Factory\AuthenticationControllerFactory::class,
         ],
     ],
     'view_manager' => [
