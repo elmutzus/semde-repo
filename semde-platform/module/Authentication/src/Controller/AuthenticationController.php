@@ -38,18 +38,12 @@ class AuthenticationController extends AbstractActionController
      */
     private $authService;
 
-    /**
-     * User manager.
-     * @var User\Service\UserManager
-     */
-    private $userManager;
 
-    public function __construct($entityManager, $authManager, $authService, $userManager)
+    public function __construct($entityManager, $authManager, $authService)
     {
         $this->entityManager = $entityManager;
         $this->authManager   = $authManager;
         $this->authService   = $authService;
-        $this->userManager   = $userManager;
     }
 
     public function loginAction()

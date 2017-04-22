@@ -78,7 +78,6 @@ return [
     ],
     'service_manager' => [
         'factories' => [
-            Service\UserManager::class                        => Service\Factory\UserManagerFactory::class,
             Service\AuthenticationAdapter::class              => Service\Factory\AuthenticationAdapterFactory::class,
             Service\AuthenticationManager::class              => Service\Factory\AuthenticationManagerFactory::class,
             \Zend\Authentication\AuthenticationService::class => Service\Factory\AuthenticationServiceFactory::class,
