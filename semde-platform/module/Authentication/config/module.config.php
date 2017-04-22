@@ -1,4 +1,5 @@
 <?php
+
 namespace Authentication;
 
 use Zend\Router\Http\Literal;
@@ -14,6 +15,16 @@ return [
                 'type' => Literal::class,
                 'options' => [
                     'route' => '/login',
+                    'defaults' => [
+                        'controller' => Controller\AuthenticationController::class,
+                        'action' => 'login',
+                    ],
+                ],
+            ],
+            'homeRoute' => [
+                'type' => Literal::class,
+                'options' => [
+                    'route' => '/',
                     'defaults' => [
                         'controller' => Controller\AuthenticationController::class,
                         'action' => 'login',
@@ -37,12 +48,12 @@ return [
             'orm_default' => [
                 'driverClass' => PDOMySqlDriver::class,
                 'params' => [
-                    'host'     => 'localhost',                    
-                    'user'     => 'manuel',
+                    'host' => 'localhost',
+                    'user' => 'manuel',
                     'password' => 'Manuel123@',
-                    'dbname'   => 'semde_authentication',
+                    'dbname' => 'semde_authentication',
                 ]
-            ], 
+            ],
         ],
         'driver' => [
             __NAMESPACE__ . '_driver' => [
@@ -64,15 +75,15 @@ return [
     ],
     'view_manager' => [
         'display_not_found_reason' => true,
-        'display_exceptions'       => true,
-        'doctype'                  => 'HTML5',
-        'not_found_template'       => 'error/404',
-        'exception_template'       => 'error/index',
+        'display_exceptions' => true,
+        'doctype' => 'HTML5',
+        'not_found_template' => 'error/404',
+        'exception_template' => 'error/index',
         'template_map' => [
-            'layout/layout'           => __DIR__ . '/../view/layout/unauthenticated.phtml',
+            'layout/layout' => __DIR__ . '/../view/layout/unauthenticated.phtml',
             'authentication/authentication/login' => __DIR__ . '/../view/authentication/authentication/login.phtml',
-            'error/404'               => __DIR__ . '/../view/error/404.phtml',
-            'error/index'             => __DIR__ . '/../view/error/index.phtml',
+            'error/404' => __DIR__ . '/../view/error/404.phtml',
+            'error/index' => __DIR__ . '/../view/error/index.phtml',
         ],
         'template_path_stack' => [
             __DIR__ . '/../view',
