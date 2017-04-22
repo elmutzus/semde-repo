@@ -68,4 +68,6 @@ body {
     width: 95%;
 }
 
-
+.errors {
+    color: red;
+}

@@ -5,9 +5,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 namespace Authentication\Form;
 
 use Zend\Form\Form;
+use Zend\Form\Fieldset;
+use Zend\InputFilter\InputFilter;
+use Zend\Validator\StringLength;
 
 /**
  * Description of LoginForm
@@ -31,6 +35,9 @@ class LoginForm extends Form
 
         // Add form elements
         $this->addElements();
+
+        // Add filters
+        $this->addInputFilter();
     }
 
     private function addElements()
@@ -39,12 +46,11 @@ class LoginForm extends Form
         // Add user name field
         $this->add([
             'type' => 'text',
-            'name' => 'userName',
+            'name' => 'user',
             'attributes' => [
-                'id' => 'userName',
+                'id' => 'user',
                 'class' => 'form-control',
                 'placeholder' => 'Usuario',
-                'required' => 'true',
             ],
             'options' => [
                 'label' => 'Usuario',
@@ -54,12 +60,11 @@ class LoginForm extends Form
         // Add password field
         $this->add([
             'type' => 'password',
-            'name' => 'userPassword',
+            'name' => 'password',
             'attributes' => [
-                'id' => 'userPassword',
+                'id' => 'password',
                 'class' => 'form-control',
                 'placeholder' => 'Contraseña',
-                'required' => 'true',
             ],
             'options' => [
                 'label' => 'Contraseña',
@@ -69,9 +74,9 @@ class LoginForm extends Form
         // Add submit button
         $this->add([
             'type' => 'submit',
-            'name' => 'sendAuthenticationInformation',
+            'name' => 'submit',
             'attributes' => [
-                'id' => 'sendAuthenticationInformation',
+                'id' => 'submit',
                 'class' => 'btn btn-primary btn-block',
                 'value' => 'Iniciar sesión',
             ],
@@ -81,5 +86,50 @@ class LoginForm extends Form
         ]);
     }
 
-}
+    /**
+     * This method creates input filter (used for form filtering/validation).
+     */
+    private function addInputFilter()
+    {
+        // Create main input filter
+        $inputFilter = new InputFilter();
+        $this->setInputFilter($inputFilter);
 
+        // Add input for "email" field
+        $inputFilter->add([
+            'name' => 'user',
+            'required' => true,
+            'filters' => [
+                    ['name' => 'StringTrim'],
+            ],
+            'validators' => [
+                    [
+                    'name' => 'StringLength',
+                    'options' => [
+                        'min' => 5,
+                        'max' => 25,
+                    ],
+                ],
+            ],
+        ]);
+
+        // Add input for "password" field
+        $inputFilter->add([
+            'name' => 'password',
+            'required' => true,
+            'filters' => [
+            ],
+            'validators' => [
+                    [
+                    'name' => 'StringLength',
+                    'options' => [
+                        'min' => 5,
+                        'max' => 25,
+                    ],
+                ],
+            ],
+        ]);
+
+    }
+
+}

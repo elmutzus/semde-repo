@@ -1,5 +1,4 @@
 <?php
-    //$form = new Authentication\Form\AuthenticationForm();
     $form = $this->form;
     
     if(!$form){
@@ -19,13 +18,17 @@
             <div class="panel-body">
                     <?= $this->form()->openTag($form); ?>                
                 <div class="form-group">
-                    <?= $this->formRow($form->get('userName')); ?>
+                    <?= $this->formLabel($form->get('user')); ?>
+                    <?= $this->formElement($form->get('user')); ?>
+                    <?= $this->formElementErrors($form->get('user'), ['class' => 'text-danger']); ?>
                 </div>
                 <div class="form-group">
-                    <?= $this->formRow($form->get('userPassword')); ?>
+                    <?= $this->formLabel($form->get('password')); ?>
+                    <?= $this->formElement($form->get('password')); ?>
+                    <?= $this->formElementErrors($form->get('password'), ['class' => 'text-danger']); ?>
                 </div>
                 <br>
-                <?= $this->formElement($form->get('sendAuthenticationInformation')); ?>
+                <?= $this->formElement($form->get('submit')); ?>
                 <?= $this->form()->closeTag(); ?>
             </div>
         </div>
