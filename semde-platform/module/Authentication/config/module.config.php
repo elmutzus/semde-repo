@@ -1,6 +1,6 @@
 <?php
 
-/* 
+/*
  * Copyright (c) 2017 Elder Mutzus <elmutzus@inspireswgt.com>.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -18,69 +18,58 @@ use Doctrine\DBAL\Driver\PDOMySql\Driver as PDOMySqlDriver;
 use Doctrine\ORM\Mapping\Driver\AnnotationDriver;
 
 return [
-    'router' => [
+    'router'          => [
         'routes' => [
-            'loginRoute' => [
-                'type' => Literal::class,
+            'loginRoute'         => [
+                'type'    => Literal::class,
                 'options' => [
-                    'route' => '/login',
+                    'route'    => '/login',
                     'defaults' => [
                         'controller' => Controller\AuthenticationController::class,
-                        'action' => 'login',
+                        'action'     => 'login',
                     ],
                 ],
             ],
-            'homeRoute' => [
-                'type' => Literal::class,
+            'homeRoute'          => [
+                'type'    => Literal::class,
                 'options' => [
-                    'route' => '/',
+                    'route'    => '/',
                     'defaults' => [
                         'controller' => Controller\AuthenticationController::class,
-                        'action' => 'login',
+                        'action'     => 'login',
                     ],
                 ],
             ],
             'roleSelectionRoute' => [
-                'type' => Literal::class,
+                'type'    => Literal::class,
                 'options' => [
-                    'route' => '/roleSelection',
+                    'route'    => '/roleSelection',
                     'defaults' => [
                         'controller' => Controller\AuthenticationController::class,
-                        'action' => 'roleSelection',
+                        'action'     => 'roleSelection',
                     ],
                 ],
             ],
         ],
     ],
-    'controllers' => [
+    'controllers'     => [
         'factories' => [
             Controller\AuthenticationController::class => Controller\Factory\AuthenticationControllerFactory::class,
         ],
     ],
-    'view_manager' => [
+    'view_manager'    => [
         'template_path_stack' => [
             'Authentication' => __DIR__ . '/../view',
         ],
     ],
-    'doctrine' => [
-        'connection' => [
-            'orm_default' => [
-                'driverClass' => PDOMySqlDriver::class,
-                'params' => [
-                    'host' => 'localhost',
-                    'user' => 'manuel',
-                    'password' => 'Manuel123@',
-                    'dbname' => 'semde_authentication',
-                ]
-            ],
-        ],
+    'doctrine'        => [
         'driver' => [
             __NAMESPACE__ . '_driver' => [
                 'class' => AnnotationDriver::class,
                 'cache' => 'array',
                 'paths' => [__DIR__ . '/../src/Entity']
             ],
-            'orm_default' => [
+            'orm_default'             => [
                 'drivers' => [
                     __NAMESPACE__ . '\Entity' => __NAMESPACE__ . '_driver'
                 ]
@@ -89,22 +78,25 @@ return [
     ],
     'service_manager' => [
         'factories' => [
-            Service\UserManager::class => Service\Factory\UserManagerFactory::class,
+            Service\UserManager::class                        => Service\Factory\UserManagerFactory::class,
+            Service\AuthenticationAdapter::class              => Service\Factory\AuthenticationAdapterFactory::class,
+            Service\AuthenticationManager::class              => Service\Factory\AuthenticationManagerFactory::class,
+            \Zend\Authentication\AuthenticationService::class => Service\Factory\AuthenticationServiceFactory::class,
         ],
     ],
-    'view_manager' => [
+    'view_manager'    => [
         'display_not_found_reason' => true,
-        'display_exceptions' => true,
-        'doctype' => 'HTML5',
-        'not_found_template' => 'error/404',
-        'exception_template' => 'error/index',
-        'template_map' => [
-            'layout/layout' => __DIR__ . '/../view/layout/unauthenticated.phtml',
+        'display_exceptions'       => true,
+        'doctype'                  => 'HTML5',
+        'not_found_template'       => 'error/404',
+        'exception_template'       => 'error/index',
+        'template_map'             => [
+            'layout/layout'                       => __DIR__ . '/../view/layout/unauthenticated.phtml',
             'authentication/authentication/login' => __DIR__ . '/../view/authentication/authentication/login.phtml',
-            'error/404' => __DIR__ . '/../view/error/404.phtml',
-            'error/index' => __DIR__ . '/../view/error/index.phtml',
+            'error/404'                           => __DIR__ . '/../view/error/404.phtml',
+            'error/index'                         => __DIR__ . '/../view/error/index.phtml',
         ],
-        'template_path_stack' => [
+        'template_path_stack'      => [
             __DIR__ . '/../view',
         ],
     ],

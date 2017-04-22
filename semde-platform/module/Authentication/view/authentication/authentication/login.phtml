@@ -12,7 +12,6 @@
 
 $form = $this->form;
 $form->prepare();
-
 ?>
 
 <section id="body">
@@ -33,7 +32,12 @@ $form->prepare();
                     <?= $this->formLabel($form->get('password')); ?>
                     <?= $this->formElement($form->get('password')); ?>
                     <?= $this->formElementErrors($form->get('password'), ['class' => 'alert alert-warning']); ?>
-                </div>                
+                </div>  
+                <div class="checkbox">
+                    <label>
+                        <?= $this->formElement($form->get('rememberMe')); ?> Recordarme
+                    </label>
+                </div>
                 <?= $this->formElement($form->get('submit')); ?>
                 <?= $this->form()->closeTag(); ?>
                 <br>

@@ -17,11 +17,6 @@ use Authentication\Entity\User;
 use Zend\Filter\StaticFilter;
 use Authentication\Form\LoginForm;
 
-/**
- * Description of UserManager
- *
- * @author manuel
- */
 class UserManager
 {
 
@@ -37,33 +32,37 @@ class UserManager
         return $this->entityManager->getRepository(User::class)->findAll();
     }
 
-    public function getUser($userName)
+    public function login($user, $password)
     {
-        $loginForm = new $LoginForm();
-
-
-
-
-
-
-
-        // Create new Post entity.
-        $post = new Post();
-
-        $post->setTitle($data['title']);
-        $post->setContent($data['content']);
-        $post->setStatus($data['status']);
-        $currentDate = date('Y-m-d H:i:s');
-        $post->setDateCreated($currentDate);
-
-        // Add the entity to entity manager.
-        $this->entityManager->persist($post);
-
-        // Add tags to post
-        $this->addTagsToPost($data['tags'], $post);
-
-        // Apply changes to database.
-        $this->entityManager->flush();
+        
     }
 
+    /* public function getUser($userName)
+      {
+      $loginForm = new $LoginForm();
+
+
+
+
+
+
+
+      // Create new Post entity.
+      $post = new Post();
+
+      $post->setTitle($data['title']);
+      $post->setContent($data['content']);
+      $post->setStatus($data['status']);
+      $currentDate = date('Y-m-d H:i:s');
+      $post->setDateCreated($currentDate);
+
+      // Add the entity to entity manager.
+      $this->entityManager->persist($post);
+
+      // Add tags to post
+      $this->addTagsToPost($data['tags'], $post);
+
+      // Apply changes to database.
+      $this->entityManager->flush();
+      } */
 }

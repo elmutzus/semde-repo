@@ -14,9 +14,10 @@
 namespace Authentication\Controller\Factory;
 
 use Interop\Container\ContainerInterface;
-use Zend\ServiceManager\Factory\FactoryInterface;
-use Authentication\Service\UserManager;
 use Authentication\Controller\AuthenticationController;
+use Zend\ServiceManager\Factory\FactoryInterface;
+use Authentication\Service\AuthenticationManager;
+use Authentication\Service\UserManager;
 
 /**
  * Description of AuthenticationControllerFactory
@@ -26,11 +27,12 @@ use Authentication\Controller\AuthenticationController;
 class AuthenticationControllerFactory implements FactoryInterface
 {
     public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
-    {
+    {   
         $entityManager = $container->get('doctrine.entitymanager.orm_default');
+        $authManager = $container->get(AuthenticationManager::class);
+        $authService = $container->get(\Zend\Authentication\AuthenticationService::class);
         $userManager = $container->get(UserManager::class);
         
-        // Instantiate the controller and inject dependencies
-        return new AuthenticationController($entityManager, $userManager);
+        return new AuthenticationController($entityManager, $authManager, $authService, $userManager);
     }
 }

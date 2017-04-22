@@ -20,18 +20,36 @@ use Authentication\Form\LoginForm;
 class AuthenticationController extends AbstractActionController
 {
 
+    /**
+     * Entity manager.
+     * @var Doctrine\ORM\EntityManager 
+     */
     private $entityManager;
+
+    /**
+     * Auth manager.
+     * @var User\Service\AuthManager 
+     */
+    private $authManager;
+
+    /**
+     * Auth service.
+     * @var \Zend\Authentication\AuthenticationService
+     */
+    private $authService;
+
+    /**
+     * User manager.
+     * @var User\Service\UserManager
+     */
     private $userManager;
 
-    public function __construct($entityManager, $userManager)
+    public function __construct($entityManager, $authManager, $authService, $userManager)
     {
         $this->entityManager = $entityManager;
+        $this->authManager   = $authManager;
+        $this->authService   = $authService;
         $this->userManager   = $userManager;
-    }
-
-    public function indexAction()
-    {
-        return [];
     }
 
     public function loginAction()
@@ -51,11 +69,17 @@ class AuthenticationController extends AbstractActionController
             {
                 // Get filtered and validated data
                 $data = $form->getData();
+                
+                $result = $this->authManager->login($data['user'], $data['password'], $data['rememberMe']);
 
                 if ($data['user'] == 'manuelito')
+                {
                     return $this->redirect()->toRoute('roleSelectionRoute');
+                }
                 else
+                {
                     $isLoginError = true;
+                }
             }
         }
 
