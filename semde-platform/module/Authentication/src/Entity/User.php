@@ -1,6 +1,6 @@
 <?php
 
-/* 
+/*
  * Copyright (c) 2017 Elder Mutzus <elmutzus@inspireswgt.com>.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -30,27 +30,27 @@ class User
      * @ORM\Column(name="user")   
      */
     protected $user;
-    
+
     /**
      * @ORM\Column(name="password")   
      */
     protected $password;
-    
+
     /**
      * @ORM\Column(name="name")   
      */
     protected $name;
-    
+
     /**
      * @ORM\Column(name="lastname")   
      */
     protected $lastname;
-    
+
     /**
      * @ORM\Column(name="email")   
      */
     protected $email;
-    
+
     /**
      * @ORM\Column(name="phone")   
      */
@@ -110,5 +110,5 @@ class User
     {
         $this->phone = $newPhone;
     }
-}
 
+}

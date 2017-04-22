@@ -1,6 +1,6 @@
 <?php
 
-/* 
+/*
  * Copyright (c) 2017 Elder Mutzus <elmutzus@inspireswgt.com>.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -14,9 +14,7 @@
 namespace Authentication\Form;
 
 use Zend\Form\Form;
-use Zend\Form\Fieldset;
 use Zend\InputFilter\InputFilter;
-use Zend\Validator\StringLength;
 
 /**
  * Description of LoginForm
@@ -47,46 +45,43 @@ class LoginForm extends Form
 
     private function addElements()
     {
-
         // Add user name field
         $this->add([
-            'type' => 'text',
-            'name' => 'user',
+            'type'       => 'text',
+            'name'       => 'user',
             'attributes' => [
-                'id' => 'user',
-                'class' => 'form-control',
+                'class'       => 'form-control',
                 'placeholder' => 'Usuario',
             ],
-            'options' => [
+            'options'    => [
                 'label' => 'Usuario',
             ],
         ]);
 
         // Add password field
         $this->add([
-            'type' => 'password',
-            'name' => 'password',
+            'type'       => 'password',
+            'name'       => 'password',
             'attributes' => [
-                'id' => 'password',
-                'class' => 'form-control',
+                'class'       => 'form-control',
                 'placeholder' => 'Contraseña',
             ],
-            'options' => [
+            'options'    => [
                 'label' => 'Contraseña',
             ],
         ]);
 
         // Add submit button
         $this->add([
-            'type' => 'submit',
-            'name' => 'submit',
+            'type'       => 'submit',
+            'name'       => 'submit',
             'attributes' => [
-                'id' => 'submit',
                 'class' => 'btn btn-primary btn-block',
                 'value' => 'Iniciar sesión',
             ],
-            'options' => [
+            'options'    => [
                 'label' => 'Iniciar sesión',
+                'id'    => 'submit',
             ],
         ]);
     }
@@ -102,14 +97,16 @@ class LoginForm extends Form
 
         // Add input for "email" field
         $inputFilter->add([
-            'name' => 'user',
-            'required' => true,
-            'filters' => [
+            'name'       => 'user',
+            'required'   => true,
+            'filters'    => [
                     ['name' => 'StringTrim'],
+                    ['name' => 'StripTags'],
+                    ['name' => 'StripNewlines'],
             ],
             'validators' => [
                     [
-                    'name' => 'StringLength',
+                    'name'    => 'StringLength',
                     'options' => [
                         'min' => 5,
                         'max' => 25,
@@ -120,13 +117,16 @@ class LoginForm extends Form
 
         // Add input for "password" field
         $inputFilter->add([
-            'name' => 'password',
-            'required' => true,
-            'filters' => [
+            'name'       => 'password',
+            'required'   => true,
+            'filters'    => [
+                    ['name' => 'StringTrim'],
+                    ['name' => 'StripTags'],
+                    ['name' => 'StripNewlines'],
             ],
             'validators' => [
                     [
-                    'name' => 'StringLength',
+                    'name'    => 'StringLength',
                     'options' => [
                         'min' => 5,
                         'max' => 25,
@@ -134,7 +134,6 @@ class LoginForm extends Form
                 ],
             ],
         ]);
-
     }
 
 }

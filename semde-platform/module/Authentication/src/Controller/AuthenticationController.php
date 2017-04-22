@@ -1,6 +1,6 @@
 <?php
 
-/* 
+/*
  * Copyright (c) 2017 Elder Mutzus <elmutzus@inspireswgt.com>.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -26,7 +26,7 @@ class AuthenticationController extends AbstractActionController
     public function __construct($entityManager, $userManager)
     {
         $this->entityManager = $entityManager;
-        $this->userManager = $userManager;
+        $this->userManager   = $userManager;
     }
 
     public function indexAction()
@@ -40,6 +40,8 @@ class AuthenticationController extends AbstractActionController
         {
             $form = new LoginForm();
 
+            $isLoginError = true;
+
             if ($this->getRequest()->isPost())
             {
                 // Fill in the form with POST data
@@ -51,18 +53,21 @@ class AuthenticationController extends AbstractActionController
                 {
                     // Get filtered and validated data
                     $data = $form->getData();
-                    
-                    if($data['userName'] == 'manuelito'){
+
+                    if ($data['userName'] == 'manuelito')
+                    {
                         return $this->redirect()->toRoute('home');
-                    } else {
+                    }
+                    else
+                    {
                         return $this->redirect()->toRoute('loginRoute');
                     }
                 }
             }
 
             return new ViewModel([
-                'form' => $form,
-                'error' => 'Usuario no encontrado.'
+                'form'         => $form,
+                'isLoginError' => $isLoginError,
             ]);
         }
     }
