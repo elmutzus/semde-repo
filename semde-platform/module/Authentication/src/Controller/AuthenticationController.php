@@ -36,40 +36,38 @@ class AuthenticationController extends AbstractActionController
 
     public function loginAction()
     {
+        $isLoginError = false;
+
+        $form = new LoginForm();
+
         if ($this->getRequest()->isPost())
         {
-            $form = new LoginForm();
+            $data = $this->params()->fromPost();
 
-            $isLoginError = true;
+            $form->setData($data);
 
-            if ($this->getRequest()->isPost())
+            // Validate form
+            if ($form->isValid())
             {
-                // Fill in the form with POST data
-                $data = $this->params()->fromPost();
-                $form->setData($data);
+                // Get filtered and validated data
+                $data = $form->getData();
 
-                // Validate form
-                if ($form->isValid())
-                {
-                    // Get filtered and validated data
-                    $data = $form->getData();
-
-                    if ($data['userName'] == 'manuelito')
-                    {
-                        return $this->redirect()->toRoute('home');
-                    }
-                    else
-                    {
-                        return $this->redirect()->toRoute('loginRoute');
-                    }
-                }
+                if ($data['user'] == 'manuelito')
+                    return $this->redirect()->toRoute('roleSelectionRoute');
+                else
+                    $isLoginError = true;
             }
-
-            return new ViewModel([
-                'form'         => $form,
-                'isLoginError' => $isLoginError,
-            ]);
         }
+
+        return new ViewModel([
+            'form'         => $form,
+            'isLoginError' => $isLoginError,
+        ]);
+    }
+
+    public function roleSelectionAction()
+    {
+        $Iamhere = true;
     }
 
 }

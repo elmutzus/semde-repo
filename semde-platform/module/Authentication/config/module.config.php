@@ -40,6 +40,16 @@ return [
                     ],
                 ],
             ],
+            'roleSelectionRoute' => [
+                'type' => Literal::class,
+                'options' => [
+                    'route' => '/roleSelection',
+                    'defaults' => [
+                        'controller' => Controller\AuthenticationController::class,
+                        'action' => 'roleSelection',
+                    ],
+                ],
+            ],
         ],
     ],
     'controllers' => [

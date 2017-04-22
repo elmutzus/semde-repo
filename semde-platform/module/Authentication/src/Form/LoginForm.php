@@ -16,15 +16,8 @@ namespace Authentication\Form;
 use Zend\Form\Form;
 use Zend\InputFilter\InputFilter;
 
-/**
- * Description of LoginForm
- *
- * @author manuel
- */
 class LoginForm extends Form
 {
-
-    //put your code here
 
     public function __construct()
     {
@@ -86,9 +79,6 @@ class LoginForm extends Form
         ]);
     }
 
-    /**
-     * This method creates input filter (used for form filtering/validation).
-     */
     private function addInputFilter()
     {
         // Create main input filter
@@ -121,8 +111,6 @@ class LoginForm extends Form
             'required'   => true,
             'filters'    => [
                     ['name' => 'StringTrim'],
-                    ['name' => 'StripTags'],
-                    ['name' => 'StripNewlines'],
             ],
             'validators' => [
                     [

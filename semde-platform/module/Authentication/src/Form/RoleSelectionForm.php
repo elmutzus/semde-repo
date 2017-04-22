@@ -14,9 +14,67 @@
 namespace Authentication\Form;
 
 use Zend\Form\Form;
+use Zend\Form\Element;
 use Zend\InputFilter\InputFilter;
 
 class RoleSelectionForm extends Form
 {
+
+    public function __construct()
+    {
+        // Define form name
+        parent::__construct('role-selection-form');
+
+        // Set POST method
+        $this->setAttribute('method', 'post');
+        // Set action attribute
+        $this->setAttribute('action', '/roleSelection');
+
+        // Add form elements
+        $this->addElements();
+    }
     
+    private function addElements()
+    {
+        // Add user name field
+        $this->add([
+            'type'       => 'text',
+            'name'       => 'user',
+            'attributes' => [
+                'class'       => 'form-control',
+                'placeholder' => 'Usuario',
+                'disabled' => true,
+            ],
+            'options'    => [
+                'label' => 'Usuario',
+            ],
+        ]);
+
+        // Add password field
+        $this->add([
+            'type'       => 'select',
+            'name'       => 'availableRoles',
+            'attributes' => [
+                'class'       => 'form-control',
+                'placeholder' => 'Contraseña',
+            ],
+            'options'    => [
+                'label' => 'Contraseña',
+            ],
+        ]);
+
+        // Add submit button
+        $this->add([
+            'type'       => 'submit',
+            'name'       => 'submit',
+            'attributes' => [
+                'class' => 'btn btn-primary btn-block',
+                'value' => 'Continuar',
+            ],
+            'options'    => [
+                'label' => 'Continuar',
+                'id'    => 'submit',
+            ],
+        ]);
+    }
 }

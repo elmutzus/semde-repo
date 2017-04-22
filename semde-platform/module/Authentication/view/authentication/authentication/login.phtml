@@ -11,13 +11,8 @@
  */
 
 $form = $this->form;
-
-if (!$form)
-{
-    $form = new Authentication\Form\LoginForm();
-}
-
 $form->prepare();
+
 ?>
 
 <section id="body">
@@ -38,15 +33,15 @@ $form->prepare();
                     <?= $this->formLabel($form->get('password')); ?>
                     <?= $this->formElement($form->get('password')); ?>
                     <?= $this->formElementErrors($form->get('password'), ['class' => 'alert alert-warning']); ?>
-                </div>
+                </div>                
+                <?= $this->formElement($form->get('submit')); ?>
+                <?= $this->form()->closeTag(); ?>
+                <br>
                 <?php if ($isLoginError): ?>
                     <div class="alert alert-warning" role="alert">
                         Usuario y/o contrase&ntilde;a incorrectos.
                     </div>
                 <?php endif; ?>
-                <br>
-                <?= $this->formElement($form->get('submit')); ?>
-                <?= $this->form()->closeTag(); ?>
             </div>
         </div>
     </div>
