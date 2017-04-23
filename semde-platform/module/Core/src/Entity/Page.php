@@ -24,6 +24,7 @@ use Doctrine\Common\Collections\ArrayCollection;
  */
 class Page
 {
+
     /**
      * @ORM\Id
      * @ORM\Column(name="page")   
@@ -34,50 +35,79 @@ class Page
      * @ORM\Column(name="name")   
      */
     protected $name;
-    
+
     /**
      * @ORM\Column(name="description")   
      */
     protected $description;
-    
+
     /**
      * @ORM\Column(name="route")   
      */
     protected $route;
-    
+
     /**
      * @ORM\Column(name="type")   
      */
     protected $type;
-    
+
     /**
      * @ORM\ManyToMany(targetEntity="\Core\Entity\Role", mappedBy="pages")
      */
     protected $roles;
-    
+
+    /*
+     * Constructor
+     */
+
     public function __construct()
     {
         $this->roles = new ArrayCollection();
     }
-    
-    
-    public function getPage(){
+
+    /*
+     * Gest the page
+     */
+
+    public function getPage()
+    {
         return $this->page;
     }
-    
-    public function getName(){
+
+    /*
+     * Gest the name
+     */
+
+    public function getName()
+    {
         return $this->name;
     }
-    
-    public function getDescription(){
+
+    /*
+     * Gest the description
+     */
+
+    public function getDescription()
+    {
         return $this->description;
     }
-    
-    public function getRoute(){
+
+    /*
+     * Gets the route
+     */
+
+    public function getRoute()
+    {
         return $this->route;
     }
-    
-    public function getType(){
+
+    /*
+     * Gets the type
+     */
+
+    public function getType()
+    {
         return $this->type;
     }
+
 }

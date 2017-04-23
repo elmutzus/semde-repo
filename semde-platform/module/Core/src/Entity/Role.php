@@ -41,41 +41,11 @@ class Role
      */
     protected $description;
 
-    public function setRole($newRole)
-    {
-        $this->role = $newRole;
-    }
-
-    public function setName($newName)
-    {
-        $this->name = $newName;
-    }
-
-    public function setDescription($newDescription)
-    {
-        $this->description = $newDescription;
-    }
-
-    public function getRole()
-    {
-        return $this->role;
-    }
-
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    public function getDescription()
-    {
-        return $this->description;
-    }
-
     /**
      * @ORM\ManyToMany(targetEntity="\Core\Entity\User", mappedBy="roles")
      */
     protected $users;
-    
+
     /**
      * @ORM\ManyToMany(targetEntity="\Core\Entity\Page", inversedBy="roles")
      * @ORM\JoinTable(name="pages_per_role",
@@ -85,28 +55,93 @@ class Role
      */
     protected $pages;
 
+    /*
+     * Constructor
+     */
+
     public function __construct()
     {
         $this->users = new ArrayCollection();
         $this->pages = new ArrayCollection();
     }
-    
+
+    /*
+     * Sets the role
+     */
+    public function setRole($newRole)
+    {
+        $this->role = $newRole;
+    }
+
+    /*
+     * Sets the name
+     */
+    public function setName($newName)
+    {
+        $this->name = $newName;
+    }
+
+    /*
+     * Sets the description
+     */
+    public function setDescription($newDescription)
+    {
+        $this->description = $newDescription;
+    }
+
+    /*
+     * Gets the role
+     */
+    public function getRole()
+    {
+        return $this->role;
+    }
+
+    /*
+     * Gets the name
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /*
+     * Gets the description
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /*
+     * Gets the users
+     */
     public function getUsers()
     {
         return $this->users;
     }
 
-    // Adds a post into collection of posts related to this tag.
+    /*
+     * Adds a user
+     */
     public function addUser($user)
     {
         $this->users[] = $user;
     }
-    
-    public function getPages(){
+
+    /*
+     * Gets the pages
+     */
+    public function getPages()
+    {
         return $this->pages;
     }
-    
-    public function addPage($newPage){
+
+    /*
+     * Adds a page
+     */
+    public function addPage($newPage)
+    {
         $this->pages[] = $newPage;
     }
 
