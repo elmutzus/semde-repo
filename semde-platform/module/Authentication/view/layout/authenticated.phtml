@@ -48,8 +48,8 @@ $this->doctype();
                         <span class="glyphicon glyphicon-chevron-down"></span>
                     </button>
                     <a class="navbar-brand" href="#">
-                        SEMDE - <?= \Authentication\Module::VERSION ?>
-                    </a>
+                        SEMDE
+                    </a> 
                 </div>
                 <div class="navbar-collapse collapse" id="collapseable-nav">
                     <ul class="nav navbar-nav">
@@ -87,6 +87,10 @@ $this->doctype();
                             <ul class="dropdown-menu" role="menu">
                                 <li class="disabled">
                                     <a href="#"><span class="glyphicon glyphicon-lock"></span> Rol: <?= $this->currentUserRole ?></a>
+                                </li>
+                                <li class="divider"></li>
+                                <li class="disabled">
+                                    <a href="#"><span class="glyphicon glyphicon-refresh"></span> v.<?= \Authentication\Module::VERSION ?></a>
                                 </li>
                                 <li class="divider"></li>
                                 <li>
