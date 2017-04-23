@@ -179,7 +179,7 @@ class AuthenticationController extends AbstractActionController
         $managementSnippet = '';
         
         foreach($managementPages as $page){
-            $managementSnippet .= '<li><a href="<?= $this->url(\'' . $page->getRoute() . '\') ?>">' . $page->getName() . '</a></li>';
+            $managementSnippet .= '<li><a href="<?php= $this->url(\'' . $page->getRoute() . '\') ?>">' . $page->getName() . '</a></li>';
         }
         
         $reportsSnippet = '';
@@ -201,7 +201,7 @@ class AuthenticationController extends AbstractActionController
         } else {
             $layout->setVariable('showManagements', false);
         }
-                
+    
         return new ViewModel();
     }
 

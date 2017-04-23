@@ -91,4 +91,40 @@ class Module
     }
     
  
+    // Event listener method.
+    public function onError(MvcEvent $event)
+    {
+        // Get the exception information.
+        $exception = $event->getParam('exception');
+        if ($exception!=null) {
+            $exceptionName = $exception->getMessage();
+            $file = $exception->getFile();
+            $line = $exception->getLine();
+            $stackTrace = $exception->getTraceAsString();
+        }
+        $errorMessage = $event->getError();
+        $controllerName = $event->getController();
+        
+        // Prepare email message.
+        $to = 'admin@yourdomain.com';
+        $subject = 'Your Website Exception';
+        
+        $body = '';
+        if(isset($_SERVER['REQUEST_URI'])) {
+            $body .= "Request URI: " . $_SERVER['REQUEST_URI'] . "\n\n";
+        }
+        $body .= "Controller: $controllerName\n";
+        $body .= "Error message: $errorMessage\n";
+        if ($exception!=null) {
+            $body .= "Exception: $exceptionName\n";
+            $body .= "File: $file\n";
+            $body .= "Line: $line\n";
+            $body .= "Stack trace:\n\n" . $stackTrace;
+        }
+        
+        $body = str_replace("\n", "<br>", $body);
+        
+        // Send an email about the error.
+        mail($to, $subject, $body);
+    }
 }

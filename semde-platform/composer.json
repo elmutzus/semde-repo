@@ -24,14 +24,13 @@
         "zendframework/zend-session": "^2.7.1",
         "doctrine/doctrine-orm-module": "^1.1",
         "zendframework/zend-inputfilter": "^2.7",
-        "zendframework/zend-crypt": "^3.2"
+        "zendframework/zend-crypt": "^3.2",
+        "zendframework/zend-navigation": "^2.8"
     },
     "autoload": {
         "psr-4": {
             "Application\\": "module/Application/src/",
-            "Authentication\\": "module/Authentication/src",
-            "Management\\": "module/Management/src",
-            "Report\\": "module/Report/src"
+            "Authentication\\": "module/Authentication/src"
         }
     },
     "autoload-dev": {
