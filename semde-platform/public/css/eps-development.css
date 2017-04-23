@@ -8,25 +8,29 @@ and open the template in the editor.
     Author     : manuel
 */
 
-.nav,
-.navbar,
-.navbar-brand,
-.navbar-header,
-.navbar-right,
-.navbar-fixed-top {
+.navbar {
     background-color: #1D243D;
     color: white;
 }
 
-a.dropdown-toggle {
+div.navbar-header > a.navbar-brand,
+div.navbar-header > a.navbar-brand:hover,
+div.navbar-header > a.navbar-brand:visited,
+div.navbar-header > a.navbar-brand:focus {
+    
+    background-color: #1D243D;
     color: white;
 }
 
-.nav > .dropdown > a:hover,
-.nav > .dropdown > a:visited,
-.nav > .dropdown > a:focus{
+li.dropdown > a.dropdown-toggle:hover,
+li.dropdown > a.dropdown-toggle:visited,
+li.dropdown > a.dropdown-toggle:focus {
     color: white;
     background: rgba(255,255,255,0.2);
+}
+
+a.dropdown-toggle {
+    color: white;
 }
 
 body {

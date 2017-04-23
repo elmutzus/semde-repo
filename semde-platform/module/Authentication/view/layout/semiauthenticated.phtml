@@ -44,19 +44,19 @@ $this->doctype();
         ?>
     </head>
     <body>
-        <nav class="navbar navbar-fixed-top">
-            <div class="container">
+        <header>
+            <nav class="navbar navbar-fixed-top">
                 <div class="navbar-header">
                     <button type="button" class="btn btn-success navbar-toggle" data-toggle="collapse" data-target="#collapseable-nav">
                         <span class="glyphicon glyphicon-chevron-down"></span>
                     </button>
-                    <a class="nav navbar-brand" href="#">
+                    <a class="navbar-brand" href="#">
                         SEMDE - <?= \Authentication\Module::VERSION ?>
                     </a>
                 </div>
                 <ul class="nav navbar-nav navbar-right">
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="hover:white;">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <span class="glyphicon glyphicon-user"></span>&nbsp; <?= $this->currentUser ?>
                             <span class="caret"></span>                          
                         </a>
@@ -67,8 +67,8 @@ $this->doctype();
                         </ul>
                     </li>
                 </ul>
-            </div>
-        </nav>
+            </nav>
+        </header>
         <div class="container">
             <?= $this->content ?>
             <hr>
