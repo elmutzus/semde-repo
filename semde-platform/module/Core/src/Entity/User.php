@@ -11,7 +11,7 @@
  *    Elder Mutzus <elder.mutzus@inspireswgt.com> - initial API and implementation and/or initial documentation
  */
 
-namespace Authentication\Entity;
+namespace Core\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -56,7 +56,7 @@ class User
     protected $phone;
 
     /**
-     * @ORM\ManyToMany(targetEntity="\Authentication\Entity\Role", inversedBy="users")
+     * @ORM\ManyToMany(targetEntity="\Core\Entity\Role", inversedBy="users")
      * @ORM\JoinTable(name="role_per_user",
      *      joinColumns={@ORM\JoinColumn(name="user", referencedColumnName="user")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="role", referencedColumnName="role")}

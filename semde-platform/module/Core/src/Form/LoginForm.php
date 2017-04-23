@@ -11,7 +11,7 @@
  *    Elder Mutzus <elder.mutzus@inspireswgt.com> - initial API and implementation and/or initial documentation
  */
 
-namespace Authentication\Form;
+namespace Core\Form;
 
 use Zend\Form\Form;
 use Zend\InputFilter\InputFilter;

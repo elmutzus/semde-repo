@@ -11,11 +11,11 @@
  *    Elder Mutzus <elder.mutzus@inspireswgt.com> - initial API and implementation and/or initial documentation
  */
 
-namespace Authentication\Service;
+namespace Core\Service;
 
 use Zend\Authentication\Result;
-use Authentication\Entity\User;
-use Authentication\Entity\Role;
+use Core\Entity\User;
+use Core\Entity\Role;
 
 /**
  * Description of AuthenticationManager

@@ -11,14 +11,14 @@
  *    Elder Mutzus <elder.mutzus@inspireswgt.com> - initial API and implementation and/or initial documentation
  */
 
-namespace Authentication\Service\Factory;
+namespace Core\Service\Factory;
 
 use Interop\Container\ContainerInterface;
 use Zend\Authentication\AuthenticationService;
 use Zend\ServiceManager\Factory\FactoryInterface;
 use Zend\Session\SessionManager;
 use Zend\Authentication\Storage\Session as SessionStorage;
-use Authentication\Service\AuthenticationAdapter;
+use Core\Service\AuthenticationAdapter;
 
 /**
  * Description of AuthenticationServiceFactory

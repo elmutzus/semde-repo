@@ -11,12 +11,12 @@
  *    Elder Mutzus <elder.mutzus@inspireswgt.com> - initial API and implementation and/or initial documentation
  */
 
-namespace Authentication\Controller;
+namespace Core\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
-use Authentication\Form\LoginForm;
-use Authentication\Form\RoleSelectionForm;
+use Core\Form\LoginForm;
+use Core\Form\RoleSelectionForm;
 use Zend\Authentication\Result;
 use Doctrine\Common\Collections\ArrayCollection;
 

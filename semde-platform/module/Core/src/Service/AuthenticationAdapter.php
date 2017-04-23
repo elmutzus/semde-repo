@@ -11,12 +11,12 @@
  *    Elder Mutzus <elder.mutzus@inspireswgt.com> - initial API and implementation and/or initial documentation
  */
 
-namespace Authentication\Service;
+namespace Core\Service;
 
 use Zend\Authentication\Adapter\AdapterInterface;
 use Zend\Authentication\Result;
 use Zend\Crypt\Password\Bcrypt;
-use Authentication\Entity\User;
+use Core\Entity\User;
 
 /**
  * Description of AuthenticationAdapter

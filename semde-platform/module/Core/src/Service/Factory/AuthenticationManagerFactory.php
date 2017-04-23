@@ -11,11 +11,11 @@
  *    Elder Mutzus <elder.mutzus@inspireswgt.com> - initial API and implementation and/or initial documentation
  */
 
-namespace Authentication\Service\Factory;
+namespace Core\Service\Factory;
 
 use Interop\Container\ContainerInterface;
 use Zend\ServiceManager\Factory\FactoryInterface;
-use Authentication\Service\AuthenticationManager;
+use Core\Service\AuthenticationManager;
 
 /**
  * Description of AuthenticationManagerFactory

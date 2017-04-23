@@ -11,7 +11,7 @@
  *    Elder Mutzus <elder.mutzus@inspireswgt.com> - initial API and implementation and/or initial documentation
  */
 
-namespace Authentication\Entity;
+namespace Core\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -72,12 +72,12 @@ class Role
     }
 
     /**
-     * @ORM\ManyToMany(targetEntity="\Authentication\Entity\User", mappedBy="roles")
+     * @ORM\ManyToMany(targetEntity="\Core\Entity\User", mappedBy="roles")
      */
     protected $users;
     
     /**
-     * @ORM\ManyToMany(targetEntity="\Authentication\Entity\Page", inversedBy="roles")
+     * @ORM\ManyToMany(targetEntity="\Core\Entity\Page", inversedBy="roles")
      * @ORM\JoinTable(name="pages_per_role",
      *      joinColumns={@ORM\JoinColumn(name="role", referencedColumnName="role")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="page", referencedColumnName="page")}

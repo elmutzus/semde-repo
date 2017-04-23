@@ -11,7 +11,7 @@
  *    Elder Mutzus <elder.mutzus@inspireswgt.com> - initial API and implementation and/or initial documentation
  */
 
-namespace Authentication\Entity;
+namespace Core\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -51,7 +51,7 @@ class Page
     protected $type;
     
     /**
-     * @ORM\ManyToMany(targetEntity="\Authentication\Entity\Role", mappedBy="pages")
+     * @ORM\ManyToMany(targetEntity="\Core\Entity\Role", mappedBy="pages")
      */
     protected $roles;
     

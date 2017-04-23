@@ -11,7 +11,7 @@
  *    Elder Mutzus <elder.mutzus@inspireswgt.com> - initial API and implementation and/or initial documentation
  */
 
-namespace Authentication;
+namespace Core;
 
 use Zend\Router\Http\Literal;
 use Zend\Router\Http\Segment;
@@ -110,10 +110,10 @@ return [
         'not_found_template'       => 'error/404',
         'exception_template'       => 'error/index',
         'template_map'             => [
-            'layout/layout'                       => __DIR__ . '/../view/layout/unauthenticated.phtml',
-            'authentication/authentication/login' => __DIR__ . '/../view/authentication/authentication/login.phtml',
-            'error/404'                           => __DIR__ . '/../view/error/404.phtml',
-            'error/index'                         => __DIR__ . '/../view/error/index.phtml',
+            'layout/layout'   => __DIR__ . '/../view/layout/unauthenticated.phtml',
+            'core/core/login' => __DIR__ . '/../view/core/core/login.phtml',
+            'error/404'       => __DIR__ . '/../view/error/404.phtml',
+            'error/index'     => __DIR__ . '/../view/error/index.phtml',
         ],
         'template_path_stack'      => [
             __DIR__ . '/../view',

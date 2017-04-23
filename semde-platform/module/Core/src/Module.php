@@ -11,7 +11,7 @@
  *    Elder Mutzus <elder.mutzus@inspireswgt.com> - initial API and implementation and/or initial documentation
  */
 
-namespace Authentication;
+namespace Core;
 
 use Zend\Db\Adapter\AdapterInterface;
 use Zend\Db\ResultSet\ResultSet;
@@ -19,8 +19,8 @@ use Zend\Db\TableGateway\TableGateway;
 use Zend\ModuleManager\Feature\ConfigProviderInterface;
 use Zend\Mvc\MvcEvent;
 use Zend\Mvc\Controller\AbstractActionController;
-use Authentication\Controller\AuthenticationController;
-use Authentication\Service\AuthenticationManager;
+use Core\Controller\AuthenticationController;
+use Core\Service\AuthenticationManager;
 use Zend\Session\SessionManager;
 
 class Module
