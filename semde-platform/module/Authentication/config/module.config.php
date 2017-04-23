@@ -60,6 +60,16 @@ return [
                     ],
                 ],
             ],
+            'mainDashboardRoute' => [
+                'type'    => Literal::class,
+                'options' => [
+                    'route'    => '/mainDashboard',
+                    'defaults' => [
+                        'controller' => Controller\AuthenticationController::class,
+                        'action'     => 'mainDashboard',
+                    ],
+                ],
+            ],
         ],
     ],
     'controllers'     => [

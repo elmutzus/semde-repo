@@ -33,7 +33,7 @@ class RoleSelectionForm extends Form
         // Add form elements
         $this->addElements();
     }
-    
+
     private function addElements()
     {
         // Add user name field
@@ -42,8 +42,7 @@ class RoleSelectionForm extends Form
             'name'       => 'user',
             'attributes' => [
                 'class'       => 'form-control',
-                'placeholder' => 'Usuario',
-                'disabled' => true,
+                'disabled'    => true,
             ],
             'options'    => [
                 'label' => 'Usuario',
@@ -55,10 +54,11 @@ class RoleSelectionForm extends Form
             'type'       => 'select',
             'name'       => 'availableRoles',
             'attributes' => [
-                'class'       => 'form-control',
+                'class' => 'form-control',
             ],
             'options'    => [
-                'label' => 'Roles disponibles',
+                'label'   => 'Roles disponibles',
+                'disable_inarray_validator' => true,
             ],
         ]);
 
@@ -76,4 +76,5 @@ class RoleSelectionForm extends Form
             ],
         ]);
     }
+
 }

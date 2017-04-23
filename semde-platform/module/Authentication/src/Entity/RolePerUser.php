@@ -16,14 +16,12 @@ namespace Authentication\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Description of RolesPerUser
- *
  * @author Elder Mutzus <elder.mutzus@inspireswgt.com>
  * 
  * @ORM\Entity
  * @ORM\Table(name="role_per_user")
  */
-class RolesPerUser
+class RolePerUser
 {
     //put your code here
     //role,user,description,active

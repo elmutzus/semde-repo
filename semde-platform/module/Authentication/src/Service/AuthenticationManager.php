@@ -14,9 +14,8 @@
 namespace Authentication\Service;
 
 use Zend\Authentication\Result;
-use Zend\Session\SessionContainer;
 use Authentication\Entity\User;
-use Authentication\Entity\RolesPerUser;
+use Authentication\Entity\Role;
 
 /**
  * Description of AuthenticationManager
@@ -94,20 +93,41 @@ class AuthenticationManager
         if (isset($this->sessionContainer->currentUserId))
         {
             $currentUserId = $this->sessionContainer->currentUserId;
-            
-            $allRoles = $this->entityManager->getRepository(RolesPerUser::class)->findByUser($currentUserId);
 
-            if ($allRoles == null)
+            $user = $this->entityManager->getRepository(User::class)->findOneByUser($currentUserId);
+
+            // If there is no such user, return 'Identity Not Found' status.
+            if ($user == null)
             {
-                throw new \Exception('El usuario no se encuentra para obtener los roles');
+                throw new \Exception('El usuario no se encuentra para obtener el nombre');
             }
-            
+
+            $allRoles = array();
+
+            foreach ($user->getRoles() as $role)
+            {
+                $allRoles[$role->getRole()] = $role->getName();
+            }
+
             return $allRoles;
         }
         else
         {
             throw new \Exception('El usuario no ha iniciado sesión');
         }
+    }
+
+    public function getRoleName($roleName)
+    {
+        $role = $this->entityManager->getRepository(Role::class)->findOneByRole($roleName);
+
+        // If there is no such user, return 'Identity Not Found' status.
+        if ($role == null)
+        {
+            throw new \Exception('El usuario no se encuentra para obtener el nombre');
+        }
+
+        return $role->getName();
     }
 
     /*
@@ -119,7 +139,7 @@ class AuthenticationManager
         if (isset($this->sessionContainer->currentUserId))
         {
             $currentUserId = $this->sessionContainer->currentUserId;
-            
+
             $user = $this->entityManager->getRepository(User::class)->findOneByUser($currentUserId);
 
             // If there is no such user, return 'Identity Not Found' status.

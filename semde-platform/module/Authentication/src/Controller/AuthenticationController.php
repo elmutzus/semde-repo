@@ -18,7 +18,6 @@ use Zend\View\Model\ViewModel;
 use Authentication\Form\LoginForm;
 use Authentication\Form\RoleSelectionForm;
 use Zend\Authentication\Result;
-use Zend\Session\Container;
 
 class AuthenticationController extends AbstractActionController
 {
@@ -48,6 +47,14 @@ class AuthenticationController extends AbstractActionController
         $this->authManager      = $authManager;
         $this->authService      = $authService;
         $this->sessionContainer = $sessionContainer;
+    }
+
+    private function verifySession()
+    {
+        if (!isset($this->sessionContainer->currentUserId))
+        {
+            return $this->redirect()->toRoute('loginRoute');
+        }
     }
 
     public function loginAction()
@@ -102,6 +109,8 @@ class AuthenticationController extends AbstractActionController
 
     public function roleSelectionAction()
     {
+        $this->verifySession();
+
         $form = new RoleSelectionForm();
 
         $layout = $this->layout();
@@ -111,24 +120,25 @@ class AuthenticationController extends AbstractActionController
         if ($this->getRequest()->isPost())
         {
             $data = $this->params()->fromPost();
-
             $form->setData($data);
 
-            // Validate form
             if ($form->isValid())
             {
-                // Get filtered and validated data
-                $data = $form->getData();
+                $this->sessionContainer->currentUserRole = $this->authManager->getRoleName($data['availableRoles']);
 
-                $result = $this->authManager->getAllRoles($data['user']);
+                return $this->redirect()->toRoute('mainDashboardRoute');
             }
         }
         else
         {
-            $currentUser = $this->sessionContainer->currentUser;
+            $currentUser = $this->sessionContainer->currentUserId;
             $result      = $this->authManager->getAllRoles();
 
-            $selectElement = 'a';
+            $userField = $form->get('user');
+            $userField->setValue($currentUser);
+
+            $selectElement = $form->get('availableRoles');
+            $selectElement->setValueOptions($result);
         }
 
         return new ViewModel([
@@ -136,11 +146,25 @@ class AuthenticationController extends AbstractActionController
         ]);
     }
 
+    public function mainDashboardAction()
+    {
+        $this->verifySession();
+        
+        $layout = $this->layout();
+        $layout->setTemplate('layout/authenticated');
+        $layout->setVariable('currentUser', $this->sessionContainer->currentUserName);
+        $layout->setVariable('currentUserRole', $this->sessionContainer->currentUserRole);
+        
+        return new ViewModel();
+    }
+
     /**
      * The "logout" action performs logout operation.
      */
     public function logoutAction()
     {
+        $this->sessionContainer->currentUserId   = null;
+        $this->sessionContainer->currentUserName = null;
         $this->authManager->logout();
 
         return $this->redirect()->toRoute('loginRoute');

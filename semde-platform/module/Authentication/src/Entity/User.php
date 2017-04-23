@@ -14,11 +14,11 @@
 namespace Authentication\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Authentication\Entity\Role;
 
 /**
- * Description of User
- *
- * @author manuel
+ * 
+ * @author Elder Mutzus <elder.mutzus@inspireswgt.com>
  * @ORM\Entity
  * @ORM\Table(name="user")
  */
@@ -55,6 +55,37 @@ class User
      * @ORM\Column(name="phone")   
      */
     protected $phone;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="\Authentication\Entity\Role", inversedBy="users")
+     * @ORM\JoinTable(name="role_per_user",
+     *      joinColumns={@ORM\JoinColumn(name="user", referencedColumnName="user")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="role", referencedColumnName="role")}
+     *      )
+     */
+    protected $roles;
+
+    public function setRoles($newRoles)
+    {
+        $this->roles = $newRoles;
+    }
+
+    public function getRoles()
+    {
+        return $this->roles;
+    }
+
+    // Removes association between this post and the given tag.
+    public function removeRoleAssociation($role)
+    {
+        $this->roles->removeElement($role);
+    }
+
+    public function __construct()
+    {
+        //...  
+        $this->roles = new ArrayCollection();
+    }
 
     public function getUser()
     {
