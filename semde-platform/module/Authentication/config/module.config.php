@@ -18,7 +18,7 @@ use Doctrine\DBAL\Driver\PDOMySql\Driver as PDOMySqlDriver;
 use Doctrine\ORM\Mapping\Driver\AnnotationDriver;
 
 return [
-    'router'          => [
+    'router'             => [
         'routes' => [
             'loginRoute'         => [
                 'type'    => Literal::class,
@@ -50,7 +50,7 @@ return [
                     ],
                 ],
             ],
-            'logoutRoute' => [
+            'logoutRoute'        => [
                 'type'    => Literal::class,
                 'options' => [
                     'route'    => '/logout',
@@ -72,17 +72,17 @@ return [
             ],
         ],
     ],
-    'controllers'     => [
+    'controllers'        => [
         'factories' => [
             Controller\AuthenticationController::class => Controller\Factory\AuthenticationControllerFactory::class,
         ],
     ],
-    'view_manager'    => [
+    'view_manager'       => [
         'template_path_stack' => [
             'Authentication' => __DIR__ . '/../view',
         ],
     ],
-    'doctrine'        => [
+    'doctrine'           => [
         'driver' => [
             __NAMESPACE__ . '_driver' => [
                 'class' => AnnotationDriver::class,
@@ -96,14 +96,14 @@ return [
             ]
         ]
     ],
-    'service_manager' => [
+    'service_manager'    => [
         'factories' => [
             Service\AuthenticationAdapter::class              => Service\Factory\AuthenticationAdapterFactory::class,
             Service\AuthenticationManager::class              => Service\Factory\AuthenticationManagerFactory::class,
             \Zend\Authentication\AuthenticationService::class => Service\Factory\AuthenticationServiceFactory::class,
         ],
     ],
-    'view_manager'    => [
+    'view_manager'       => [
         'display_not_found_reason' => true,
         'display_exceptions'       => true,
         'doctype'                  => 'HTML5',

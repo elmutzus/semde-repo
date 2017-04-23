@@ -18,6 +18,7 @@ use Zend\View\Model\ViewModel;
 use Authentication\Form\LoginForm;
 use Authentication\Form\RoleSelectionForm;
 use Zend\Authentication\Result;
+use Doctrine\Common\Collections\ArrayCollection;
 
 class AuthenticationController extends AbstractActionController
 {
@@ -124,7 +125,8 @@ class AuthenticationController extends AbstractActionController
 
             if ($form->isValid())
             {
-                $this->sessionContainer->currentUserRole = $this->authManager->getRoleName($data['availableRoles']);
+                $this->sessionContainer->currentUserRole   = $this->authManager->getRoleName($data['availableRoles']);
+                $this->sessionContainer->currentUserRoleId = $data['availableRoles'];
 
                 return $this->redirect()->toRoute('mainDashboardRoute');
             }
@@ -149,12 +151,57 @@ class AuthenticationController extends AbstractActionController
     public function mainDashboardAction()
     {
         $this->verifySession();
-        
+
+        $currentRoleId = $this->sessionContainer->currentUserRoleId;
+
         $layout = $this->layout();
         $layout->setTemplate('layout/authenticated');
         $layout->setVariable('currentUser', $this->sessionContainer->currentUserName);
         $layout->setVariable('currentUserRole', $this->sessionContainer->currentUserRole);
+
+        $pagesPerRole = $this->authManager->getPagesForCurrentRole();
         
+        $layout->setVariable('pages', $pagesPerRole);
+        
+        $managementPages = new ArrayCollection();
+        $reportPages = new ArrayCollection();
+        
+        foreach($pagesPerRole as $page){
+            if($page->getType() == 'R'){
+                $reportPages[] = $page;
+            }
+            
+            if($page->getType() == 'M'){
+                $managementPages[] = $page;
+            }
+        }
+        
+        $managementSnippet = '';
+        
+        foreach($managementPages as $page){
+            $managementSnippet .= '<li><a href="<?= $this->url(\'' . $page->getRoute() . '\') ?>">' . $page->getName() . '</a></li>';
+        }
+        
+        $reportsSnippet = '';
+        
+        foreach($reportPages as $page){
+            $reportsSnippet .= '<li><a href="<?= $this->url(\'' . $page->getRoute() . '\') ?>">' . $page->getName() . '</a></li>';
+        }
+        
+        if(sizeof($reportPages) > 0){
+            $layout->setVariable('showReports', true);
+            $layout->setVariable('reportsSnippet', $reportsSnippet);
+        } else {
+            $layout->setVariable('showReports', false);
+        }
+        
+        if(sizeof($managementPages) > 0){
+            $layout->setVariable('showManagements', true);
+            $layout->setVariable('managementsSnippet', $managementSnippet);
+        } else {
+            $layout->setVariable('showManagements', false);
+        }
+                
         return new ViewModel();
     }
 
@@ -163,8 +210,10 @@ class AuthenticationController extends AbstractActionController
      */
     public function logoutAction()
     {
-        $this->sessionContainer->currentUserId   = null;
-        $this->sessionContainer->currentUserName = null;
+        $this->sessionContainer->currentUserId     = null;
+        $this->sessionContainer->currentUserName   = null;
+        $this->sessionContainer->currentUserRole   = null;
+        $this->sessionContainer->currentUserRoleId = null;
         $this->authManager->logout();
 
         return $this->redirect()->toRoute('loginRoute');

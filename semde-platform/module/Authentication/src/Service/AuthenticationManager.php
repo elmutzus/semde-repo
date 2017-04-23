@@ -156,6 +156,25 @@ class AuthenticationManager
         }
     }
 
+    public function getPagesForCurrentRole()
+    {
+        if (isset($this->sessionContainer->currentUserRoleId))
+        {
+            $currentRoleId = $this->sessionContainer->currentUserRoleId;
+
+            $role = $this->entityManager->getRepository(Role::class)->findOneByRole($currentRoleId);
+
+            if ($role)
+            {
+                return $role->getPages();
+            }
+        }
+        else
+        {
+            throw new \Exception('El usuario no ha iniciado sesión');
+        }
+    }
+
     /**
      * Performs user logout.
      */

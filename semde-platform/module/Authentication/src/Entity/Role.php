@@ -71,17 +71,26 @@ class Role
         return $this->description;
     }
 
-    public function __construct()
-    {
-        //...  
-        $this->users = new ArrayCollection();
-    }
-
     /**
      * @ORM\ManyToMany(targetEntity="\Authentication\Entity\User", mappedBy="roles")
      */
     protected $users;
+    
+    /**
+     * @ORM\ManyToMany(targetEntity="\Authentication\Entity\Page", inversedBy="roles")
+     * @ORM\JoinTable(name="pages_per_role",
+     *      joinColumns={@ORM\JoinColumn(name="role", referencedColumnName="role")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="page", referencedColumnName="page")}
+     *      )
+     */
+    protected $pages;
 
+    public function __construct()
+    {
+        $this->users = new ArrayCollection();
+        $this->pages = new ArrayCollection();
+    }
+    
     public function getUsers()
     {
         return $this->users;
@@ -91,6 +100,14 @@ class Role
     public function addUser($user)
     {
         $this->users[] = $user;
+    }
+    
+    public function getPages(){
+        return $this->pages;
+    }
+    
+    public function addPage($newPage){
+        $this->pages[] = $newPage;
     }
 
 }

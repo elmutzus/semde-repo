@@ -51,23 +51,51 @@ $this->doctype();
                         SEMDE - <?= \Authentication\Module::VERSION ?>
                     </a>
                 </div>
-                <ul class="nav navbar-nav navbar-right">
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <span class="glyphicon glyphicon-user"></span>&nbsp; <?= $this->currentUser ?>
-                            <span class="caret"></span>                          
-                        </a>
-                        <ul class="dropdown-menu" role="menu">
-                            <li class="disabled">
-                                <a href="#"><span class="glyphicon glyphicon-lock"></span> Rol: <?= $this->currentUserRole ?></a>
+                <div class="navbar-collapse collapse" id="collapseable-nav">
+                    <ul class="nav navbar-nav">
+                        <?php if ($showReports): ?>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-stats"></span> Reportes <span class="caret"></span></a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <?php echo($reportsSnippet) ?>
+                                </ul>
+                            </li> 
+                        <?php endif; ?>
+                        <?php if ($showManagements): ?>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-cog"></span> Configuraciones <span class="caret"></span></a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <?php echo($managementsSnippet) ?>
+                                </ul>
                             </li>
-                            <li class="divider"></li>
-                            <li>
-                                <a href="<?= $this->url('logoutRoute') ?>"><span class="glyphicon glyphicon-off"></span> Cerrar sesi&oacute;n</a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
+                        <?php endif; ?>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-cog"></span> Test demogr&aacute;fico <span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li>
+                                    <a href="survey/survey.html">Test</a>
+                                </li>                    
+                            </ul>
+                        </li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <span class="glyphicon glyphicon-user"></span>&nbsp; <?= $this->currentUser ?>
+                                <span class="caret"></span>                          
+                            </a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li class="disabled">
+                                    <a href="#"><span class="glyphicon glyphicon-lock"></span> Rol: <?= $this->currentUserRole ?></a>
+                                </li>
+                                <li class="divider"></li>
+                                <li>
+                                    <a href="<?= $this->url('logoutRoute') ?>"><span class="glyphicon glyphicon-off"></span> Cerrar sesi&oacute;n</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
             </nav>
         </header>
         <div class="container">
