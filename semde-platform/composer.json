@@ -29,7 +29,9 @@
     "autoload": {
         "psr-4": {
             "Application\\": "module/Application/src/",
-            "Authentication\\": "module/Authentication/src"
+            "Authentication\\": "module/Authentication/src",
+            "Management\\": "module/Management/src",
+            "Report\\": "module/Report/src"
         }
     },
     "autoload-dev": {

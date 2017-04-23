@@ -11,22 +11,18 @@
  *    Elder Mutzus <elder.mutzus@inspireswgt.com> - initial API and implementation and/or initial documentation
  */
 
-namespace Authentication;
+namespace Report;
 
-use Zend\Db\Adapter\AdapterInterface;
-use Zend\Db\ResultSet\ResultSet;
-use Zend\Db\TableGateway\TableGateway;
-use Zend\ModuleManager\Feature\ConfigProviderInterface;
 use Zend\Mvc\MvcEvent;
 use Zend\Mvc\Controller\AbstractActionController;
-use Authentication\Controller\AuthenticationController;
-use Authentication\Service\AuthenticationManager;
+use Report\Controller\ReportController;
+use Report\Service\ReportManager;
 use Zend\Session\SessionManager;
 
 class Module
 {
 
-    const VERSION = '1.0.17.0415';
+    const VERSION = '1.0.17.0423';
 
     public function getConfig()
     {
@@ -64,7 +60,7 @@ class Module
         $actionName = str_replace('-', '', lcfirst(ucwords($actionName, '-')));
 
         // Get the instance of AuthManager service.
-        $authManager = $event->getApplication()->getServiceManager()->get(AuthenticationManager::class);
+        $authManager = $event->getApplication()->getServiceManager()->get(ReportManager::class);
         
         $application = $event->getApplication();
         $serviceManager = $application->getServiceManager();
@@ -72,7 +68,7 @@ class Module
 
         // Execute the access filter on every controller except AuthController
         // (to avoid infinite redirect).
-        if ($controllerName != AuthenticationController::class && !$authManager->filterAccess($controllerName, $actionName))
+        if ($controllerName != ReportController::class)
         {
             // Remember the URL of the page the user tried to access. We will
             // redirect the user to that URL after successful login.
@@ -86,9 +82,9 @@ class Module
             $redirectUrl = $uri->toString();
 
             // Redirect the user to the "Login" page.
-            return $controller->redirect()->toRoute('login', [], ['query' => ['redirectUrl' => $redirectUrl]]);
+            //return $controller->redirect()->toRoute('defaultRoute', [], ['query' => ['redirectUrl' => $redirectUrl]]);
         }
     }
     
- 
+
 }

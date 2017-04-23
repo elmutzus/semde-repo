@@ -14,6 +14,7 @@ and open the template in the editor.
 }
 
 div.navbar-header > a.navbar-brand,
+div.navbar-header > a.navbar-brand:active,
 div.navbar-header > a.navbar-brand:hover,
 div.navbar-header > a.navbar-brand:visited,
 div.navbar-header > a.navbar-brand:focus {
