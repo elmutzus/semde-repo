@@ -14,7 +14,6 @@
 namespace Authentication;
 
 use Zend\Router\Http\Literal;
-use Doctrine\DBAL\Driver\PDOMySql\Driver as PDOMySqlDriver;
 use Doctrine\ORM\Mapping\Driver\AnnotationDriver;
 
 return [

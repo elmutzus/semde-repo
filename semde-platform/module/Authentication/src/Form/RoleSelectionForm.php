@@ -14,8 +14,6 @@
 namespace Authentication\Form;
 
 use Zend\Form\Form;
-use Zend\Form\Element;
-use Zend\InputFilter\InputFilter;
 
 class RoleSelectionForm extends Form
 {

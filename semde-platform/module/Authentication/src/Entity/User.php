@@ -14,7 +14,6 @@
 namespace Authentication\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Authentication\Entity\Role;
 
 /**
  * 

@@ -15,8 +15,6 @@ namespace Authentication\Service\Factory;
 
 use Interop\Container\ContainerInterface;
 use Zend\ServiceManager\Factory\FactoryInterface;
-use Zend\Authentication\AuthenticationService;
-use Zend\Session\SessionContainer;
 use Authentication\Service\AuthenticationManager;
 
 /**

@@ -17,7 +17,6 @@ use Zend\Authentication\Adapter\AdapterInterface;
 use Zend\Authentication\Result;
 use Zend\Crypt\Password\Bcrypt;
 use Authentication\Entity\User;
-use Authentication\Entity\RolesPerUser;
 
 /**
  * Description of AuthenticationAdapter

@@ -17,7 +17,6 @@ use Interop\Container\ContainerInterface;
 use Authentication\Controller\AuthenticationController;
 use Zend\ServiceManager\Factory\FactoryInterface;
 use Authentication\Service\AuthenticationManager;
-use Zend\Session\SessionContainer;
 
 /**
  * Description of AuthenticationControllerFactory
