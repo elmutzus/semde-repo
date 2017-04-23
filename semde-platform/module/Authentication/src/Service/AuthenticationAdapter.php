@@ -17,6 +17,7 @@ use Zend\Authentication\Adapter\AdapterInterface;
 use Zend\Authentication\Result;
 use Zend\Crypt\Password\Bcrypt;
 use Authentication\Entity\User;
+use Authentication\Entity\RolesPerUser;
 
 /**
  * Description of AuthenticationAdapter
@@ -25,24 +26,25 @@ use Authentication\Entity\User;
  */
 class AuthenticationAdapter implements AdapterInterface
 {
+
     /**
      * User email.
      * @var string 
      */
     private $user;
-    
+
     /**
      * Password
      * @var string 
      */
     private $password;
-    
+
     /**
      * Entity manager.
      * @var Doctrine\ORM\EntityManager 
      */
     private $entityManager;
-        
+
     /**
      * Constructor.
      */
@@ -50,57 +52,51 @@ class AuthenticationAdapter implements AdapterInterface
     {
         $this->entityManager = $entityManager;
     }
-    
+
     /**
      * Sets user.     
      */
-    public function setUser($user) 
+    public function setUser($user)
     {
-        $this->user = $user;        
+        $this->user = $user;
     }
-    
+
     /**
      * Sets password.     
      */
-    public function setPassword($password) 
+    public function setPassword($password)
     {
-        $this->password = (string)$password;        
+        $this->password = (string) $password;
     }
-    
+
     /**
      * Performs an authentication attempt.
      */
     public function authenticate()
-    {                
+    {
         // Check the database if there is a user with such email.
         $user = $this->entityManager->getRepository(User::class)->findOneByUser($this->user);
 
         // If there is no such user, return 'Identity Not Found' status.
-        if ($user == null) {
-            return new Result(
-                Result::FAILURE_IDENTITY_NOT_FOUND, 
-                null, 
-                ['Credenciales no válidas']);        
-        }   
-        
+        if ($user == null)
+        {
+            return new Result(Result::FAILURE_IDENTITY_NOT_FOUND, null, ['Credenciales no válidas']);
+        }
+
         // Now we need to calculate hash based on user-entered password and compare
         // it with the password hash stored in database.
-        $bcrypt = new Bcrypt();
+        $bcrypt       = new Bcrypt();
         $passwordHash = $user->getPassword();
 
-        if ($bcrypt->verify($this->password, $passwordHash)) {
+        if ($bcrypt->verify($this->password, $passwordHash))
+        {
             // Great! The password hash matches. Return user identity (email) to be
             // saved in session for later use.
-            return new Result(
-                    Result::SUCCESS, 
-                    $this->user, 
-                    ['Autenticado']);        
-        }             
-        
+            return new Result(Result::SUCCESS, $this->user, ['Usuario autenticado']);
+        }
+
         // If password check didn't pass return 'Invalid Credential' failure status.
-        return new Result(
-                Result::FAILURE_CREDENTIAL_INVALID, 
-                null, 
-                ['Credenciales inválidas']);        
+        return new Result(Result::FAILURE_CREDENTIAL_INVALID, null, ['Credenciales inválidas']);
     }
+    
 }

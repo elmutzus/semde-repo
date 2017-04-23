@@ -14,6 +14,9 @@
 namespace Authentication\Service;
 
 use Zend\Authentication\Result;
+use Zend\Session\SessionContainer;
+use Authentication\Entity\User;
+use Authentication\Entity\RolesPerUser;
 
 /**
  * Description of AuthenticationManager
@@ -31,24 +34,26 @@ class AuthenticationManager
 
     /**
      * Session manager.
-     * @var Zend\Session\SessionManager
+     * @var Zend\Session\SessionContainer
      */
-    private $sessionManager;
+    private $sessionContainer;
 
     /**
      * Contents of the 'access_filter' config key.
      * @var array 
      */
     private $config;
+    private $entityManager;
 
     /**
      * Constructs the service.
      */
-    public function __construct($authService, $sessionManager, $config)
+    public function __construct($authService, $sessionContainer, $config, $entityManager)
     {
-        $this->authService    = $authService;
-        $this->sessionManager = $sessionManager;
-        $this->config         = $config;
+        $this->authService      = $authService;
+        $this->sessionContainer = $sessionContainer;
+        $this->config           = $config;
+        $this->entityManager    = $entityManager;
     }
 
     /**
@@ -74,10 +79,61 @@ class AuthenticationManager
         if ($result->getCode() == Result::SUCCESS && $rememberMe)
         {
             // Session cookie will expire in 1 month (30 days).
-            $this->sessionManager->rememberMe(60 * 60 * 24 * 30);
+            $this->sessionContainer->rememberMe(60 * 60 * 24 * 30);
         }
 
         return $result;
+    }
+
+    /*
+     * Returns the list of all roles for the user
+     */
+
+    public function getAllRoles()
+    {
+        if (isset($this->sessionContainer->currentUserId))
+        {
+            $currentUserId = $this->sessionContainer->currentUserId;
+            
+            $allRoles = $this->entityManager->getRepository(RolesPerUser::class)->findByUser($currentUserId);
+
+            if ($allRoles == null)
+            {
+                throw new \Exception('El usuario no se encuentra para obtener los roles');
+            }
+            
+            return $allRoles;
+        }
+        else
+        {
+            throw new \Exception('El usuario no ha iniciado sesión');
+        }
+    }
+
+    /*
+     *  Returns the full name of the user: LastName, FirstName
+     */
+
+    public function getUserFullName()
+    {
+        if (isset($this->sessionContainer->currentUserId))
+        {
+            $currentUserId = $this->sessionContainer->currentUserId;
+            
+            $user = $this->entityManager->getRepository(User::class)->findOneByUser($currentUserId);
+
+            // If there is no such user, return 'Identity Not Found' status.
+            if ($user == null)
+            {
+                throw new \Exception('El usuario no se encuentra para obtener el nombre');
+            }
+
+            return $user->getLastName() . ', ' . $user->getName();
+        }
+        else
+        {
+            throw new \Exception('El usuario no ha iniciado sesión');
+        }
     }
 
     /**

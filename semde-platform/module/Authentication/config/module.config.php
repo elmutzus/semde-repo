@@ -50,6 +50,16 @@ return [
                     ],
                 ],
             ],
+            'logoutRoute' => [
+                'type'    => Literal::class,
+                'options' => [
+                    'route'    => '/logout',
+                    'defaults' => [
+                        'controller' => Controller\AuthenticationController::class,
+                        'action'     => 'logout',
+                    ],
+                ],
+            ],
         ],
     ],
     'controllers'     => [
@@ -98,5 +108,8 @@ return [
         'template_path_stack'      => [
             __DIR__ . '/../view',
         ],
+    ],
+    'session_containers' => [
+        'SemdeSessionContainer'
     ],
 ];

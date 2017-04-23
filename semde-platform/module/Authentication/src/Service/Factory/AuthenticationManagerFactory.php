@@ -16,9 +16,8 @@ namespace Authentication\Service\Factory;
 use Interop\Container\ContainerInterface;
 use Zend\ServiceManager\Factory\FactoryInterface;
 use Zend\Authentication\AuthenticationService;
-use Zend\Session\SessionManager;
+use Zend\Session\SessionContainer;
 use Authentication\Service\AuthenticationManager;
-use Authentication\Service\UserManager;
 
 /**
  * Description of AuthenticationManagerFactory
@@ -34,7 +33,8 @@ class AuthenticationManagerFactory implements FactoryInterface
     {        
         // Instantiate dependencies.
         $authenticationService = $container->get(\Zend\Authentication\AuthenticationService::class);
-        $sessionManager = $container->get(SessionManager::class);
+        $sessionContainer = $container->get('SemdeSessionContainer');
+        $entityManager = $container->get('doctrine.entitymanager.orm_default');
         
         // Get contents of 'access_filter' config key (the AuthManager service
         // will use this data to determine whether to allow currently logged in user
@@ -46,6 +46,6 @@ class AuthenticationManagerFactory implements FactoryInterface
             $config = [];
                         
         // Instantiate the AuthManager service and inject dependencies to its constructor.
-        return new AuthenticationManager($authenticationService, $sessionManager, $config);
+        return new AuthenticationManager($authenticationService, $sessionContainer, $config, $entityManager);
     }
 }

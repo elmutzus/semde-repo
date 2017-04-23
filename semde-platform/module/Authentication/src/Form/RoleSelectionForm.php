@@ -50,16 +50,15 @@ class RoleSelectionForm extends Form
             ],
         ]);
 
-        // Add password field
+        // Add select field
         $this->add([
             'type'       => 'select',
             'name'       => 'availableRoles',
             'attributes' => [
                 'class'       => 'form-control',
-                'placeholder' => 'Contraseña',
             ],
             'options'    => [
-                'label' => 'Contraseña',
+                'label' => 'Roles disponibles',
             ],
         ]);
 

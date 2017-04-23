@@ -17,6 +17,7 @@ use Interop\Container\ContainerInterface;
 use Authentication\Controller\AuthenticationController;
 use Zend\ServiceManager\Factory\FactoryInterface;
 use Authentication\Service\AuthenticationManager;
+use Zend\Session\SessionContainer;
 
 /**
  * Description of AuthenticationControllerFactory
@@ -30,7 +31,8 @@ class AuthenticationControllerFactory implements FactoryInterface
         $entityManager = $container->get('doctrine.entitymanager.orm_default');
         $authManager = $container->get(AuthenticationManager::class);
         $authService = $container->get(\Zend\Authentication\AuthenticationService::class);
+        $sessionContainer = $container->get('SemdeSessionContainer');
         
-        return new AuthenticationController($entityManager, $authManager, $authService);
+        return new AuthenticationController($entityManager, $authManager, $authService, $sessionContainer);
     }
 }
