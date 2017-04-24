@@ -14,6 +14,7 @@
 namespace Core\Service;
 
 use Core\Entity\User;
+use Zend\Crypt\Password\Bcrypt;
 
 /**
  * Description of UserManager
@@ -74,6 +75,29 @@ class UserManager
         }
 
         return $usersToReturn;
+    }
+
+    private function getEncriptedPassword($password)
+    {
+        $bcrypt     = new Bcrypt();
+        $securePass = $bcrypt->create($password);
+
+        return $securePass;
+    }
+
+    public function saveUser($user, $password, $name, $lastname, $email, $phone)
+    {
+        $model = new User();
+        
+        $model->setUser($user);
+        $model->setEmail($email);
+        $model->setLastName($lastname);
+        $model->setName($name);
+        $model->setPassword($this->getEncriptedPassword($password));
+        $model->setPhone($phone);
+        
+        $this->entityManager->persist($model);
+        $this->entityManager->flush();
     }
 
 }

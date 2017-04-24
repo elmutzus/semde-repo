@@ -29,11 +29,6 @@ class UserForm extends Form
         // Define form name
         parent::__construct('user-form');
 
-        // Set POST method
-        $this->setAttribute('method', 'post');
-        // Set action attribute
-        $this->setAttribute('action', '/management/user');
-
         // Add form elements
         $this->addElements();
 
@@ -127,10 +122,10 @@ class UserForm extends Form
             'name'       => 'submit',
             'attributes' => [
                 'class' => 'btn btn-primary btn-block',
-                'value' => 'Iniciar sesión',
+                'value' => 'Enviar',
             ],
             'options'    => [
-                'label' => 'Iniciar sesión',
+                'label' => 'Enviar',
                 'id'    => 'submit',
             ],
         ]);
@@ -240,7 +235,7 @@ class UserForm extends Form
 
         // Add input for "phone" field
         $inputFilter->add([
-            'name'       => 'user',
+            'name'       => 'phone',
             'required'   => true,
             'filters'    => [
                 ['name' => 'StringTrim'],
@@ -249,11 +244,7 @@ class UserForm extends Form
             ],
             'validators' => [
                 [
-                    'name'    => 'StringLength',
-                    'options' => [
-                        'min' => 1,
-                        'max' => 25,
-                    ],
+                    'name'    => 'digits',
                 ],
             ],
         ]);

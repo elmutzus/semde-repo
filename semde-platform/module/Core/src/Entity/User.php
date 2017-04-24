@@ -14,6 +14,7 @@
 namespace Core\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * 
@@ -104,6 +105,7 @@ class User
     /*
      * Gets User
      */
+
     public function getUser()
     {
         return $this->user;
@@ -112,6 +114,7 @@ class User
     /*
      * Gets Password
      */
+
     public function getPassword()
     {
         return $this->password;
@@ -120,6 +123,7 @@ class User
     /*
      * Gets Name
      */
+
     public function getName()
     {
         return $this->name;
@@ -128,6 +132,7 @@ class User
     /*
      * Gets LastName
      */
+
     public function getLastName()
     {
         return $this->lastname;
@@ -136,6 +141,7 @@ class User
     /*
      * Gets Email
      */
+
     public function getEmail()
     {
         return $this->email;
@@ -144,14 +150,25 @@ class User
     /*
      * Gets Phone
      */
+
     public function getPhone()
     {
         return $this->phone;
     }
 
     /*
+     * Sets the user
+     */
+
+    public function setUser($newUser)
+    {
+        $this->user = $newUser;
+    }
+
+    /*
      * Sets Password
      */
+
     public function setPassword($newPassword)
     {
         $this->password = $newPassword;
@@ -160,6 +177,7 @@ class User
     /*
      *  Sets Name 
      */
+
     public function setName($newName)
     {
         $this->name = $newName;
@@ -168,6 +186,7 @@ class User
     /*
      * Sets last name
      */
+
     public function setLastName($newLastName)
     {
         $this->lastname = $newLastName;
@@ -176,6 +195,7 @@ class User
     /*
      * Sets email
      */
+
     public function setEmail($newEmail)
     {
         $this->email = $newEmail;
@@ -184,6 +204,7 @@ class User
     /*
      * Sets phone
      */
+
     public function setPhone($newPhone)
     {
         $this->phone = $newPhone;

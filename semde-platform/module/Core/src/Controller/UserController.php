@@ -16,6 +16,7 @@ namespace Core\Controller;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use Core\Form\UserForm;
+use Core\Entity\User;
 
 /**
  * Description of UserController
@@ -24,16 +25,10 @@ use Core\Form\UserForm;
  */
 class UserController extends AbstractActionController
 {
-
-    /**
-     * Entity manager.
-     * @var Doctrine\ORM\EntityManager 
-     */
-    private $entityManager;
-
     /*
      * User manager
      */
+
     private $userManager;
 
     /*
@@ -45,9 +40,8 @@ class UserController extends AbstractActionController
      * Constructor
      */
 
-    public function __construct($entityManager, $userManager, $sessionContainer)
+    public function __construct($userManager, $sessionContainer)
     {
-        $this->entityManager    = $entityManager;
         $this->userManager      = $userManager;
         $this->sessionContainer = $sessionContainer;
     }
@@ -68,7 +62,7 @@ class UserController extends AbstractActionController
         $form = new UserForm();
 
         $this->setLayoutVariables();
-        
+
         $users = $this->userManager->getAllUsers();
 
         return new ViewModel([
@@ -80,25 +74,60 @@ class UserController extends AbstractActionController
     {
         $form = new UserForm();
 
+        $form->get('submit')->setValue('Crear usuario');
+
         $this->setLayoutVariables();
 
-        return new ViewModel();
+        if ($this->getRequest()->isPost())
+        {
+            $data = $this->params()->fromPost();
+
+            $form->setData($data);
+
+            // Validate form
+            if ($form->isValid())
+            {
+                // Get filtered and validated data
+                $data = $form->getData();
+
+                //$user, $password, $name, $lastname, $email, $phone
+                $this->userManager->saveUser(
+                        $data['user'], $data['password'], $data['name'], $data['lastname'], $data['email'], $data['phone']
+                );
+
+                return $this->redirect()->toRoute('userManagementRoute');
+            }
+        }
+
+        return new ViewModel([
+            'form' => $form,
+        ]);
     }
-    
-    public function modifyAction(){
+
+    public function modifyAction()
+    {
         $form = new UserForm();
 
+        $form->get('submit')->setValue('Crear usuario');
+
         $this->setLayoutVariables();
 
-        return new ViewModel();
+        return new ViewModel([
+            'form' => $form,
+        ]);
     }
-    
-    public function deleteAction(){
+
+    public function deleteAction()
+    {
         $form = new UserForm();
 
+        $form->get('submit')->setValue('Crear usuario');
+
         $this->setLayoutVariables();
 
-        return new ViewModel();
+        return new ViewModel([
+            'form' => $form,
+        ]);
     }
 
 }
