@@ -77,6 +77,18 @@ class UserManager
         return $usersToReturn;
     }
 
+    public function getUser($userId)
+    {
+        $user = $this->entityManager->getRepository(User::class)->findByUser($userId);
+
+        if ($user == null)
+        {
+            throw new \Exception("No se pudo localizar al usuario.");
+        }
+
+        return $user;
+    }
+
     private function getEncriptedPassword($password)
     {
         $bcrypt     = new Bcrypt();
@@ -85,19 +97,52 @@ class UserManager
         return $securePass;
     }
 
-    public function saveUser($user, $password, $name, $lastname, $email, $phone)
+    public function createUser($user, $password, $name, $lastname, $email, $phone)
     {
         $model = new User();
-        
+
         $model->setUser($user);
         $model->setEmail($email);
         $model->setLastName($lastname);
         $model->setName($name);
         $model->setPassword($this->getEncriptedPassword($password));
         $model->setPhone($phone);
-        
-        $this->entityManager->persist($model);
-        $this->entityManager->flush();
+
+        try
+        {
+            $this->entityManager->persist($model);
+            $this->entityManager->flush();
+        }
+        catch (Exception $ex)
+        {
+            throw $ex;
+        }
+    }
+
+    public function updateUser($model)
+    {
+        $newPassword = $model->getPassword();
+
+        if (empty($newPassword))
+        {
+            $actualUser = $this->getUser($model->getUser());
+
+            $model->setPassword($actualUser->getPassword());
+        }
+        else
+        {
+            $model->setPassword($this->getEncriptedPassword($newPassword));
+        }
+
+        try
+        {
+            $this->entityManager->merge($model);
+            $this->entityManager->flush();
+        }
+        catch (Exception $ex)
+        {
+            throw $ex;
+        }
     }
 
 }

@@ -91,7 +91,7 @@ class UserController extends AbstractActionController
                 $data = $form->getData();
 
                 //$user, $password, $name, $lastname, $email, $phone
-                $this->userManager->saveUser(
+                $this->userManager->createUser(
                         $data['user'], $data['password'], $data['name'], $data['lastname'], $data['email'], $data['phone']
                 );
 
@@ -106,15 +106,55 @@ class UserController extends AbstractActionController
 
     public function modifyAction()
     {
-        $form = new UserForm();
-
-        $form->get('submit')->setValue('Crear usuario');
-
         $this->setLayoutVariables();
 
-        return new ViewModel([
-            'form' => $form,
-        ]);
+        $userId = $this->params()->fromRoute('user', '-');
+
+        if ($userId == '-')
+        {
+            return $this->redirect()->toRoute('userManagement', ['action' => 'index']);
+        }
+
+        try
+        {
+            $user = $this->userManager->getUser($userId);
+        }
+        catch (Exception $ex)
+        {
+            throw $ex;
+        }
+
+        $form = new UserForm();
+
+        $form->get('submit')->setValue('Modificar usuario');
+        $form->get('user')->setAttribute('readonly', 'true');
+        $form->getInputFilter()->get('password')->setRequired(false);
+        
+        $form->get('user')->setValue($user[0]->getUser());
+        $form->get('name')->setValue($user[0]->getName());
+        $form->get('lastname')->setValue($user[0]->getLastName());
+        $form->get('email')->setValue($user[0]->getEmail());
+        $form->get('phone')->setValue($user[0]->getPhone());
+
+        if (!$this->request->isPost())
+        {
+            return new ViewModel([
+                'form' => $form,
+            ]);
+        }
+
+        $form->setData($this->request->getPost());
+        
+        if (!$form->isValid())
+        {
+            return new ViewModel([
+                'form' => $form,
+            ]);
+        }
+
+        $this->userManager->updateUser($user[0]);
+
+        return $this->redirect()->toRoute('userManagementRoute');
     }
 
     public function deleteAction()
