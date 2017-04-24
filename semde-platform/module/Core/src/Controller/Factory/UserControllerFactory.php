@@ -1,7 +1,7 @@
 <?php
 
-/* 
- * Copyright (c) 2017 Elder Mutzus <elmutzus@inspireswgt.com>.
+/*
+ * Copyright (c) 2017 Elder Mutzus <elder.mutzus@inspireswgt.com>.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -14,23 +14,23 @@
 namespace Core\Controller\Factory;
 
 use Interop\Container\ContainerInterface;
-use Core\Controller\AuthenticationController;
+use Core\Controller\UserController;
+use Core\Service\UserManager;
 use Zend\ServiceManager\Factory\FactoryInterface;
-use Core\Service\AuthenticationManager;
 
 /**
- * Description of AuthenticationControllerFactory
+ * Description of UserControllerFactory
  *
- * @author manuel
+ * @author Elder Mutzus <elder.mutzus@inspireswgt.com>
  */
-class AuthenticationControllerFactory implements FactoryInterface
+class UserControllerFactory implements FactoryInterface
 {
     public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {   
         $entityManager = $container->get('doctrine.entitymanager.orm_default');
-        $authManager = $container->get(AuthenticationManager::class);
+        $userManager = $container->get(UserManager::class);
         $sessionContainer = $container->get('SemdeSessionContainer');
         
-        return new AuthenticationController($entityManager, $authManager, $sessionContainer);
+        return new UserController($entityManager, $userManager, $sessionContainer);
     }
 }

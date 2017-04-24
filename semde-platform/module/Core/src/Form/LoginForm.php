@@ -94,7 +94,7 @@ class LoginForm extends Form
         $inputFilter = new InputFilter();
         $this->setInputFilter($inputFilter);
 
-        // Add input for "email" field
+        // Add input for "user" field
         $inputFilter->add([
             'name'       => 'user',
             'required'   => true,
@@ -107,8 +107,8 @@ class LoginForm extends Form
                     [
                     'name'    => 'StringLength',
                     'options' => [
-                        'min' => 5,
-                        'max' => 25,
+                        'min' => 1,
+                        'max' => 50,
                     ],
                 ],
             ],
@@ -125,8 +125,8 @@ class LoginForm extends Form
                     [
                     'name'    => 'StringLength',
                     'options' => [
-                        'min' => 5,
-                        'max' => 25,
+                        'min' => 1,
+                        'max' => 50,
                     ],
                 ],
             ],

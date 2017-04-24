@@ -16,21 +16,28 @@ namespace Core\Form;
 use Zend\Form\Form;
 use Zend\InputFilter\InputFilter;
 
-class RoleSelectionForm extends Form
+/**
+ * Description of RoleForm
+ *
+ * @author Elder Mutzus <elder.mutzus@inspireswgt.com>
+ */
+class RoleForm extends Form
 {
-
     public function __construct()
     {
         // Define form name
-        parent::__construct('role-selection-form');
+        parent::__construct('role-form');
 
         // Set POST method
         $this->setAttribute('method', 'post');
         // Set action attribute
-        $this->setAttribute('action', '/roleSelection');
+        $this->setAttribute('action', '/login');
 
         // Add form elements
         $this->addElements();
+
+        // Add filters
+        $this->addInputFilter();
     }
 
     private function addElements()
@@ -41,23 +48,32 @@ class RoleSelectionForm extends Form
             'name'       => 'user',
             'attributes' => [
                 'class'       => 'form-control',
-                'disabled'    => true,
+                'placeholder' => 'Usuario',
             ],
             'options'    => [
                 'label' => 'Usuario',
             ],
         ]);
 
-        // Add select field
+        // Add password field
         $this->add([
-            'type'       => 'select',
-            'name'       => 'availableRoles',
+            'type'       => 'password',
+            'name'       => 'password',
             'attributes' => [
-                'class' => 'form-control',
+                'class'       => 'form-control',
+                'placeholder' => 'Contraseña',
             ],
             'options'    => [
-                'label'   => 'Roles disponibles',
-                'disable_inarray_validator' => true,
+                'label' => 'Contraseña',
+            ],
+        ]);
+
+        // Add "remember me" field
+        $this->add([
+            'type'       => 'checkbox',
+            'name'       => 'rememberMe',
+              'options'    => [
+                'label' => 'Recordarme',
             ],
         ]);
 
@@ -67,13 +83,12 @@ class RoleSelectionForm extends Form
             'name'       => 'submit',
             'attributes' => [
                 'class' => 'btn btn-primary btn-block',
-                'value' => 'Continuar',
+                'value' => 'Iniciar sesión',
             ],
             'options'    => [
-                'label' => 'Continuar',
+                'label' => 'Iniciar sesión',
                 'id'    => 'submit',
             ],
         ]);
     }
-
 }

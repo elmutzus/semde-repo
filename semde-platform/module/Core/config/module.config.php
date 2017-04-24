@@ -20,7 +20,7 @@ use Doctrine\ORM\Mapping\Driver\AnnotationDriver;
 return [
     'router'             => [
         'routes' => [
-            'loginRoute'         => [
+            'loginRoute'          => [
                 'type'    => Literal::class,
                 'options' => [
                     'route'    => '/login',
@@ -30,7 +30,7 @@ return [
                     ],
                 ],
             ],
-            'homeRoute'          => [
+            'homeRoute'           => [
                 'type'    => Literal::class,
                 'options' => [
                     'route'    => '/',
@@ -40,7 +40,7 @@ return [
                     ],
                 ],
             ],
-            'roleSelectionRoute' => [
+            'roleSelectionRoute'  => [
                 'type'    => Literal::class,
                 'options' => [
                     'route'    => '/roleSelection',
@@ -50,7 +50,7 @@ return [
                     ],
                 ],
             ],
-            'logoutRoute'        => [
+            'logoutRoute'         => [
                 'type'    => Literal::class,
                 'options' => [
                     'route'    => '/logout',
@@ -60,7 +60,7 @@ return [
                     ],
                 ],
             ],
-            'mainDashboardRoute' => [
+            'mainDashboardRoute'  => [
                 'type'    => Literal::class,
                 'options' => [
                     'route'    => '/mainDashboard',
@@ -70,11 +70,22 @@ return [
                     ],
                 ],
             ],
+            'userManagementRoute' => [
+                'type'    => Segment::class,
+                'options' => [
+                    'route'    => '/management/user[/:action]',
+                    'defaults' => [
+                        'controller' => Controller\UserController::class,
+                        'action'     => 'index',
+                    ],
+                ],
+            ],
         ],
     ],
     'controllers'        => [
         'factories' => [
             Controller\AuthenticationController::class => Controller\Factory\AuthenticationControllerFactory::class,
+            Controller\UserController::class           => Controller\Factory\UserControllerFactory::class,
         ],
     ],
     'view_manager'       => [
@@ -101,6 +112,7 @@ return [
             Service\AuthenticationAdapter::class              => Service\Factory\AuthenticationAdapterFactory::class,
             Service\AuthenticationManager::class              => Service\Factory\AuthenticationManagerFactory::class,
             \Zend\Authentication\AuthenticationService::class => Service\Factory\AuthenticationServiceFactory::class,
+            Service\UserManager::class                        => Service\Factory\UserManagerFactory::class,
         ],
     ],
     'view_manager'       => [

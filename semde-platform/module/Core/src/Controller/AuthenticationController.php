@@ -35,18 +35,15 @@ class AuthenticationController extends AbstractActionController
      */
     private $authManager;
 
-    /**
-     * Auth service.
-     * @var \Zend\Authentication\AuthenticationService
+    /*
+     * Session container
      */
-    private $authService;
     private $sessionContainer;
 
-    public function __construct($entityManager, $authManager, $authService, $sessionContainer)
+    public function __construct($entityManager, $authManager, $sessionContainer)
     {
         $this->entityManager    = $entityManager;
         $this->authManager      = $authManager;
-        $this->authService      = $authService;
         $this->sessionContainer = $sessionContainer;
     }
 

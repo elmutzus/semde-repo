@@ -22,6 +22,10 @@ use Zend\Mvc\Controller\AbstractActionController;
 use Core\Controller\AuthenticationController;
 use Core\Service\AuthenticationManager;
 use Zend\Session\SessionManager;
+use Zend\View\HelperPluginManager;
+use Zend\Permissions\Acl\Acl;
+use Zend\Permissions\Acl\Role\GenericRole;
+use Zend\Permissions\Acl\Resource\GenericResource;
 
 class Module
 {
