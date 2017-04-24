@@ -10,19 +10,22 @@
  *    Elder Mutzus <elder.mutzus@inspireswgt.com> - initial API and implementation and/or initial documentation
  */
 
-
+$users = $this->users;
 ?>
 
 <section id="body">
     <div class="text-center"><h3>Gestión de usuarios</h3></div>
-    <div class="form-small">
-        <div class="panel panel-primary">
-            <div class="panel-heading">
-                Usuarios
-            </div>
-            <div class="panel-body">
-                Body
-            </div>
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            Listado de Usuarios
+        </div>
+        <div class="panel-body">
+            <?php echo $this->partial('partial-view/user-table', ['users' => $users]); ?>
+        </div>
+        <div class="panel-footer">
+            <a class="btn btn-primary btn-sm" href="<?= $this->url('userManagementRoute', ['action' => 'add', 'user' => 'newItem']) ?>">
+                Agregar nuevo
+            </a>
         </div>
     </div>
 </section>

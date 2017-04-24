@@ -22,7 +22,8 @@ use Core\Entity\User;
  */
 class UserManager
 {
-     /**
+
+    /**
      * Authentication service.
      * @var \Zend\Authentication\AuthenticationService
      */
@@ -50,37 +51,29 @@ class UserManager
         $this->config           = $config;
         $this->entityManager    = $entityManager;
     }
-    
+
     /*
      * Returns the list of all roles for the user
      */
 
-    public function getAllRoles()
+    public function getAllUsers()
     {
-        if (isset($this->sessionContainer->currentUserId))
+        $users = $this->entityManager->getRepository(User::class)->findAll();
+
+        $usersToReturn = array();
+
+        foreach ($users as $user)
         {
-            $currentUserId = $this->sessionContainer->currentUserId;
-
-            $user = $this->entityManager->getRepository(User::class)->findOneByUser($currentUserId);
-
-            // If there is no such user, return 'Identity Not Found' status.
-            if ($user == null)
-            {
-                throw new \Exception('El usuario no se encuentra para obtener el nombre');
-            }
-
-            $allRoles = array();
-
-            foreach ($user->getRoles() as $role)
-            {
-                $allRoles[$role->getRole()] = $role->getName();
-            }
-
-            return $allRoles;
+            $usersToReturn[] = [
+                'user'     => $user->getUser(),
+                'name'     => $user->getName(),
+                'lastname' => $user->getLastName(),
+                'email'    => $user->getEmail(),
+                'phone'    => $user->getPhone(),
+            ];
         }
-        else
-        {
-            throw new \Exception('El usuario no ha iniciado sesión');
-        }
+
+        return $usersToReturn;
     }
+
 }

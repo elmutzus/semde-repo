@@ -68,12 +68,32 @@ class UserController extends AbstractActionController
         $form = new UserForm();
 
         $this->setLayoutVariables();
+        
+        $users = $this->userManager->getAllUsers();
 
-        return new ViewModel();
+        return new ViewModel([
+            'users' => $users,
+        ]);
     }
 
     public function addAction()
     {
+        $form = new UserForm();
+
+        $this->setLayoutVariables();
+
+        return new ViewModel();
+    }
+    
+    public function modifyAction(){
+        $form = new UserForm();
+
+        $this->setLayoutVariables();
+
+        return new ViewModel();
+    }
+    
+    public function deleteAction(){
         $form = new UserForm();
 
         $this->setLayoutVariables();

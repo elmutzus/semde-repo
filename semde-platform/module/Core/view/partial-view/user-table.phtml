@@ -1,0 +1,33 @@
+<?php
+/*
+ * Copyright (c) 2017 Elder Mutzus <elder.mutzus@inspireswgt.com>.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *    Elder Mutzus <elder.mutzus@inspireswgt.com> - initial API and implementation and/or initial documentation
+ */
+?>
+
+<table class="table table-hover table-striped table-condensed">
+    <thead>
+        <tr>
+            <th>Usuario</th>
+            <th>Nombres</th>
+            <th>Apellidos</th>
+            <th>Email</th>
+            <th>Tel&eacute;fono</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php
+        foreach ($this->users as $user)
+        {
+            echo $this->partial('partial-view/user-row', ['user' => $user]);
+        }
+        ?>    
+    </tbody>
+</table>

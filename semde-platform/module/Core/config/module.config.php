@@ -73,7 +73,11 @@ return [
             'userManagementRoute' => [
                 'type'    => Segment::class,
                 'options' => [
-                    'route'    => '/management/user[/:action]',
+                    'route' => '/userManagement[/:action[/:user]]',
+                    'constraints' => [
+                        'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                        'user'     => '[a-zA-Z][a-zA-Z0-9_-]*',
+                    ],
                     'defaults' => [
                         'controller' => Controller\UserController::class,
                         'action'     => 'index',
