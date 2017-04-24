@@ -53,19 +53,27 @@ $this->doctype();
                 </div>
                 <div class="navbar-collapse collapse" id="collapseable-nav">
                     <ul class="nav navbar-nav">
-                        <?php if ($showReports): ?>
+                        <?php if (sizeof($reportPages) > 0): ?>
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-stats"></span> Reportes <span class="caret"></span></a>
                                 <ul class="dropdown-menu" role="menu">
-                                    <?php echo($reportsSnippet) ?>
+                                    <?php foreach ($reportPages as $key => $val): ?>
+                                        <li>
+                                            <a href="<?php echo($val) ?>"><?php echo($key) ?></a>
+                                        </li>
+                                    <?php endforeach; ?>
                                 </ul>
                             </li> 
                         <?php endif; ?>
-                        <?php if ($showManagements): ?>
+                        <?php if (sizeof($managementPages) > 0): ?>
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-cog"></span> Configuraciones <span class="caret"></span></a>
                                 <ul class="dropdown-menu" role="menu">
-                                    <?php echo($managementsSnippet) ?>
+                                    <?php foreach ($managementPages as $key => $val): ?>
+                                        <li>
+                                            <a href="<?php echo($val) ?>"><?php echo($key) ?></a>
+                                        </li>
+                                    <?php endforeach; ?>
                                 </ul>
                             </li>
                         <?php endif; ?>

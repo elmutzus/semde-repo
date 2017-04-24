@@ -52,12 +52,22 @@ class UserController extends AbstractActionController
         $this->sessionContainer = $sessionContainer;
     }
 
+    private function setLayoutVariables()
+    {
+        $layout = $this->layout();
+
+        $layout->setTemplate('layout/authenticated');
+        $layout->setVariable('reportPages', $this->sessionContainer->reportPages);
+        $layout->setVariable('managementPages', $this->sessionContainer->managementPages);
+        $layout->setVariable('currentUser', $this->sessionContainer->currentUserName);
+        $layout->setVariable('currentUserRole', $this->sessionContainer->currentUserRole);
+    }
+
     public function indexAction()
     {
         $form = new UserForm();
-        
-        $layout = $this->layout();
-        $layout->setTemplate('layout/authenticated');
+
+        $this->setLayoutVariables();
 
         return new ViewModel();
     }
@@ -65,9 +75,8 @@ class UserController extends AbstractActionController
     public function addAction()
     {
         $form = new UserForm();
-        
-        $layout = $this->layout();
-        $layout->setTemplate('layout/authenticated');
+
+        $this->setLayoutVariables();
 
         return new ViewModel();
     }

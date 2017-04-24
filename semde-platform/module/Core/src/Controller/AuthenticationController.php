@@ -157,48 +157,31 @@ class AuthenticationController extends AbstractActionController
         $layout->setVariable('currentUserRole', $this->sessionContainer->currentUserRole);
 
         $pagesPerRole = $this->authManager->getPagesForCurrentRole();
-        
+
         $layout->setVariable('pages', $pagesPerRole);
-        
+
         $managementPages = new ArrayCollection();
-        $reportPages = new ArrayCollection();
-        
-        foreach($pagesPerRole as $page){
-            if($page->getType() == 'R'){
-                $reportPages[] = $page;
+        $reportPages     = new ArrayCollection();
+
+        foreach ($pagesPerRole as $page)
+        {
+            if ($page->getType() == 'R')
+            {
+                $reportPages[$page->getName()] = $page->getRoute();
             }
-            
-            if($page->getType() == 'M'){
-                $managementPages[] = $page;
+
+            if ($page->getType() == 'M')
+            {
+                $managementPages[$page->getName()] = $page->getRoute();
             }
         }
-        
-        $managementSnippet = '';
-        
-        foreach($managementPages as $page){
-            $managementSnippet .= '<li><a href="<?php= $this->url(\'' . $page->getRoute() . '\') ?>">' . $page->getName() . '</a></li>';
-        }
-        
-        $reportsSnippet = '';
-        
-        foreach($reportPages as $page){
-            $reportsSnippet .= '<li><a href="<?= $this->url(\'' . $page->getRoute() . '\') ?>">' . $page->getName() . '</a></li>';
-        }
-        
-        if(sizeof($reportPages) > 0){
-            $layout->setVariable('showReports', true);
-            $layout->setVariable('reportsSnippet', $reportsSnippet);
-        } else {
-            $layout->setVariable('showReports', false);
-        }
-        
-        if(sizeof($managementPages) > 0){
-            $layout->setVariable('showManagements', true);
-            $layout->setVariable('managementsSnippet', $managementSnippet);
-        } else {
-            $layout->setVariable('showManagements', false);
-        }
-    
+
+        $this->sessionContainer->reportPages     = $reportPages;
+        $this->sessionContainer->managementPages = $managementPages;
+
+        $layout->setVariable('reportPages', $reportPages);
+        $layout->setVariable('managementPages', $managementPages);
+
         return new ViewModel();
     }
 
@@ -211,6 +194,8 @@ class AuthenticationController extends AbstractActionController
         $this->sessionContainer->currentUserName   = null;
         $this->sessionContainer->currentUserRole   = null;
         $this->sessionContainer->currentUserRoleId = null;
+        $this->sessionContainer->reportPages       = null;
+        $this->sessionContainer->managementPages   = null;
         $this->authManager->logout();
 
         return $this->redirect()->toRoute('loginRoute');
