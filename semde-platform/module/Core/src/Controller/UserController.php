@@ -168,6 +168,8 @@ class UserController extends AbstractActionController
             if ($del == 'Yes')
             {
                 $userId = $request->getPost('user');
+                
+                //@todo: Verify if the user has roles before deleting it
 
                 $this->userManager->delete($userId);
             }
