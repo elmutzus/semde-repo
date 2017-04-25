@@ -81,11 +81,6 @@ class UserManager
     {
         $user = $this->entityManager->getRepository(User::class)->findByUser($userId);
 
-        if ($user == null)
-        {
-            throw new \Exception("No se pudo localizar al usuario.");
-        }
-
         return $user;
     }
 
@@ -99,6 +94,14 @@ class UserManager
 
     public function createUser($user, $password, $name, $lastname, $email, $phone)
     {
+        // Verify is user id is available
+        $existingUser = $this->getUser($user);
+
+        if ($existingUser)
+        {
+            throw new \Exception('El usuario no está disponible');
+        }
+
         $model = new User();
 
         $model->setUser($user);
@@ -119,24 +122,27 @@ class UserManager
         }
     }
 
-    public function updateUser($model)
+    public function updateUser($model, $previousPassword)
     {
-        $newPassword = $model->getPassword();
+        $updatedUser = new User();
+        $updatedUser->setUser($model['user']);
+        $updatedUser->setName($model['name']);
+        $updatedUser->setLastName($model['lastname']);
+        $updatedUser->setEmail($model['email']);
+        $updatedUser->setPhone($model['phone']);        
 
-        if (empty($newPassword))
+        if (model['password'])
         {
-            $actualUser = $this->getUser($model->getUser());
-
-            $model->setPassword($actualUser->getPassword());
+            $updatedUser->setPassword($this->getEncriptedPassword($model['password']));
         }
         else
         {
-            $model->setPassword($this->getEncriptedPassword($newPassword));
+            $updatedUser->setPassword($previousPassword);
         }
 
         try
         {
-            $this->entityManager->merge($model);
+            $this->entityManager->merge($updatedUser);
             $this->entityManager->flush();
         }
         catch (Exception $ex)

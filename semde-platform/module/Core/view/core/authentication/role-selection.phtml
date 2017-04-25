@@ -27,12 +27,12 @@ $form->prepare();
                 <div class="form-group">
                     <?= $this->formLabel($form->get('user')); ?>
                     <?= $this->formElement($form->get('user')); ?>
-                    <?= $this->formElementErrors($form->get('user'), ['class' => 'alert alert-warning']); ?>
+                    <?= $this->formElementErrors($form->get('user'), ['class' => 'alert-danger']); ?>
                 </div>
                 <div class="form-group">
                     <?= $this->formLabel($form->get('availableRoles')); ?>
                     <?= $this->formElement($form->get('availableRoles')); ?>
-                    <?= $this->formElementErrors($form->get('availableRoles'), ['class' => 'alert alert-warning']); ?>
+                    <?= $this->formElementErrors($form->get('availableRoles'), ['class' => 'alert-danger']); ?>
                 </div>  
                 <?= $this->formElement($form->get('submit')); ?>
                 <?= $this->form()->closeTag(); ?>

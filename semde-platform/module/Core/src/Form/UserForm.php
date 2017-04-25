@@ -137,14 +137,34 @@ class UserForm extends Form
         $inputFilter = new InputFilter();
         $this->setInputFilter($inputFilter);
 
+        /* // Add input for "user" field
+          $inputFilter->add([
+          'name'       => 'user',
+          'required'   => true,
+          'filters'    => [
+          ['name' => 'StringTrim'],
+          ['name' => 'StripTags'],
+          ['name' => 'StripNewlines'],
+          ],
+          'validators' => [
+          [
+          'name'    => 'StringLength',
+          'options' => [
+          'min' => 1,
+          'max' => 50,
+          ],
+          ],
+          ],
+          ]); */
+
         // Add input for "user" field
         $inputFilter->add([
             'name'       => 'user',
-            'required'   => true,
             'filters'    => [
                 ['name' => 'StringTrim'],
                 ['name' => 'StripTags'],
                 ['name' => 'StripNewlines'],
+                ['name' => 'Null'],
             ],
             'validators' => [
                 [
@@ -154,13 +174,21 @@ class UserForm extends Form
                         'max' => 50,
                     ],
                 ],
+                [
+                    'name'    => 'Regex',
+                    'options' => [
+                        'pattern'  => '/^[\w]*$/',
+                        'messages' => [
+                            'regexNotMatch' => 'El usuario no es válido. Usar únicamente letras y números',
+                        ],
+                    ],
+                ],
             ],
         ]);
 
         // Add input for "password" field
         $inputFilter->add([
             'name'       => 'password',
-            'required'   => true,
             'filters'    => [
                 ['name' => 'StringTrim'],
             ],
@@ -178,7 +206,6 @@ class UserForm extends Form
         // Add input for "name" field
         $inputFilter->add([
             'name'       => 'name',
-            'required'   => true,
             'filters'    => [
                 ['name' => 'StringTrim'],
                 ['name' => 'StripTags'],
@@ -198,7 +225,6 @@ class UserForm extends Form
         // Add input for "lastname" field
         $inputFilter->add([
             'name'       => 'lastname',
-            'required'   => true,
             'filters'    => [
                 ['name' => 'StringTrim'],
                 ['name' => 'StripTags'],
@@ -218,7 +244,6 @@ class UserForm extends Form
         // Add input for "email" field
         $inputFilter->add([
             'name'       => 'email',
-            'required'   => true,
             'filters'    => [
                 ['name' => 'StringTrim'],
             ],
@@ -236,7 +261,6 @@ class UserForm extends Form
         // Add input for "phone" field
         $inputFilter->add([
             'name'       => 'phone',
-            'required'   => true,
             'filters'    => [
                 ['name' => 'StringTrim'],
                 ['name' => 'StripTags'],
@@ -244,7 +268,7 @@ class UserForm extends Form
             ],
             'validators' => [
                 [
-                    'name'    => 'digits',
+                    'name' => 'digits',
                 ],
             ],
         ]);

@@ -115,13 +115,11 @@ class UserController extends AbstractActionController
             return $this->redirect()->toRoute('userManagement', ['action' => 'index']);
         }
 
-        try
+        $user = $this->userManager->getUser($userId);
+
+        if (!$user)
         {
-            $user = $this->userManager->getUser($userId);
-        }
-        catch (Exception $ex)
-        {
-            throw $ex;
+            throw new \Exception("No se puede encontrar el usuario a modificar");
         }
 
         $form = new UserForm();
@@ -129,7 +127,7 @@ class UserController extends AbstractActionController
         $form->get('submit')->setValue('Modificar usuario');
         $form->get('user')->setAttribute('readonly', 'true');
         $form->getInputFilter()->get('password')->setRequired(false);
-        
+
         $form->get('user')->setValue($user[0]->getUser());
         $form->get('name')->setValue($user[0]->getName());
         $form->get('lastname')->setValue($user[0]->getLastName());
@@ -144,7 +142,7 @@ class UserController extends AbstractActionController
         }
 
         $form->setData($this->request->getPost());
-        
+
         if (!$form->isValid())
         {
             return new ViewModel([
@@ -152,7 +150,7 @@ class UserController extends AbstractActionController
             ]);
         }
 
-        $this->userManager->updateUser($user[0]);
+        $this->userManager->updateUser($form->getData(), $user[0]->getPassword());
 
         return $this->redirect()->toRoute('userManagementRoute');
     }
