@@ -89,10 +89,10 @@ class UserManager
         return $securePass;
     }
 
-    public function create($user, $password, $name, $lastname, $email, $phone)
+    public function create($user)
     {
         // Verify is user id is available
-        $existingUser = $this->getUser($user);
+        $existingUser = $this->getUser($user['user']);
 
         if ($existingUser)
         {
@@ -101,12 +101,12 @@ class UserManager
 
         $model = new User();
 
-        $model->setUser($user);
-        $model->setEmail($email);
-        $model->setLastName($lastname);
-        $model->setName($name);
-        $model->setPassword($this->getEncriptedPassword($password));
-        $model->setPhone($phone);
+        $model->setUser($user['user']);
+        $model->setEmail($user['email']);
+        $model->setLastName($user['lastname']);
+        $model->setName($user['name']);
+        $model->setPassword($this->getEncriptedPassword($user['password']));
+        $model->setPhone($user['phone']);
 
         try
         {

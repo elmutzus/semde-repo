@@ -87,13 +87,7 @@ class UserController extends AbstractActionController
             // Validate form
             if ($form->isValid())
             {
-                // Get filtered and validated data
-                $data = $form->getData();
-
-                //$user, $password, $name, $lastname, $email, $phone
-                $this->userManager->create(
-                        $data['user'], $data['password'], $data['name'], $data['lastname'], $data['email'], $data['phone']
-                );
+                $this->userManager->create($form->getData());
 
                 return $this->redirect()->toRoute('userManagementRoute');
             }
