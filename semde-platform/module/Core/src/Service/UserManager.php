@@ -25,12 +25,6 @@ class UserManager
 {
 
     /**
-     * Authentication service.
-     * @var \Zend\Authentication\AuthenticationService
-     */
-    private $authService;
-
-    /**
      * Session manager.
      * @var Zend\Session\SessionContainer
      */
@@ -80,8 +74,11 @@ class UserManager
     public function getUser($userId)
     {
         $user = $this->entityManager->getRepository(User::class)->findByUser($userId);
+        
+        if(sizeof($user) == 1)
+            return $user[0];
 
-        return $user;
+        return null;
     }
 
     private function getEncriptedPassword($password)
@@ -92,7 +89,7 @@ class UserManager
         return $securePass;
     }
 
-    public function createUser($user, $password, $name, $lastname, $email, $phone)
+    public function create($user, $password, $name, $lastname, $email, $phone)
     {
         // Verify is user id is available
         $existingUser = $this->getUser($user);
@@ -122,14 +119,14 @@ class UserManager
         }
     }
 
-    public function updateUser($model, $previousPassword)
+    public function update($model, $previousPassword)
     {
         $updatedUser = new User();
         $updatedUser->setUser($model['user']);
         $updatedUser->setName($model['name']);
         $updatedUser->setLastName($model['lastname']);
         $updatedUser->setEmail($model['email']);
-        $updatedUser->setPhone($model['phone']);        
+        $updatedUser->setPhone($model['phone']);
 
         if ($model['password'])
         {
@@ -148,6 +145,29 @@ class UserManager
         catch (Exception $ex)
         {
             throw $ex;
+        }
+    }
+
+    public function delete($userId)
+    {
+
+        $user = $this->getUser($userId);
+
+        if ($user)
+        {
+            try
+            {
+                $this->entityManager->remove($user);
+                $this->entityManager->flush();
+            }
+            catch (Exception $ex)
+            {
+                throw $ex;
+            }
+        }
+        else
+        {
+            throw new \Exception('El usuario no se puede eliminar');
         }
     }
 

@@ -91,7 +91,7 @@ class UserController extends AbstractActionController
                 $data = $form->getData();
 
                 //$user, $password, $name, $lastname, $email, $phone
-                $this->userManager->createUser(
+                $this->userManager->create(
                         $data['user'], $data['password'], $data['name'], $data['lastname'], $data['email'], $data['phone']
                 );
 
@@ -112,7 +112,6 @@ class UserController extends AbstractActionController
 
         if ($userId == '-')
         {
-
             return $this->redirect()->toRoute('userManagement', ['action' => 'index']);
         }
 
@@ -120,7 +119,7 @@ class UserController extends AbstractActionController
 
         if (!$user)
         {
-            throw new \Exception("No se puede encontrar el usuario a modificar");
+            throw new \Exception("No se puede encontrar el usuario");
         }
 
         $form = new UserForm();
@@ -129,11 +128,11 @@ class UserController extends AbstractActionController
         $form->get('user')->setAttribute('readonly', 'true');
         $form->getInputFilter()->get('password')->setRequired(false);
 
-        $form->get('user')->setValue($user[0]->getUser());
-        $form->get('name')->setValue($user[0]->getName());
-        $form->get('lastname')->setValue($user[0]->getLastName());
-        $form->get('email')->setValue($user[0]->getEmail());
-        $form->get('phone')->setValue($user[0]->getPhone());
+        $form->get('user')->setValue($user->getUser());
+        $form->get('name')->setValue($user->getName());
+        $form->get('lastname')->setValue($user->getLastName());
+        $form->get('email')->setValue($user->getEmail());
+        $form->get('phone')->setValue($user->getPhone());
 
         if (!$this->request->isPost())
         {
@@ -151,21 +150,39 @@ class UserController extends AbstractActionController
             ]);
         }
 
-        $this->userManager->updateUser($form->getData(), $user[0]->getPassword());
+        $this->userManager->update($form->getData(), $user->getPassword());
 
         return $this->redirect()->toRoute('userManagementRoute');
     }
 
     public function deleteAction()
     {
-        $form = new UserForm();
+        $userId = $this->params()->fromRoute('user', '-');
 
-        $form->get('submit')->setValue('Crear usuario');
+        if ($userId == '-')
+        {
+            return $this->redirect()->toRoute('userManagementRoute');
+        }
 
-        $this->setLayoutVariables();
+        $request = $this->getRequest();
+
+        if ($request->isPost())
+        {
+
+            $del = $request->getPost('del', 'No');
+
+            if ($del == 'Yes')
+            {
+                $userId = $request->getPost('user');
+
+                $this->userManager->delete($userId);
+            }
+
+            return $this->redirect()->toRoute('userManagementRoute');
+        }
 
         return new ViewModel([
-            'form' => $form,
+            'user' => $userId,
         ]);
     }
 
