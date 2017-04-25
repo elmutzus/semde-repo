@@ -131,7 +131,7 @@ class UserManager
         $updatedUser->setEmail($model['email']);
         $updatedUser->setPhone($model['phone']);        
 
-        if (model['password'])
+        if ($model['password'])
         {
             $updatedUser->setPassword($this->getEncriptedPassword($model['password']));
         }

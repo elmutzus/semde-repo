@@ -112,6 +112,7 @@ class UserController extends AbstractActionController
 
         if ($userId == '-')
         {
+
             return $this->redirect()->toRoute('userManagement', ['action' => 'index']);
         }
 
