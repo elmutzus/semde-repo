@@ -8,7 +8,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  * Contributors:
- *    Elder Mutzus <elder.mutzus@inspireswgt.com> - initial API and implementation and/or initial documentation
+ *    Elder Mutzus <elmutzus@gmail.com> - initial API and implementation and/or initial documentation
  */
 
 namespace Core\Entity;
@@ -18,7 +18,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * 
- * @author Elder Mutzus <elder.mutzus@inspireswgt.com>
+ * @author Elder Mutzus <elmutzus@gmail.com>
  * @ORM\Entity
  * @ORM\Table(name="user")
  */
