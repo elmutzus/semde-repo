@@ -89,7 +89,7 @@ class UserManager
     public function create($user)
     {
         // Verify is user id is available
-        $existingUser = $this->getUser($user['user']);
+        $existingUser = $this->get($user['user']);
 
         if ($existingUser)
         {
