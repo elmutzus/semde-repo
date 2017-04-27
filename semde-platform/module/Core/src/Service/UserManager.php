@@ -30,20 +30,17 @@ class UserManager
      */
     private $sessionContainer;
 
-    /**
-     * Contents of the 'access_filter' config key.
-     * @var array 
+    /*
+     * Entity manager
      */
-    private $config;
     private $entityManager;
 
     /**
      * Constructs the service.
      */
-    public function __construct($sessionContainer, $config, $entityManager)
+    public function __construct($sessionContainer, $entityManager)
     {
         $this->sessionContainer = $sessionContainer;
-        $this->config           = $config;
         $this->entityManager    = $entityManager;
     }
 
@@ -51,7 +48,7 @@ class UserManager
      * Returns the list of all roles for the user
      */
 
-    public function getAllUsers()
+    public function getAll()
     {
         $users = $this->entityManager->getRepository(User::class)->findAll();
 
@@ -71,7 +68,7 @@ class UserManager
         return $usersToReturn;
     }
 
-    public function getUser($userId)
+    public function get($userId)
     {
         $user = $this->entityManager->getRepository(User::class)->findByUser($userId);
         
@@ -151,7 +148,7 @@ class UserManager
     public function delete($userId)
     {
 
-        $user = $this->getUser($userId);
+        $user = $this->get($userId);
 
         if ($user)
         {

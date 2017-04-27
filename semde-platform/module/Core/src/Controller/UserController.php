@@ -63,7 +63,7 @@ class UserController extends AbstractActionController
 
         $this->setLayoutVariables();
 
-        $users = $this->userManager->getAllUsers();
+        $users = $this->userManager->getAll();
 
         return new ViewModel([
             'users' => $users,
@@ -109,7 +109,7 @@ class UserController extends AbstractActionController
             return $this->redirect()->toRoute('userManagement', ['action' => 'index']);
         }
 
-        $user = $this->userManager->getUser($userId);
+        $user = $this->userManager->get($userId);
 
         if (!$user)
         {
