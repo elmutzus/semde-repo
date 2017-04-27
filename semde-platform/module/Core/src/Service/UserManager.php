@@ -57,7 +57,7 @@ class UserManager
         foreach ($users as $user)
         {
             $usersToReturn[] = [
-                'user'     => $user->getUser(),
+                'id'     => $user->getId(),
                 'name'     => $user->getName(),
                 'lastname' => $user->getLastName(),
                 'email'    => $user->getEmail(),
@@ -70,7 +70,7 @@ class UserManager
 
     public function get($userId)
     {
-        $user = $this->entityManager->getRepository(User::class)->findByUser($userId);
+        $user = $this->entityManager->getRepository(User::class)->findById($userId);
         
         if(sizeof($user) == 1)
             return $user[0];
@@ -89,7 +89,7 @@ class UserManager
     public function create($user)
     {
         // Verify is user id is available
-        $existingUser = $this->get($user['user']);
+        $existingUser = $this->get($user['id']);
 
         if ($existingUser)
         {
@@ -98,7 +98,7 @@ class UserManager
 
         $model = new User();
 
-        $model->setUser($user['user']);
+        $model->setId($user['id']);
         $model->setEmail($user['email']);
         $model->setLastName($user['lastname']);
         $model->setName($user['name']);
@@ -119,7 +119,7 @@ class UserManager
     public function update($model, $previousPassword)
     {
         $updatedUser = new User();
-        $updatedUser->setUser($model['user']);
+        $updatedUser->setId($model['id']);
         $updatedUser->setName($model['name']);
         $updatedUser->setLastName($model['lastname']);
         $updatedUser->setEmail($model['email']);

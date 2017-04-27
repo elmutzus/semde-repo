@@ -41,7 +41,7 @@ class UserForm extends Form
         // Add user field
         $this->add([
             'type'       => 'text',
-            'name'       => 'user',
+            'name'       => 'id',
             'attributes' => [
                 'class'       => 'form-control',
                 'placeholder' => 'Usuario',
@@ -139,7 +139,7 @@ class UserForm extends Form
 
         // Add input for "user" field
         $inputFilter->add([
-            'name'       => 'user',
+            'name'       => 'id',
             'filters'    => [
                 ['name' => 'StringTrim'],
                 ['name' => 'StripTags'],

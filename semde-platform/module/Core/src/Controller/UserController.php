@@ -102,11 +102,11 @@ class UserController extends AbstractActionController
     {
         $this->setLayoutVariables();
 
-        $userId = $this->params()->fromRoute('user', '-');
+        $userId = $this->params()->fromRoute('id', '-');
 
         if ($userId == '-')
         {
-            return $this->redirect()->toRoute('userManagement', ['action' => 'index']);
+            return $this->redirect()->toRoute('userManagementRoute', ['action' => 'index']);
         }
 
         $user = $this->userManager->get($userId);
@@ -119,10 +119,10 @@ class UserController extends AbstractActionController
         $form = new UserForm();
 
         $form->get('submit')->setValue('Modificar usuario');
-        $form->get('user')->setAttribute('readonly', 'true');
+        $form->get('id')->setAttribute('readonly', 'true');
         $form->getInputFilter()->get('password')->setRequired(false);
 
-        $form->get('user')->setValue($user->getUser());
+        $form->get('id')->setValue($user->getId());
         $form->get('name')->setValue($user->getName());
         $form->get('lastname')->setValue($user->getLastName());
         $form->get('email')->setValue($user->getEmail());
@@ -151,7 +151,7 @@ class UserController extends AbstractActionController
 
     public function deleteAction()
     {
-        $userId = $this->params()->fromRoute('user', '-');
+        $userId = $this->params()->fromRoute('id', '-');
 
         if ($userId == '-')
         {
@@ -167,7 +167,7 @@ class UserController extends AbstractActionController
 
             if ($del == 'Yes')
             {
-                $userId = $request->getPost('user');
+                $userId = $request->getPost('id');
                 
                 //@todo: Verify if the user has roles before deleting it
 
@@ -178,7 +178,7 @@ class UserController extends AbstractActionController
         }
 
         return new ViewModel([
-            'user' => $userId,
+            'id' => $userId,
         ]);
     }
 

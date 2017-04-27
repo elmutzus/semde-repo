@@ -27,9 +27,9 @@ class User
 
     /**
      * @ORM\Id
-     * @ORM\Column(name="user")   
+     * @ORM\Column(name="id")   
      */
-    protected $user;
+    protected $id;
 
     /**
      * @ORM\Column(name="password")   
@@ -59,8 +59,8 @@ class User
     /**
      * @ORM\ManyToMany(targetEntity="\Core\Entity\Role", inversedBy="users")
      * @ORM\JoinTable(name="role_per_user",
-     *      joinColumns={@ORM\JoinColumn(name="user", referencedColumnName="user")},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="role", referencedColumnName="role")}
+     *      joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="role_id", referencedColumnName="id")}
      *      )
      */
     protected $roles;
@@ -106,9 +106,9 @@ class User
      * Gets User
      */
 
-    public function getUser()
+    public function getId()
     {
-        return $this->user;
+        return $this->id;
     }
 
     /*
@@ -160,9 +160,9 @@ class User
      * Sets the user
      */
 
-    public function setUser($newUser)
+    public function setId($newUser)
     {
-        $this->user = $newUser;
+        $this->id = $newUser;
     }
 
     /*

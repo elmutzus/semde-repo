@@ -72,7 +72,30 @@ class RoleController extends AbstractActionController
 
     public function addAction()
     {
-        return new ViewModel([]);
+        $form = new RoleForm();
+
+        $form->get('submit')->setValue('Crear rol');
+
+        $this->setLayoutVariables();
+
+        if ($this->getRequest()->isPost())
+        {
+            $data = $this->params()->fromPost();
+
+            $form->setData($data);
+
+            // Validate form
+            if ($form->isValid())
+            {
+                $this->roleManager->create($form->getData());
+
+                return $this->redirect()->toRoute('roleManagementRoute');
+            }
+        }
+
+        return new ViewModel([
+            'form' => $form,
+        ]);
     }
 
     public function modifyAction()

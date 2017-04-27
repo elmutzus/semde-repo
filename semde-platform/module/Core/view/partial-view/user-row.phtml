@@ -12,16 +12,16 @@
 ?>
 
 <tr>
-    <td> <?= $this->user['user'] ?> </td>
+    <td> <?= $this->user['id'] ?> </td>
     <td> <?= $this->user['name'] ?> </td>
     <td> <?= $this->user['lastname'] ?> </td>
     <td> <?= $this->user['email'] ?> </td>
     <td> <?= $this->user['phone'] ?> </td>
     <td>         
-        <a class="btn btn-primary btn-xs" href="<?= $this->url('userManagementRoute', ['action' => 'modify', 'user' => $this->user['user']]) ?>">
+        <a class="btn btn-primary btn-xs" href="<?= $this->url('userManagementRoute', ['action' => 'modify', 'id' => $this->user['id']]) ?>">
             Modificar
         </a>
-        <a class="btn btn-danger btn-xs" href="<?= $this->url('userManagementRoute', ['action' => 'delete', 'user' => $this->user['user']]) ?>">
+        <a class="btn btn-danger btn-xs" href="<?= $this->url('userManagementRoute', ['action' => 'delete', 'id' => $this->user['id']]) ?>">
             Eliminar
         </a>
     </td>

@@ -27,14 +27,9 @@ class Role
 
     /**
      * @ORM\Id
-     * @ORM\Column(name="role")   
+     * @ORM\Column(name="id")   
      */
-    protected $role;
-
-    /**
-     * @ORM\Column(name="name")   
-     */
-    protected $name;
+    protected $id;
 
     /**
      * @ORM\Column(name="description")   
@@ -49,8 +44,8 @@ class Role
     /**
      * @ORM\ManyToMany(targetEntity="\Core\Entity\Page", inversedBy="roles")
      * @ORM\JoinTable(name="pages_per_role",
-     *      joinColumns={@ORM\JoinColumn(name="role", referencedColumnName="role")},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="page", referencedColumnName="page")}
+     *      joinColumns={@ORM\JoinColumn(name="role_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="page_id", referencedColumnName="id")}
      *      )
      */
     protected $pages;
@@ -68,17 +63,9 @@ class Role
     /*
      * Sets the role
      */
-    public function setRole($newRole)
+    public function setId($newRole)
     {
-        $this->role = $newRole;
-    }
-
-    /*
-     * Sets the name
-     */
-    public function setName($newName)
-    {
-        $this->name = $newName;
+        $this->id = $newRole;
     }
 
     /*
@@ -92,17 +79,9 @@ class Role
     /*
      * Gets the role
      */
-    public function getRole()
+    public function getId()
     {
-        return $this->role;
-    }
-
-    /*
-     * Gets the name
-     */
-    public function getName()
-    {
-        return $this->name;
+        return $this->id;
     }
 
     /*

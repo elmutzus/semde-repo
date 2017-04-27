@@ -38,7 +38,7 @@ class RoleSelectionForm extends Form
         // Add user name field
         $this->add([
             'type'       => 'text',
-            'name'       => 'user',
+            'name'       => 'id',
             'attributes' => [
                 'class'       => 'form-control',
                 'disabled'    => true,

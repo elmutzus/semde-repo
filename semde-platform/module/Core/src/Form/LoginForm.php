@@ -41,7 +41,7 @@ class LoginForm extends Form
         // Add user name field
         $this->add([
             'type'       => 'text',
-            'name'       => 'user',
+            'name'       => 'id',
             'attributes' => [
                 'class'       => 'form-control',
                 'placeholder' => 'Usuario',
@@ -96,7 +96,7 @@ class LoginForm extends Form
 
         // Add input for "user" field
         $inputFilter->add([
-            'name'       => 'user',
+            'name'       => 'id',
             'required'   => true,
             'filters'    => [
                     ['name' => 'StringTrim'],

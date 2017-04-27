@@ -73,7 +73,7 @@ class AuthenticationController extends AbstractActionController
                 // Get filtered and validated data
                 $data = $form->getData();
 
-                $result = $this->authManager->login($data['user'], $data['password'], $data['rememberMe']);
+                $result = $this->authManager->login($data['id'], $data['password'], $data['rememberMe']);
 
                 if ($result->getCode() == Result::SUCCESS)
                 {
@@ -122,7 +122,7 @@ class AuthenticationController extends AbstractActionController
 
             if ($form->isValid())
             {
-                $this->sessionContainer->currentUserRole   = $this->authManager->getRoleName($data['availableRoles']);
+                $this->sessionContainer->currentUserRole   = $this->authManager->getRoleDescription($data['availableRoles']);
                 $this->sessionContainer->currentUserRoleId = $data['availableRoles'];
 
                 return $this->redirect()->toRoute('mainDashboardRoute');
@@ -167,12 +167,12 @@ class AuthenticationController extends AbstractActionController
         {
             if ($page->getType() == 'R')
             {
-                $reportPages[$page->getName()] = $page->getRoute();
+                $reportPages[$page->getDescription()] = $page->getRoute();
             }
 
             if ($page->getType() == 'M')
             {
-                $managementPages[$page->getName()] = $page->getRoute();
+                $managementPages[$page->getDescription()] = $page->getRoute();
             }
         }
 

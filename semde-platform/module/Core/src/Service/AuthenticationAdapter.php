@@ -30,7 +30,7 @@ class AuthenticationAdapter implements AdapterInterface
      * User email.
      * @var string 
      */
-    private $user;
+    private $id;
 
     /**
      * Password
@@ -55,9 +55,9 @@ class AuthenticationAdapter implements AdapterInterface
     /**
      * Sets user.     
      */
-    public function setUser($user)
+    public function setId($user)
     {
-        $this->user = $user;
+        $this->id = $user;
     }
 
     /**
@@ -74,7 +74,7 @@ class AuthenticationAdapter implements AdapterInterface
     public function authenticate()
     {
         // Check the database if there is a user with such email.
-        $user = $this->entityManager->getRepository(User::class)->findOneByUser($this->user);
+        $user = $this->entityManager->getRepository(User::class)->findOneById($this->id);
 
         // If there is no such user, return 'Identity Not Found' status.
         if ($user == null)
@@ -91,7 +91,7 @@ class AuthenticationAdapter implements AdapterInterface
         {
             // Great! The password hash matches. Return user identity (email) to be
             // saved in session for later use.
-            return new Result(Result::SUCCESS, $this->user, ['Usuario autenticado']);
+            return new Result(Result::SUCCESS, $this->id, ['Usuario autenticado']);
         }
 
         // If password check didn't pass return 'Invalid Credential' failure status.

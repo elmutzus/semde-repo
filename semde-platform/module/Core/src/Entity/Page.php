@@ -27,14 +27,9 @@ class Page
 
     /**
      * @ORM\Id
-     * @ORM\Column(name="page")   
+     * @ORM\Column(name="id")   
      */
-    protected $page;
-
-    /**
-     * @ORM\Column(name="name")   
-     */
-    protected $name;
+    protected $id;
 
     /**
      * @ORM\Column(name="description")   
@@ -69,18 +64,9 @@ class Page
      * Gest the page
      */
 
-    public function getPage()
+    public function getId()
     {
         return $this->page;
-    }
-
-    /*
-     * Gest the name
-     */
-
-    public function getName()
-    {
-        return $this->name;
     }
 
     /*

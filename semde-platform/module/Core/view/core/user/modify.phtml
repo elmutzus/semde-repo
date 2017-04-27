@@ -10,7 +10,7 @@
  * Contributors:
  *    Elder Mutzus <elmutzus@gmail.com> - initial API and implementation and/or initial documentation
  */
-$form->setAttribute('action', $this->url('userManagementRoute', ['action' => 'modify', 'user' => $this->form->get('user')->getValue()]));
+$form->setAttribute('action', $this->url('userManagementRoute', ['action' => 'modify', 'id' => $this->form->get('id')->getValue()]));
 $form->prepare();
 ?>
 
@@ -26,9 +26,9 @@ $form->prepare();
             <div class="panel-body">
                 <?= $this->form()->openTag($form); ?>
                 <div class="form-group">
-                    <?= $this->formLabel($form->get('user')); ?>
-                    <?= $this->formElement($form->get('user')); ?>
-                    <?= $this->formElementErrors($form->get('user'), ['class' => 'alert-danger']); ?>
+                    <?= $this->formLabel($form->get('id')); ?>
+                    <?= $this->formElement($form->get('id')); ?>
+                    <?= $this->formElementErrors($form->get('id'), ['class' => 'alert-danger']); ?>
                 </div>
                 <div class="form-group">
                     <?= $this->formLabel($form->get('password')); ?>

@@ -14,7 +14,6 @@
 namespace Core\Service;
 
 use Core\Entity\Role;
-use Zend\Crypt\Password\Bcrypt;
 
 /**
  * Description of UserManager
@@ -57,8 +56,7 @@ class RoleManager
         foreach ($items as $item)
         {
             $itemsToReturn[] = [
-                'role'     => $item->getRole(),
-                'name'     => $item->getName(),
+                'id'     => $item->getId(),
                 'description' => $item->getDescription()
             ];
         }
@@ -66,14 +64,39 @@ class RoleManager
         return $itemsToReturn;
     }
 
-    public function get($id)
+    public function getById($id)
     {
+        $item = $this->entityManager->getRepository(Role::class)->findById($id);
         
-    }
+        if(sizeof($item) == 1)
+            return $item[0];
 
+        return null;
+    }
+  
     public function create($entity)
     {
-        
+        $existingItem = $this->getById($entity['id']);
+
+        if ($existingItem)
+        {
+            throw new \Exception('El nombre del rol no está disponible');
+        }
+
+        $model = new Role();
+
+        $model->setId($entity['id']);
+        $model->setDescription($entity['description']);
+
+        try
+        {
+            $this->entityManager->persist($model);
+            $this->entityManager->flush();
+        }
+        catch (Exception $ex)
+        {
+            throw $ex;
+        }
     }
 
     public function update($entity)

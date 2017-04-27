@@ -9,7 +9,7 @@
  * Contributors:
  *    Elder Mutzus <elmutzus@gmail.com> - initial API and implementation and/or initial documentation
  */
-$url = $this->url('userManagementRoute', ['action' => 'delete', 'user' => $user]);
+$url = $this->url('userManagementRoute', ['action' => 'delete', 'id' => $id]);
 ?>
 
 <section id="body">
@@ -23,13 +23,13 @@ $url = $this->url('userManagementRoute', ['action' => 'delete', 'user' => $user]
             </div>
             <div class="panel-body">
                 <p>
-                    Esta seguro de eliminar el usuario "<?= $this->escapeHtml($user) ?>"?
+                    Esta seguro de eliminar el usuario "<?= $this->escapeHtml($id) ?>"?
                 </p>
             </div>
             <div class="panel-footer">
                 <form action="<?= $url ?>" method="post">
                     <div class="form-group">
-                        <input type="hidden" name="user" value="<?= $user ?>" />
+                        <input type="hidden" name="id" value="<?= $id ?>" />
                         <input type="submit" class="btn btn-danger" name="del" value="Yes" />
                         <input type="submit" class="btn btn-success" name="del" value="No" />
                     </div>

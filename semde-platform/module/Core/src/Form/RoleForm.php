@@ -45,29 +45,16 @@ class RoleForm extends Form
         // Add user name field
         $this->add([
             'type'       => 'text',
-            'name'       => 'role',
+            'name'       => 'id',
             'attributes' => [
                 'class'       => 'form-control',
-                'placeholder' => 'Rol',
+                'placeholder' => 'ID',
             ],
             'options'    => [
-                'label' => 'Rol',
+                'label' => 'ID',
             ],
         ]);
 
-        // Add password field
-        $this->add([
-            'type'       => 'text',
-            'name'       => 'name',
-            'attributes' => [
-                'class'       => 'form-control',
-                'placeholder' => 'Nombre',
-            ],
-            'options'    => [
-                'label' => 'Nombre',
-            ],
-        ]);
-        
         // Add password field
         $this->add([
             'type'       => 'text',
@@ -103,21 +90,7 @@ class RoleForm extends Form
         $this->setInputFilter($inputFilter);
 
         $inputFilter->add([
-            'name'       => 'role',
-            'filters'    => [
-                ['name' => 'StringTrim'],
-                ['name' => 'StripTags'],
-                ['name' => 'StripNewlines'],
-            ],
-            'validators' => [
-                [
-                    'name' => 'digits',
-                ],
-            ],
-        ]);
-
-        $inputFilter->add([
-            'name'       => 'name',
+            'name'       => 'id',
             'filters'    => [
                 ['name' => 'StringTrim'],
                 ['name' => 'StripTags'],
@@ -129,6 +102,15 @@ class RoleForm extends Form
                     'options' => [
                         'min' => 1,
                         'max' => 50,
+                    ],
+                ],
+                [
+                    'name'    => 'Regex',
+                    'options' => [
+                        'pattern'  => '/^[\w]*$/',
+                        'messages' => [
+                            'regexNotMatch' => 'El rol no es válido. Usar únicamente letras y números',
+                        ],
                     ],
                 ],
             ],

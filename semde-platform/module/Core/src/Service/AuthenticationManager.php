@@ -68,7 +68,7 @@ class AuthenticationManager
 
         // Authenticate with login/password.
         $authAdapter = $this->authService->getAdapter();
-        $authAdapter->setUser($user);
+        $authAdapter->setId($user);
         $authAdapter->setPassword($password);
         $result      = $this->authService->authenticate();
 
@@ -94,7 +94,7 @@ class AuthenticationManager
         {
             $currentUserId = $this->sessionContainer->currentUserId;
 
-            $user = $this->entityManager->getRepository(User::class)->findOneByUser($currentUserId);
+            $user = $this->entityManager->getRepository(User::class)->findOneById($currentUserId);
 
             // If there is no such user, return 'Identity Not Found' status.
             if ($user == null)
@@ -106,7 +106,7 @@ class AuthenticationManager
 
             foreach ($user->getRoles() as $role)
             {
-                $allRoles[$role->getRole()] = $role->getName();
+                $allRoles[$role->getId()] = $role->getDescription();
             }
 
             return $allRoles;
@@ -117,9 +117,9 @@ class AuthenticationManager
         }
     }
 
-    public function getRoleName($roleName)
+    public function getRoleDescription($roleName)
     {
-        $role = $this->entityManager->getRepository(Role::class)->findOneByRole($roleName);
+        $role = $this->entityManager->getRepository(Role::class)->findOneById($roleName);
 
         // If there is no such user, return 'Identity Not Found' status.
         if ($role == null)
@@ -127,7 +127,7 @@ class AuthenticationManager
             throw new \Exception('El usuario no se encuentra para obtener el nombre');
         }
 
-        return $role->getName();
+        return $role->getDescription();
     }
 
     /*
@@ -140,7 +140,7 @@ class AuthenticationManager
         {
             $currentUserId = $this->sessionContainer->currentUserId;
 
-            $user = $this->entityManager->getRepository(User::class)->findOneByUser($currentUserId);
+            $user = $this->entityManager->getRepository(User::class)->findOneById($currentUserId);
 
             // If there is no such user, return 'Identity Not Found' status.
             if ($user == null)
@@ -162,7 +162,7 @@ class AuthenticationManager
         {
             $currentRoleId = $this->sessionContainer->currentUserRoleId;
 
-            $role = $this->entityManager->getRepository(Role::class)->findOneByRole($currentRoleId);
+            $role = $this->entityManager->getRepository(Role::class)->findOneById($currentRoleId);
 
             if ($role)
             {
