@@ -38,20 +38,32 @@ class RoleManager
     /**
      * Constructs the service.
      */
-    public function __construct($sessionContainer, $config, $entityManager)
+    public function __construct($sessionContainer, $entityManager)
     {
         $this->sessionContainer = $sessionContainer;
-        $this->config           = $config;
         $this->entityManager    = $entityManager;
     }
 
     /*
-     * Returns the list of all roles for the user
+     * Returns the list of all roles
      */
 
     public function getAll()
     {
-        
+        $items = $this->entityManager->getRepository(Role::class)->findAll();
+
+        $itemsToReturn = array();
+
+        foreach ($items as $item)
+        {
+            $itemsToReturn[] = [
+                'role'     => $item->getRole(),
+                'name'     => $item->getName(),
+                'description' => $item->getDescription()
+            ];
+        }
+
+        return $itemsToReturn;
     }
 
     public function get($id)

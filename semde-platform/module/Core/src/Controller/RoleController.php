@@ -59,7 +59,15 @@ class RoleController extends AbstractActionController
 
     public function indexAction()
     {
-        return new ViewModel([]);
+        $form = new RoleForm();
+
+        $this->setLayoutVariables();
+
+        $items = $this->roleManager->getAll();
+
+        return new ViewModel([
+            'items' => $items,
+        ]);
     }
 
     public function addAction()

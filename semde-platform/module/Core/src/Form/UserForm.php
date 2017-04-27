@@ -137,26 +137,6 @@ class UserForm extends Form
         $inputFilter = new InputFilter();
         $this->setInputFilter($inputFilter);
 
-        /* // Add input for "user" field
-          $inputFilter->add([
-          'name'       => 'user',
-          'required'   => true,
-          'filters'    => [
-          ['name' => 'StringTrim'],
-          ['name' => 'StripTags'],
-          ['name' => 'StripNewlines'],
-          ],
-          'validators' => [
-          [
-          'name'    => 'StringLength',
-          'options' => [
-          'min' => 1,
-          'max' => 50,
-          ],
-          ],
-          ],
-          ]); */
-
         // Add input for "user" field
         $inputFilter->add([
             'name'       => 'user',

@@ -84,12 +84,27 @@ return [
                     ],
                 ],
             ],
+            'roleManagementRoute' => [
+                'type'    => Segment::class,
+                'options' => [
+                    'route' => '/roleManagement[/:action[/:id]]',
+                    'constraints' => [
+                        'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                        'id'     => '[a-zA-Z][a-zA-Z0-9_-]*',
+                    ],
+                    'defaults' => [
+                        'controller' => Controller\RoleController::class,
+                        'action'     => 'index',
+                    ],
+                ],
+            ],
         ],
     ],
     'controllers'        => [
         'factories' => [
             Controller\AuthenticationController::class => Controller\Factory\AuthenticationControllerFactory::class,
             Controller\UserController::class           => Controller\Factory\UserControllerFactory::class,
+            Controller\RoleController::class           => Controller\Factory\RoleControllerFactory::class,
         ],
     ],
     'view_manager'       => [
@@ -117,6 +132,7 @@ return [
             Service\AuthenticationManager::class              => Service\Factory\AuthenticationManagerFactory::class,
             \Zend\Authentication\AuthenticationService::class => Service\Factory\AuthenticationServiceFactory::class,
             Service\UserManager::class                        => Service\Factory\UserManagerFactory::class,
+            Service\RoleManager::class                        => Service\Factory\RoleManagerFactory::class,
         ],
     ],
     'view_manager'       => [

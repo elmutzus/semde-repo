@@ -14,7 +14,7 @@
 namespace Core\Controller\Factory;
 
 use Interop\Container\ContainerInterface;
-use Core\Controller\UserController;
+use Core\Controller\RoleController;
 use Core\Service\RoleManager;
 use Zend\ServiceManager\Factory\FactoryInterface;
 

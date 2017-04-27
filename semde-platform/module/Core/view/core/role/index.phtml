@@ -11,3 +11,22 @@
  *    Elder Mutzus <elmutzus@gmail.com> - initial API and implementation and/or initial documentation
  */
 
+$items = $this->items;
+?>
+
+<section id="body">
+    <div class="text-center"><h3>Gestión de roles</h3></div>
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            Listado de Roles
+        </div>
+        <div class="panel-body">
+            <?php echo $this->partial('partial-view/role-table', ['items' => $items]); ?>
+        </div>
+        <div class="panel-footer">
+            <a class="btn btn-primary btn-sm" href="<?= $this->url('roleManagementRoute', ['action' => 'add', 'id' => 'newItem']) ?>">
+                Agregar nuevo
+            </a>
+        </div>
+    </div>
+</section>

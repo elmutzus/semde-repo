@@ -45,35 +45,39 @@ class RoleForm extends Form
         // Add user name field
         $this->add([
             'type'       => 'text',
-            'name'       => 'user',
+            'name'       => 'role',
             'attributes' => [
                 'class'       => 'form-control',
-                'placeholder' => 'Usuario',
+                'placeholder' => 'Rol',
             ],
             'options'    => [
-                'label' => 'Usuario',
+                'label' => 'Rol',
             ],
         ]);
 
         // Add password field
         $this->add([
-            'type'       => 'password',
-            'name'       => 'password',
+            'type'       => 'text',
+            'name'       => 'name',
             'attributes' => [
                 'class'       => 'form-control',
-                'placeholder' => 'Contraseña',
+                'placeholder' => 'Nombre',
             ],
             'options'    => [
-                'label' => 'Contraseña',
+                'label' => 'Nombre',
             ],
         ]);
-
-        // Add "remember me" field
+        
+        // Add password field
         $this->add([
-            'type'       => 'checkbox',
-            'name'       => 'rememberMe',
-              'options'    => [
-                'label' => 'Recordarme',
+            'type'       => 'text',
+            'name'       => 'description',
+            'attributes' => [
+                'class'       => 'form-control',
+                'placeholder' => 'Descripción',
+            ],
+            'options'    => [
+                'label' => 'Descripción',
             ],
         ]);
 
@@ -83,11 +87,68 @@ class RoleForm extends Form
             'name'       => 'submit',
             'attributes' => [
                 'class' => 'btn btn-primary btn-block',
-                'value' => 'Iniciar sesión',
+                'value' => 'Enviar',
             ],
             'options'    => [
-                'label' => 'Iniciar sesión',
+                'label' => 'Enviar',
                 'id'    => 'submit',
+            ],
+        ]);
+    }
+    
+    private function addInputFilter()
+    {
+        // Create main input filter
+        $inputFilter = new InputFilter();
+        $this->setInputFilter($inputFilter);
+
+        $inputFilter->add([
+            'name'       => 'role',
+            'filters'    => [
+                ['name' => 'StringTrim'],
+                ['name' => 'StripTags'],
+                ['name' => 'StripNewlines'],
+            ],
+            'validators' => [
+                [
+                    'name' => 'digits',
+                ],
+            ],
+        ]);
+
+        $inputFilter->add([
+            'name'       => 'name',
+            'filters'    => [
+                ['name' => 'StringTrim'],
+                ['name' => 'StripTags'],
+                ['name' => 'StripNewlines'],
+            ],
+            'validators' => [
+                [
+                    'name'    => 'StringLength',
+                    'options' => [
+                        'min' => 1,
+                        'max' => 50,
+                    ],
+                ],
+            ],
+        ]);
+
+        $inputFilter->add([
+            'name'       => 'description',
+            'filters'    => [
+                ['name' => 'StringTrim'],
+                ['name' => 'StripTags'],
+                ['name' => 'StripNewlines'],
+            ],
+            'validators' => [
+                [
+                    'name'    => 'StringLength',
+                    'options' => [
+                        'min' => 1,
+                        'max' => 50,
+                    ],
+                ],
             ],
         ]);
     }
