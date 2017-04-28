@@ -133,7 +133,7 @@ class AuthenticationController extends AbstractActionController
             $currentUser = $this->sessionContainer->currentUserId;
             $result      = $this->authManager->getAllRoles();
 
-            $userField = $form->get('user');
+            $userField = $form->get('id');
             $userField->setValue($currentUser);
 
             $selectElement = $form->get('availableRoles');
