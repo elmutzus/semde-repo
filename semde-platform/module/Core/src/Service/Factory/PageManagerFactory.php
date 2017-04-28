@@ -1,7 +1,7 @@
 <?php
 
-/* 
- * Copyright (c) 2017 Elder Mutzus <elder.mutzus@inspireswgt.com>.
+/*
+ * Copyright (c) 2017 Elder Mutzus <elmutzus@gmail.com>.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -11,25 +11,26 @@
  *    Elder Mutzus <elmutzus@gmail.com> - initial API and implementation and/or initial documentation
  */
 
-namespace Core\Controller\Factory;
+namespace Core\Service\Factory;
 
 use Interop\Container\ContainerInterface;
-use Core\Controller\RoleController;
-use Core\Service\RoleManager;
 use Zend\ServiceManager\Factory\FactoryInterface;
+use Core\Service\PageManager;
 
 /**
- * Description of UserControllerFactory
+ * Description of PageManagementFactory
  *
  * @author Elder Mutzus <elmutzus@gmail.com>
  */
-class RoleControllerFactory implements FactoryInterface
+class PageManagerFactory implements FactoryInterface
 {
     public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
-    {   
-        $itemManager = $container->get(RoleManager::class);
+    {        
+        // Instantiate dependencies.
         $sessionContainer = $container->get('SemdeSessionContainer');
-        
-        return new RoleController($itemManager, $sessionContainer);
+        $entityManager = $container->get('doctrine.entitymanager.orm_default');
+
+        // Instantiate the AuthManager service and inject dependencies to its constructor.
+        return new PageManager($sessionContainer, $entityManager);
     }
 }

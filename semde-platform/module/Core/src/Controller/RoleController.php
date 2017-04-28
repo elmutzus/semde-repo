@@ -1,6 +1,6 @@
 <?php
 
-/* 
+/*
  * Copyright (c) 2017 Elder Mutzus <elder.mutzus@inspireswgt.com>.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -164,7 +164,7 @@ class RoleController extends AbstractActionController
             if ($del == 'Yes')
             {
                 $itemId = $request->getPost('id');
-                
+
                 //@todo: Verify if the role has users asigned before deleting it
 
                 $this->roleManager->delete($itemId);

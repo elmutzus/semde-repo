@@ -13,20 +13,22 @@
 
 namespace Core\Form;
 
+use Zend\Form\Element;
 use Zend\Form\Form;
 use Zend\InputFilter\InputFilter;
 
 /**
- * Description of RoleForm
+ * Description of PageForm
  *
  * @author Elder Mutzus <elmutzus@gmail.com>
  */
-class RoleForm extends Form
+class PageForm extends Form
 {
+
     public function __construct()
     {
         // Define form name
-        parent::__construct('role-form');
+        parent::__construct('page-form');
 
         // Add form elements
         $this->addElements();
@@ -37,7 +39,7 @@ class RoleForm extends Form
 
     private function addElements()
     {
-        // Add user name field
+        // Add id field
         $this->add([
             'type'       => 'text',
             'name'       => 'id',
@@ -50,7 +52,7 @@ class RoleForm extends Form
             ],
         ]);
 
-        // Add password field
+        // Add description field
         $this->add([
             'type'       => 'text',
             'name'       => 'description',
@@ -60,6 +62,35 @@ class RoleForm extends Form
             ],
             'options'    => [
                 'label' => 'Descripción',
+            ],
+        ]);
+
+        // Add route field
+        $this->add([
+            'type'       => 'text',
+            'name'       => 'route',
+            'attributes' => [
+                'class'       => 'form-control',
+                'placeholder' => '/Ruta',
+            ],
+            'options'    => [
+                'label' => '/Ruta',
+            ],
+        ]);
+
+        // Add type field
+        $this->add([
+            'type'       => Element\Select::class,
+            'name'       => 'type',
+            'attributes' => [
+                'class' => 'form-control',
+            ],
+            'options'    => [
+                'label'         => 'Tipo de página',
+                'value_options' => [
+                    'M' => 'Gestión',
+                    'R' => 'Reportería',
+                ],
             ],
         ]);
 
@@ -77,7 +108,7 @@ class RoleForm extends Form
             ],
         ]);
     }
-    
+
     private function addInputFilter()
     {
         // Create main input filter
@@ -128,5 +159,24 @@ class RoleForm extends Form
                 ],
             ],
         ]);
+        
+        $inputFilter->add([
+            'name'       => 'route',
+            'filters'    => [
+                ['name' => 'StringTrim'],
+                ['name' => 'StripTags'],
+                ['name' => 'StripNewlines'],
+            ],
+            'validators' => [
+                [
+                    'name'    => 'StringLength',
+                    'options' => [
+                        'min' => 1,
+                        'max' => 50,
+                    ],
+                ],
+            ],
+        ]);
     }
+
 }

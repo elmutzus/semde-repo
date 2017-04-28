@@ -1,0 +1,29 @@
+<?php
+
+/* 
+ * Copyright (c) 2017 Elder Mutzus <elmutzus@gmail.com>.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *    Elder Mutzus <elmutzus@gmail.com> - initial API and implementation and/or initial documentation
+ */
+
+?>
+
+<tr>
+    <td> <?= $this->item['id'] ?> </td>
+    <td> <?= $this->item['description'] ?> </td>
+    <td> <?= $this->item['route'] ?> </td>
+    <td> <?= $this->item['type'] ?> </td>
+    <td>         
+        <a class="btn btn-primary btn-xs" href="<?= $this->url('pageManagementRoute', ['action' => 'modify', 'id' => $this->item['id']]) ?>">
+            Modificar
+        </a>
+        <a class="btn btn-danger btn-xs" href="<?= $this->url('pageManagementRoute', ['action' => 'delete', 'id' => $this->item['id']]) ?>">
+            Eliminar
+        </a>
+    </td>
+</tr>

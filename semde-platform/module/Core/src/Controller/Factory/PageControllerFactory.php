@@ -1,7 +1,7 @@
 <?php
 
-/* 
- * Copyright (c) 2017 Elder Mutzus <elder.mutzus@inspireswgt.com>.
+/*
+ * Copyright (c) 2017 Elder Mutzus <elmutzus@gmail.com>.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -14,8 +14,8 @@
 namespace Core\Controller\Factory;
 
 use Interop\Container\ContainerInterface;
-use Core\Controller\RoleController;
-use Core\Service\RoleManager;
+use Core\Controller\PageController;
+use Core\Service\PageManager;
 use Zend\ServiceManager\Factory\FactoryInterface;
 
 /**
@@ -23,13 +23,13 @@ use Zend\ServiceManager\Factory\FactoryInterface;
  *
  * @author Elder Mutzus <elmutzus@gmail.com>
  */
-class RoleControllerFactory implements FactoryInterface
+class PageControllerFactory implements FactoryInterface
 {
     public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {   
-        $itemManager = $container->get(RoleManager::class);
+        $itemManager = $container->get(PageManager::class);
         $sessionContainer = $container->get('SemdeSessionContainer');
         
-        return new RoleController($itemManager, $sessionContainer);
+        return new PageController($itemManager, $sessionContainer);
     }
 }

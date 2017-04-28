@@ -98,6 +98,20 @@ return [
                     ],
                 ],
             ],
+            'pageManagementRoute' => [
+                'type'    => Segment::class,
+                'options' => [
+                    'route' => '/pageManagement[/:action[/:id]]',
+                    'constraints' => [
+                        'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                        'id'     => '[a-zA-Z][a-zA-Z0-9_-]*',
+                    ],
+                    'defaults' => [
+                        'controller' => Controller\PageController::class,
+                        'action'     => 'index',
+                    ],
+                ],
+            ],
         ],
     ],
     'controllers'        => [
@@ -105,6 +119,7 @@ return [
             Controller\AuthenticationController::class => Controller\Factory\AuthenticationControllerFactory::class,
             Controller\UserController::class           => Controller\Factory\UserControllerFactory::class,
             Controller\RoleController::class           => Controller\Factory\RoleControllerFactory::class,
+            Controller\PageController::class           => Controller\Factory\PageControllerFactory::class,
         ],
     ],
     'view_manager'       => [
@@ -133,6 +148,7 @@ return [
             \Zend\Authentication\AuthenticationService::class => Service\Factory\AuthenticationServiceFactory::class,
             Service\UserManager::class                        => Service\Factory\UserManagerFactory::class,
             Service\RoleManager::class                        => Service\Factory\RoleManagerFactory::class,
+            Service\PageManager::class                        => Service\Factory\PageManagerFactory::class,
         ],
     ],
     'view_manager'       => [

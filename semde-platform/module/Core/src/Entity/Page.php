@@ -66,7 +66,7 @@ class Page
 
     public function getId()
     {
-        return $this->page;
+        return $this->id;
     }
 
     /*
