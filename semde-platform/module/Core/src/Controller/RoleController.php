@@ -105,7 +105,35 @@ class RoleController extends AbstractActionController
 
     public function deleteAction()
     {
-        return new ViewModel([]);
+        $itemId = $this->params()->fromRoute('id', '-');
+
+        if ($itemId == '-')
+        {
+            return $this->redirect()->toRoute('roleManagementRoute');
+        }
+
+        $request = $this->getRequest();
+
+        if ($request->isPost())
+        {
+
+            $del = $request->getPost('del', 'No');
+
+            if ($del == 'Yes')
+            {
+                $itemId = $request->getPost('id');
+                
+                //@todo: Verify if the role has users asigned before deleting it
+
+                $this->roleManager->delete($itemId);
+            }
+
+            return $this->redirect()->toRoute('roleManagementRoute');
+        }
+
+        return new ViewModel([
+            'id' => $itemId,
+        ]);
     }
 
 }

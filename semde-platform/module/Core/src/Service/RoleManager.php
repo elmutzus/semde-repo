@@ -106,7 +106,24 @@ class RoleManager
 
     public function delete($id)
     {
+        $existingItem = $this->getById($id);
 
+        if ($existingItem)
+        {
+            try
+            {
+                $this->entityManager->remove($existingItem);
+                $this->entityManager->flush();
+            }
+            catch (Exception $ex)
+            {
+                throw $ex;
+            }
+        }
+        else
+        {
+            throw new \Exception('El rol no se puede eliminar');
+        }
     }
 
 }
