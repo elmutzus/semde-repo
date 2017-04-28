@@ -64,7 +64,7 @@ class RoleManager
         return $itemsToReturn;
     }
 
-    public function getById($id)
+    public function get($id)
     {
         $item = $this->entityManager->getRepository(Role::class)->findById($id);
         
@@ -76,7 +76,7 @@ class RoleManager
   
     public function create($entity)
     {
-        $existingItem = $this->getById($entity['id']);
+        $existingItem = $this->get($entity['id']);
 
         if ($existingItem)
         {
@@ -101,12 +101,24 @@ class RoleManager
 
     public function update($entity)
     {
-        
+        $updatedItem = new Role();
+        $updatedItem->setId($entity['id']);
+        $updatedItem->setDescription($entity['description']);
+
+        try
+        {
+            $this->entityManager->merge($updatedItem);
+            $this->entityManager->flush();
+        }
+        catch (Exception $ex)
+        {
+            throw $ex;
+        }
     }
 
     public function delete($id)
     {
-        $existingItem = $this->getById($id);
+        $existingItem = $this->get($id);
 
         if ($existingItem)
         {

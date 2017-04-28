@@ -100,7 +100,49 @@ class RoleController extends AbstractActionController
 
     public function modifyAction()
     {
-        return new ViewModel([]);
+        $this->setLayoutVariables();
+
+        $itemId = $this->params()->fromRoute('id', '-');
+
+        if ($itemId == '-')
+        {
+            return $this->redirect()->toRoute('roleManagementRoute', ['action' => 'index']);
+        }
+
+        $existingItem = $this->roleManager->get($itemId);
+
+        if (!$existingItem)
+        {
+            throw new \Exception("No se puede encontrar el rol");
+        }
+
+        $form = new RoleForm();
+
+        $form->get('submit')->setValue('Modificar rol');
+        $form->get('id')->setAttribute('readonly', 'true');
+
+        $form->get('id')->setValue($existingItem->getId());
+        $form->get('description')->setValue($existingItem->getDescription());
+
+        if (!$this->request->isPost())
+        {
+            return new ViewModel([
+                'form' => $form,
+            ]);
+        }
+
+        $form->setData($this->request->getPost());
+
+        if (!$form->isValid())
+        {
+            return new ViewModel([
+                'form' => $form,
+            ]);
+        }
+
+        $this->roleManager->update($form->getData());
+
+        return $this->redirect()->toRoute('roleManagementRoute');
     }
 
     public function deleteAction()
