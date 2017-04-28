@@ -72,7 +72,30 @@ class PageController extends AbstractActionController
 
     public function addAction()
     {
-        return new ViewModel([]);
+        $form = new PageForm();
+
+        $form->get('submit')->setValue('Crear página');
+
+        $this->setLayoutVariables();
+
+        if ($this->getRequest()->isPost())
+        {
+            $data = $this->params()->fromPost();
+
+            $form->setData($data);
+
+            // Validate form
+            if ($form->isValid())
+            {
+                $this->pageManager->create($form->getData());
+
+                return $this->redirect()->toRoute('pageManagementRoute');
+            }
+        }
+
+        return new ViewModel([
+            'form' => $form,
+        ]);
     }
 
     public function editAction()

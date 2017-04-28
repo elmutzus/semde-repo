@@ -74,7 +74,7 @@ class PageForm extends Form
                 'placeholder' => '/Ruta',
             ],
             'options'    => [
-                'label' => '/Ruta',
+                'label' => 'Ruta',
             ],
         ]);
 
@@ -135,7 +135,7 @@ class PageForm extends Form
                     'options' => [
                         'pattern'  => '/^[\w]*$/',
                         'messages' => [
-                            'regexNotMatch' => 'El rol no es válido. Usar únicamente letras y números',
+                            'regexNotMatch' => 'El rol no es válido. No usar símbolos especiales',
                         ],
                     ],
                 ],

@@ -96,4 +96,40 @@ class Page
         return $this->type;
     }
 
+    /*
+     * Sets the Id
+     */
+
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+
+    /*
+     * Sets the description
+     */
+
+    public function setDescription($description)
+    {
+        $this->description = $description;
+    }
+
+    /*
+     * Sets the route
+     */
+
+    public function setRoute($route)
+    {
+        $this->route = $route;
+    }
+
+    /*
+     * Sets the type
+     */
+
+    public function setType($type)
+    {
+        $this->type = $type;
+    }
+
 }

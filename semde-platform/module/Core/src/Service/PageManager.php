@@ -74,4 +74,31 @@ class PageManager
 
         return null;
     }
+    
+    public function create($entity)
+    {
+        $existingItem = $this->get($entity['id']);
+
+        if ($existingItem)
+        {
+            throw new \Exception('El nombre de la página no está disponible');
+        }
+
+        $model = new Page();
+
+        $model->setId($entity['id']);
+        $model->setDescription($entity['description']);
+        $model->setRoute($entity['route']);
+        $model->setType($entity['type']);
+
+        try
+        {
+            $this->entityManager->persist($model);
+            $this->entityManager->flush();
+        }
+        catch (Exception $ex)
+        {
+            throw $ex;
+        }
+    }
 }
