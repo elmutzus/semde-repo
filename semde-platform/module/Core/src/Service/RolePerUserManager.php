@@ -22,12 +22,6 @@ use Core\Entity\RolePerUser;
  */
 class RolePerUserManager
 {
-    /**
-     * Session manager.
-     * @var Zend\Session\SessionContainer
-     */
-    private $sessionContainer;
-
     /*
      * Entity manager
      */
@@ -36,9 +30,8 @@ class RolePerUserManager
     /**
      * Constructs the service.
      */
-    public function __construct($sessionContainer, $entityManager)
+    public function __construct($entityManager)
     {
-        $this->sessionContainer = $sessionContainer;
         $this->entityManager    = $entityManager;
     }
     

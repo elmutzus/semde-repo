@@ -26,11 +26,8 @@ class RolePerUserManagerFactory implements FactoryInterface
 {
     public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {        
-        // Instantiate dependencies.
-        $sessionContainer = $container->get('SemdeSessionContainer');
         $entityManager = $container->get('doctrine.entitymanager.orm_default');
 
-        // Instantiate the AuthManager service and inject dependencies to its constructor.
-        return new RolePerUserManager($sessionContainer, $entityManager);
+        return new RolePerUserManager($entityManager);
     }
 }

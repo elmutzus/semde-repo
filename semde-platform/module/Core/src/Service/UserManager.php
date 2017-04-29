@@ -23,13 +23,6 @@ use Zend\Crypt\Password\Bcrypt;
  */
 class UserManager
 {
-
-    /**
-     * Session manager.
-     * @var Zend\Session\SessionContainer
-     */
-    private $sessionContainer;
-
     /*
      * Entity manager
      */
@@ -38,9 +31,8 @@ class UserManager
     /**
      * Constructs the service.
      */
-    public function __construct($sessionContainer, $entityManager)
+    public function __construct($entityManager)
     {
-        $this->sessionContainer = $sessionContainer;
         $this->entityManager    = $entityManager;
     }
 
