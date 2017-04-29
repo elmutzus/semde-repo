@@ -101,4 +101,26 @@ class PageManager
             throw $ex;
         }
     }
+    
+    public function delete($id)
+    {
+        $existingItem = $this->get($id);
+
+        if ($existingItem)
+        {
+            try
+            {
+                $this->entityManager->remove($existingItem);
+                $this->entityManager->flush();
+            }
+            catch (Exception $ex)
+            {
+                throw $ex;
+            }
+        }
+        else
+        {
+            throw new \Exception('La página no se puede eliminar');
+        }
+    }
 }
