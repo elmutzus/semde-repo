@@ -102,6 +102,25 @@ class PageManager
         }
     }
     
+    public function update($entity)
+    {
+        $updatedItem = new Page();
+        $updatedItem->setId($entity['id']);
+        $updatedItem->setDescription($entity['description']);
+        $updatedItem->setRoute($entity['route']);
+        $updatedItem->setType($entity['type']);
+
+        try
+        {
+            $this->entityManager->merge($updatedItem);
+            $this->entityManager->flush();
+        }
+        catch (Exception $ex)
+        {
+            throw $ex;
+        }
+    }
+    
     public function delete($id)
     {
         $existingItem = $this->get($id);

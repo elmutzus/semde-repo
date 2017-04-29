@@ -98,9 +98,53 @@ class PageController extends AbstractActionController
         ]);
     }
 
-    public function editAction()
+    public function modifyAction()
     {
-        return new ViewModel([]);
+        $this->setLayoutVariables();
+
+        $itemId = $this->params()->fromRoute('id', '-');
+
+        if ($itemId == '-')
+        {
+            return $this->redirect()->toRoute('pageManagementRoute', ['action' => 'index']);
+        }
+
+        $existingItem = $this->pageManager->get($itemId);
+
+        if (!$existingItem)
+        {
+            throw new \Exception("No se puede encontrar la página");
+        }
+
+        $form = new PageForm();
+
+        $form->get('submit')->setValue('Modificar página');
+        $form->get('id')->setAttribute('readonly', 'true');
+
+        $form->get('id')->setValue($existingItem->getId());
+        $form->get('description')->setValue($existingItem->getDescription());
+        $form->get('route')->setValue($existingItem->getRoute());
+        $form->get('type')->setValue($existingItem->getType());
+
+        if (!$this->request->isPost())
+        {
+            return new ViewModel([
+                'form' => $form,
+            ]);
+        }
+
+        $form->setData($this->request->getPost());
+
+        if (!$form->isValid())
+        {
+            return new ViewModel([
+                'form' => $form,
+            ]);
+        }
+
+        $this->pageManager->update($form->getData());
+
+        return $this->redirect()->toRoute('pageManagementRoute');
     }
 
     public function deleteAction()
