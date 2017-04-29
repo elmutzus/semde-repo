@@ -12,6 +12,9 @@
  */
 
 $url = $this->url('rolePerUserManagementRoute', ['action' => 'delete', 'id' => $id]);
+
+$ids = split('-', $id);
+
 ?>
 
 <section id="body">
@@ -25,7 +28,7 @@ $url = $this->url('rolePerUserManagementRoute', ['action' => 'delete', 'id' => $
             </div>
             <div class="panel-body">
                 <p>
-                    Esta seguro de eliminar la relaci&oacute;n entre rol y usuario "<?= $this->escapeHtml($id) ?>"?
+                    Esta seguro de eliminar el rol "<?= $this->escapeHtml($ids[0]) ?>" para el usuario "<?= $this->escapeHtml($ids[1]) ?>"?
                 </p>
             </div>
             <div class="panel-footer">
