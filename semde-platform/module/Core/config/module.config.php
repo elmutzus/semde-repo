@@ -20,7 +20,7 @@ use Doctrine\ORM\Mapping\Driver\AnnotationDriver;
 return [
     'router'             => [
         'routes' => [
-            'loginRoute'          => [
+            'loginRoute'                 => [
                 'type'    => Literal::class,
                 'options' => [
                     'route'    => '/login',
@@ -30,7 +30,7 @@ return [
                     ],
                 ],
             ],
-            'homeRoute'           => [
+            'homeRoute'                  => [
                 'type'    => Literal::class,
                 'options' => [
                     'route'    => '/',
@@ -40,7 +40,7 @@ return [
                     ],
                 ],
             ],
-            'roleSelectionRoute'  => [
+            'roleSelectionRoute'         => [
                 'type'    => Literal::class,
                 'options' => [
                     'route'    => '/roleSelection',
@@ -50,7 +50,7 @@ return [
                     ],
                 ],
             ],
-            'logoutRoute'         => [
+            'logoutRoute'                => [
                 'type'    => Literal::class,
                 'options' => [
                     'route'    => '/logout',
@@ -60,7 +60,7 @@ return [
                     ],
                 ],
             ],
-            'mainDashboardRoute'  => [
+            'mainDashboardRoute'         => [
                 'type'    => Literal::class,
                 'options' => [
                     'route'    => '/mainDashboard',
@@ -70,44 +70,58 @@ return [
                     ],
                 ],
             ],
-            'userManagementRoute' => [
+            'userManagementRoute'        => [
                 'type'    => Segment::class,
                 'options' => [
-                    'route' => '/userManagement[/:action[/:id]]',
+                    'route'       => '/userManagement[/:action[/:id]]',
                     'constraints' => [
                         'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
                         'id'     => '[a-zA-Z][a-zA-Z0-9_-]*',
                     ],
-                    'defaults' => [
+                    'defaults'    => [
                         'controller' => Controller\UserController::class,
                         'action'     => 'index',
                     ],
                 ],
             ],
-            'roleManagementRoute' => [
+            'roleManagementRoute'        => [
                 'type'    => Segment::class,
                 'options' => [
-                    'route' => '/roleManagement[/:action[/:id]]',
+                    'route'       => '/roleManagement[/:action[/:id]]',
                     'constraints' => [
                         'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
                         'id'     => '[a-zA-Z][a-zA-Z0-9_-]*',
                     ],
-                    'defaults' => [
+                    'defaults'    => [
                         'controller' => Controller\RoleController::class,
                         'action'     => 'index',
                     ],
                 ],
             ],
-            'pageManagementRoute' => [
+            'pageManagementRoute'        => [
                 'type'    => Segment::class,
                 'options' => [
-                    'route' => '/pageManagement[/:action[/:id]]',
+                    'route'       => '/pageManagement[/:action[/:id]]',
                     'constraints' => [
                         'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
                         'id'     => '[a-zA-Z][a-zA-Z0-9_-]*',
                     ],
-                    'defaults' => [
+                    'defaults'    => [
                         'controller' => Controller\PageController::class,
+                        'action'     => 'index',
+                    ],
+                ],
+            ],
+            'rolePerUserManagementRoute' => [
+                'type'    => Segment::class,
+                'options' => [
+                    'route'       => '/rolePerUserManagement[/:action[/:id]]',
+                    'constraints' => [
+                        'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                        'id'     => '[a-zA-Z][a-zA-Z0-9_-]*',
+                    ],
+                    'defaults'    => [
+                        'controller' => Controller\RolePerUserController::class,
                         'action'     => 'index',
                     ],
                 ],
@@ -120,6 +134,7 @@ return [
             Controller\UserController::class           => Controller\Factory\UserControllerFactory::class,
             Controller\RoleController::class           => Controller\Factory\RoleControllerFactory::class,
             Controller\PageController::class           => Controller\Factory\PageControllerFactory::class,
+            Controller\RolePerUserController::class        => Controller\Factory\RolePerUserControllerFactory::class,
         ],
     ],
     'view_manager'       => [
@@ -149,6 +164,7 @@ return [
             Service\UserManager::class                        => Service\Factory\UserManagerFactory::class,
             Service\RoleManager::class                        => Service\Factory\RoleManagerFactory::class,
             Service\PageManager::class                        => Service\Factory\PageManagerFactory::class,
+            Service\RolePerUserManager::class                 => Service\Factory\RolePerUserManagerFactory::class,
         ],
     ],
     'view_manager'       => [

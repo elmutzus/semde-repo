@@ -1,0 +1,32 @@
+<?php
+
+/* 
+ * Copyright (c) 2017 Elder Mutzus <elmutzus@gmail.com>.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *    Elder Mutzus <elmutzus@gmail.com> - initial API and implementation and/or initial documentation
+ */
+
+$items = $this->items;
+?>
+
+<section id="body">
+    <div class="text-center"><h3>Gesti&oacute;n de roles por usuario</h3></div>
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            Listado de Roles por Usuario
+        </div>
+        <div class="panel-body">
+            <?php echo $this->partial('partial-view/role-per-user-table', ['items' => $items]); ?>
+        </div>
+        <div class="panel-footer">
+            <a class="btn btn-primary btn-sm" href="<?= $this->url('rolePerUserManagementRoute', ['action' => 'add', 'id' => 'newItem']) ?>">
+                Agregar nuevo
+            </a>
+        </div>
+    </div>
+</section>
