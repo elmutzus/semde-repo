@@ -134,7 +134,7 @@ return [
             Controller\UserController::class           => Controller\Factory\UserControllerFactory::class,
             Controller\RoleController::class           => Controller\Factory\RoleControllerFactory::class,
             Controller\PageController::class           => Controller\Factory\PageControllerFactory::class,
-            Controller\RolePerUserController::class        => Controller\Factory\RolePerUserControllerFactory::class,
+            Controller\RolePerUserController::class    => Controller\Factory\RolePerUserControllerFactory::class,
         ],
     ],
     'view_manager'       => [
