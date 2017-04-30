@@ -70,8 +70,6 @@ class RolePerUserController extends AbstractActionController
 
     public function indexAction()
     {
-        $form = new RolePerUserForm();
-
         $this->setLayoutVariables();
 
         $items = $this->rolePerUserManager->getAll();

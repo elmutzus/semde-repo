@@ -59,8 +59,6 @@ class RoleController extends AbstractActionController
 
     public function indexAction()
     {
-        $form = new RoleForm();
-
         $this->setLayoutVariables();
 
         $items = $this->roleManager->getAll();

@@ -59,8 +59,6 @@ class PageController extends AbstractActionController
 
     public function indexAction()
     {
-        $form = new PageForm();
-
         $this->setLayoutVariables();
 
         $items = $this->pageManager->getAll();

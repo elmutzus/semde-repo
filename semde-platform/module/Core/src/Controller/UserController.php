@@ -59,8 +59,6 @@ class UserController extends AbstractActionController
 
     public function indexAction()
     {
-        $form = new UserForm();
-
         $this->setLayoutVariables();
 
         $users = $this->userManager->getAll();

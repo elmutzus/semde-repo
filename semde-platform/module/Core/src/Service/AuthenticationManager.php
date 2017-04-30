@@ -106,7 +106,7 @@ class AuthenticationManager
 
             foreach ($user->getRoles() as $role)
             {
-                $allRoles[$role->getId()] = $role->getDescription();
+                $allRoles[$role->getId()] = $role->getId() . ' - ' . $role->getDescription();
             }
 
             return $allRoles;
