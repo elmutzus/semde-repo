@@ -70,11 +70,7 @@ class RolePerUserManager
     
     public function create($entity)
     {
-        $newRole = $entity['role'];
-        $newUser = $entity['user'];
-        $newDescription = $entity['description'];
-        
-        $existingItem = $this->get($newRole, $newUser);
+        $existingItem = $this->get($entity['role'], $entity['user']);
 
         if ($existingItem)
         {
@@ -83,9 +79,9 @@ class RolePerUserManager
 
         $model = new RolePerUser();
 
-        $model->setRole($newRole);
-        $model->setUser($newUser);
-        $model->setDescription($newDescription);
+        $model->setRole($entity['role']);
+        $model->setUser($entity['user']);
+        $model->setDescription($entity['description']);
 
         try
         {
