@@ -83,11 +83,58 @@ class RolePerUserController extends AbstractActionController
 
     public function addAction()
     {
-        
+        $form = new RolePerUserForm();
+
+        $form->get('submit')->setValue('Asignar rol a usuario');
+
+        $this->setLayoutVariables();
+
+        if ($this->getRequest()->isPost())
+        {
+            $data = $this->params()->fromPost();
+
+            $form->setData($data);
+
+            // Validate form
+            if ($form->isValid())
+            {
+                $this->rolePerUserManager->create($form->getData());
+
+                return $this->redirect()->toRoute('rolePerUserManagementRoute');
+            }
+        }
+
+        $allUsers    = $this->userManager->getAll();
+        $userOptions = array();
+
+        foreach ($allUsers as $user)
+        {
+            $userOptions[$user['id']] = $user['id'] . ' - ' . $user['lastname'] . ', ' . $user['name'];
+        }
+
+        $userSelect = $form->get('user');
+        $userSelect->setValueOptions($userOptions);
+
+        $allRoles    = $this->roleManager->getAll();
+        $roleOptions = array();
+
+        foreach ($allRoles as $role)
+        {
+            $roleOptions[$role['id']] = $role['id'] . ' - ' . $role['description'];
+        }
+
+        $roleSelect = $form->get('role');
+        $roleSelect->setValueOptions($roleOptions);
+
+        return new ViewModel([
+            'form' => $form,
+        ]);
     }
 
     public function deleteAction()
     {
+        $this->setLayoutVariables();
+
         $itemId = $this->params()->fromRoute('id', '-');
 
         if ($itemId == '-')

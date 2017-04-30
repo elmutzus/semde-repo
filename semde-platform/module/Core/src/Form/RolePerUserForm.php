@@ -47,6 +47,7 @@ class RolePerUserForm extends Form
             ],
             'options'    => [
                 'label'         => 'Rol',
+                'disable_inarray_validator' => true,
             ],
         ]);
         
@@ -59,6 +60,7 @@ class RolePerUserForm extends Form
             ],
             'options'    => [
                 'label'         => 'Usuario',
+                'disable_inarray_validator' => true,
             ],
         ]);
 

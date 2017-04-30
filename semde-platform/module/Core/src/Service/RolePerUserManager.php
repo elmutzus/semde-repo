@@ -68,6 +68,36 @@ class RolePerUserManager
         return $itemsToReturn;
     }
     
+    public function create($entity)
+    {
+        $newRole = $entity['role'];
+        $newUser = $entity['user'];
+        $newDescription = $entity['description'];
+        
+        $existingItem = $this->get($newRole, $newUser);
+
+        if ($existingItem)
+        {
+            throw new \Exception('El rol ya se encuentra asignado al usuario');
+        }
+
+        $model = new RolePerUser();
+
+        $model->setRole($newRole);
+        $model->setUser($newUser);
+        $model->setDescription($newDescription);
+
+        try
+        {
+            $this->entityManager->persist($model);
+            $this->entityManager->flush();
+        }
+        catch (Exception $ex)
+        {
+            throw $ex;
+        }
+    }
+    
     public function delete($role, $user)
     {
         $existingItem = $this->get($role, $user);

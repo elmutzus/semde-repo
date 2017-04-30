@@ -11,3 +11,39 @@
  *    Elder Mutzus <elmutzus@gmail.com> - initial API and implementation and/or initial documentation
  */
 
+$form->setAttribute('action', $this->url('rolePerUserManagementRoute', ['action' => 'add', 'id' => 'newItem']));
+$form->prepare();
+?>
+
+<section id="body">
+    <div class="text-center"><h3>Gesti&oacute;n de roles por usuario</h3></div>
+    <div class="form-small">
+        <div class="panel panel-sm panel-primary">
+            <div class="panel-heading">
+                <div class="text-center">
+                    Creación de Rol por Usuario
+                </div>                
+            </div>
+            <div class="panel-body">
+                <?= $this->form()->openTag($form); ?>
+                <div class="form-group">
+                    <?= $this->formLabel($form->get('user')); ?>
+                    <?= $this->formElement($form->get('user')); ?>
+                    <?= $this->formElementErrors($form->get('user'), ['class' => 'alert-danger']); ?>
+                </div>
+                <div class="form-group">
+                    <?= $this->formLabel($form->get('role')); ?>
+                    <?= $this->formElement($form->get('role')); ?>
+                    <?= $this->formElementErrors($form->get('role'), ['class' => 'alert-danger']); ?>
+                </div>                
+                <div class="form-group">
+                    <?= $this->formLabel($form->get('description')); ?>
+                    <?= $this->formElement($form->get('description')); ?>
+                    <?= $this->formElementErrors($form->get('description'), ['class' => 'alert-danger']); ?>
+                </div>
+                <?= $this->formElement($form->get('submit')); ?>
+                <?= $this->form()->closeTag(); ?>
+            </div>
+        </div>
+    </div>
+</section>
