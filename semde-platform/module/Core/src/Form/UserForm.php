@@ -177,7 +177,7 @@ class UserForm extends Form
                     'name'    => 'StringLength',
                     'options' => [
                         'min' => 1,
-                        'max' => 50,
+                        'max' => 100,
                     ],
                 ],
             ],
@@ -249,6 +249,13 @@ class UserForm extends Form
             'validators' => [
                 [
                     'name' => 'digits',
+                ],
+                [
+                    'name'    => 'StringLength',
+                    'options' => [
+                        'min' => 1,
+                        'max' => 8,
+                    ],
                 ],
             ],
         ]);
