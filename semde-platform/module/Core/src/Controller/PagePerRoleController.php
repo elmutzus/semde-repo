@@ -79,6 +79,56 @@ class PagePerRoleController extends AbstractActionController
         ]);
     }
     
+    public function addAction()
+    {
+        $form = new PagePerRoleForm();
+
+        $form->get('submit')->setValue('Asignar página a rol');
+
+        $this->setLayoutVariables();
+
+        if ($this->getRequest()->isPost())
+        {
+            $data = $this->params()->fromPost();
+
+            $form->setData($data);
+
+            // Validate form
+            if ($form->isValid())
+            {
+                $this->pagePerRoleManager->create($form->getData());
+
+                return $this->redirect()->toRoute('pagePerRoleManagementRoute');
+            }
+        }
+
+        $allPages    = $this->pageManager->getAll();
+        $pageOptions = array();
+
+        foreach ($allPages as $page)
+        {
+            $pageOptions[$page['id']] = $page['id'] . ' - ' . $page['description'];
+        }
+
+        $userSelect = $form->get('page');
+        $userSelect->setValueOptions($pageOptions);
+
+        $allRoles    = $this->roleManager->getAll();
+        $roleOptions = array();
+
+        foreach ($allRoles as $role)
+        {
+            $roleOptions[$role['id']] = $role['id'] . ' - ' . $role['description'];
+        }
+
+        $roleSelect = $form->get('role');
+        $roleSelect->setValueOptions($roleOptions);
+
+        return new ViewModel([
+            'form' => $form,
+        ]);
+    }
+    
     public function deleteAction()
     {
         $this->setLayoutVariables();

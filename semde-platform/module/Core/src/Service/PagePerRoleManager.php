@@ -67,6 +67,32 @@ class PagePerRoleManager
 
         return $itemsToReturn;
     }
+    
+    public function create($entity)
+    {
+        $existingItem = $this->get($entity['page'], $entity['role']);
+
+        if ($existingItem)
+        {
+            throw new \Exception('La página ya se encuentra asignada al rol');
+        }
+
+        $model = new PagePerRole();
+
+        $model->setRole($entity['role']);
+        $model->setPage($entity['page']);
+        $model->setDescription($entity['description']);
+
+        try
+        {
+            $this->entityManager->persist($model);
+            $this->entityManager->flush();
+        }
+        catch (Exception $ex)
+        {
+            throw $ex;
+        }
+    }
 
     public function delete($page, $role)
     {

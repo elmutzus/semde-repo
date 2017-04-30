@@ -44,8 +44,7 @@ class RolePerUserManager
         
         return $item;
     }
-    
-    
+        
     /*
      * Returns the list of all pages
      */
