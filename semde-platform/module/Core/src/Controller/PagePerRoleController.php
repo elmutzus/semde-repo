@@ -78,4 +78,41 @@ class PagePerRoleController extends AbstractActionController
             'items' => $items,
         ]);
     }
+    
+    public function deleteAction()
+    {
+        $this->setLayoutVariables();
+
+        $itemId = $this->params()->fromRoute('id', '-');
+
+        if ($itemId == '-')
+        {
+            return $this->redirect()->toRoute('pagePerRoleManagementRoute');
+        }
+
+        $request = $this->getRequest();
+
+        if ($request->isPost())
+        {
+            $del = $request->getPost('del', 'No');
+
+            if ($del == 'Yes')
+            {
+                $itemId = $request->getPost('id');
+
+                $items = split('-', $itemId);
+
+                if (sizeof($items) == 2)
+                {
+                    $this->pagePerRoleManager->delete($items[0], $items[1]);
+                }
+            }
+
+            return $this->redirect()->toRoute('pagePerRoleManagementRoute');
+        }
+
+        return new ViewModel([
+            'id' => $itemId,
+        ]);
+    }
 }

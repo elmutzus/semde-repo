@@ -68,4 +68,25 @@ class PagePerRoleManager
         return $itemsToReturn;
     }
 
+    public function delete($page, $role)
+    {
+        $existingItem = $this->get($page, $role);
+
+        if ($existingItem)
+        {
+            try
+            {
+                $this->entityManager->remove($existingItem);
+                $this->entityManager->flush();
+            }
+            catch (Exception $ex)
+            {
+                throw $ex;
+            }
+        }
+        else
+        {
+            throw new \Exception('La relación entre página y rol no se puede eliminar');
+        }
+    }
 }
