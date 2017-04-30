@@ -1,14 +1,14 @@
 <?php
 
 /*
- * Copyright (c) 2017 Elder Mutzus <elmutzus@gmail.com>.
+ * Copyright (c) 2017 Elder Mutzus <elder.mutzus@inspireswgt.com>.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *
  * Contributors:
- *    Elder Mutzus <elmutzus@gmail.com> - initial API and implementation and/or initial documentation
+ *    Elder Mutzus <elder.mutzus@inspireswgt.com> - initial API and implementation and/or initial documentation
  */
 
 namespace Core\Form;
@@ -18,16 +18,16 @@ use Zend\Form\Form;
 use Zend\InputFilter\InputFilter;
 
 /**
- * Description of RolePerUserForm
+ * Description of PagePerRoleForm
  *
- * @author Elder Mutzus <elmutzus@gmail.com>
+ * @author Elder Mutzus <elder.mutzus@inspireswgt.com>
  */
-class RolePerUserForm extends Form
+class PagePerRoleForm extends Form
 {
     public function __construct()
     {
         // Define form name
-        parent::__construct('role-per-user-form');
+        parent::__construct('page-per-role-form');
 
         // Add form elements
         $this->addElements();
@@ -54,12 +54,12 @@ class RolePerUserForm extends Form
         // Add type field
         $this->add([
             'type'       => Element\Select::class,
-            'name'       => 'user',
+            'name'       => 'page',
             'attributes' => [
                 'class' => 'form-control',
             ],
             'options'    => [
-                'label'         => 'Usuario',
+                'label'         => 'Página',
                 'disable_inarray_validator' => true,
             ],
         ]);

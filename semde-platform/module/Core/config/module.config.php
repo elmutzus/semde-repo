@@ -126,6 +126,20 @@ return [
                     ],
                 ],
             ],
+            'pagePerRoleManagementRoute' => [
+                'type'    => Segment::class,
+                'options' => [
+                    'route'       => '/pagePerRoleManagement[/:action[/:id]]',
+                    'constraints' => [
+                        'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                        'id'     => '[a-zA-Z][a-zA-Z0-9_-]*',
+                    ],
+                    'defaults'    => [
+                        'controller' => Controller\PagePerRoleController::class,
+                        'action'     => 'index',
+                    ],
+                ],
+            ],
         ],
     ],
     'controllers'        => [
@@ -135,6 +149,7 @@ return [
             Controller\RoleController::class           => Controller\Factory\RoleControllerFactory::class,
             Controller\PageController::class           => Controller\Factory\PageControllerFactory::class,
             Controller\RolePerUserController::class    => Controller\Factory\RolePerUserControllerFactory::class,
+            Controller\PagePerRoleController::class    => Controller\Factory\PagePerRoleControllerFactory::class,
         ],
     ],
     'view_manager'       => [
@@ -165,6 +180,7 @@ return [
             Service\RoleManager::class                        => Service\Factory\RoleManagerFactory::class,
             Service\PageManager::class                        => Service\Factory\PageManagerFactory::class,
             Service\RolePerUserManager::class                 => Service\Factory\RolePerUserManagerFactory::class,
+            Service\PagePerRoleManager::class                 => Service\Factory\PagePerRoleManagerFactory::class,
         ],
     ],
     'view_manager'       => [
