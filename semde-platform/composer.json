@@ -29,7 +29,8 @@
     },
     "autoload": {
         "psr-4": {
-            "Core\\": "module/Core/src"
+            "Core\\": "module/Core/src",
+            "Survey\\": "module/Survey/src"
         }
     },
     "autoload-dev": {

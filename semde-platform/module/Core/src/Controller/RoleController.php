@@ -16,7 +16,6 @@ namespace Core\Controller;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use Core\Form\RoleForm;
-use Core\Entity\Role;
 
 /**
  * Description of UserController
