@@ -11,7 +11,8 @@
  *    Elder Mutzus <elmutzus@gmail.com> - initial API and implementation and/or initial documentation
  */
 
-$form->setAttribute('action', $this->url('surveyManagementRoute', ['action' => 'addOrUpdate', 'id' => $this->form->get('id')->getValue()]));
+//$form->setAttribute('action', $this->url('surveyManagementRoute', ['action' => 'addOrUpdate', 'id' => $this->form->get('id')->getValue()]));
+$form->setAttribute('action', $this->url('surveyManagementRoute', ['action' => 'addOrUpdateStudent']));
 $form->prepare();
 ?>
 

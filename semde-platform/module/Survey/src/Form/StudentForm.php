@@ -134,10 +134,10 @@ class StudentForm extends Form
             'name'       => 'submit',
             'attributes' => [
                 'class' => 'btn btn-primary btn-block',
-                'value' => 'Enviar',
+                'value' => 'Continuar',
             ],
             'options'    => [
-                'label' => 'Enviar',
+                'label' => 'Continuar',
                 'id'    => 'submit',
             ],
         ]);
@@ -163,7 +163,7 @@ class StudentForm extends Form
                 [
                     'name'    => 'StringLength',
                     'options' => [
-                        'min' => 1,
+                        'min' => 9,
                         'max' => 9,
                     ],
                 ],
