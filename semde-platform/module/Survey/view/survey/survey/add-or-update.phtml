@@ -1,0 +1,69 @@
+<?php
+
+/* 
+ * Copyright (c) 2017 Elder Mutzus <elmutzus@gmail.com>.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *    Elder Mutzus <elmutzus@gmail.com> - initial API and implementation and/or initial documentation
+ */
+
+$form->setAttribute('action', $this->url('surveyManagementRoute', ['action' => 'addOrUpdate', 'id' => $this->form->get('id')->getValue()]));
+$form->prepare();
+?>
+
+<section id="body">
+    <div class="text-center"><h3>Evaluaci&oacute;n Demogr&aacute;fica</h3></div>
+    <div class="form-small">
+        <div class="panel panel-sm panel-primary">
+            <div class="panel-heading">
+                <div class="text-center">
+                    Informaci&oacute;n del estudiante
+                </div>                
+            </div>
+            <div class="panel-body">
+                <?= $this->form()->openTag($form); ?>
+                <div class="form-group">
+                    <?= $this->formLabel($form->get('id')); ?>
+                    <?= $this->formElement($form->get('id')); ?>
+                    <?= $this->formElementErrors($form->get('id'), ['class' => 'alert-danger']); ?>
+                </div>
+                <div class="form-group">
+                    <?= $this->formLabel($form->get('dpi')); ?>
+                    <?= $this->formElement($form->get('dpi')); ?>
+                    <?= $this->formElementErrors($form->get('dpi'), ['class' => 'alert-danger']); ?>
+                </div>
+                <div class="form-group">
+                    <?= $this->formLabel($form->get('nov')); ?>
+                    <?= $this->formElement($form->get('nov')); ?>
+                    <?= $this->formElementErrors($form->get('nov'), ['class' => 'alert-danger']); ?>
+                </div>
+                <div class="form-group">
+                    <?= $this->formLabel($form->get('name')); ?>
+                    <?= $this->formElement($form->get('name')); ?>
+                    <?= $this->formElementErrors($form->get('name'), ['class' => 'alert-danger']); ?>
+                </div>
+                <div class="form-group">
+                    <?= $this->formLabel($form->get('lastname')); ?>
+                    <?= $this->formElement($form->get('lastname')); ?>
+                    <?= $this->formElementErrors($form->get('lastname'), ['class' => 'alert-danger']); ?>
+                </div>
+                <div class="form-group">
+                    <?= $this->formLabel($form->get('gender')); ?>
+                    <?= $this->formElement($form->get('gender')); ?>
+                    <?= $this->formElementErrors($form->get('gender'), ['class' => 'alert-danger']); ?>
+                </div>
+                <div class="form-group">
+                    <?= $this->formLabel($form->get('birthdate')); ?>
+                    <?= $this->formElement($form->get('birthdate')); ?>
+                    <?= $this->formElementErrors($form->get('birthdate'), ['class' => 'alert-danger']); ?>
+                </div>
+                <?= $this->formElement($form->get('submit')); ?>
+                <?= $this->form()->closeTag(); ?>
+            </div>
+        </div>
+    </div>
+</section>

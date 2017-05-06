@@ -29,7 +29,7 @@ return [
                     ],
                     'defaults'    => [
                         'controller' => Controller\SurveyController::class,
-                        'action'     => 'index',
+                        'action'     => 'addOrUpdate',
                     ],
                 ],
             ],

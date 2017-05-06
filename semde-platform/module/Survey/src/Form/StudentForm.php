@@ -115,12 +115,12 @@ class StudentForm extends Form
             ],
         ]);
 
-        $form->add([
+        $this->add([
             'type'       => Element\Date::class,
             'name'       => 'birthdate',
             'options'    => [
-                'label'  => 'Appointment Date',
-                'format' => 'aaaa-mm-dd',
+                'label'  => 'Fecha de nacimiento',
+                'format' => 'yyyy-mm-dd',
             ],
             'attributes' => [
                 'min'  => '1950-01-01',

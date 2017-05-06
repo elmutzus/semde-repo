@@ -41,7 +41,7 @@ class SurveyController extends AbstractActionController
 
     public function __construct($roleManager, $sessionContainer)
     {
-        $this->surveyManager      = $roleManager;
+        $this->surveyManager    = $roleManager;
         $this->sessionContainer = $sessionContainer;
     }
 
@@ -56,12 +56,14 @@ class SurveyController extends AbstractActionController
         $layout->setVariable('currentUserRole', $this->sessionContainer->currentUserRole);
     }
 
-    public function indexAction()
+    public function addOrUpdateAction()
     {
         $this->setLayoutVariables();
+        
+        $form = new StudentForm();
 
         return new ViewModel([
-            
+            'form' => $form,
         ]);
     }
 
