@@ -184,7 +184,7 @@ class StudentForm extends Form
                 [
                     'name'    => 'StringLength',
                     'options' => [
-                        'min' => 1,
+                        'min' => 13,
                         'max' => 13,
                     ],
                 ],
