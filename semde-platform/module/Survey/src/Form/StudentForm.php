@@ -119,8 +119,9 @@ class StudentForm extends Form
             'type'       => Element\Date::class,
             'name'       => 'birthdate',
             'options'    => [
-                'label'  => 'Fecha de nacimiento',
-                'format' => 'yyyy-mm-dd',
+                'label'  => 'Fecha de nacimiento (mes/dia/año)',
+                'format' => 'Y-m-d',
+                'locale' => 'es',
             ],
             'attributes' => [
                 'min'  => '1950-01-01',

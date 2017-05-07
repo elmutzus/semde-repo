@@ -41,11 +41,6 @@ class StudentEntity
     protected $nov;
 
     /**
-     * @ORM\Column(name="nov")   
-     */
-    protected $nov;
-
-    /**
      * @ORM\Column(name="name")   
      */
     protected $name;
@@ -188,7 +183,7 @@ class StudentEntity
 
     public function getBirthdate()
     {
-        return $this->birthdate;
+        return $this->birthdate->format('Y-m-d');
     }
 
 }

@@ -13,6 +13,7 @@
 
 namespace Survey\Service;
 
+use Survey\Entity\StudentEntity;
 
 /**
  * Description of SurveyManager
@@ -24,6 +25,7 @@ class SurveyManager
     /*
      * Entity manager
      */
+
     private $entityManager;
 
     /**
@@ -31,10 +33,79 @@ class SurveyManager
      */
     public function __construct($entityManager)
     {
-        $this->entityManager    = $entityManager;
+        $this->entityManager = $entityManager;
+    }
+
+    public function addOrUpdateStudent($newStudent)
+    {
+        $existingStudent = $this->getStudentById($newStudent['id']);
+
+        if ($existingStudent == null)
+        {
+            $this->addNewStudent($newStudent);
+        }
+        else
+        {
+            $this->updateExistingStudent($newStudent);
+        }
     }
     
-    public function addOrUpdateStudent($newStudent){
-        
+    public function getStudentById($id)
+    {
+        $item = $this->entityManager->getRepository(StudentEntity::class)->findById($id);
+
+        if (sizeof($item) == 1)
+            return $item[0];
+
+        return null;
     }
+
+    public function addNewStudent($entity)
+    {
+        $model = new StudentEntity();
+
+        $model->setId($entity['id']);
+        $model->setDpi($entity['dpi']);
+        $model->setNov($entity['nov']);
+        $model->setName($entity['name']);
+        $model->setLastname($entity['lastname']);
+        $model->setGender($entity['gender']);
+        $model->setBirthdate($entity['birthdate']);
+
+        try
+        {
+            $this->entityManager->persist($model);
+            $this->entityManager->flush();
+        }
+        catch (Exception $ex)
+        {
+            throw $ex;
+        }
+    }
+
+    public function updateExistingStudent($entity)
+    {
+        $model = new StudentEntity();
+
+        $model->setId($entity['id']);
+        $model->setDpi($entity['dpi']);
+        $model->setNov($entity['nov']);
+        $model->setName($entity['name']);
+        $model->setLastname($entity['lastname']);
+        $model->setGender($entity['gender']);
+        $model->setBirthdate($entity['birthdate']);
+
+        try
+        {
+            $this->entityManager->merge($model);
+            $this->entityManager->flush();
+        }
+        catch (Exception $ex)
+        {
+            throw $ex;
+        }
+    }
+
+    
+
 }
