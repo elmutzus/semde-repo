@@ -49,7 +49,7 @@ class SurveyManager
             $this->updateExistingStudent($newStudent);
         }
     }
-    
+
     public function getStudentById($id)
     {
         $item = $this->entityManager->getRepository(StudentEntity::class)->findById($id);
@@ -69,7 +69,16 @@ class SurveyManager
         $model->setNov($entity['nov']);
         $model->setName($entity['name']);
         $model->setLastname($entity['lastname']);
-        $model->setGender($entity['gender']);
+
+        if ($entity['hiddenGender'] != '')
+        {
+            $model->setGender($entity['hiddenGender']);
+        }
+        else
+        {
+            $model->setGender($entity['gender']);
+        }
+
         $model->setBirthdate($entity['birthdate']);
 
         try
@@ -105,7 +114,5 @@ class SurveyManager
             throw $ex;
         }
     }
-
-    
 
 }

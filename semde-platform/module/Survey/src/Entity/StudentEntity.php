@@ -183,7 +183,7 @@ class StudentEntity
 
     public function getBirthdate()
     {
-        return $this->birthdate->format('Y-m-d');
+        return $this->birthdate;
     }
 
 }

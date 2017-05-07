@@ -11,8 +11,8 @@
  *    Elder Mutzus <elmutzus@gmail.com> - initial API and implementation and/or initial documentation
  */
 
-//$form->setAttribute('action', $this->url('surveyManagementRoute', ['action' => 'addOrUpdate', 'id' => $this->form->get('id')->getValue()]));
-$form->setAttribute('action', $this->url('surveyManagementRoute', ['action' => 'addOrUpdateStudent']));
+$form->setAttribute('action', $this->url('surveyManagementRoute', ['action' => 'addOrUpdateStudent', 'id' => $this->form->get('id')->getValue()]));
+//$form->setAttribute('action', $this->url('surveyManagementRoute', ['action' => 'addOrUpdateStudent']));
 $form->prepare();
 ?>
 
@@ -56,6 +56,7 @@ $form->prepare();
                     <?= $this->formLabel($form->get('gender')); ?>
                     <?= $this->formElement($form->get('gender')); ?>
                     <?= $this->formElementErrors($form->get('gender'), ['class' => 'alert-danger']); ?>
+                    <?= $this->formElement($form->get('hiddenGender')); ?>
                 </div>
                 <div class="form-group">
                     <?= $this->formLabel($form->get('birthdate')); ?>

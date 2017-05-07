@@ -56,28 +56,70 @@ class SurveyController extends AbstractActionController
         $layout->setVariable('currentUserRole', $this->sessionContainer->currentUserRole);
     }
 
-    public function addOrUpdateAction()
+    private function validateAuthentication($id)
     {
-        $this->setLayoutVariables();
-
-        $operationId = $this->params()->fromRoute('id', '-');
-
-        if ($operationId == '-')
+        if ($id != '-')
         {
-            return $this->redirect()->toRoute('surveyManagementRoute', ['action' => 'addOrUpdateStudent']);
+            return true;
+        }
+    }
+
+    private function fillStudentFormData($form, $existingData)
+    {
+        if ($existingData == null)
+        {
+            return $form;
         }
 
-        switch ($operationId)
+        $form->get('id')->setValue($existingData->getId());
+        $form->get('dpi')->setValue($existingData->getDpi());
+        $form->get('nov')->setValue($existingData->getNov());
+        $form->get('name')->setValue($existingData->getName());
+        $form->get('lastname')->setValue($existingData->getLastname());
+        $form->get('gender')->setValue($existingData->getGender());
+        $form->get('birthdate')->setValue($existingData->getBirthdate());
+
+        $form->get('id')->setAttribute('readonly', 'true');
+
+        if ($existingData->getDpi() != '')
         {
-            case 'student':
-                addOrUpdateStudentAction();
-                break;
+            $form->get('dpi')->setAttribute('readonly', 'true');
         }
+
+        if ($existingData->getNov() != '')
+        {
+            $form->get('nov')->setAttribute('readonly', 'true');
+        }
+
+        if ($existingData->getName() != '')
+        {
+            $form->get('name')->setAttribute('readonly', 'true');
+        }
+
+        if ($existingData->getLastname() != '')
+        {
+            $form->get('lastname')->setAttribute('readonly', 'true');
+        }
+
+        if ($existingData->getGender() != '')
+        {
+            $form->get('gender')->setAttribute('disabled', 'true');
+            $form->get('hiddenGender')->setValue($existingData->getGender());
+        }
+
+        if ($existingData->getBirthdate() != '')
+        {
+            $form->get('birthdate')->setAttribute('readonly', 'true');
+        }
+
+        return $form;
     }
 
     public function addOrUpdateStudentAction()
     {
         $this->setLayoutVariables();
+
+        $id = $this->params()->fromRoute('id', '-');
 
         $form = new StudentForm();
 
@@ -85,15 +127,24 @@ class SurveyController extends AbstractActionController
         {
             $data = $this->params()->fromPost();
 
+            if ($data['hiddenGender'] != '')
+            {
+                $data['gender'] = $data['hiddenGender'];
+            }
+
             $form->setData($data);
 
             if ($form->isvalid())
             {
                 $this->surveyManager->addOrUpdateStudent($form->getData());
 
-                return $this->redirect()->toRoute('pageManagementRoute', ['action' => 'addOrUpdateStudentStatus']);
+                return $this->redirect()->toRoute('surveyManagementRoute', ['action' => 'addOrUpdateStudentStatus']);
             }
         }
+
+        $existingData = $this->surveyManager->getStudentById($id);
+
+        $form = $this->fillStudentFormData($form, $existingData);
 
         return new ViewModel([
             'form' => $form,

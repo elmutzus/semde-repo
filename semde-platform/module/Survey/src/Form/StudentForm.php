@@ -60,7 +60,7 @@ class StudentForm extends Form
                 'placeholder' => 'Número',
             ],
             'options'    => [
-                'label' => 'D.P.I',
+                'label' => 'C.U.I.',
             ],
         ]);
 
@@ -98,6 +98,11 @@ class StudentForm extends Form
             'options'    => [
                 'label' => 'Apellidos',
             ],
+        ]);
+        
+        $this->add([
+            'type'       => 'hidden',
+            'name'       => 'hiddenGender',
         ]);
 
         $this->add([

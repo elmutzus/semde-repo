@@ -25,11 +25,11 @@ return [
                     'route'       => '/surveyManagement[/:action[/:id]]',
                     'constraints' => [
                         'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
-                        'id'     => '[a-zA-Z][a-zA-Z0-9_-]*',
+                        'id'     => '[a-zA-Z0-9_-]+',
                     ],
                     'defaults'    => [
                         'controller' => Controller\SurveyController::class,
-                        'action'     => 'addOrUpdate',
+                        'action'     => 'addOrUpdateStudent',
                     ],
                 ],
             ],
