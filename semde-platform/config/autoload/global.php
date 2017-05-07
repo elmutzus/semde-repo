@@ -34,5 +34,13 @@ return [
         'type' => SessionArrayStorage::class
     ],
     'doctrine'        => [
+        'entitymanager' => [
+            'orm_authentication' => [
+                'connection' => 'orm_authentication_connection',
+            ],
+            'orm_survey'  => [
+                'connection' => 'orm_survey_connection',
+            ],
+        ],
     ],
 ];

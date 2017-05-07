@@ -168,8 +168,8 @@ return [
                 'drivers' => [
                     __NAMESPACE__ . '\Entity' => __NAMESPACE__ . '_driver'
                 ]
-            ]
-        ]
+            ],
+        ],
     ],
     'service_manager'    => [
         'factories' => [

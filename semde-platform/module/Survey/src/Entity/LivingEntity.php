@@ -11,30 +11,44 @@
  *    Elder Mutzus <elmutzus@gmail.com> - initial API and implementation and/or initial documentation
  */
 
-namespace Survey\Service;
+namespace Survey\Entity;
 
+use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Description of SurveyManager
- *
+ * 
  * @author Elder Mutzus <elmutzus@gmail.com>
+ * @ORM\Entity
+ * @ORM\Table(name="living")
  */
-class SurveyManager
+class LivingEntity
 {
-    /*
-     * Entity manager
-     */
-    private $entityManager;
 
     /**
-     * Constructs the service.
+     * @ORM\Id
+     * @ORM\Column(name="id")   
      */
-    public function __construct($entityManager)
+    protected $id;
+
+    /**
+     * @ORM\Column(name="description")   
+     */
+    protected $description;
+
+    /**
+     * Gets the ID
+     */
+    public function getId()
     {
-        $this->entityManager    = $entityManager;
+        return $this->id;
     }
-    
-    public function addOrUpdateStudent($newStudent){
-        
+
+    /**
+     * Gets the description
+     */
+    public function getDescription()
+    {
+        return $this->description;
     }
+
 }

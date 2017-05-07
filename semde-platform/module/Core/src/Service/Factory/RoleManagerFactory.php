@@ -26,7 +26,7 @@ class RoleManagerFactory implements FactoryInterface
 {
     public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {        
-        $entityManager = $container->get('doctrine.entitymanager.orm_default');
+        $entityManager = $container->get('doctrine.entitymanager.orm_authentication');
 
         return new RoleManager($entityManager);
     }

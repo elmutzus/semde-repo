@@ -32,7 +32,7 @@ class AuthenticationManagerFactory implements FactoryInterface
         // Instantiate dependencies.
         $authenticationService = $container->get(\Zend\Authentication\AuthenticationService::class);
         $sessionContainer = $container->get('SemdeSessionContainer');
-        $entityManager = $container->get('doctrine.entitymanager.orm_default');
+        $entityManager = $container->get('doctrine.entitymanager.orm_authentication');
         
         // Get contents of 'access_filter' config key (the AuthManager service
         // will use this data to determine whether to allow currently logged in user

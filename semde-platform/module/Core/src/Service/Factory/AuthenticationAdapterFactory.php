@@ -30,7 +30,7 @@ class AuthenticationAdapterFactory implements FactoryInterface
     public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {        
         // Get Doctrine entity manager from Service Manager.
-        $entityManager = $container->get('doctrine.entitymanager.orm_default');        
+        $entityManager = $container->get('doctrine.entitymanager.orm_authentication');        
                         
         // Create the AuthAdapter and inject dependency to its constructor.
         return new AuthenticationAdapter($entityManager);

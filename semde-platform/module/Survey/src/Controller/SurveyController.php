@@ -55,18 +55,20 @@ class SurveyController extends AbstractActionController
         $layout->setVariable('currentUser', $this->sessionContainer->currentUserName);
         $layout->setVariable('currentUserRole', $this->sessionContainer->currentUserRole);
     }
-    
-    public function addOrUpdateAction(){
+
+    public function addOrUpdateAction()
+    {
         $this->setLayoutVariables();
 
         $operationId = $this->params()->fromRoute('id', '-');
-        
+
         if ($operationId == '-')
         {
             return $this->redirect()->toRoute('surveyManagementRoute', ['action' => 'addOrUpdateStudent']);
         }
-        
-        switch($operationId){
+
+        switch ($operationId)
+        {
             case 'student':
                 addOrUpdateStudentAction();
                 break;
@@ -87,16 +89,20 @@ class SurveyController extends AbstractActionController
 
             if ($form->isvalid())
             {
-                // call to manager to update data
-                // //$this->pageManager->create($form->getData());
-                // re-route
-                //return $this->redirect()->toRoute('pageManagementRoute');
+                $this->surveyManager->addOrUpdateStudent($form->getData());
+
+                return $this->redirect()->toRoute('pageManagementRoute', ['action' => 'addOrUpdateStudentStatus']);
             }
         }
 
         return new ViewModel([
             'form' => $form,
         ]);
+    }
+
+    public function addOrUpdateStudentStatusAction()
+    {
+        
     }
 
 }
