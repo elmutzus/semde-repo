@@ -66,21 +66,37 @@ class SurveyManager
         return $this->auxiliaryEntityHelper->getEconomicHelpOptions();
     }
     
+    /**
+     * 
+     * @return type
+     */
     public function getLivingOptions()
     {
         return $this->auxiliaryEntityHelper->getLivingOptions();
     }
     
+    /**
+     * 
+     * @return type
+     */
     public function getTravelTimeOptions()
     {
         return $this->auxiliaryEntityHelper->getTravelTimeOptions();
     }
     
+    /**
+     * 
+     * @return type
+     */
     public function getMaritalStatusOptions()
     {
         return $this->auxiliaryEntityHelper->getMaritalStatusOptions();
     }
     
+    /**
+     * 
+     * @return type
+     */
     public function getTransportOptions()
     {
         return $this->auxiliaryEntityHelper->getTransportOptions();
