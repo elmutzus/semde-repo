@@ -132,9 +132,8 @@ class StudentStatusControllerHelper
         $form->get('otherEconomicHelp')->setValue($existingData->getOtherEconomicHelp());
         $form->get('maritalStatusId')->setValue($existingData->getMaritalStatusId());
         $form->get('livingId')->setValue($existingData->getLivingId());
-        $form->get('travelTime')->setValue($existingData->getTravelTime());
+        $form->get('travelTimeId')->setValue($existingData->getTravelTime());
         $form->get('transportId')->setValue($existingData->getTransportId());
-
         $form->get('economicHelpId')->setValue($existingData->getEconomicHelpId());
 
         return $form;
