@@ -214,11 +214,6 @@ class StudentStatusEntity
         return $this->studentId;
     }
 
-    public function setId($id)
-    {
-        $this->id = $id;
-    }
-
     public function setYear($year)
     {
         $this->year = $year;

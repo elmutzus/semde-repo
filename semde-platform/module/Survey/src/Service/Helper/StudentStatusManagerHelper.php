@@ -62,7 +62,98 @@ class StudentStatusManagerHelper
      */
     public function addOrUpdateStudentStatus($newStudentStatus)
     {
+        $existingData = $this->getStudentStatusById($newStudentStatus['id']);
+
+        if ($existingData == null)
+        {
+            $this->addNewStudentStatus($newStudentStatus);
+        }
+        else
+        {
+            $this->updateExistingStudentStatus($newStudentStatus);
+        }
+    }
+    
+    /**
+     * 
+     * @param type $entity
+     * @throws \Survey\Service\Helper\Exception
+     */
+    public function addNewStudentStatus($entity)
+    {   
+        $model = new StudentStatusEntity();
+
+        $model->setEconomicHelpId($entity['economicHelpId']);
+        $model->setHighschool($entity['highschool']);
+        $model->setJobDescription($entity['jobDescription']);
+        $model->setLivesWithOther($entity['livesWithOther']);
+        $model->setLivingId($entity['livingId']);
+        $model->setMaritalStatusId($entity['maritalStatusId']);
+        $model->setOtherEconomicHelp($entity['otherEconomicHelp']);
+        $model->setProfessing($entity['professing']);
+        $model->setReligion($entity['religion']);
+        $model->setRepeatedSemesters($entity['repeatedSemesters']);
+        $model->setSemester($entity['semester']);
+        $model->setStudentId($entity['studentId']);
+        $model->setTransportId($entity['transportId']);
+        $model->setTravelTimeId($entity['travelTimeId']);
+        $model->setWorks($entity['works']);
         
+        $now = new DateTime();
+        $model->setUpdated($now);
+        $model->setWeek($now->format('W'));        
+        $model->setYear($now->format('Y'));
+
+        try
+        {
+            $this->entityManager->persist($model);
+            $this->entityManager->flush();
+        }
+        catch (Exception $ex)
+        {
+            throw $ex;
+        }
     }
 
+    /**
+     * 
+     * @param type $entity
+     * @throws \Survey\Service\Helper\Exception
+     */
+    public function updateExistingStudentStatus($entity)
+    {   
+        $model = new StudentStatusEntity();
+
+        $model->setEconomicHelpId($entity['economicHelpId']);
+        $model->setHighschool($entity['highschool']);
+        $model->setId($entity['id']);
+        $model->setJobDescription($entity['jobDescription']);
+        $model->setLivesWithOther($entity['livesWithOther']);
+        $model->setLivingId($entity['livingId']);
+        $model->setMaritalStatusId($entity['maritalStatusId']);
+        $model->setOtherEconomicHelp($entity['otherEconomicHelp']);
+        $model->setProfessing($entity['professing']);
+        $model->setReligion($entity['religion']);
+        $model->setRepeatedSemesters($entity['repeatedSemesters']);
+        $model->setSemester($entity['semester']);
+        $model->setStudentId($entity['studentId']);
+        $model->setTransportId($entity['transportId']);
+        $model->setTravelTimeId($entity['travelTimeId']);
+        $model->setWorks($entity['works']);
+        
+        $now = new DateTime();
+        $model->setUpdated($now);
+        $model->setWeek($now->format('W'));        
+        $model->setYear($now->format('Y'));
+
+        try
+        {
+            $this->entityManager->merge($model);
+            $this->entityManager->flush();
+        }
+        catch (Exception $ex)
+        {
+            throw $ex;
+        }
+    }
 }

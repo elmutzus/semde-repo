@@ -154,7 +154,7 @@ class StudentStatusForm extends Form
         ]);
 
         $this->add([
-            'type'       => Element\Select::class,
+            'type'       => Element\Radio::class,
             'name'       => 'livingId',
             'attributes' => [
                 'class' => 'form-control',
@@ -179,7 +179,7 @@ class StudentStatusForm extends Form
         ]);
 
         $this->add([
-            'type'       => Element\Select::class,
+            'type'       => Element\Radio::class,
             'name'       => 'economicHelpId',
             'attributes' => [
                 'class' => 'form-control',
@@ -204,7 +204,7 @@ class StudentStatusForm extends Form
         ]);
 
         $this->add([
-            'type'       => Element\Select::class,
+            'type'       => Element\Radio::class,
             'name'       => 'maritalStatusId',
             'attributes' => [
                 'class' => 'form-control',
@@ -217,7 +217,7 @@ class StudentStatusForm extends Form
         ]);
 
         $this->add([
-            'type'       => Element\Select::class,
+            'type'       => Element\Radio::class,
             'name'       => 'travelTimeId',
             'attributes' => [
                 'class' => 'form-control',
@@ -230,7 +230,7 @@ class StudentStatusForm extends Form
         ]);
 
         $this->add([
-            'type'       => Element\Select::class,
+            'type'       => Element\Radio::class,
             'name'       => 'transportId',
             'attributes' => [
                 'class' => 'form-control',

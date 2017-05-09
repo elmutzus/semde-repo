@@ -55,9 +55,9 @@ class SurveyManager
      */
     public function __construct($entityManager)
     {
-        $this->entityManager        = $entityManager;
-        $this->studentHelper        = new StudentManagerHelper($entityManager);
-        $this->studentStatusHelper  = new StudentStatusManagerHelper($entityManager);
+        $this->entityManager         = $entityManager;
+        $this->studentHelper         = new StudentManagerHelper($entityManager);
+        $this->studentStatusHelper   = new StudentStatusManagerHelper($entityManager);
         $this->auxiliaryEntityHelper = new AuxiliaryEntityHelper($entityManager);
     }
 
@@ -65,7 +65,7 @@ class SurveyManager
     {
         return $this->auxiliaryEntityHelper->getEconomicHelpOptions();
     }
-    
+
     /**
      * 
      * @return type
@@ -74,7 +74,7 @@ class SurveyManager
     {
         return $this->auxiliaryEntityHelper->getLivingOptions();
     }
-    
+
     /**
      * 
      * @return type
@@ -83,7 +83,7 @@ class SurveyManager
     {
         return $this->auxiliaryEntityHelper->getTravelTimeOptions();
     }
-    
+
     /**
      * 
      * @return type
@@ -92,7 +92,7 @@ class SurveyManager
     {
         return $this->auxiliaryEntityHelper->getMaritalStatusOptions();
     }
-    
+
     /**
      * 
      * @return type
@@ -104,12 +104,30 @@ class SurveyManager
 
     /**
      * 
+     * @param type $studentId
+     * @param type $studentSecret
+     * @return boolean
+     */
+    private function validateSurveyAccess($studentId, $studentSecret)
+    {
+        return true;
+    }
+
+    /**
+     * 
      * @param type $id
      * @return type
      */
     public function getStudentById($id)
     {
-        return $this->studentHelper->getStudentById($id);
+        if ($this->validateSurveyAccess($id, '<Insert secret key here>'))
+        {
+            return $this->studentHelper->getStudentById($id);
+        }
+        else
+        {
+            throw new \Exception('No cuenta con acceso para modificar este estudiante');
+        }
     }
 
     /**
@@ -118,7 +136,14 @@ class SurveyManager
      */
     public function addOrUpdateStudent($newStudent)
     {
-        $this->studentHelper->addOrUpdateStudent($newStudent);
+        if ($this->validateSurveyAccess($newStudent['id'], '<Insert secret key here>'))
+        {
+            $this->studentHelper->addOrUpdateStudent($newStudent);
+        }
+        else
+        {
+            throw new \Exception('No cuenta con acceso para modificar este estudiante');
+        }
     }
 
     /**
@@ -128,7 +153,14 @@ class SurveyManager
      */
     public function getStudentStatusById($id)
     {
-        return $this->studentStatusHelper->getStudentStatusById($id);
+        if ($this->validateSurveyAccess($id, '<Insert secret key here>'))
+        {
+            return $this->studentStatusHelper->getStudentStatusById($id);
+        }
+        else
+        {
+            throw new \Exception('No cuenta con acceso para modificar este estudiante');
+        }
     }
 
     /**
@@ -137,7 +169,14 @@ class SurveyManager
      */
     public function addOrUpdateStudentStatus($newStudentStatus)
     {
-        $this->studentStatusHelper->addOrUpdateStudentStatus($newStudentStatus);
+        if ($this->validateSurveyAccess($newStudentStatus['id'], '<Insert secret key here>'))
+        {
+            $this->studentStatusHelper->addOrUpdateStudentStatus($newStudentStatus);
+        }
+        else
+        {
+            throw new \Exception('No cuenta con acceso para modificar este estudiante');
+        }
     }
 
 }

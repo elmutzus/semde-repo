@@ -71,8 +71,6 @@ class SurveyController extends AbstractActionController
     {
         $this->setLayoutVariables();
 
-        $id = $this->params()->fromRoute('id', '-');
-
         $form = new StudentForm();
 
         if ($this->getRequest()->isPost())
@@ -94,14 +92,17 @@ class SurveyController extends AbstractActionController
             }
         }
 
+        $id = $this->params()->fromRoute('id', '-');
+
         $existingData = $this->surveyManager->getStudentById($id);
 
         $studentInstance = new StudentControllerHelper();
-                
+
         $form = $studentInstance->fillFormData($form, $existingData);
 
         return new ViewModel([
             'form' => $form,
+            'id' => $id,
         ]);
     }
 
@@ -109,37 +110,33 @@ class SurveyController extends AbstractActionController
     {
         $this->setLayoutVariables();
 
-        $id = $this->params()->fromRoute('id', '-');
-
         $form = new StudentStatusForm();
 
         if ($this->getRequest()->isPost())
         {
-            /*$data = $this->params()->fromPost();
-
-            if ($data['hiddenGender'] != '')
-            {
-                $data['gender'] = $data['hiddenGender'];
-            }
+            $data = $this->params()->fromPost();
 
             $form->setData($data);
 
             if ($form->isvalid())
             {
-                $this->surveyManager->addOrUpdateStudent($form->getData());
+                $this->surveyManager->addOrUpdateStudentStatus($form->getData());
 
-                return $this->redirect()->toRoute('surveyManagementRoute', ['action' => 'addOrUpdateStudentStatus']);
-            }*/
+                return $this->redirect()->toRoute('surveyManagementRoute', ['action' => 'addOrUpdateStudentAddress', 'id' => $data['studentId']]);
+            }
         }
 
+        $id = $this->params()->fromRoute('id', '-');
+
         $existingData = $this->surveyManager->getStudentStatusById($id);
-        
+
         $studentStatusInstance = new StudentStatusControllerHelper($this->surveyManager);
 
         $form = $studentStatusInstance->fillFormData($form, $existingData);
 
         return new ViewModel([
             'form' => $form,
+            'id' => $id,
         ]);
     }
 
