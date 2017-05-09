@@ -15,6 +15,7 @@ namespace Survey\Service;
 
 use Survey\Service\Helper\StudentManagerHelper;
 use Survey\Service\Helper\StudentStatusManagerHelper;
+use Survey\Service\Helper\AuxiliarEntityHelper;
 
 /**
  * Description of SurveyManager
@@ -35,7 +36,7 @@ class SurveyManager
      * @var type StudentManagerHelper
      */
     private $studentHelper;
-    
+
     /**
      *
      * @var type StudentStatusManagerHelper
@@ -43,14 +44,46 @@ class SurveyManager
     private $studentStatusHelper;
 
     /**
+     *
+     * @var type AuxiliarEntityHelper
+     */
+    private $auxiliarEntityHelper;
+
+    /**
      * 
      * @param type $entityManager
      */
     public function __construct($entityManager)
     {
-        $this->entityManager = $entityManager;
-        $this->studentHelper = new StudentManagerHelper($entityManager);
-        $this->studentStatusHelper = new StudentStatusManagerHelper($entityManager);
+        $this->entityManager        = $entityManager;
+        $this->studentHelper        = new StudentManagerHelper($entityManager);
+        $this->studentStatusHelper  = new StudentStatusManagerHelper($entityManager);
+        $this->auxiliarEntityHelper = new AuxiliarEntityHelper($entityManager);
+    }
+
+    public function getEconomicHelpOptions()
+    {
+        return $this->auxiliarEntityHelper->getEconomicHelpOptions();
+    }
+    
+    public function getLivingOptions()
+    {
+        return $this->auxiliarEntityHelper->getLivingOptions();
+    }
+    
+    public function getTravelTimeOptions()
+    {
+        return $this->auxiliarEntityHelper->getTravelTimeOptions();
+    }
+    
+    public function getMaritalStatusOptions()
+    {
+        return $this->auxiliarEntityHelper->getMaritalStatusOptions();
+    }
+    
+    public function getTransportOptions()
+    {
+        return $this->auxiliarEntityHelper->getTransportOptions();
     }
 
     /**
@@ -71,13 +104,14 @@ class SurveyManager
     {
         $this->studentHelper->addOrUpdateStudent($newStudent);
     }
-    
+
     /**
      * 
      * @param type $id
      * @return type
      */
-    public function getStudentStatusById($id){
+    public function getStudentStatusById($id)
+    {
         return $this->studentStatusHelper->getStudentStatusById($id);
     }
 

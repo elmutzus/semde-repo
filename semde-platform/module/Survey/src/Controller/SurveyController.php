@@ -134,7 +134,7 @@ class SurveyController extends AbstractActionController
 
         $existingData = $this->surveyManager->getStudentStatusById($id);
         
-        $studentStatusInstance = new StudentStatusControllerHelper();
+        $studentStatusInstance = new StudentStatusControllerHelper($this->surveyManager);
 
         $form = $studentStatusInstance->fillFormData($form, $existingData);
 

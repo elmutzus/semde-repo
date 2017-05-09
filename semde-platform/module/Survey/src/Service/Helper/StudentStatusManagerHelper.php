@@ -13,6 +13,9 @@
 
 namespace Survey\Service\Helper;
 
+use \DateTime;
+use Survey\Entity\StudentStatusEntity;
+
 /**
  * Description of StudentStatusManagerHelper
  *
@@ -42,7 +45,15 @@ class StudentStatusManagerHelper
      */
     public function getStudentStatusById($id)
     {
+        $currentTime = new DateTime();
         
+        $item = $this->entityManager->getRepository(StudentStatusEntity::class)->find([
+            'week' => $currentTime->format('W'),
+            'year' => $currentTime->format('Y'),
+            'studentId' => $id,
+        ]);
+        
+        return $item;
     }
 
     /**

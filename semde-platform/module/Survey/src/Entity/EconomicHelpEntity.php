@@ -36,7 +36,8 @@ class EconomicHelpEntity
     protected $description;
 
     /**
-     * Gets the ID
+     * 
+     * @return type
      */
     public function getId()
     {
@@ -44,7 +45,8 @@ class EconomicHelpEntity
     }
 
     /**
-     * Gets the description
+     * 
+     * @return type
      */
     public function getDescription()
     {
