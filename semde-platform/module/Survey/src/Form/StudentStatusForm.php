@@ -100,7 +100,7 @@ class StudentStatusForm extends Form
         ]);
 
         $this->add([
-            'type'       => Element\Radio::class,
+            'type'       => Element\Select::class,
             'name'       => 'professing',
             'attributes' => [
                 'class' => 'form-control',
@@ -115,7 +115,7 @@ class StudentStatusForm extends Form
         ]);
 
         $this->add([
-            'type'       => Element\Radio::class,
+            'type'       => Element\Select::class,
             'name'       => 'works',
             'attributes' => [
                 'class' => 'form-control',
@@ -154,13 +154,14 @@ class StudentStatusForm extends Form
         ]);
 
         $this->add([
-            'type'       => Element\Radio::class,
+            'type'       => Element\Select::class,
             'name'       => 'livingId',
             'attributes' => [
                 'class' => 'form-control',
             ],
             'options'    => [
                 'label'         => 'Con quién vive actualmente?',
+                'disable_inarray_validator' => true,
                 'value_options' => [
                 ],
             ],
@@ -179,13 +180,14 @@ class StudentStatusForm extends Form
         ]);
 
         $this->add([
-            'type'       => Element\Radio::class,
+            'type'       => Element\Select::class,
             'name'       => 'economicHelpId',
             'attributes' => [
                 'class' => 'form-control',
             ],
             'options'    => [
                 'label'         => 'De quién depende su sostenimiento económico?',
+                'disable_inarray_validator' => true,
                 'value_options' => [
                 ],
             ],
@@ -204,39 +206,42 @@ class StudentStatusForm extends Form
         ]);
 
         $this->add([
-            'type'       => Element\Radio::class,
+            'type'       => Element\Select::class,
             'name'       => 'maritalStatusId',
             'attributes' => [
                 'class' => 'form-control',
             ],
             'options'    => [
                 'label'         => 'Estado civil',
+                'disable_inarray_validator' => true,
                 'value_options' => [
                 ],
             ],
         ]);
 
         $this->add([
-            'type'       => Element\Radio::class,
+            'type'       => Element\Select::class,
             'name'       => 'travelTimeId',
             'attributes' => [
                 'class' => 'form-control',
             ],
             'options'    => [
                 'label'         => 'Cuánto tiempo le lleva trasladarse de su residencia a la USAC?',
+                'disable_inarray_validator' => true,
                 'value_options' => [
                 ],
             ],
         ]);
 
         $this->add([
-            'type'       => Element\Radio::class,
+            'type'       => Element\Select::class,
             'name'       => 'transportId',
             'attributes' => [
                 'class' => 'form-control',
             ],
             'options'    => [
                 'label'         => 'Cómo se transporta para llegar a la USAC?',
+                'disable_inarray_validator' => true,
                 'value_options' => [
                 ],
             ],

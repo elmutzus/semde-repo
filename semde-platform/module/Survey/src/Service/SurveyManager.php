@@ -169,7 +169,7 @@ class SurveyManager
      */
     public function addOrUpdateStudentStatus($newStudentStatus)
     {
-        if ($this->validateSurveyAccess($newStudentStatus['id'], '<Insert secret key here>'))
+        if ($this->validateSurveyAccess($newStudentStatus['studentId'], '<Insert secret key here>'))
         {
             $this->studentStatusHelper->addOrUpdateStudentStatus($newStudentStatus);
         }

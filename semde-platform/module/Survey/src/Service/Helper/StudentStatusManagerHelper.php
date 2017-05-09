@@ -62,7 +62,7 @@ class StudentStatusManagerHelper
      */
     public function addOrUpdateStudentStatus($newStudentStatus)
     {
-        $existingData = $this->getStudentStatusById($newStudentStatus['id']);
+        $existingData = $this->getStudentStatusById($newStudentStatus['studentId']);
 
         if ($existingData == null)
         {
@@ -100,7 +100,7 @@ class StudentStatusManagerHelper
         $model->setWorks($entity['works']);
         
         $now = new DateTime();
-        $model->setUpdated($now);
+        $model->setUpdated($now->format('Y-m-d'));
         $model->setWeek($now->format('W'));        
         $model->setYear($now->format('Y'));
 
@@ -142,7 +142,7 @@ class StudentStatusManagerHelper
         $model->setWorks($entity['works']);
         
         $now = new DateTime();
-        $model->setUpdated($now);
+        $model->setUpdated($now->format('Y-m-d'));
         $model->setWeek($now->format('W'));        
         $model->setYear($now->format('Y'));
 
