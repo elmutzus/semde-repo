@@ -15,7 +15,7 @@ namespace Survey\Service;
 
 use Survey\Service\Helper\StudentManagerHelper;
 use Survey\Service\Helper\StudentStatusManagerHelper;
-use Survey\Service\Helper\AuxiliarEntityHelper;
+use Survey\Service\Helper\AuxiliaryEntityHelper;
 
 /**
  * Description of SurveyManager
@@ -47,7 +47,7 @@ class SurveyManager
      *
      * @var type AuxiliarEntityHelper
      */
-    private $auxiliarEntityHelper;
+    private $auxiliaryEntityHelper;
 
     /**
      * 
@@ -58,32 +58,32 @@ class SurveyManager
         $this->entityManager        = $entityManager;
         $this->studentHelper        = new StudentManagerHelper($entityManager);
         $this->studentStatusHelper  = new StudentStatusManagerHelper($entityManager);
-        $this->auxiliarEntityHelper = new AuxiliarEntityHelper($entityManager);
+        $this->auxiliaryEntityHelper = new AuxiliaryEntityHelper($entityManager);
     }
 
     public function getEconomicHelpOptions()
     {
-        return $this->auxiliarEntityHelper->getEconomicHelpOptions();
+        return $this->auxiliaryEntityHelper->getEconomicHelpOptions();
     }
     
     public function getLivingOptions()
     {
-        return $this->auxiliarEntityHelper->getLivingOptions();
+        return $this->auxiliaryEntityHelper->getLivingOptions();
     }
     
     public function getTravelTimeOptions()
     {
-        return $this->auxiliarEntityHelper->getTravelTimeOptions();
+        return $this->auxiliaryEntityHelper->getTravelTimeOptions();
     }
     
     public function getMaritalStatusOptions()
     {
-        return $this->auxiliarEntityHelper->getMaritalStatusOptions();
+        return $this->auxiliaryEntityHelper->getMaritalStatusOptions();
     }
     
     public function getTransportOptions()
     {
-        return $this->auxiliarEntityHelper->getTransportOptions();
+        return $this->auxiliaryEntityHelper->getTransportOptions();
     }
 
     /**

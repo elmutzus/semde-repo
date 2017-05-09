@@ -25,7 +25,7 @@ use Survey\Entity\TravelTimeEntity;
  *
  * @author Elder Mutzus <elmutzus@gmail.com>
  */
-class AuxiliarEntityHelper
+class AuxiliaryEntityHelper
 {
 
     /**
