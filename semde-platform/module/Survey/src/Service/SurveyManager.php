@@ -13,7 +13,8 @@
 
 namespace Survey\Service;
 
-use Survey\Entity\StudentEntity;
+use Survey\Service\Helper\StudentManagerHelper;
+use Survey\Service\Helper\StudentStatusManagerHelper;
 
 /**
  * Description of SurveyManager
@@ -22,97 +23,71 @@ use Survey\Entity\StudentEntity;
  */
 class SurveyManager
 {
-    /*
-     * Entity manager
-     */
 
+    /**
+     *
+     * @var type 
+     */
     private $entityManager;
 
     /**
-     * Constructs the service.
+     *
+     * @var type StudentManagerHelper
+     */
+    private $studentHelper;
+    
+    /**
+     *
+     * @var type StudentStatusManagerHelper
+     */
+    private $studentStatusHelper;
+
+    /**
+     * 
+     * @param type $entityManager
      */
     public function __construct($entityManager)
     {
         $this->entityManager = $entityManager;
+        $this->studentHelper = new StudentManagerHelper($entityManager);
+        $this->studentStatusHelper = new StudentStatusManagerHelper($entityManager);
     }
 
-    public function addOrUpdateStudent($newStudent)
-    {
-        $existingStudent = $this->getStudentById($newStudent['id']);
-
-        if ($existingStudent == null)
-        {
-            $this->addNewStudent($newStudent);
-        }
-        else
-        {
-            $this->updateExistingStudent($newStudent);
-        }
-    }
-
+    /**
+     * 
+     * @param type $id
+     * @return type
+     */
     public function getStudentById($id)
     {
-        $item = $this->entityManager->getRepository(StudentEntity::class)->findById($id);
-
-        if (sizeof($item) == 1)
-            return $item[0];
-
-        return null;
+        return $this->studentHelper->getStudentById($id);
     }
 
-    public function addNewStudent($entity)
+    /**
+     * 
+     * @param type $newStudent
+     */
+    public function addOrUpdateStudent($newStudent)
     {
-        $model = new StudentEntity();
-
-        $model->setId($entity['id']);
-        $model->setDpi($entity['dpi']);
-        $model->setNov($entity['nov']);
-        $model->setName($entity['name']);
-        $model->setLastname($entity['lastname']);
-
-        if ($entity['hiddenGender'] != '')
-        {
-            $model->setGender($entity['hiddenGender']);
-        }
-        else
-        {
-            $model->setGender($entity['gender']);
-        }
-
-        $model->setBirthdate($entity['birthdate']);
-
-        try
-        {
-            $this->entityManager->persist($model);
-            $this->entityManager->flush();
-        }
-        catch (Exception $ex)
-        {
-            throw $ex;
-        }
+        $this->studentHelper->addOrUpdateStudent($newStudent);
+    }
+    
+    /**
+     * 
+     * @param type $id
+     * @return type
+     */
+    public function getStudentStatusById($id){
+        return $this->studentStatusHelper->getStudentStatusById($id);
     }
 
-    public function updateExistingStudent($entity)
+    /**
+     * 
+     * @param type $newStudentStatus
+     */
+    public function addOrUpdateStudentStatus($newStudentStatus)
     {
-        $model = new StudentEntity();
-
-        $model->setId($entity['id']);
-        $model->setDpi($entity['dpi']);
-        $model->setNov($entity['nov']);
-        $model->setName($entity['name']);
-        $model->setLastname($entity['lastname']);
-        $model->setGender($entity['gender']);
-        $model->setBirthdate($entity['birthdate']);
-
-        try
-        {
-            $this->entityManager->merge($model);
-            $this->entityManager->flush();
-        }
-        catch (Exception $ex)
-        {
-            throw $ex;
-        }
+        $this->studentStatusHelper->addOrUpdateStudentStatus($newStudentStatus);
     }
 
 }

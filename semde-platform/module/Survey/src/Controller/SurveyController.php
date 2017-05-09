@@ -16,6 +16,9 @@ namespace Survey\Controller;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use Survey\Form\StudentForm;
+use Survey\Form\StudentStatusForm;
+use Survey\Controller\Helper\StudentControllerHelper;
+use Survey\Controller\Helper\StudentStatusControllerHelper;
 
 /**
  * Description of SurveyController
@@ -64,57 +67,6 @@ class SurveyController extends AbstractActionController
         }
     }
 
-    private function fillStudentFormData($form, $existingData)
-    {
-        if ($existingData == null)
-        {
-            return $form;
-        }
-
-        $form->get('id')->setValue($existingData->getId());
-        $form->get('dpi')->setValue($existingData->getDpi());
-        $form->get('nov')->setValue($existingData->getNov());
-        $form->get('name')->setValue($existingData->getName());
-        $form->get('lastname')->setValue($existingData->getLastname());
-        $form->get('gender')->setValue($existingData->getGender());
-        $form->get('birthdate')->setValue($existingData->getBirthdate());
-
-        $form->get('id')->setAttribute('readonly', 'true');
-
-        if ($existingData->getDpi() != '')
-        {
-            $form->get('dpi')->setAttribute('readonly', 'true');
-        }
-
-        if ($existingData->getNov() != '')
-        {
-            $form->get('nov')->setAttribute('readonly', 'true');
-        }
-
-        if ($existingData->getName() != '')
-        {
-            $form->get('name')->setAttribute('readonly', 'true');
-        }
-
-        if ($existingData->getLastname() != '')
-        {
-            $form->get('lastname')->setAttribute('readonly', 'true');
-        }
-
-        if ($existingData->getGender() != '')
-        {
-            $form->get('gender')->setAttribute('disabled', 'true');
-            $form->get('hiddenGender')->setValue($existingData->getGender());
-        }
-
-        if ($existingData->getBirthdate() != '')
-        {
-            $form->get('birthdate')->setAttribute('readonly', 'true');
-        }
-
-        return $form;
-    }
-
     public function addOrUpdateStudentAction()
     {
         $this->setLayoutVariables();
@@ -138,13 +90,15 @@ class SurveyController extends AbstractActionController
             {
                 $this->surveyManager->addOrUpdateStudent($form->getData());
 
-                return $this->redirect()->toRoute('surveyManagementRoute', ['action' => 'addOrUpdateStudentStatus']);
+                return $this->redirect()->toRoute('surveyManagementRoute', ['action' => 'addOrUpdateStudentStatus', 'id' => $data['id']]);
             }
         }
 
         $existingData = $this->surveyManager->getStudentById($id);
 
-        $form = $this->fillStudentFormData($form, $existingData);
+        $studentInstance = new StudentControllerHelper();
+                
+        $form = $studentInstance->fillFormData($form, $existingData);
 
         return new ViewModel([
             'form' => $form,
@@ -153,7 +107,40 @@ class SurveyController extends AbstractActionController
 
     public function addOrUpdateStudentStatusAction()
     {
+        $this->setLayoutVariables();
+
+        $id = $this->params()->fromRoute('id', '-');
+
+        $form = new StudentStatusForm();
+
+        if ($this->getRequest()->isPost())
+        {
+            /*$data = $this->params()->fromPost();
+
+            if ($data['hiddenGender'] != '')
+            {
+                $data['gender'] = $data['hiddenGender'];
+            }
+
+            $form->setData($data);
+
+            if ($form->isvalid())
+            {
+                $this->surveyManager->addOrUpdateStudent($form->getData());
+
+                return $this->redirect()->toRoute('surveyManagementRoute', ['action' => 'addOrUpdateStudentStatus']);
+            }*/
+        }
+
+        $existingData = $this->surveyManager->getStudentStatusById($id);
         
+        $studentStatusInstance = new StudentStatusControllerHelper();
+
+        $form = $studentStatusInstance->fillFormData($form, $existingData);
+
+        return new ViewModel([
+            'form' => $form,
+        ]);
     }
 
 }
