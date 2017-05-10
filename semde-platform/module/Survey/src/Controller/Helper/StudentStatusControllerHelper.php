@@ -47,6 +47,8 @@ class StudentStatusControllerHelper
         $selectElement = $form->get('economicHelpId');
 
         $selectElement->setValueOptions($options);
+        
+        return $form;
     }
 
     /**
@@ -104,18 +106,27 @@ class StudentStatusControllerHelper
     /**
      * 
      * @param type $form
-     * @param type $existingData
-     * @param type $studentId
-     * @return type
      */
-    public function fillFormData($form, $existingData, $studentId)
+    public function fillOptionsData($form)
     {
         $this->fillEconomicHelpData($form);
         $this->fillLivingData($form);
         $this->fillMaritalStatusData($form);
         $this->fillTransportData($form);
         $this->fillTravelTimeData($form);
+    }
 
+    /**
+     * 
+     * @param type $form
+     * @param type $existingData
+     * @param type $studentId
+     * @return type
+     */
+    public function fillFormData($form, $existingData, $studentId)
+    {
+        $this->fillOptionsData($form);
+        
         $form->get('studentId')->setValue($studentId);
 
         if ($existingData == null)
@@ -167,33 +178,33 @@ class StudentStatusControllerHelper
 
     /**
      * Updates the fields based on its requirements if selected options
-     * @param type $form
+     * @param type $data
      * @return type
      */
-    public function getUpdatedFormData($form)
+    public function getUpdatedFormData($data)
     {
-        $works = $form->get('works')->getValue();
+        $works = $data['works'];
 
         if ($works != '1')
         {
-            $form->get('jobDescription')->setValue('');
+            $data['jobDescription'] = '';
         }
 
-        $livingId = $form->get('livingId')->getValue();
+        $livingId = $data['livingId'];
 
         if ($livingId != '12')
         {
-            $form->get('livesWithOther')->setValue();
+            $data['livesWithOther'] = '';
         }
 
-        $economicHelpId = $form->get('economicHelpId')->getValue();
+        $economicHelpId = $data['economicHelpId'];
 
         if ($economicHelpId != '8')
         {
-            $form->get('otherEconomicHelp')->setValue('');
+            $data['otherEconomicHelp'] = '';
         }
 
-        return $form;
+        return $data;
     }
 
 }

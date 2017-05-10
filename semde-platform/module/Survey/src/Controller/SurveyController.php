@@ -153,17 +153,27 @@ class SurveyController extends AbstractActionController
 
             if ($form->isvalid())
             {
-                $form = $this->studentStatusInstance->getUpdatedFormData($form);
+                $data = $form->getData();
                 
-                $this->surveyManager->addOrUpdateStudentStatus($form->getData());
+                $data = $this->studentStatusInstance->getUpdatedFormData($data);
+
+                $this->surveyManager->addOrUpdateStudentStatus($data);
 
                 return $this->redirect()->toRoute('surveyManagementRoute', ['action' => 'addOrUpdateStudentAddress', 'id' => $data['studentId']]);
             }
+            else
+            {
+                $this->studentStatusInstance->fillOptionsData($form);
+            }
+        }
+        else
+        {
+            $existingData = $this->surveyManager->getStudentStatusById($idUser);
+
+            $form = $this->studentStatusInstance->fillFormData($form, $existingData, $idUser);
         }
 
-        $existingData = $this->surveyManager->getStudentStatusById($idUser);
 
-        $form = $this->studentStatusInstance->fillFormData($form, $existingData, $idUser);
 
         return new ViewModel([
             'form' => $form,
