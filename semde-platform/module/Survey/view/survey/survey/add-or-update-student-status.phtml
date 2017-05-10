@@ -27,77 +27,107 @@ $form->prepare();
             <div class="form-group">
                 <?= $this->formElement($form->get('studentId')); ?>
             </div>
-            <div class="form-group">
-                <?= $this->formLabel($form->get('semester')); ?>
-                <?= $this->formElement($form->get('semester')); ?>
-                <?= $this->formElementErrors($form->get('semester'), ['class' => 'alert-danger']); ?>
+            <div class="col-sm-6 col-md-6 col-lg-6">
+                <div class="form-group">
+                    <?= $this->formLabel($form->get('semester')); ?>
+                    <?= $this->formElement($form->get('semester')); ?>
+                    <?= $this->formElementErrors($form->get('semester'), ['class' => 'alert-danger']); ?>
+                </div>
             </div>
-            <div class="form-group">
-                <?= $this->formLabel($form->get('repeatedSemesters')); ?>
-                <?= $this->formElement($form->get('repeatedSemesters')); ?>
-                <?= $this->formElementErrors($form->get('repeatedSemesters'), ['class' => 'alert-danger']); ?>
+            <div class="col-sm-6 col-md-6 col-lg-6">
+                <div class="form-group">
+                    <?= $this->formLabel($form->get('repeatedSemesters')); ?>
+                    <?= $this->formElement($form->get('repeatedSemesters')); ?>
+                    <?= $this->formElementErrors($form->get('repeatedSemesters'), ['class' => 'alert-danger']); ?>
+                </div>
             </div>
-            <div class="form-group">
-                <?= $this->formLabel($form->get('religion')); ?>
-                <?= $this->formElement($form->get('religion')); ?>
-                <?= $this->formElementErrors($form->get('religion'), ['class' => 'alert-danger']); ?>
+            <div class="col-sm-6 col-md-6 col-lg-6">
+                <div class="form-group">
+                    <?= $this->formLabel($form->get('religion')); ?>
+                    <?= $this->formElement($form->get('religion')); ?>
+                    <?= $this->formElementErrors($form->get('religion'), ['class' => 'alert-danger']); ?>
+                </div>
             </div>
-            <div class="form-group">
-                <?= $this->formLabel($form->get('professing')); ?>
-                <?= $this->formElement($form->get('professing')); ?>
-                <?= $this->formElementErrors($form->get('professing'), ['class' => 'alert-danger']); ?>
+            <div class="col-sm-3 col-md-3 col-lg-3">
+                <div class="form-group">
+                    <?= $this->formLabel($form->get('professing')); ?>
+                    <?= $this->formElement($form->get('professing')); ?>
+                    <?= $this->formElementErrors($form->get('professing'), ['class' => 'alert-danger']); ?>
+                </div>
             </div>
-            <div class="form-group">
-                <?= $this->formLabel($form->get('works')); ?>
-                <?= $this->formElement($form->get('works')); ?>
-                <?= $this->formElementErrors($form->get('works'), ['class' => 'alert-danger']); ?>
+            <div class="col-sm-3 col-md-3 col-lg-3">
+                <div class="form-group">
+                    <?= $this->formLabel($form->get('works')); ?>
+                    <?= $this->formElement($form->get('works')); ?>
+                    <?= $this->formElementErrors($form->get('works'), ['class' => 'alert-danger']); ?>
+                </div>
             </div>
-            <div class="form-group">
-                <?= $this->formLabel($form->get('jobDescription')); ?>
-                <?= $this->formElement($form->get('jobDescription')); ?>
-                <?= $this->formElementErrors($form->get('jobDescription'), ['class' => 'alert-danger']); ?>
+            <div class="col-sm-12 col-md-12 col-lg-12">
+                <div class="form-group">
+                    <?= $this->formLabel($form->get('jobDescription')); ?>
+                    <?= $this->formElement($form->get('jobDescription')); ?>
+                    <?= $this->formElementErrors($form->get('jobDescription'), ['class' => 'alert-danger']); ?>
+                </div>
             </div>
-            <div class="form-group">
-                <?= $this->formLabel($form->get('highschool')); ?>
-                <?= $this->formElement($form->get('highschool')); ?>
-                <?= $this->formElementErrors($form->get('highschool'), ['class' => 'alert-danger']); ?>
+            <div class="col-sm-12 col-md-12 col-lg-12">
+                <div class="form-group">
+                    <?= $this->formLabel($form->get('highschool')); ?>
+                    <?= $this->formElement($form->get('highschool')); ?>
+                    <?= $this->formElementErrors($form->get('highschool'), ['class' => 'alert-danger']); ?>
+                </div>
             </div>
-            <div class="form-group">
-                <?= $this->formLabel($form->get('livingId')); ?>
-                <?= $this->formElement($form->get('livingId')); ?>
-                <?= $this->formElementErrors($form->get('livingId'), ['class' => 'alert-danger']); ?>
+            <div class="col-sm-5 col-md-5 col-lg-5">
+                <div class="form-group">
+                    <?= $this->formLabel($form->get('livingId')); ?>
+                    <?= $this->formElement($form->get('livingId')); ?>
+                    <?= $this->formElementErrors($form->get('livingId'), ['class' => 'alert-danger']); ?>
+                </div>
             </div>
-            <div class="form-group">
-                <?= $this->formLabel($form->get('livesWithOther')); ?>
-                <?= $this->formElement($form->get('livesWithOther')); ?>
-                <?= $this->formElementErrors($form->get('livesWithOther'), ['class' => 'alert-danger']); ?>
+            <div class="col-sm-7 col-md-7 col-lg-7">
+                <div class="form-group">
+                    <?= $this->formLabel($form->get('livesWithOther')); ?>
+                    <?= $this->formElement($form->get('livesWithOther')); ?>
+                    <?= $this->formElementErrors($form->get('livesWithOther'), ['class' => 'alert-danger']); ?>
+                </div>
             </div>
-            <div class="form-group">
-                <?= $this->formLabel($form->get('economicHelpId')); ?>
-                <?= $this->formElement($form->get('economicHelpId')); ?>
-                <?= $this->formElementErrors($form->get('economicHelpId'), ['class' => 'alert-danger']); ?>
+            <div class="col-sm-5 col-md-5 col-lg-5">
+                <div class="form-group">
+                    <?= $this->formLabel($form->get('economicHelpId')); ?>
+                    <?= $this->formElement($form->get('economicHelpId')); ?>
+                    <?= $this->formElementErrors($form->get('economicHelpId'), ['class' => 'alert-danger']); ?>
+                </div>
             </div>
-            <div class="form-group">
-                <?= $this->formLabel($form->get('otherEconomicHelp')); ?>
-                <?= $this->formElement($form->get('otherEconomicHelp')); ?>
-                <?= $this->formElementErrors($form->get('otherEconomicHelp'), ['class' => 'alert-danger']); ?>
+            <div class="col-sm-7 col-md-7 col-lg-7">
+                <div class="form-group">
+                    <?= $this->formLabel($form->get('otherEconomicHelp')); ?>
+                    <?= $this->formElement($form->get('otherEconomicHelp')); ?>
+                    <?= $this->formElementErrors($form->get('otherEconomicHelp'), ['class' => 'alert-danger']); ?>
+                </div>
             </div>
-            <div class="form-group">
-                <?= $this->formLabel($form->get('maritalStatusId')); ?>
-                <?= $this->formElement($form->get('maritalStatusId')); ?>
-                <?= $this->formElementErrors($form->get('maritalStatusId'), ['class' => 'alert-danger']); ?>
+            <div class="col-sm-2 col-md-2 col-lg-2">
+                <div class="form-group">
+                    <?= $this->formLabel($form->get('maritalStatusId')); ?>
+                    <?= $this->formElement($form->get('maritalStatusId')); ?>
+                    <?= $this->formElementErrors($form->get('maritalStatusId'), ['class' => 'alert-danger']); ?>
+                </div>
             </div>
-            <div class="form-group">
-                <?= $this->formLabel($form->get('travelTimeId')); ?>
-                <?= $this->formElement($form->get('travelTimeId')); ?>
-                <?= $this->formElementErrors($form->get('travelTimeId'), ['class' => 'alert-danger']); ?>
+            <div class="col-sm-5 col-md-5 col-lg-5">
+                <div class="form-group">
+                    <?= $this->formLabel($form->get('travelTimeId')); ?>
+                    <?= $this->formElement($form->get('travelTimeId')); ?>
+                    <?= $this->formElementErrors($form->get('travelTimeId'), ['class' => 'alert-danger']); ?>
+                </div>
             </div>
-            <div class="form-group">
-                <?= $this->formLabel($form->get('transportId')); ?>
-                <?= $this->formElement($form->get('transportId')); ?>
-                <?= $this->formElementErrors($form->get('transportId'), ['class' => 'alert-danger']); ?>
+            <div class="col-sm-5 col-md-5 col-lg-5">
+                <div class="form-group">
+                    <?= $this->formLabel($form->get('transportId')); ?>
+                    <?= $this->formElement($form->get('transportId')); ?>
+                    <?= $this->formElementErrors($form->get('transportId'), ['class' => 'alert-danger']); ?>
+                </div>
             </div>
-            <?= $this->formElement($form->get('submit')); ?>
+            <div class="pull-right">
+                <?= $this->formElement($form->get('submit')); ?>
+            </div>
             <?= $this->form()->closeTag(); ?>
         </div>
     </div>
