@@ -115,14 +115,14 @@ class StudentStatusControllerHelper
         $this->fillMaritalStatusData($form);
         $this->fillTransportData($form);
         $this->fillTravelTimeData($form);
-        
+
         $form->get('studentId')->setValue($studentId);
 
         if ($existingData == null)
         {
             return $form;
         }
-        
+
         $form->get('semester')->setValue($existingData->getSemester());
         $form->get('repeatedSemesters')->setValue($existingData->getRepeatedSemesters());
         $form->get('religion')->setValue($existingData->getReligion());
@@ -139,6 +139,28 @@ class StudentStatusControllerHelper
         $form->get('economicHelpId')->setValue($existingData->getEconomicHelpId());
         $form->get('week')->setValue($existingData->getWeek());
         $form->get('year')->setValue($existingData->getYear());
+
+        return $form;
+    }
+
+    /**
+     * 
+     * @param type $form
+     * @return type
+     */
+    public function getUpdatedControlsBasedOnValidation($form)
+    {
+        // Validation for: is currently working
+        $works = $form->get('works')->getValue();
+
+        $form->getInputFilter()->get('jobDescription')->setAllowEmpty(($works == '1' ? false : true));
+
+        
+
+
+
+
+
 
         return $form;
     }

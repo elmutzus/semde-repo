@@ -27,25 +27,42 @@ use Survey\Controller\Helper\StudentStatusControllerHelper;
  */
 class SurveyController extends AbstractActionController
 {
-    /*
-     * User manager
-     */
 
+    /**
+     *
+     * @var type 
+     */
     private $surveyManager;
 
-    /*
-     * Session container
+    /**
+     *
+     * @var type 
      */
     private $sessionContainer;
 
-    /*
-     * Constructor
+    /**
+     *
+     * @var type 
      */
+    private $studentStatusInstance;
 
+    /**
+     *
+     * @var type 
+     */
+    private $studentInstance;
+
+    /**
+     * 
+     * @param type $roleManager
+     * @param type $sessionContainer
+     */
     public function __construct($roleManager, $sessionContainer)
     {
-        $this->surveyManager    = $roleManager;
-        $this->sessionContainer = $sessionContainer;
+        $this->surveyManager         = $roleManager;
+        $this->sessionContainer      = $sessionContainer;
+        $this->studentStatusInstance = new StudentStatusControllerHelper($this->surveyManager);
+        $this->studentInstance       = new StudentControllerHelper();
     }
 
     private function setLayoutVariables()
@@ -71,8 +88,8 @@ class SurveyController extends AbstractActionController
     {
         $this->setLayoutVariables();
 
-        $id = $this->params()->fromRoute('id', '-');
-        $idUser = $id;
+        $id       = $this->params()->fromRoute('id', '-');
+        $idUser   = $id;
         $idSecret = '';
 
         if (!$this->validateAuthentication($idUser, $idSecret))
@@ -103,9 +120,7 @@ class SurveyController extends AbstractActionController
 
         $existingData = $this->surveyManager->getStudentById($idUser);
 
-        $studentInstance = new StudentControllerHelper();
-
-        $form = $studentInstance->fillFormData($form, $existingData, $idUser);
+        $form = $this->studentInstance->fillFormData($form, $existingData, $idUser);
 
         return new ViewModel([
             'form' => $form,
@@ -116,11 +131,11 @@ class SurveyController extends AbstractActionController
     public function addOrUpdateStudentStatusAction()
     {
         $this->setLayoutVariables();
-        
-        $id = $this->params()->fromRoute('id', '-');
-        $idUser = $id;
+
+        $id       = $this->params()->fromRoute('id', '-');
+        $idUser   = $id;
         $idSecret = '';
-        
+
         if (!$this->validateAuthentication($idUser, $idSecret))
         {
             throw new \Exception('No puede modificar la información solicitada');
@@ -134,6 +149,8 @@ class SurveyController extends AbstractActionController
 
             $form->setData($data);
 
+            $form = $this->studentStatusInstance->getUpdatedControlsBasedOnValidation($form);
+
             if ($form->isvalid())
             {
                 $this->surveyManager->addOrUpdateStudentStatus($form->getData());
@@ -144,9 +161,7 @@ class SurveyController extends AbstractActionController
 
         $existingData = $this->surveyManager->getStudentStatusById($idUser);
 
-        $studentStatusInstance = new StudentStatusControllerHelper($this->surveyManager);
-
-        $form = $studentStatusInstance->fillFormData($form, $existingData, $idUser);
+        $form = $this->studentStatusInstance->fillFormData($form, $existingData, $idUser);
 
         return new ViewModel([
             'form' => $form,
