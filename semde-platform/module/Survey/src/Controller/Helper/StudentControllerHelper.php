@@ -20,14 +20,15 @@ namespace Survey\Controller\Helper;
  */
 class StudentControllerHelper
 {
-    public function fillFormData($form, $existingData)
+    public function fillFormData($form, $existingData, $idStudent)
     {
+        $form->get('id')->setValue($idStudent);
+        
         if ($existingData == null)
         {
             return $form;
         }
-
-        $form->get('id')->setValue($existingData->getId());
+        
         $form->get('dpi')->setValue($existingData->getDpi());
         $form->get('nov')->setValue($existingData->getNov());
         $form->get('name')->setValue($existingData->getName());

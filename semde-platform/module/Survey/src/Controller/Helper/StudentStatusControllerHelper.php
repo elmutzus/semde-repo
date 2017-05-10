@@ -105,22 +105,24 @@ class StudentStatusControllerHelper
      * 
      * @param type $form
      * @param type $existingData
+     * @param type $studentId
      * @return type
      */
-    public function fillFormData($form, $existingData)
+    public function fillFormData($form, $existingData, $studentId)
     {
         $this->fillEconomicHelpData($form);
         $this->fillLivingData($form);
         $this->fillMaritalStatusData($form);
         $this->fillTransportData($form);
         $this->fillTravelTimeData($form);
+        
+        $form->get('studentId')->setValue($studentId);
 
         if ($existingData == null)
         {
             return $form;
         }
-
-        $form->get('studentId')->setValue($existingData->getStudentId());
+        
         $form->get('semester')->setValue($existingData->getSemester());
         $form->get('repeatedSemesters')->setValue($existingData->getRepeatedSemesters());
         $form->get('religion')->setValue($existingData->getReligion());
@@ -132,9 +134,11 @@ class StudentStatusControllerHelper
         $form->get('otherEconomicHelp')->setValue($existingData->getOtherEconomicHelp());
         $form->get('maritalStatusId')->setValue($existingData->getMaritalStatusId());
         $form->get('livingId')->setValue($existingData->getLivingId());
-        $form->get('travelTimeId')->setValue($existingData->getTravelTime());
+        $form->get('travelTimeId')->setValue($existingData->getTravelTimeId());
         $form->get('transportId')->setValue($existingData->getTransportId());
         $form->get('economicHelpId')->setValue($existingData->getEconomicHelpId());
+        $form->get('week')->setValue($existingData->getWeek());
+        $form->get('year')->setValue($existingData->getYear());
 
         return $form;
     }

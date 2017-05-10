@@ -104,30 +104,12 @@ class SurveyManager
 
     /**
      * 
-     * @param type $studentId
-     * @param type $studentSecret
-     * @return boolean
-     */
-    private function validateSurveyAccess($studentId, $studentSecret)
-    {
-        return true;
-    }
-
-    /**
-     * 
      * @param type $id
      * @return type
      */
     public function getStudentById($id)
     {
-        if ($this->validateSurveyAccess($id, '<Insert secret key here>'))
-        {
-            return $this->studentHelper->getStudentById($id);
-        }
-        else
-        {
-            throw new \Exception('No cuenta con acceso para modificar este estudiante');
-        }
+        return $this->studentHelper->getStudentById($id);
     }
 
     /**
@@ -136,14 +118,7 @@ class SurveyManager
      */
     public function addOrUpdateStudent($newStudent)
     {
-        if ($this->validateSurveyAccess($newStudent['id'], '<Insert secret key here>'))
-        {
-            $this->studentHelper->addOrUpdateStudent($newStudent);
-        }
-        else
-        {
-            throw new \Exception('No cuenta con acceso para modificar este estudiante');
-        }
+        $this->studentHelper->addOrUpdateStudent($newStudent);
     }
 
     /**
@@ -153,14 +128,7 @@ class SurveyManager
      */
     public function getStudentStatusById($id)
     {
-        if ($this->validateSurveyAccess($id, '<Insert secret key here>'))
-        {
-            return $this->studentStatusHelper->getStudentStatusById($id);
-        }
-        else
-        {
-            throw new \Exception('No cuenta con acceso para modificar este estudiante');
-        }
+        return $this->studentStatusHelper->getStudentStatusById($id);
     }
 
     /**
@@ -169,14 +137,8 @@ class SurveyManager
      */
     public function addOrUpdateStudentStatus($newStudentStatus)
     {
-        if ($this->validateSurveyAccess($newStudentStatus['studentId'], '<Insert secret key here>'))
-        {
-            $this->studentStatusHelper->addOrUpdateStudentStatus($newStudentStatus);
-        }
-        else
-        {
-            throw new \Exception('No cuenta con acceso para modificar este estudiante');
-        }
+
+        $this->studentStatusHelper->addOrUpdateStudentStatus($newStudentStatus);
     }
 
 }

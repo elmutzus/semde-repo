@@ -45,42 +45,53 @@ class StudentStatusManagerHelper
      */
     public function getStudentStatusById($id)
     {
-        $currentTime = new DateTime();
+        //@TODO Change here to simulate the weeks
+        $now = new DateTime();
+
+        $items = $this->entityManager->getRepository(StudentStatusEntity::class)->findBy(
+                ['year' => $now->format('Y'), 'studentId' => $id,], ['week' => 'DESC',]
+        );
         
-        $item = $this->entityManager->getRepository(StudentStatusEntity::class)->find([
-            'week' => $currentTime->format('W'),
-            'year' => $currentTime->format('Y'),
-            'studentId' => $id,
-        ]);
-        
-        return $item;
+        if(sizeof($items) >= 1)
+        {
+            return $items[0];
+        }        
+
+        return null;
     }
 
     /**
      * 
-     * @param type $newStudentStatus
+     * @param type $studentId
+     * @param type $year
+     * @param type $week
+     * @return boolean
      */
-    public function addOrUpdateStudentStatus($newStudentStatus)
+    public function existsSpecificStatus($studentId, $year, $week)
     {
-        $existingData = $this->getStudentStatusById($newStudentStatus['studentId']);
+        $item = $this->entityManager->getRepository(StudentStatusEntity::class)->find([
+            'year'      => $year,
+            'week'      => $week,
+            'studentId' => $studentId,
+        ]);
 
-        if ($existingData == null)
+        if ($item)
         {
-            $this->addNewStudentStatus($newStudentStatus);
+            return true;
         }
-        else
-        {
-            $this->updateExistingStudentStatus($newStudentStatus);
-        }
+
+        return false;
     }
-    
+
     /**
      * 
      * @param type $entity
-     * @throws \Survey\Service\Helper\Exception
      */
-    public function addNewStudentStatus($entity)
-    {   
+    public function addOrUpdateStudentStatus($entity)
+    {
+        //@TODO Change here to simulate the weeks
+        $now = new DateTime();
+
         $model = new StudentStatusEntity();
 
         $model->setEconomicHelpId($entity['economicHelpId']);
@@ -98,12 +109,29 @@ class StudentStatusManagerHelper
         $model->setTransportId($entity['transportId']);
         $model->setTravelTimeId($entity['travelTimeId']);
         $model->setWorks($entity['works']);
-        
-        $now = new DateTime();
         $model->setUpdated($now->format('Y-m-d'));
-        $model->setWeek($now->format('W'));        
+        $model->setWeek($now->format('W'));
         $model->setYear($now->format('Y'));
 
+        $exists = $this->existsSpecificStatus($model->getStudentId(), $model->getYear(), $model->getWeek());
+
+        if ($exists)
+        {
+            $this->updateExistingStudentStatus($model);
+        }
+        else
+        {
+            $this->addNewStudentStatus($model);
+        }
+    }
+
+    /**
+     * 
+     * @param type $model
+     * @throws \Survey\Service\Helper\Exception
+     */
+    public function addNewStudentStatus($model)
+    {
         try
         {
             $this->entityManager->persist($model);
@@ -117,35 +145,11 @@ class StudentStatusManagerHelper
 
     /**
      * 
-     * @param type $entity
+     * @param type $model
      * @throws \Survey\Service\Helper\Exception
      */
-    public function updateExistingStudentStatus($entity)
-    {   
-        $model = new StudentStatusEntity();
-
-        $model->setEconomicHelpId($entity['economicHelpId']);
-        $model->setHighschool($entity['highschool']);
-        $model->setId($entity['id']);
-        $model->setJobDescription($entity['jobDescription']);
-        $model->setLivesWithOther($entity['livesWithOther']);
-        $model->setLivingId($entity['livingId']);
-        $model->setMaritalStatusId($entity['maritalStatusId']);
-        $model->setOtherEconomicHelp($entity['otherEconomicHelp']);
-        $model->setProfessing($entity['professing']);
-        $model->setReligion($entity['religion']);
-        $model->setRepeatedSemesters($entity['repeatedSemesters']);
-        $model->setSemester($entity['semester']);
-        $model->setStudentId($entity['studentId']);
-        $model->setTransportId($entity['transportId']);
-        $model->setTravelTimeId($entity['travelTimeId']);
-        $model->setWorks($entity['works']);
-        
-        $now = new DateTime();
-        $model->setUpdated($now->format('Y-m-d'));
-        $model->setWeek($now->format('W'));        
-        $model->setYear($now->format('Y'));
-
+    public function updateExistingStudentStatus($model)
+    {
         try
         {
             $this->entityManager->merge($model);
@@ -156,4 +160,5 @@ class StudentStatusManagerHelper
             throw $ex;
         }
     }
+
 }

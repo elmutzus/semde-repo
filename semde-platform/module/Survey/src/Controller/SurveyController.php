@@ -59,7 +59,7 @@ class SurveyController extends AbstractActionController
         $layout->setVariable('currentUserRole', $this->sessionContainer->currentUserRole);
     }
 
-    private function validateAuthentication($id)
+    private function validateAuthentication($id, $idSecret)
     {
         if ($id != '-')
         {
@@ -70,6 +70,15 @@ class SurveyController extends AbstractActionController
     public function addOrUpdateStudentAction()
     {
         $this->setLayoutVariables();
+
+        $id = $this->params()->fromRoute('id', '-');
+        $idUser = $id;
+        $idSecret = '';
+
+        if (!$this->validateAuthentication($idUser, $idSecret))
+        {
+            throw new \Exception('No puede modificar la información solicitada');
+        }
 
         $form = new StudentForm();
 
@@ -92,23 +101,30 @@ class SurveyController extends AbstractActionController
             }
         }
 
-        $id = $this->params()->fromRoute('id', '-');
-
-        $existingData = $this->surveyManager->getStudentById($id);
+        $existingData = $this->surveyManager->getStudentById($idUser);
 
         $studentInstance = new StudentControllerHelper();
 
-        $form = $studentInstance->fillFormData($form, $existingData);
+        $form = $studentInstance->fillFormData($form, $existingData, $idUser);
 
         return new ViewModel([
             'form' => $form,
-            'id' => $id,
+            'id'   => $idUser,
         ]);
     }
 
     public function addOrUpdateStudentStatusAction()
     {
         $this->setLayoutVariables();
+        
+        $id = $this->params()->fromRoute('id', '-');
+        $idUser = $id;
+        $idSecret = '';
+        
+        if (!$this->validateAuthentication($idUser, $idSecret))
+        {
+            throw new \Exception('No puede modificar la información solicitada');
+        }
 
         $form = new StudentStatusForm();
 
@@ -126,17 +142,15 @@ class SurveyController extends AbstractActionController
             }
         }
 
-        $id = $this->params()->fromRoute('id', '-');
-
-        $existingData = $this->surveyManager->getStudentStatusById($id);
+        $existingData = $this->surveyManager->getStudentStatusById($idUser);
 
         $studentStatusInstance = new StudentStatusControllerHelper($this->surveyManager);
 
-        $form = $studentStatusInstance->fillFormData($form, $existingData);
+        $form = $studentStatusInstance->fillFormData($form, $existingData, $idUser);
 
         return new ViewModel([
             'form' => $form,
-            'id' => $id,
+            'id'   => $idUser,
         ]);
     }
 
