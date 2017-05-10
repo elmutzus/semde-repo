@@ -155,12 +155,13 @@ class StudentStatusControllerHelper
 
         $form->getInputFilter()->get('jobDescription')->setAllowEmpty(($works == '1' ? false : true));
 
-        
+        $livingId = $form->get('livingId')->getValue();
 
+        $form->getInputFilter()->get('livesWithOther')->setAllowEmpty(($livingId == '12' ? false : true));
 
+        $economicHelpId = $form->get('economicHelpId')->getValue();
 
-
-
+        $form->getInputFilter()->get('otherEconomicHelp')->setAllowEmpty(($economicHelpId == '8' ? false : true));
 
         return $form;
     }
