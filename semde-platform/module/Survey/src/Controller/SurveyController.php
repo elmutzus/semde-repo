@@ -153,6 +153,8 @@ class SurveyController extends AbstractActionController
 
             if ($form->isvalid())
             {
+                $form = $this->studentStatusInstance->getUpdatedFormData($form);
+                
                 $this->surveyManager->addOrUpdateStudentStatus($form->getData());
 
                 return $this->redirect()->toRoute('surveyManagementRoute', ['action' => 'addOrUpdateStudentAddress', 'id' => $data['studentId']]);

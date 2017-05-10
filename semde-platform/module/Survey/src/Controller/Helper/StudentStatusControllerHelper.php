@@ -144,13 +144,12 @@ class StudentStatusControllerHelper
     }
 
     /**
-     * 
+     * Updates the filters based on the selection in the form
      * @param type $form
      * @return type
      */
     public function getUpdatedControlsBasedOnValidation($form)
     {
-        // Validation for: is currently working
         $works = $form->get('works')->getValue();
 
         $form->getInputFilter()->get('jobDescription')->setAllowEmpty(($works == '1' ? false : true));
@@ -162,6 +161,37 @@ class StudentStatusControllerHelper
         $economicHelpId = $form->get('economicHelpId')->getValue();
 
         $form->getInputFilter()->get('otherEconomicHelp')->setAllowEmpty(($economicHelpId == '8' ? false : true));
+
+        return $form;
+    }
+
+    /**
+     * Updates the fields based on its requirements if selected options
+     * @param type $form
+     * @return type
+     */
+    public function getUpdatedFormData($form)
+    {
+        $works = $form->get('works')->getValue();
+
+        if ($works != '1')
+        {
+            $form->get('jobDescription')->setValue('');
+        }
+
+        $livingId = $form->get('livingId')->getValue();
+
+        if ($livingId != '12')
+        {
+            $form->get('livesWithOther')->setValue();
+        }
+
+        $economicHelpId = $form->get('economicHelpId')->getValue();
+
+        if ($economicHelpId != '8')
+        {
+            $form->get('otherEconomicHelp')->setValue('');
+        }
 
         return $form;
     }
