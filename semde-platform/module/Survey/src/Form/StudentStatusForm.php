@@ -246,6 +246,34 @@ class StudentStatusForm extends Form
                 ],
             ],
         ]);
+        
+        $this->add([
+            'type'       => Element\Select::class,
+            'name'       => 'movedOn',
+            'attributes' => [
+                'class' => 'form-control',
+            ],
+            'options'    => [
+                'label'         => 'Tuvo que migrar del interior del pais a la capital para realizar sus estudios universitarios?',
+                'disable_inarray_validator' => true,
+                'value_options' => [
+                    '1' => 'Sí',
+                    '0' => 'No',
+                ],
+            ],
+        ]);
+
+        $this->add([
+            'type'       => Element\Text::class,
+            'name'       => 'movedOnSolution',
+            'attributes' => [
+                'class'       => 'form-control',
+                'placeholder' => 'Especifique',
+            ],
+            'options'    => [
+                'label' => 'Cómo lo solucionó?',
+            ],
+        ]);
 
         $this->add([
             'type'       => 'submit',
@@ -394,6 +422,24 @@ class StudentStatusForm extends Form
                     'options' => [
                         'min' => 1,
                         'max' => 100,
+                    ],
+                ],
+            ],
+        ]);
+        
+        $inputFilter->add([
+            'name'       => 'movedOnSolution',
+            'filters'    => [
+                ['name' => 'StringTrim'],
+                ['name' => 'StripTags'],
+                ['name' => 'StripNewlines'],
+            ],
+            'validators' => [
+                [
+                    'name'    => 'StringLength',
+                    'options' => [
+                        'min' => 1,
+                        'max' => 300,
                     ],
                 ],
             ],

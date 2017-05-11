@@ -47,7 +47,7 @@ class StudentStatusControllerHelper
         $selectElement = $form->get('economicHelpId');
 
         $selectElement->setValueOptions($options);
-        
+
         return $form;
     }
 
@@ -126,13 +126,16 @@ class StudentStatusControllerHelper
     public function fillFormData($form, $existingData, $studentId)
     {
         $this->fillOptionsData($form);
-        
+
         $form->get('studentId')->setValue($studentId);
 
         if ($existingData == null)
         {
             return $form;
         }
+        
+        $form->get('week')->setValue($existingData->getWeek());
+        $form->get('year')->setValue($existingData->getYear());
 
         $form->get('semester')->setValue($existingData->getSemester());
         $form->get('repeatedSemesters')->setValue($existingData->getRepeatedSemesters());
@@ -148,8 +151,8 @@ class StudentStatusControllerHelper
         $form->get('travelTimeId')->setValue($existingData->getTravelTimeId());
         $form->get('transportId')->setValue($existingData->getTransportId());
         $form->get('economicHelpId')->setValue($existingData->getEconomicHelpId());
-        $form->get('week')->setValue($existingData->getWeek());
-        $form->get('year')->setValue($existingData->getYear());
+        $form->get('movedOn')->setValue($existingData->getMovedOn());
+        $form->get('movedOnSolution')->setValue($existingData->getMovedOnSolution());
 
         return $form;
     }
@@ -172,6 +175,10 @@ class StudentStatusControllerHelper
         $economicHelpId = $form->get('economicHelpId')->getValue();
 
         $form->getInputFilter()->get('otherEconomicHelp')->setAllowEmpty(($economicHelpId == '8' ? false : true));
+        
+        $movedOn = $form->get('movedOn')->getValue();
+
+        $form->getInputFilter()->get('movedOnSolution')->setAllowEmpty(($movedOn == '1' ? false : true));
 
         return $form;
     }
@@ -202,6 +209,13 @@ class StudentStatusControllerHelper
         if ($economicHelpId != '8')
         {
             $data['otherEconomicHelp'] = '';
+        }
+        
+        $movedOn = $data['movedOn'];
+
+        if ($movedOn != '1')
+        {
+            $data['movedOnSolution'] = '';
         }
 
         return $data;

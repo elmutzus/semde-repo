@@ -125,6 +125,20 @@ $form->prepare();
                     <?= $this->formElementErrors($form->get('transportId'), ['class' => 'alert-danger']); ?>
                 </div>
             </div>
+            <div class="col-sm-12 col-md-12 col-lg-12">
+                <div class="form-group">
+                    <?= $this->formLabel($form->get('movedOn')); ?>
+                    <?= $this->formElement($form->get('movedOn')); ?>
+                    <?= $this->formElementErrors($form->get('movedOn'), ['class' => 'alert-danger']); ?>
+                </div>
+            </div>
+             <div class="col-sm-12 col-md-12 col-lg-12">
+                <div class="form-group">
+                    <?= $this->formLabel($form->get('movedOnSolution')); ?>
+                    <?= $this->formElement($form->get('movedOnSolution')); ?>
+                    <?= $this->formElementErrors($form->get('movedOnSolution'), ['class' => 'alert-danger']); ?>
+                </div>
+            </div>
             <div class="pull-right">
                 <?= $this->formElement($form->get('submit')); ?>
             </div>

@@ -35,7 +35,7 @@ class StudentStatusEntity
      * @ORM\Column(name="week")   
      */
     protected $week;
-    
+
     /**
      * @ORM\Id
      * @ORM\Column(name="student_id")   
@@ -117,191 +117,383 @@ class StudentStatusEntity
      */
     protected $economicHelpId;
 
-    
+    /**
+     * @ORM\Column(name="moved_on")   
+     */
+    protected $movedOn;
 
+    /**
+     * @ORM\Column(name="moved_on_solution")   
+     */
+    protected $movedOnSolution;
+
+    /**
+     * 
+     * @return type
+     */
     public function getId()
     {
         return $this->id;
     }
 
+    /**
+     * 
+     * @return type
+     */
     public function getYear()
     {
         return $this->year;
     }
 
+    /**
+     * 
+     * @return type
+     */
     public function getWeek()
     {
         return $this->week;
     }
 
+    /**
+     * 
+     * @return type
+     */
     public function getSemester()
     {
         return $this->semester;
     }
 
+    /**
+     * 
+     * @return type
+     */
     public function getRepeatedSemesters()
     {
         return $this->repeatedSemesters;
     }
 
+    /**
+     * 
+     * @return type
+     */
     public function getReligion()
     {
         return $this->religion;
     }
 
+    /**
+     * 
+     * @return type
+     */
     public function getProfessing()
     {
         return $this->professing;
     }
 
+    /**
+     * 
+     * @return type
+     */
     public function getWorks()
     {
         return $this->works;
     }
 
+    /**
+     * 
+     * @return type
+     */
     public function getJobDescription()
     {
         return $this->jobDescription;
     }
 
+    /**
+     * 
+     * @return type
+     */
     public function getHighschool()
     {
         return $this->highschool;
     }
 
+    /**
+     * 
+     * @return type
+     */
     public function getLivesWithOther()
     {
         return $this->livesWithOther;
     }
 
+    /**
+     * 
+     * @return type
+     */
     public function getOtherEconomicHelp()
     {
         return $this->otherEconomicHelp;
     }
 
+    /**
+     * 
+     * @return type
+     */
     public function getUpdated()
     {
         return $this->updated;
     }
 
+    /**
+     * 
+     * @return type
+     */
     public function getMaritalStatusId()
     {
         return $this->maritalStatusId;
     }
 
+    /**
+     * 
+     * @return type
+     */
     public function getLivingId()
     {
         return $this->livingId;
     }
 
+    /**
+     * 
+     * @return type
+     */
     public function getTravelTimeId()
     {
         return $this->travelTimeId;
     }
 
+    /**
+     * 
+     * @return type
+     */
     public function getTransportId()
     {
         return $this->transportId;
     }
 
+    /**
+     * 
+     * @return type
+     */
     public function getEconomicHelpId()
     {
         return $this->economicHelpId;
     }
 
+    /**
+     * 
+     * @return type
+     */
     public function getStudentId()
     {
         return $this->studentId;
     }
 
+    /**
+     * 
+     * @return type
+     */
+    public function getMovedOn()
+    {
+        return $this->movedOn;
+    }
+
+    /**
+     * 
+     * @return type
+     */
+    public function getMovedOnSolution()
+    {
+        return $this->movedOnSolution;
+    }
+
+    /**
+     * 
+     * @param type $year
+     */
     public function setYear($year)
     {
         $this->year = $year;
     }
 
+    /**
+     * 
+     * @param type $week
+     */
     public function setWeek($week)
     {
         $this->week = $week;
     }
 
+    /**
+     * 
+     * @param type $semester
+     */
     public function setSemester($semester)
     {
         $this->semester = $semester;
     }
 
+    /**
+     * 
+     * @param type $repeatedSemesters
+     */
     public function setRepeatedSemesters($repeatedSemesters)
     {
         $this->repeatedSemesters = $repeatedSemesters;
     }
 
+    /**
+     * 
+     * @param type $religion
+     */
     public function setReligion($religion)
     {
         $this->religion = $religion;
     }
 
+    /**
+     * 
+     * @param type $professing
+     */
     public function setProfessing($professing)
     {
         $this->professing = $professing;
     }
 
+    /**
+     * 
+     * @param type $works
+     */
     public function setWorks($works)
     {
         $this->works = $works;
     }
 
+    /**
+     * 
+     * @param type $jobDescription
+     */
     public function setJobDescription($jobDescription)
     {
         $this->jobDescription = $jobDescription;
     }
 
+    /**
+     * 
+     * @param type $highschool
+     */
     public function setHighschool($highschool)
     {
         $this->highschool = $highschool;
     }
 
+    /**
+     * 
+     * @param type $livesWithOther
+     */
     public function setLivesWithOther($livesWithOther)
     {
         $this->livesWithOther = $livesWithOther;
     }
 
+    /**
+     * 
+     * @param type $otherEconomicHelp
+     */
     public function setOtherEconomicHelp($otherEconomicHelp)
     {
         $this->otherEconomicHelp = $otherEconomicHelp;
     }
 
+    /**
+     * 
+     * @param type $updated
+     */
     public function setUpdated($updated)
     {
         $this->updated = $updated;
     }
 
+    /**
+     * 
+     * @param type $maritalStatusId
+     */
     public function setMaritalStatusId($maritalStatusId)
     {
         $this->maritalStatusId = $maritalStatusId;
     }
 
+    /**
+     * 
+     * @param type $livingId
+     */
     public function setLivingId($livingId)
     {
         $this->livingId = $livingId;
     }
 
+    /**
+     * 
+     * @param type $travelTimeId
+     */
     public function setTravelTimeId($travelTimeId)
     {
         $this->travelTimeId = $travelTimeId;
     }
 
+    /**
+     * 
+     * @param type $transportId
+     */
     public function setTransportId($transportId)
     {
         $this->transportId = $transportId;
     }
 
+    /**
+     * 
+     * @param type $economicHelpId
+     */
     public function setEconomicHelpId($economicHelpId)
     {
         $this->economicHelpId = $economicHelpId;
     }
 
+    /**
+     * 
+     * @param type $studentId
+     */
     public function setStudentId($studentId)
     {
         $this->studentId = $studentId;
+    }
+
+    /**
+     * 
+     * @param type $movedOn
+     */
+    public function setMovedOn($movedOn)
+    {
+        $this->movedOn = $movedOn;
+    }
+
+    /**
+     * 
+     * @param type $movedOnSolution
+     */
+    public function setMovedOnSolution($movedOnSolution)
+    {
+        $this->movedOnSolution = $movedOnSolution;
     }
 
 }

@@ -93,6 +93,10 @@ class StudentStatusManagerHelper
         $now = new DateTime();
 
         $model = new StudentStatusEntity();
+        
+        $model->setUpdated($now->format('Y-m-d'));
+        $model->setWeek($now->format('W'));
+        $model->setYear($now->format('Y'));
 
         $model->setEconomicHelpId($entity['economicHelpId']);
         $model->setHighschool($entity['highschool']);
@@ -109,9 +113,8 @@ class StudentStatusManagerHelper
         $model->setTransportId($entity['transportId']);
         $model->setTravelTimeId($entity['travelTimeId']);
         $model->setWorks($entity['works']);
-        $model->setUpdated($now->format('Y-m-d'));
-        $model->setWeek($now->format('W'));
-        $model->setYear($now->format('Y'));
+        $model->setMovedOn($entity['movedOn']);
+        $model->setMovedOnSolution($entity['movedOnSolution']);        
 
         $exists = $this->existsSpecificStatus($model->getStudentId(), $model->getYear(), $model->getWeek());
 
