@@ -17,8 +17,10 @@ use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use Survey\Form\StudentForm;
 use Survey\Form\StudentStatusForm;
+use Survey\Form\StudentAddressForm;
 use Survey\Controller\Helper\StudentControllerHelper;
 use Survey\Controller\Helper\StudentStatusControllerHelper;
+use Survey\Controller\Helper\StudentAddressControllerHelper;
 
 /**
  * Description of SurveyController
@@ -53,16 +55,23 @@ class SurveyController extends AbstractActionController
     private $studentInstance;
 
     /**
+     *
+     * @var type 
+     */
+    private $studentAddressInstance;
+
+    /**
      * 
      * @param type $roleManager
      * @param type $sessionContainer
      */
     public function __construct($roleManager, $sessionContainer)
     {
-        $this->surveyManager         = $roleManager;
-        $this->sessionContainer      = $sessionContainer;
-        $this->studentStatusInstance = new StudentStatusControllerHelper($this->surveyManager);
-        $this->studentInstance       = new StudentControllerHelper();
+        $this->surveyManager          = $roleManager;
+        $this->sessionContainer       = $sessionContainer;
+        $this->studentStatusInstance  = new StudentStatusControllerHelper($this->surveyManager);
+        $this->studentInstance        = new StudentControllerHelper();
+        $this->studentAddressInstance = new StudentAddressControllerHelper($this->surveyManager);
     }
 
     private function setLayoutVariables()
@@ -114,13 +123,58 @@ class SurveyController extends AbstractActionController
             {
                 $this->surveyManager->addOrUpdateStudent($form->getData());
 
-                return $this->redirect()->toRoute('surveyManagementRoute', ['action' => 'addOrUpdateStudentStatus', 'id' => $data['id']]);
+                return $this->redirect()->toRoute('surveyManagementRoute', ['action' => 'addOrUpdateStudentAddress', 'id' => $data['id']]);
             }
         }
 
         $existingData = $this->surveyManager->getStudentById($idUser);
 
         $form = $this->studentInstance->fillFormData($form, $existingData, $idUser);
+
+        return new ViewModel([
+            'form' => $form,
+            'id'   => $idUser,
+        ]);
+    }
+
+    public function addOrUpdateStudentAddressAction()
+    {
+        $this->setLayoutVariables();
+
+        $id       = $this->params()->fromRoute('id', '-');
+        $idUser   = $id;
+        $idSecret = '';
+
+        if (!$this->validateAuthentication($idUser, $idSecret))
+        {
+            throw new \Exception('No puede modificar la información solicitada');
+        }
+
+        $form = new StudentAddressForm();
+
+        if ($this->getRequest()->isPost())
+        {
+            $data = $this->params()->fromPost();
+
+            $form->setData($data);
+
+            if ($form->isvalid())
+            {
+                $this->surveyManager->addOrUpdateStudentAddress($form->getData());
+
+                return $this->redirect()->toRoute('surveyManagementRoute', ['action' => 'addOrUpdateStudentStatus', 'id' => $data['studentId']]);
+            }
+            else
+            {
+                $this->studentAddressInstance->fillOptionsData($form);
+            }
+        }
+        else
+        {
+            $existingData = $this->surveyManager->getStudentAddressById($idUser);
+
+            $form = $this->studentAddressInstance->fillFormData($form, $existingData, $idUser);
+        }
 
         return new ViewModel([
             'form' => $form,
@@ -154,12 +208,12 @@ class SurveyController extends AbstractActionController
             if ($form->isvalid())
             {
                 $data = $form->getData();
-                
+
                 $data = $this->studentStatusInstance->getUpdatedFormData($data);
 
                 $this->surveyManager->addOrUpdateStudentStatus($data);
 
-                return $this->redirect()->toRoute('surveyManagementRoute', ['action' => 'addOrUpdateStudentAddress', 'id' => $data['studentId']]);
+                return $this->redirect()->toRoute('surveyManagementRoute', ['action' => 'addOrUpdateStudentProfessionalLife', 'id' => $data['studentId']]);
             }
             else
             {
@@ -172,8 +226,6 @@ class SurveyController extends AbstractActionController
 
             $form = $this->studentStatusInstance->fillFormData($form, $existingData, $idUser);
         }
-
-
 
         return new ViewModel([
             'form' => $form,

@@ -15,6 +15,7 @@ namespace Survey\Service;
 
 use Survey\Service\Helper\StudentManagerHelper;
 use Survey\Service\Helper\StudentStatusManagerHelper;
+use Survey\Service\Helper\StudentAddressManagerHelper;
 use Survey\Service\Helper\AuxiliaryEntityHelper;
 
 /**
@@ -42,6 +43,12 @@ class SurveyManager
      * @var type StudentStatusManagerHelper
      */
     private $studentStatusHelper;
+    
+    /**
+     *
+     * @var type StudentStatusManagerHelper
+     */
+    private $studentAddressHelper;
 
     /**
      *
@@ -58,6 +65,7 @@ class SurveyManager
         $this->entityManager         = $entityManager;
         $this->studentHelper         = new StudentManagerHelper($entityManager);
         $this->studentStatusHelper   = new StudentStatusManagerHelper($entityManager);
+        $this->studentAddressHelper   = new StudentAddressManagerHelper($entityManager);
         $this->auxiliaryEntityHelper = new AuxiliaryEntityHelper($entityManager);
     }
 
@@ -101,6 +109,24 @@ class SurveyManager
     {
         return $this->auxiliaryEntityHelper->getTransportOptions();
     }
+    
+    /**
+     * 
+     * @return type
+     */
+    public function getDepartmentOptions()
+    {
+        return $this->auxiliaryEntityHelper->getDepartmentOptions();
+    }
+    
+    /**
+     * 
+     * @return type
+     */
+    public function getTownOptions($id)
+    {
+        return $this->auxiliaryEntityHelper->getTownOptions($id);
+    }
 
     /**
      * 
@@ -139,6 +165,26 @@ class SurveyManager
     {
 
         $this->studentStatusHelper->addOrUpdateStudentStatus($newStudentStatus);
+    }
+    
+    /**
+     * 
+     * @param type $id
+     * @return type
+     */
+    public function getStudentAddressById($id)
+    {
+        return $this->studentAddressHelper->getStudentAddressById($id);
+    }
+
+    /**
+     * 
+     * @param type $newStudentStatus
+     */
+    public function addOrUpdateStudentAddress($newStudentAddress)
+    {
+
+        $this->studentAddressHelper->addOrUpdateStudentAddress($newStudentAddress);
     }
 
 }

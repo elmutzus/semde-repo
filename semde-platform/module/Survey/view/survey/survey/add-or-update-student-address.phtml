@@ -1,0 +1,58 @@
+<?php
+/*
+ * Copyright (c) 2017 Elder Mutzus <elmutzus@gmail.com>.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *    Elder Mutzus <elmutzus@gmail.com> - initial API and implementation and/or initial documentation
+ */
+
+$form->setAttribute('action', $this->url('surveyManagementRoute', ['action' => 'addOrUpdateStudentAddress', 'id' => $this->id]));
+$form->prepare();
+?>
+
+<section id="body">
+    <div class="text-center"><h3>Evaluaci&oacute;n Demogr&aacute;fica</h3></div>
+    <div class="panel panel-md panel-primary">
+        <div class="panel-heading">
+            <div class="text-center">
+                Informaci&oacute;n del estudiante - Direcci&oacute;n
+            </div>                
+        </div>
+        <div class="panel-body">
+            <?= $this->form()->openTag($form); ?>
+            <div class="form-group">
+                <?= $this->formElement($form->get('studentId')); ?>
+            </div>
+
+            <div class="form-group">
+                <?= $this->formLabel($form->get('departmentId')); ?>
+                <?= $this->formElement($form->get('departmentId')); ?>
+                <?= $this->formElementErrors($form->get('departmentId'), ['class' => 'alert-danger']); ?>
+            </div>
+            <div class="form-group">
+                <?= $this->formLabel($form->get('townId')); ?>
+                <?= $this->formElement($form->get('townId')); ?>
+                <?= $this->formElementErrors($form->get('townId'), ['class' => 'alert-danger']); ?>
+            </div>
+            <div class="form-group">
+                <?= $this->formLabel($form->get('zone')); ?>
+                <?= $this->formElement($form->get('zone')); ?>
+                <?= $this->formElementErrors($form->get('zone'), ['class' => 'alert-danger']); ?>
+            </div>
+            <div class="form-group">
+                <?= $this->formLabel($form->get('anotherSector')); ?>
+                <?= $this->formElement($form->get('anotherSector')); ?>
+                <?= $this->formElementErrors($form->get('anotherSector'), ['class' => 'alert-danger']); ?>
+            </div>
+            
+            <div class="pull-right">
+                <?= $this->formElement($form->get('submit')); ?>
+            </div>
+            <?= $this->form()->closeTag(); ?>
+        </div>
+    </div>
+</section>

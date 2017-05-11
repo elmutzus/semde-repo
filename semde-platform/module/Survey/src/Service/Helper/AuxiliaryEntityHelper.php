@@ -19,6 +19,8 @@ use Survey\Entity\MaritalStatusEntity;
 use Survey\Entity\SocialLifeTypeEntity;
 use Survey\Entity\TransportEntity;
 use Survey\Entity\TravelTimeEntity;
+use Survey\Entity\DepartmentEntity;
+use Survey\Entity\TownEntity;
 
 /**
  * Description of AuxiliarEntityHelper
@@ -63,12 +65,13 @@ class AuxiliaryEntityHelper
 
         return $options;
     }
-    
+
     /**
      * 
      * @return type
      */
-    public function getLivingOptions(){
+    public function getLivingOptions()
+    {
         $allItems = $this->entityManager->getRepository(LivingEntity::class)->findAll();
 
         $options = array();
@@ -83,12 +86,13 @@ class AuxiliaryEntityHelper
 
         return $options;
     }
-    
+
     /**
      * 
      * @return type
      */
-    public function getMaritalStatusOptions(){
+    public function getMaritalStatusOptions()
+    {
         $allItems = $this->entityManager->getRepository(MaritalStatusEntity::class)->findAll();
 
         $options = array();
@@ -103,12 +107,13 @@ class AuxiliaryEntityHelper
 
         return $options;
     }
-    
+
     /**
      * 
      * @return type
      */
-    public function getTravelTimeOptions(){
+    public function getTravelTimeOptions()
+    {
         $allItems = $this->entityManager->getRepository(TravelTimeEntity::class)->findAll();
 
         $options = array();
@@ -123,12 +128,13 @@ class AuxiliaryEntityHelper
 
         return $options;
     }
-    
+
     /**
      * 
      * @return type
      */
-    public function getTransportOptions(){
+    public function getTransportOptions()
+    {
         $allItems = $this->entityManager->getRepository(TransportEntity::class)->findAll();
 
         $options = array();
@@ -143,12 +149,13 @@ class AuxiliaryEntityHelper
 
         return $options;
     }
-    
+
     /**
      * 
      * @return type
      */
-    public function getSocialLifeTypeOptions(){
+    public function getSocialLifeTypeOptions()
+    {
         $allItems = $this->entityManager->getRepository(SocialLifeTypeEntity::class)->findAll();
 
         $options = array();
@@ -163,4 +170,55 @@ class AuxiliaryEntityHelper
 
         return $options;
     }
+
+    /**
+     * 
+     * @return type
+     */
+    public function getDepartmentOptions()
+    {
+        $allItems = $this->entityManager->getRepository(DepartmentEntity::class)->findAll();
+
+        $options = array();
+
+        if ($allItems != null)
+        {
+            foreach ($allItems as $item)
+            {
+                $options[$item->getId()] = $item->getName();
+            }
+        }
+
+        return $options;
+    }
+
+    /**
+     * 
+     * @return type
+     */
+    public function getTownOptions($id)
+    {
+
+        if (!$id)
+        {
+            $id = 0;
+        }
+
+        $allItems = $this->entityManager->getRepository(TownEntity::class)->findByDepartmentId([
+            'departmentId' => $id,
+        ]);
+
+        $options = array();
+
+        if ($allItems != null)
+        {
+            foreach ($allItems as $item)
+            {
+                $options[$item->getId()] = $item->getName();
+            }
+        }
+
+        return $options;
+    }
+
 }
