@@ -271,7 +271,7 @@ class StudentStatusForm extends Form
                 'placeholder' => 'Especifique',
             ],
             'options'    => [
-                'label' => 'Cómo lo solucionó?',
+                'label' => 'Si lo hizo, ¿Cómo solucionó el alojamiento en la capital? Especifique',
             ],
         ]);
 
