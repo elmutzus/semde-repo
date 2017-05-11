@@ -41,7 +41,7 @@ class StudentForm extends Form
     {
         // Add user name field
         $this->add([
-            'type'       => 'text',
+            'type'       => Element\Text::class,
             'name'       => 'id',
             'attributes' => [
                 'class'       => 'form-control',
@@ -53,7 +53,7 @@ class StudentForm extends Form
         ]);
 
         $this->add([
-            'type'       => 'text',
+            'type'       => Element\Text::class,
             'name'       => 'dpi',
             'attributes' => [
                 'class'       => 'form-control',
@@ -65,7 +65,7 @@ class StudentForm extends Form
         ]);
 
         $this->add([
-            'type'       => 'text',
+            'type'       => Element\Text::class,
             'name'       => 'nov',
             'attributes' => [
                 'class'       => 'form-control',
@@ -77,7 +77,7 @@ class StudentForm extends Form
         ]);
 
         $this->add([
-            'type'       => 'text',
+            'type'       => Element\Text::class,
             'name'       => 'name',
             'attributes' => [
                 'class'       => 'form-control',
@@ -89,7 +89,7 @@ class StudentForm extends Form
         ]);
 
         $this->add([
-            'type'       => 'text',
+            'type'       => Element\Text::class,
             'name'       => 'lastname',
             'attributes' => [
                 'class'       => 'form-control',
@@ -101,7 +101,7 @@ class StudentForm extends Form
         ]);
         
         $this->add([
-            'type'       => 'hidden',
+            'type'       => Element\Hidden::class,
             'name'       => 'hiddenGender',
         ]);
 
@@ -134,9 +134,21 @@ class StudentForm extends Form
                 'step' => '1', // days; default step interval is 1 day
             ],
         ]);
+        
+        $this->add([
+            'type'       => Element\Text::class,
+            'name'       => 'birthplace',
+            'attributes' => [
+                'class'       => 'form-control',
+                'placeholder' => 'Lugar de nacimiento',
+            ],
+            'options'    => [
+                'label' => 'Lugar de nacimiento',
+            ],
+        ]);
 
         $this->add([
-            'type'       => 'submit',
+            'type'       => Element\Submit::class,
             'name'       => 'submit',
             'attributes' => [
                 'class' => 'btn btn-primary btn-block',
@@ -249,6 +261,24 @@ class StudentForm extends Form
                     'options' => [
                         'min' => 1,
                         'max' => 50,
+                    ],
+                ],
+            ],
+        ]);
+        
+        $inputFilter->add([
+            'name'       => 'birthplace',
+            'filters'    => [
+                ['name' => 'StringTrim'],
+                ['name' => 'StripTags'],
+                ['name' => 'StripNewlines'],
+            ],
+            'validators' => [
+                [
+                    'name'    => 'StringLength',
+                    'options' => [
+                        'min' => 1,
+                        'max' => 300,
                     ],
                 ],
             ],

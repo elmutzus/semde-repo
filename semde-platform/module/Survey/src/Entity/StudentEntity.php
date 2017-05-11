@@ -60,130 +60,151 @@ class StudentEntity
      */
     protected $birthdate;
 
-    /*
-     * Sets the ID
+    /**
+     * @ORM\Column(name="birthplace")   
      */
+    protected $birthplace;
 
+    /**
+     * 
+     * @param type $id
+     */
     public function setId($id)
     {
         $this->id = $id;
     }
 
-    /*
-     * Sets the DPI
+    /**
+     * 
+     * @param type $dpi
      */
-
     public function setDpi($dpi)
     {
         $this->dpi = $dpi;
     }
 
-    /*
-     * Sets the NOV
+    /**
+     * 
+     * @param type $nov
      */
-
     public function setNov($nov)
     {
         $this->nov = $nov;
     }
 
-    /*
-     * Sets the name
+    /**
+     * 
+     * @param type $name
      */
-
     public function setName($name)
     {
         $this->name = $name;
     }
 
-    /*
-     * Sets the lastname
+    /**
+     * 
+     * @param type $lastname
      */
-
     public function setLastname($lastname)
     {
         $this->lastname = $lastname;
     }
 
-    /*
-     * Sets the gender
+    /**
+     * 
+     * @param type $gender
      */
-
     public function setGender($gender)
     {
         $this->gender = $gender;
     }
 
-    /*
-     * Sets the birthdate
+    /**
+     * 
+     * @param type $birthdate
      */
-
     public function setBirthdate($birthdate)
     {
         $this->birthdate = $birthdate;
     }
-
-    /*
-     * Gets the ID
+    
+    /**
+     * 
+     * @param type $birthplace
      */
+    public function setBirthplace($birthplace){
+        $this->birthplace = $birthplace;
+    }
 
+    /**
+     * 
+     * @return type
+     */
     public function getId()
     {
         return $this->id;
     }
 
-    /*
-     * Gets the DPI
+    /**
+     * 
+     * @return type
      */
-
     public function getDpi()
     {
         return $this->dpi;
     }
 
-    /*
-     * Gets the NOV
+    /**
+     * 
+     * @return type
      */
-
     public function getNov()
     {
         return $this->nov;
     }
 
-    /*
-     * Gets the name
+    /**
+     * 
+     * @return type
      */
-
     public function getName()
     {
         return $this->name;
     }
 
-    /*
-     * Gets the lastname
+    /**
+     * 
+     * @return type
      */
-
     public function getLastname()
     {
         return $this->lastname;
     }
 
-    /*
-     * Gets the gender
+    /**
+     * 
+     * @return type
      */
-
     public function getGender()
     {
         return $this->gender;
     }
 
-    /*
-     * Gets the birthdate
+    /**
+     * 
+     * @return type
      */
-
     public function getBirthdate()
     {
         return $this->birthdate;
+    }
+    
+    /**
+     * 
+     * @return type
+     */
+    public function getBirthplace(){
+        return $this->birthplace;
     }
 
 }

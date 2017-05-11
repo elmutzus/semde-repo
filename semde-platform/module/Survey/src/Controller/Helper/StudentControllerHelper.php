@@ -20,21 +20,30 @@ namespace Survey\Controller\Helper;
  */
 class StudentControllerHelper
 {
+
+    /**
+     * 
+     * @param type $form
+     * @param type $existingData
+     * @param type $idStudent
+     * @return type
+     */
     public function fillFormData($form, $existingData, $idStudent)
     {
         $form->get('id')->setValue($idStudent);
-        
+
         if ($existingData == null)
         {
             return $form;
         }
-        
+
         $form->get('dpi')->setValue($existingData->getDpi());
         $form->get('nov')->setValue($existingData->getNov());
         $form->get('name')->setValue($existingData->getName());
         $form->get('lastname')->setValue($existingData->getLastname());
         $form->get('gender')->setValue($existingData->getGender());
         $form->get('birthdate')->setValue($existingData->getBirthdate());
+        $form->get('birthplace')->setValue($existingData->getBirthplace());
 
         $form->get('id')->setAttribute('readonly', 'true');
 
@@ -69,6 +78,12 @@ class StudentControllerHelper
             $form->get('birthdate')->setAttribute('readonly', 'true');
         }
 
+        if ($existingData->getBirthplace() != '')
+        {
+            $form->get('birthplace')->setAttribute('readonly', 'true');
+        }
+
         return $form;
     }
+
 }

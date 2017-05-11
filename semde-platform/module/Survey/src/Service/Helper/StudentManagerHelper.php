@@ -71,6 +71,7 @@ class StudentManagerHelper
         $model->setNov($entity['nov']);
         $model->setName($entity['name']);
         $model->setLastname($entity['lastname']);
+        $model->setBirthplace($entity['birthplace']);
 
         if ($entity['hiddenGender'] != '')
         {
@@ -105,6 +106,7 @@ class StudentManagerHelper
         $model->setLastname($entity['lastname']);
         $model->setGender($entity['gender']);
         $model->setBirthdate($entity['birthdate']);
+        $model->setBirthplace($entity['birthplace']);
 
         try
         {

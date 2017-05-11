@@ -75,6 +75,13 @@ $form->prepare();
                     <?= $this->formElementErrors($form->get('birthdate'), ['class' => 'alert-danger']); ?>
                 </div>
             </div>
+            <div class="col-sm-12 col-md-12 col-lg-12">
+                <div class="form-group">
+                    <?= $this->formLabel($form->get('birthplace')); ?>
+                    <?= $this->formElement($form->get('birthplace')); ?>
+                    <?= $this->formElementErrors($form->get('birthplace'), ['class' => 'alert-danger']); ?>
+                </div>
+            </div>
             <div class="pull-right">
                 <?= $this->formElement($form->get('submit')); ?>
             </div>
