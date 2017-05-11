@@ -27,28 +27,34 @@ $form->prepare();
             <div class="form-group">
                 <?= $this->formElement($form->get('studentId')); ?>
             </div>
-
-            <div class="form-group">
-                <?= $this->formLabel($form->get('departmentId')); ?>
-                <?= $this->formElement($form->get('departmentId')); ?>
-                <?= $this->formElementErrors($form->get('departmentId'), ['class' => 'alert-danger']); ?>
+            <div class="col-sm-6 col-md-6 col-lg-6">
+                <div class="form-group">
+                    <?= $this->formLabel($form->get('departmentId')); ?>
+                    <?= $this->formElement($form->get('departmentId')); ?>
+                    <?= $this->formElementErrors($form->get('departmentId'), ['class' => 'alert-danger']); ?>
+                </div>
             </div>
-            <div class="form-group">
-                <?= $this->formLabel($form->get('townId')); ?>
-                <?= $this->formElement($form->get('townId')); ?>
-                <?= $this->formElementErrors($form->get('townId'), ['class' => 'alert-danger']); ?>
+            <div class="col-sm-6 col-md-6 col-lg-6">
+                <div class="form-group">
+                    <?= $this->formLabel($form->get('townId')); ?>
+                    <?= $this->formElement($form->get('townId')); ?>
+                    <?= $this->formElementErrors($form->get('townId'), ['class' => 'alert-danger']); ?>
+                </div>
             </div>
-            <div class="form-group">
-                <?= $this->formLabel($form->get('zone')); ?>
-                <?= $this->formElement($form->get('zone')); ?>
-                <?= $this->formElementErrors($form->get('zone'), ['class' => 'alert-danger']); ?>
+            <div class="col-sm-2 col-md-2 col-lg-2">
+                <div class="form-group">
+                    <?= $this->formLabel($form->get('zone')); ?>
+                    <?= $this->formElement($form->get('zone')); ?>
+                    <?= $this->formElementErrors($form->get('zone'), ['class' => 'alert-danger']); ?>
+                </div>
             </div>
-            <div class="form-group">
-                <?= $this->formLabel($form->get('anotherSector')); ?>
-                <?= $this->formElement($form->get('anotherSector')); ?>
-                <?= $this->formElementErrors($form->get('anotherSector'), ['class' => 'alert-danger']); ?>
+            <div class="col-sm-10 col-md-10 col-lg-10">
+                <div class="form-group">
+                    <?= $this->formLabel($form->get('anotherSector')); ?>
+                    <?= $this->formElement($form->get('anotherSector')); ?>
+                    <?= $this->formElementErrors($form->get('anotherSector'), ['class' => 'alert-danger']); ?>
+                </div>
             </div>
-            
             <div class="pull-right">
                 <?= $this->formElement($form->get('submit')); ?>
             </div>
