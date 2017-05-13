@@ -125,7 +125,7 @@ class StudentProfessionalLifeForm extends Form
                 'placeholder' => 'Especifique',
             ],
             'options'    => [
-                'label' => 'En qué porcentaje lo(s) domina??',
+                'label' => 'En qué porcentaje lo(s) domina?',
             ],
         ]);
 

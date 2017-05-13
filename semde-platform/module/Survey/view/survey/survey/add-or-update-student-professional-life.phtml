@@ -27,56 +27,72 @@ $form->prepare();
             <div class="form-group">
                 <?= $this->formElement($form->get('studentId')); ?>
             </div>
-            
-            <div class="form-group">
-                <?= $this->formLabel($form->get('hasScholarship')); ?>
-                <?= $this->formElement($form->get('hasScholarship')); ?>
-                <?= $this->formElementErrors($form->get('hasScholarship'), ['class' => 'alert-danger']); ?>
+            <div class="row">
+                <div class="form-group">
+                    <div class="col-sm-12 col-md-12 col-lg-12">
+                        <?= $this->formLabel($form->get('hasScholarship')); ?>
+                    </div>
+                    <div class="col-sm-2 col-md-2 col-lg-2">
+                        <?= $this->formElement($form->get('hasScholarship')); ?>
+                    </div>
+                    <div class="col-sm-10 col-md-10 col-lg-10">
+                        <?= $this->formElement($form->get('scholarship')); ?>
+                        <?= $this->formElementErrors($form->get('scholarship'), ['class' => 'alert-danger']); ?>
+                    </div>
+                </div>
             </div>
-            
-            <div class="form-group">
-                <?= $this->formLabel($form->get('scholarship')); ?>
-                <?= $this->formElement($form->get('scholarship')); ?>
-                <?= $this->formElementErrors($form->get('scholarship'), ['class' => 'alert-danger']); ?>
+            <div class="row">
+                <div class="col-sm-3 col-md-3 col-lg-3">
+                    <div class="form-group">
+                        <?= $this->formLabel($form->get('studiesLanguages')); ?>
+                        <?= $this->formElement($form->get('studiesLanguages')); ?>
+                        <?= $this->formElementErrors($form->get('studiesLanguages'), ['class' => 'alert-danger']); ?>
+                    </div>
+                </div>
+                <div class="col-sm-3 col-md-3 col-lg-3">
+                    <div class="form-group">
+                        <?= $this->formLabel($form->get('studiesLanguagesPercentage')); ?>
+                        <?= $this->formElement($form->get('studiesLanguagesPercentage')); ?>
+                        <?= $this->formElementErrors($form->get('studiesLanguagesPercentage'), ['class' => 'alert-danger']); ?>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-6 col-lg-6">
+                    <div class="form-group">
+                        <?= $this->formLabel($form->get('studiesWhichLanguages')); ?>
+                        <?= $this->formElement($form->get('studiesWhichLanguages')); ?>
+                        <?= $this->formElementErrors($form->get('studiesWhichLanguages'), ['class' => 'alert-danger']); ?>
+                    </div>
+                </div>
             </div>
-            
-            
-            <div class="form-group">
-                <?= $this->formLabel($form->get('studiesLanguages')); ?>
-                <?= $this->formElement($form->get('studiesLanguages')); ?>
-                <?= $this->formElementErrors($form->get('studiesLanguages'), ['class' => 'alert-danger']); ?>
-            </div>
-            <div class="form-group">
-                <?= $this->formLabel($form->get('studiesWhichLanguages')); ?>
-                <?= $this->formElement($form->get('studiesWhichLanguages')); ?>
-                <?= $this->formElementErrors($form->get('studiesWhichLanguages'), ['class' => 'alert-danger']); ?>
-            </div>
-            <div class="form-group">
-                <?= $this->formLabel($form->get('studiesLanguagesPercentage')); ?>
-                <?= $this->formElement($form->get('studiesLanguagesPercentage')); ?>
-                <?= $this->formElementErrors($form->get('studiesLanguagesPercentage'), ['class' => 'alert-danger']); ?>
-            </div>
-            <div class="form-group">
-                <?= $this->formLabel($form->get('handlesLanguages')); ?>
-                <?= $this->formElement($form->get('handlesLanguages')); ?>
-                <?= $this->formElementErrors($form->get('handlesLanguages'), ['class' => 'alert-danger']); ?>
-            </div>
-            <div class="form-group">
-                <?= $this->formLabel($form->get('handlesWhichLanguages')); ?>
-                <?= $this->formElement($form->get('handlesWhichLanguages')); ?>
-                <?= $this->formElementErrors($form->get('handlesWhichLanguages'), ['class' => 'alert-danger']); ?>
-            </div>
-            <div class="form-group">
-                <?= $this->formLabel($form->get('handlesLanguagesPercentage')); ?>
-                <?= $this->formElement($form->get('handlesLanguagesPercentage')); ?>
-                <?= $this->formElementErrors($form->get('handlesLanguagesPercentage'), ['class' => 'alert-danger']); ?>
+            <div class="row">
+                <div class="col-sm-3 col-md-3 col-lg-3">
+                    <div class="form-group">
+                        <?= $this->formLabel($form->get('handlesLanguages')); ?>
+                        <?= $this->formElement($form->get('handlesLanguages')); ?>
+                        <?= $this->formElementErrors($form->get('handlesLanguages'), ['class' => 'alert-danger']); ?>
+                    </div>
+                </div>
+                <div class="col-sm-3 col-md-3 col-lg-3">
+                    <div class="form-group">
+                        <?= $this->formLabel($form->get('handlesWhichLanguages')); ?>
+                        <?= $this->formElement($form->get('handlesWhichLanguages')); ?>
+                        <?= $this->formElementErrors($form->get('handlesWhichLanguages'), ['class' => 'alert-danger']); ?>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-6 col-lg-6">
+                    <div class="form-group">
+                        <?= $this->formLabel($form->get('handlesLanguagesPercentage')); ?>
+                        <?= $this->formElement($form->get('handlesLanguagesPercentage')); ?>
+                        <?= $this->formElementErrors($form->get('handlesLanguagesPercentage'), ['class' => 'alert-danger']); ?>
+                    </div>
+                </div>
             </div>
             <div class="form-group">
                 <?= $this->formLabel($form->get('careerId')); ?>
                 <?= $this->formElement($form->get('careerId')); ?>
                 <?= $this->formElementErrors($form->get('careerId'), ['class' => 'alert-danger']); ?>
             </div>
-            
+
             <div class="form-group">
                 <?= $this->formLabel($form->get('careerMotivation')); ?>
                 <?= $this->formElement($form->get('careerMotivation')); ?>
@@ -92,7 +108,7 @@ $form->prepare();
                 <?= $this->formElement($form->get('selfDescription')); ?>
                 <?= $this->formElementErrors($form->get('selfDescription'), ['class' => 'alert-danger']); ?>
             </div>
-            
+
 
             <div class="pull-right">
                 <?= $this->formElement($form->get('submit')); ?>
