@@ -77,7 +77,7 @@ class StudentProfessionalLifeControllerHelper
 
         if ($studiesLanguages != '1')
         {
-            $data['studiesLanguagesPercentage'] = '';
+            $data['studiesLanguagesPercentage'] = null;
             $data['studiesWhichLanguages'] = '';
         }
 
@@ -85,7 +85,7 @@ class StudentProfessionalLifeControllerHelper
 
         if ($handlesLanguages != '1')
         {
-            $data['handlesLanguagesPercentage'] = '';
+            $data['handlesLanguagesPercentage'] = null;
             $data['handlesWhichLanguages'] = '';
         }
 

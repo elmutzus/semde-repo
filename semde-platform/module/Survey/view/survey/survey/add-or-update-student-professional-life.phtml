@@ -41,6 +41,7 @@ $form->prepare();
                     </div>
                 </div>
             </div>
+            <br>
             <div class="row">
                 <div class="col-sm-3 col-md-3 col-lg-3">
                     <div class="form-group">
@@ -74,18 +75,18 @@ $form->prepare();
                 </div>
                 <div class="col-sm-3 col-md-3 col-lg-3">
                     <div class="form-group">
-                        <?= $this->formLabel($form->get('handlesWhichLanguages')); ?>
-                        <?= $this->formElement($form->get('handlesWhichLanguages')); ?>
-                        <?= $this->formElementErrors($form->get('handlesWhichLanguages'), ['class' => 'alert-danger']); ?>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-md-6 col-lg-6">
-                    <div class="form-group">
                         <?= $this->formLabel($form->get('handlesLanguagesPercentage')); ?>
                         <?= $this->formElement($form->get('handlesLanguagesPercentage')); ?>
                         <?= $this->formElementErrors($form->get('handlesLanguagesPercentage'), ['class' => 'alert-danger']); ?>
                     </div>
                 </div>
+                <div class="col-sm-6 col-md-6 col-lg-6">
+                    <div class="form-group">
+                        <?= $this->formLabel($form->get('handlesWhichLanguages')); ?>
+                        <?= $this->formElement($form->get('handlesWhichLanguages')); ?>
+                        <?= $this->formElementErrors($form->get('handlesWhichLanguages'), ['class' => 'alert-danger']); ?>
+                    </div>
+                </div>                
             </div>
             <div class="form-group">
                 <?= $this->formLabel($form->get('careerId')); ?>
