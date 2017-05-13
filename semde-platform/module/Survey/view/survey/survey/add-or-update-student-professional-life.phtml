@@ -1,0 +1,103 @@
+<?php
+/*
+ * Copyright (c) 2017 Elder Mutzus <elmutzus@gmail.com>.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *    Elder Mutzus <elmutzus@gmail.com> - initial API and implementation and/or initial documentation
+ */
+
+$form->setAttribute('action', $this->url('surveyManagementRoute', ['action' => 'addOrUpdateStudentProfessionalLife', 'id' => $this->id]));
+$form->prepare();
+?>
+
+<section id="body">
+    <div class="text-center"><h3>Evaluaci&oacute;n Demogr&aacute;fica</h3></div>
+    <div class="panel panel-md panel-primary">
+        <div class="panel-heading">
+            <div class="text-center">
+                Informaci&oacute;n del estudiante - Vida profesional
+            </div>                
+        </div>
+        <div class="panel-body">
+            <?= $this->form()->openTag($form); ?>
+            <div class="form-group">
+                <?= $this->formElement($form->get('studentId')); ?>
+            </div>
+            
+            <div class="form-group">
+                <?= $this->formLabel($form->get('hasScholarship')); ?>
+                <?= $this->formElement($form->get('hasScholarship')); ?>
+                <?= $this->formElementErrors($form->get('hasScholarship'), ['class' => 'alert-danger']); ?>
+            </div>
+            
+            <div class="form-group">
+                <?= $this->formLabel($form->get('scholarship')); ?>
+                <?= $this->formElement($form->get('scholarship')); ?>
+                <?= $this->formElementErrors($form->get('scholarship'), ['class' => 'alert-danger']); ?>
+            </div>
+            
+            
+            <div class="form-group">
+                <?= $this->formLabel($form->get('studiesLanguages')); ?>
+                <?= $this->formElement($form->get('studiesLanguages')); ?>
+                <?= $this->formElementErrors($form->get('studiesLanguages'), ['class' => 'alert-danger']); ?>
+            </div>
+            <div class="form-group">
+                <?= $this->formLabel($form->get('studiesWhichLanguages')); ?>
+                <?= $this->formElement($form->get('studiesWhichLanguages')); ?>
+                <?= $this->formElementErrors($form->get('studiesWhichLanguages'), ['class' => 'alert-danger']); ?>
+            </div>
+            <div class="form-group">
+                <?= $this->formLabel($form->get('studiesLanguagesPercentage')); ?>
+                <?= $this->formElement($form->get('studiesLanguagesPercentage')); ?>
+                <?= $this->formElementErrors($form->get('studiesLanguagesPercentage'), ['class' => 'alert-danger']); ?>
+            </div>
+            <div class="form-group">
+                <?= $this->formLabel($form->get('handlesLanguages')); ?>
+                <?= $this->formElement($form->get('handlesLanguages')); ?>
+                <?= $this->formElementErrors($form->get('handlesLanguages'), ['class' => 'alert-danger']); ?>
+            </div>
+            <div class="form-group">
+                <?= $this->formLabel($form->get('handlesWhichLanguages')); ?>
+                <?= $this->formElement($form->get('handlesWhichLanguages')); ?>
+                <?= $this->formElementErrors($form->get('handlesWhichLanguages'), ['class' => 'alert-danger']); ?>
+            </div>
+            <div class="form-group">
+                <?= $this->formLabel($form->get('handlesLanguagesPercentage')); ?>
+                <?= $this->formElement($form->get('handlesLanguagesPercentage')); ?>
+                <?= $this->formElementErrors($form->get('handlesLanguagesPercentage'), ['class' => 'alert-danger']); ?>
+            </div>
+            <div class="form-group">
+                <?= $this->formLabel($form->get('careerId')); ?>
+                <?= $this->formElement($form->get('careerId')); ?>
+                <?= $this->formElementErrors($form->get('careerId'), ['class' => 'alert-danger']); ?>
+            </div>
+            
+            <div class="form-group">
+                <?= $this->formLabel($form->get('careerMotivation')); ?>
+                <?= $this->formElement($form->get('careerMotivation')); ?>
+                <?= $this->formElementErrors($form->get('careerMotivation'), ['class' => 'alert-danger']); ?>
+            </div>
+            <div class="form-group">
+                <?= $this->formLabel($form->get('hobbies')); ?>
+                <?= $this->formElement($form->get('hobbies')); ?>
+                <?= $this->formElementErrors($form->get('hobbies'), ['class' => 'alert-danger']); ?>
+            </div>
+            <div class="form-group">
+                <?= $this->formLabel($form->get('selfDescription')); ?>
+                <?= $this->formElement($form->get('selfDescription')); ?>
+                <?= $this->formElementErrors($form->get('selfDescription'), ['class' => 'alert-danger']); ?>
+            </div>
+            
+
+            <div class="pull-right">
+                <?= $this->formElement($form->get('submit')); ?>
+            </div>
+            <?= $this->form()->closeTag(); ?>
+        </div>
+    </div>
+</section>

@@ -18,9 +18,11 @@ use Zend\View\Model\ViewModel;
 use Survey\Form\StudentForm;
 use Survey\Form\StudentStatusForm;
 use Survey\Form\StudentAddressForm;
+use Survey\Form\StudentProfessionalLifeForm;
 use Survey\Controller\Helper\StudentControllerHelper;
 use Survey\Controller\Helper\StudentStatusControllerHelper;
 use Survey\Controller\Helper\StudentAddressControllerHelper;
+use Survey\Controller\Helper\StudentProfessionalLifeControllerHelper;
 
 /**
  * Description of SurveyController
@@ -61,17 +63,24 @@ class SurveyController extends AbstractActionController
     private $studentAddressInstance;
 
     /**
+     *
+     * @var type 
+     */
+    private $studentProfessionalLifeInstance;
+
+    /**
      * 
      * @param type $roleManager
      * @param type $sessionContainer
      */
     public function __construct($roleManager, $sessionContainer)
     {
-        $this->surveyManager          = $roleManager;
-        $this->sessionContainer       = $sessionContainer;
-        $this->studentStatusInstance  = new StudentStatusControllerHelper($this->surveyManager);
-        $this->studentInstance        = new StudentControllerHelper();
-        $this->studentAddressInstance = new StudentAddressControllerHelper($this->surveyManager);
+        $this->surveyManager                   = $roleManager;
+        $this->sessionContainer                = $sessionContainer;
+        $this->studentStatusInstance           = new StudentStatusControllerHelper($this->surveyManager);
+        $this->studentInstance                 = new StudentControllerHelper();
+        $this->studentAddressInstance          = new StudentAddressControllerHelper($this->surveyManager);
+        $this->studentProfessionalLifeInstance = new StudentProfessionalLifeControllerHelper($this->surveyManager);
     }
 
     private function setLayoutVariables()
@@ -225,6 +234,57 @@ class SurveyController extends AbstractActionController
             $existingData = $this->surveyManager->getStudentStatusById($idUser);
 
             $form = $this->studentStatusInstance->fillFormData($form, $existingData, $idUser);
+        }
+
+        return new ViewModel([
+            'form' => $form,
+            'id'   => $idUser,
+        ]);
+    }
+
+    public function addOrUpdateStudentProfessionalLifeAction()
+    {
+        $this->setLayoutVariables();
+
+        $id       = $this->params()->fromRoute('id', '-');
+        $idUser   = $id;
+        $idSecret = '';
+
+        if (!$this->validateAuthentication($idUser, $idSecret))
+        {
+            throw new \Exception('No puede modificar la información solicitada');
+        }
+
+        $form = new StudentProfessionalLifeForm();
+
+        if ($this->getRequest()->isPost())
+        {
+            $data = $this->params()->fromPost();
+
+            $form->setData($data);
+
+            $form = $this->studentProfessionalLifeInstance->getUpdatedControlsBasedOnValidation($form);
+
+            if ($form->isvalid())
+            {
+                $data = $form->getData();
+
+                $data = $this->studentProfessionalLifeInstance->getUpdatedFormData($data);
+
+                $this->surveyManager->addOrUpdateStudentProfessionalLife($data);
+
+                return $this->redirect()->toRoute('surveyManagementRoute', ['action' => 'addOrUpdateStudentFather', 'id' => $data['studentId']]);
+            }
+            else
+            {
+                $this->studentProfessionalLifeInstance->fillOptionsData($form);
+            }
+        }
+        else
+        {
+            $existingData = $this->surveyManager->getStudentProfessionalLifeById($idUser);
+
+            $form = $this->studentProfessionalLifeInstance->fillFormData($form, $existingData, $idUser);
         }
 
         return new ViewModel([

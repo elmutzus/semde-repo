@@ -17,6 +17,7 @@ use Survey\Service\Helper\StudentManagerHelper;
 use Survey\Service\Helper\StudentStatusManagerHelper;
 use Survey\Service\Helper\StudentAddressManagerHelper;
 use Survey\Service\Helper\AuxiliaryEntityHelper;
+use Survey\Service\Helper\StudentProfessionalLifeManagerHelper;
 
 /**
  * Description of SurveyManager
@@ -43,7 +44,7 @@ class SurveyManager
      * @var type StudentStatusManagerHelper
      */
     private $studentStatusHelper;
-    
+
     /**
      *
      * @var type StudentStatusManagerHelper
@@ -57,16 +58,23 @@ class SurveyManager
     private $auxiliaryEntityHelper;
 
     /**
+     *
+     * @var type 
+     */
+    private $studentProfessionalLifeHelper;
+
+    /**
      * 
      * @param type $entityManager
      */
     public function __construct($entityManager)
     {
-        $this->entityManager         = $entityManager;
-        $this->studentHelper         = new StudentManagerHelper($entityManager);
-        $this->studentStatusHelper   = new StudentStatusManagerHelper($entityManager);
-        $this->studentAddressHelper   = new StudentAddressManagerHelper($entityManager);
-        $this->auxiliaryEntityHelper = new AuxiliaryEntityHelper($entityManager);
+        $this->entityManager                 = $entityManager;
+        $this->studentHelper                 = new StudentManagerHelper($entityManager);
+        $this->studentStatusHelper           = new StudentStatusManagerHelper($entityManager);
+        $this->studentAddressHelper          = new StudentAddressManagerHelper($entityManager);
+        $this->auxiliaryEntityHelper         = new AuxiliaryEntityHelper($entityManager);
+        $this->studentProfessionalLifeHelper = new StudentProfessionalLifeManagerHelper($entityManager);
     }
 
     public function getEconomicHelpOptions()
@@ -109,7 +117,7 @@ class SurveyManager
     {
         return $this->auxiliaryEntityHelper->getTransportOptions();
     }
-    
+
     /**
      * 
      * @return type
@@ -118,7 +126,7 @@ class SurveyManager
     {
         return $this->auxiliaryEntityHelper->getDepartmentOptions();
     }
-    
+
     /**
      * 
      * @return type
@@ -136,6 +144,16 @@ class SurveyManager
     public function getStudentById($id)
     {
         return $this->studentHelper->getStudentById($id);
+    }
+
+    /**
+     * 
+     * @param type $id
+     * @return type
+     */
+    public function getCareerOptions()
+    {
+        return $this->auxiliaryEntityHelper->getCareerOptions();
     }
 
     /**
@@ -166,7 +184,7 @@ class SurveyManager
 
         $this->studentStatusHelper->addOrUpdateStudentStatus($newStudentStatus);
     }
-    
+
     /**
      * 
      * @param type $id
@@ -185,6 +203,25 @@ class SurveyManager
     {
 
         $this->studentAddressHelper->addOrUpdateStudentAddress($newStudentAddress);
+    }
+
+    /**
+     * 
+     * @param type $id
+     * @return type
+     */
+    public function getStudentProfessionalLifeById($id)
+    {
+        return $this->studentProfessionalLifeHelper->getStudentProfessionalLifeById($id);
+    }
+
+    /**
+     * 
+     * @param type $newStudentProfessionalLife
+     */
+    public function addOrUpdateStudentProfessionalLife($newStudentProfessionalLife)
+    {
+        $this->studentProfessionalLifeHelper->addOrUpdateStudentProfessionalLife($newStudentProfessionalLife);
     }
 
 }

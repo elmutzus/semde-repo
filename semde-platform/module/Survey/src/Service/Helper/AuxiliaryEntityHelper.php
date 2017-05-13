@@ -21,6 +21,7 @@ use Survey\Entity\TransportEntity;
 use Survey\Entity\TravelTimeEntity;
 use Survey\Entity\DepartmentEntity;
 use Survey\Entity\TownEntity;
+use Survey\Entity\CareerEntity;
 
 /**
  * Description of AuxiliarEntityHelper
@@ -215,6 +216,27 @@ class AuxiliaryEntityHelper
             foreach ($allItems as $item)
             {
                 $options[$item->getId()] = $item->getName();
+            }
+        }
+
+        return $options;
+    }
+    
+    /**
+     * 
+     * @return type
+     */
+    public function getCareerOptions()
+    {
+        $allItems = $this->entityManager->getRepository(CareerEntity::class)->findAll();
+
+        $options = array();
+
+        if ($allItems != null)
+        {
+            foreach ($allItems as $item)
+            {
+                $options[$item->getId()] = $item->getDescription();
             }
         }
 
