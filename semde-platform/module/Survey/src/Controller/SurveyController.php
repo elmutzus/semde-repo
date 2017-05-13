@@ -19,10 +19,12 @@ use Survey\Form\StudentForm;
 use Survey\Form\StudentStatusForm;
 use Survey\Form\StudentAddressForm;
 use Survey\Form\StudentProfessionalLifeForm;
+use Survey\Form\StudentParentForm;
 use Survey\Controller\Helper\StudentControllerHelper;
 use Survey\Controller\Helper\StudentStatusControllerHelper;
 use Survey\Controller\Helper\StudentAddressControllerHelper;
 use Survey\Controller\Helper\StudentProfessionalLifeControllerHelper;
+use Survey\Controller\Helper\StudentParentControllerHelper;
 
 /**
  * Description of SurveyController
@@ -69,6 +71,12 @@ class SurveyController extends AbstractActionController
     private $studentProfessionalLifeInstance;
 
     /**
+     *
+     * @var type 
+     */
+    private $studentParentInstance;
+
+    /**
      * 
      * @param type $roleManager
      * @param type $sessionContainer
@@ -81,6 +89,7 @@ class SurveyController extends AbstractActionController
         $this->studentInstance                 = new StudentControllerHelper();
         $this->studentAddressInstance          = new StudentAddressControllerHelper($this->surveyManager);
         $this->studentProfessionalLifeInstance = new StudentProfessionalLifeControllerHelper($this->surveyManager);
+        $this->studentParentInstance           = new StudentParentControllerHelper($this->surveyManager);
     }
 
     private function setLayoutVariables()
@@ -285,6 +294,104 @@ class SurveyController extends AbstractActionController
             $existingData = $this->surveyManager->getStudentProfessionalLifeById($idUser);
 
             $form = $this->studentProfessionalLifeInstance->fillFormData($form, $existingData, $idUser);
+        }
+
+        return new ViewModel([
+            'form' => $form,
+            'id'   => $idUser,
+        ]);
+    }
+
+    public function addOrUpdateStudentFatherAction()
+    {
+        $this->setLayoutVariables();
+
+        $id         = $this->params()->fromRoute('id', '-');
+        $idUser     = $id;
+        $idSecret   = '';
+        $parentType = 'F';
+
+        if (!$this->validateAuthentication($idUser, $idSecret))
+        {
+            throw new \Exception('No puede modificar la información solicitada');
+        }
+
+        $form = new StudentParentForm();
+
+        if ($this->getRequest()->isPost())
+        {
+            $data = $this->params()->fromPost();
+            $data['parentType'] = $parentType;
+
+            $form->setData($data);
+
+            $form = $this->studentParentInstance->getUpdatedControlsBasedOnValidation($form);
+
+            if ($form->isvalid())
+            {
+                $data = $form->getData();
+
+                $data = $this->studentParentInstance->getUpdatedFormData($data);
+
+                $this->surveyManager->addOrUpdateStudentParent($data);
+
+                return $this->redirect()->toRoute('surveyManagementRoute', ['action' => 'addOrUpdateStudentMother', 'id' => $data['studentId']]);
+            }
+        }
+        else
+        {
+            $existingData = $this->surveyManager->getStudentParentById($idUser, $parentType);
+
+            $form = $this->studentParentInstance->fillFormData($form, $existingData, $idUser);
+        }
+
+        return new ViewModel([
+            'form' => $form,
+            'id'   => $idUser,
+        ]);
+    }
+
+    public function addOrUpdateStudentMotherAction()
+    {
+        $this->setLayoutVariables();
+
+        $id         = $this->params()->fromRoute('id', '-');
+        $idUser     = $id;
+        $idSecret   = '';
+        $parentType = 'M';
+
+        if (!$this->validateAuthentication($idUser, $idSecret))
+        {
+            throw new \Exception('No puede modificar la información solicitada');
+        }
+
+        $form = new StudentParentForm();
+
+        if ($this->getRequest()->isPost())
+        {
+            $data = $this->params()->fromPost();
+            $data['parentType'] = $parentType;
+
+            $form->setData($data);
+
+            $form = $this->studentParentInstance->getUpdatedControlsBasedOnValidation($form);
+
+            if ($form->isvalid())
+            {
+                $data = $form->getData();
+
+                $data = $this->studentParentInstance->getUpdatedFormData($data);
+
+                $this->surveyManager->addOrUpdateStudentParent($data);
+
+                return $this->redirect()->toRoute('surveyManagementRoute', ['action' => 'addOrUpdateStudentBrother', 'id' => $data['studentId']]);
+            }
+        }
+        else
+        {
+            $existingData = $this->surveyManager->getStudentParentById($idUser, $parentType);
+
+            $form = $this->studentParentInstance->fillFormData($form, $existingData, $idUser);
         }
 
         return new ViewModel([

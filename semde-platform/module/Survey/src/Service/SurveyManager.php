@@ -18,6 +18,7 @@ use Survey\Service\Helper\StudentStatusManagerHelper;
 use Survey\Service\Helper\StudentAddressManagerHelper;
 use Survey\Service\Helper\AuxiliaryEntityHelper;
 use Survey\Service\Helper\StudentProfessionalLifeManagerHelper;
+use Survey\Service\Helper\StudentParentManagerHelper;
 
 /**
  * Description of SurveyManager
@@ -64,6 +65,12 @@ class SurveyManager
     private $studentProfessionalLifeHelper;
 
     /**
+     *
+     * @var type 
+     */
+    private $studentParentHelper;
+
+    /**
      * 
      * @param type $entityManager
      */
@@ -75,6 +82,7 @@ class SurveyManager
         $this->studentAddressHelper          = new StudentAddressManagerHelper($entityManager);
         $this->auxiliaryEntityHelper         = new AuxiliaryEntityHelper($entityManager);
         $this->studentProfessionalLifeHelper = new StudentProfessionalLifeManagerHelper($entityManager);
+        $this->studentParentHelper           = new StudentParentManagerHelper($entityManager);
     }
 
     public function getEconomicHelpOptions()
@@ -224,4 +232,22 @@ class SurveyManager
         $this->studentProfessionalLifeHelper->addOrUpdateStudentProfessionalLife($newStudentProfessionalLife);
     }
 
+    /**
+     * 
+     * @param type $id
+     * @return type
+     */
+    public function getStudentParentById($id, $parentType)
+    {
+        return $this->studentParentHelper->getStudentParentById($id, $parentType);
+    }
+
+    /**
+     * 
+     * @param type $newStudentProfessionalLife
+     */
+    public function addOrUpdateStudentParent($newStudentParent)
+    {
+        $this->studentParentHelper->addOrUpdateStudentParent($newStudentParent);
+    }
 }
