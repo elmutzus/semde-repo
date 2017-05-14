@@ -22,6 +22,7 @@ use Survey\Form\StudentProfessionalLifeForm;
 use Survey\Form\StudentParentForm;
 use Survey\Form\StudentBrotherForm;
 use Survey\Form\StudentMateForm;
+use Survey\Form\StudentSocialLifeForm;
 use Survey\Controller\Helper\StudentControllerHelper;
 use Survey\Controller\Helper\StudentStatusControllerHelper;
 use Survey\Controller\Helper\StudentAddressControllerHelper;
@@ -29,6 +30,7 @@ use Survey\Controller\Helper\StudentProfessionalLifeControllerHelper;
 use Survey\Controller\Helper\StudentParentControllerHelper;
 use Survey\Controller\Helper\StudentBrotherControllerHelper;
 use Survey\Controller\Helper\StudentMateControllerHelper;
+use Survey\Controller\Helper\StudentSocialLifeControllerHelper;
 
 /**
  * Description of SurveyController
@@ -85,12 +87,18 @@ class SurveyController extends AbstractActionController
      * @var type 
      */
     private $studentBrotherInstance;
-    
+
     /**
      *
      * @var type 
      */
     private $studentMateInstance;
+
+    /**
+     *
+     * @var type 
+     */
+    private $studentSocialLifeInstance;
 
     /**
      * 
@@ -107,7 +115,8 @@ class SurveyController extends AbstractActionController
         $this->studentProfessionalLifeInstance = new StudentProfessionalLifeControllerHelper($this->surveyManager);
         $this->studentParentInstance           = new StudentParentControllerHelper($this->surveyManager);
         $this->studentBrotherInstance          = new StudentBrotherControllerHelper($this->surveyManager);
-        $this->studentMateInstance = new StudentMateControllerHelper($this->surveyManager);
+        $this->studentMateInstance             = new StudentMateControllerHelper($this->surveyManager);
+        $this->studentSocialLifeInstance       = new StudentSocialLifeControllerHelper($this->surveyManager);
     }
 
     private function setLayoutVariables()
@@ -464,7 +473,7 @@ class SurveyController extends AbstractActionController
             'id'   => $idUser,
         ]);
     }
-    
+
     public function addOrUpdateStudentMateAction()
     {
         $this->setLayoutVariables();
@@ -515,4 +524,56 @@ class SurveyController extends AbstractActionController
             'id'   => $idUser,
         ]);
     }
+
+    public function addOrUpdateStudentSocialLifeAction()
+    {
+        $this->setLayoutVariables();
+
+        $id       = $this->params()->fromRoute('id', '-');
+        $idUser   = $id;
+        $idSecret = '';
+
+        if (!$this->validateAuthentication($idUser, $idSecret))
+        {
+            throw new \Exception('No puede modificar la información solicitada');
+        }
+
+        $form = new StudentSocialLifeForm();
+
+        if ($this->getRequest()->isPost())
+        {
+            $data = $this->params()->fromPost();
+
+            $form->setData($data);
+
+            $form = $this->studentSocialLifeInstance->getUpdatedControlsBasedOnValidation($form);
+
+            if ($form->isvalid())
+            {
+                $data = $form->getData();
+
+                $data = $this->studentSocialLifeInstance->getUpdatedFormData($data);
+
+                $this->surveyManager->addOrUpdateStudentSocialLife($data);
+
+                return $this->redirect()->toRoute('surveyManagementRoute', ['action' => 'addOrUpdateStudentFinish', 'id' => $data['studentId']]);
+            }
+            else
+            {
+                $this->studentSocialLifeInstance->fillOptionsData($form);
+            }
+        }
+        else
+        {
+            $existingData = $this->surveyManager->getStudentSocialLifeById($idUser);
+
+            $form = $this->studentSocialLifeInstance->fillFormData($form, $existingData, $idUser);
+        }
+
+        return new ViewModel([
+            'form' => $form,
+            'id'   => $idUser,
+        ]);
+    }
+
 }

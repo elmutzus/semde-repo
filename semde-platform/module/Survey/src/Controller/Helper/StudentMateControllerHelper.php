@@ -87,7 +87,7 @@ class StudentMateControllerHelper
 
         if ($relationshipId == '0')
         {
-            $data['birthdate']     = '';
+            $data['birthdate']     = null;
             $data['occupation']    = '';
             $data['academicTitle'] = '';
             $data['timeTogether']  = '';

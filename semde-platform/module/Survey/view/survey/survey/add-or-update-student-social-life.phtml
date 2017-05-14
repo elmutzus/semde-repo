@@ -1,0 +1,221 @@
+<?php
+/*
+ * Copyright (c) 2017 Elder Mutzus <elmutzus@gmail.com>.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *    Elder Mutzus <elmutzus@gmail.com> - initial API and implementation and/or initial documentation
+ */
+
+$form->setAttribute('action', $this->url('surveyManagementRoute', ['action' => 'addOrUpdateStudentSocialLife', 'id' => $this->id]));
+$form->prepare();
+?>
+
+<section id="body">
+    <div class="text-center"><h3>Evaluaci&oacute;n Demogr&aacute;fica</h3></div>
+    <div class="panel panel-md panel-primary">
+        <div class="panel-heading">
+            <div class="text-center">
+                Informaci&oacute;n del estudiante - Vida social
+            </div>                
+        </div>
+        <div class="panel-body">
+            <?= $this->form()->openTag($form); ?>
+            <div class="form-group">
+                <?= $this->formElement($form->get('studentId')); ?>
+            </div>
+            <div class="form-group">
+                <?= $this->formElement($form->get('year')); ?>
+            </div>
+            <div class="form-group">
+                <?= $this->formElement($form->get('week')); ?>
+            </div>
+
+
+            <div class="col-sm-12 col-md-12 col-lg-12">
+                <div class="row">
+                    <div class="col-sm-3 col-md-3 col-lg-3">
+                        <div class="form-group">
+                            <?= $this->formLabel($form->get('socialLifeTypeId')); ?>
+                            <?= $this->formElement($form->get('socialLifeTypeId')); ?>
+                            <?= $this->formElementErrors($form->get('socialLifeTypeId'), ['class' => 'alert-danger']); ?>
+                        </div>
+                    </div>
+                    <div class="col-sm-9 col-md-9 col-lg-9">
+                        <div class="form-group">
+                            <?= $this->formLabel($form->get('socialLifeOther')); ?>
+                            <?= $this->formElement($form->get('socialLifeOther')); ?>
+                            <?= $this->formElementErrors($form->get('socialLifeOther'), ['class' => 'alert-danger']); ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-12 col-lg-12">
+                <div class="row">
+                    <div class="col-sm-3 col-md-3 col-lg-3">
+                        <div class="form-group">
+                            <?= $this->formLabel($form->get('exercises')); ?>
+                            <?= $this->formElement($form->get('exercises')); ?>
+                            <?= $this->formElementErrors($form->get('exercises'), ['class' => 'alert-danger']); ?>
+                        </div>
+                    </div>
+                    <div class="col-sm-9 col-md-9 col-lg-9">
+                        <div class="form-group">
+                            <?= $this->formLabel($form->get('exercisesWhich')); ?>
+                            <?= $this->formElement($form->get('exercisesWhich')); ?>
+                            <?= $this->formElementErrors($form->get('exercisesWhich'), ['class' => 'alert-danger']); ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-12 col-lg-12">
+                <div class="form-group">
+                    <?= $this->formLabel($form->get('exercisesFrequency')); ?>
+                    <?= $this->formElement($form->get('exercisesFrequency')); ?>
+                    <?= $this->formElementErrors($form->get('exercisesFrequency'), ['class' => 'alert-danger']); ?>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-12 col-lg-12">
+                <div class="row">
+                    <div class="col-sm-3 col-md-3 col-lg-3">
+                        <div class="form-group">
+                            <?= $this->formLabel($form->get('drinksAlcohol')); ?>
+                            <?= $this->formElement($form->get('drinksAlcohol')); ?>
+                            <?= $this->formElementErrors($form->get('drinksAlcohol'), ['class' => 'alert-danger']); ?>
+                        </div>
+                    </div>
+                    <div class="col-sm-9 col-md-9 col-lg-9">
+                        <div class="form-group">
+                            <?= $this->formLabel($form->get('drinksAlcoholFrequency')); ?>
+                            <?= $this->formElement($form->get('drinksAlcoholFrequency')); ?>
+                            <?= $this->formElementErrors($form->get('drinksAlcoholFrequency'), ['class' => 'alert-danger']); ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-12 col-lg-12">
+                <div class="row">
+                    <div class="col-sm-3 col-md-3 col-lg-3">
+                        <div class="form-group">
+                            <?= $this->formLabel($form->get('smokes')); ?>
+                            <?= $this->formElement($form->get('smokes')); ?>
+                            <?= $this->formElementErrors($form->get('smokes'), ['class' => 'alert-danger']); ?>
+                        </div>
+                    </div>
+                    <div class="col-sm-9 col-md-9 col-lg-9">
+                        <div class="form-group">
+                            <?= $this->formLabel($form->get('smokesFrequency')); ?>
+                            <?= $this->formElement($form->get('smokesFrequency')); ?>
+                            <?= $this->formElementErrors($form->get('smokesFrequency'), ['class' => 'alert-danger']); ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-12 col-lg-12">
+                <div class="row">
+                    <div class="form-group">
+                        <div class="col-sm-12 col-md-12 col-lg-12">
+                            <?= $this->formLabel($form->get('hasChronicDisease')); ?>
+                        </div>
+                        <div class="col-sm-2 col-md-2 col-lg-2">
+                            <?= $this->formElement($form->get('hasChronicDisease')); ?>
+                        </div>
+                        <div class="col-sm-10 col-md-10 col-lg-10">
+                            <?= $this->formElement($form->get('chronicDisease')); ?>
+                            <?= $this->formElementErrors($form->get('chronicDisease'), ['class' => 'alert-danger']); ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-12 col-lg-12">
+                <br>
+                <div class="row">
+                    <div class="form-group">
+                        <div class="col-sm-12 col-md-12 col-lg-12">
+                            <?= $this->formLabel($form->get('hasLearningIllness')); ?>
+                        </div>
+                        <div class="col-sm-2 col-md-2 col-lg-2">
+                            <?= $this->formElement($form->get('hasLearningIllness')); ?>
+                        </div>
+                        <div class="col-sm-10 col-md-10 col-lg-10">
+                            <?= $this->formElement($form->get('learningIllness')); ?>
+                            <?= $this->formElementErrors($form->get('learningIllness'), ['class' => 'alert-danger']); ?>
+                        </div>
+                    </div>
+                </div>
+                <br>
+            </div>
+            <div class="col-sm-12 col-md-12 col-lg-12">
+                <div class="form-group">
+                    <?= $this->formLabel($form->get('studyTime')); ?>
+                    <?= $this->formElement($form->get('studyTime')); ?>
+                    <?= $this->formElementErrors($form->get('studyTime'), ['class' => 'alert-danger']); ?>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-12 col-lg-12">
+                <div class="form-group">
+                    <?= $this->formLabel($form->get('studyMethodology')); ?>
+                    <?= $this->formElement($form->get('studyMethodology')); ?>
+                    <?= $this->formElementErrors($form->get('studyMethodology'), ['class' => 'alert-danger']); ?>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-12 col-lg-12">
+                <div class="row">
+                    <div class="col-sm-6 col-md-6 col-lg-6">
+                        <div class="form-group">
+                            <?= $this->formLabel($form->get('sleepHours')); ?>
+                            <?= $this->formElement($form->get('sleepHours')); ?>
+                            <?= $this->formElementErrors($form->get('sleepHours'), ['class' => 'alert-danger']); ?>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-6 col-lg-6">
+                        <div class="form-group">
+                            <?= $this->formLabel($form->get('familyHours')); ?>
+                            <?= $this->formElement($form->get('familyHours')); ?>
+                            <?= $this->formElementErrors($form->get('familyHours'), ['class' => 'alert-danger']); ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-12 col-lg-12">
+                <div class="row">
+                    <div class="col-sm-6 col-md-6 col-lg-6">
+                        <div class="form-group">
+                            <?= $this->formLabel($form->get('friendsHours')); ?>
+                            <?= $this->formElement($form->get('friendsHours')); ?>
+                            <?= $this->formElementErrors($form->get('friendsHours'), ['class' => 'alert-danger']); ?>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-6 col-lg-6">
+                        <div class="form-group">
+                            <?= $this->formLabel($form->get('mateHours')); ?>
+                            <?= $this->formElement($form->get('mateHours')); ?>
+                            <?= $this->formElementErrors($form->get('mateHours'), ['class' => 'alert-danger']); ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-12 col-lg-12">
+                <div class="form-group">
+                    <?= $this->formLabel($form->get('anotherActivityTime')); ?>
+                    <?= $this->formElement($form->get('anotherActivityTime')); ?>
+                    <?= $this->formElementErrors($form->get('anotherActivityTime'), ['class' => 'alert-danger']); ?>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-12 col-lg-12">
+                <div class="form-group">
+                    <?= $this->formLabel($form->get('familyCommunication')); ?>
+                    <?= $this->formElement($form->get('familyCommunication')); ?>
+                    <?= $this->formElementErrors($form->get('familyCommunication'), ['class' => 'alert-danger']); ?>
+                </div>
+            </div>
+            <div class="pull-right">
+                <?= $this->formElement($form->get('submit')); ?>
+            </div>
+            <?= $this->form()->closeTag(); ?>
+        </div>
+    </div>
+</section>

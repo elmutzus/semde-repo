@@ -21,6 +21,7 @@ use Survey\Service\Helper\StudentProfessionalLifeManagerHelper;
 use Survey\Service\Helper\StudentParentManagerHelper;
 use Survey\Service\Helper\StudentBrotherManagerHelper;
 use Survey\Service\Helper\StudentMateManagerHelper;
+use Survey\Service\Helper\StudentSocialLifeManagerHelper;
 
 /**
  * Description of SurveyManager
@@ -85,6 +86,12 @@ class SurveyManager
     private $studentMateHelper;
 
     /**
+     *
+     * @var type 
+     */
+    private $studentSocialLifeHelper;
+
+    /**
      * 
      * @param type $entityManager
      */
@@ -99,6 +106,7 @@ class SurveyManager
         $this->studentParentHelper           = new StudentParentManagerHelper($entityManager);
         $this->studentBrotherHelper          = new StudentBrotherManagerHelper($entityManager);
         $this->studentMateHelper             = new StudentMateManagerHelper($entityManager);
+        $this->studentSocialLifeHelper       = new StudentSocialLifeManagerHelper($entityManager);
     }
 
     public function getEconomicHelpOptions()
@@ -179,7 +187,7 @@ class SurveyManager
     {
         return $this->auxiliaryEntityHelper->getCareerOptions();
     }
-    
+
     /**
      * 
      * @param type $id
@@ -189,7 +197,7 @@ class SurveyManager
     {
         return $this->auxiliaryEntityHelper->getRelationshipOptions();
     }
-    
+
     /**
      * 
      * @param type $id
@@ -324,5 +332,24 @@ class SurveyManager
     public function addOrUpdateStudentMate($newStudentMate)
     {
         $this->studentMateHelper->addOrUpdateStudentMate($newStudentMate);
+    }
+
+    /**
+     * 
+     * @param type $id
+     * @return type
+     */
+    public function getStudentSocialLifeById($id)
+    {
+        return $this->studentSocialLifeHelper->getStudentSocialLifeById($id);
+    }
+
+    /**
+     * 
+     * @param type $newStudentMate
+     */
+    public function addOrUpdateStudentSocialLife($newStudentSocialLife)
+    {
+        $this->studentSocialLifeHelper->addOrUpdateStudentSocialLife($newStudentSocialLife);
     }
 }
