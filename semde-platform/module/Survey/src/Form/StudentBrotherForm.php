@@ -18,17 +18,17 @@ use Zend\InputFilter\InputFilter;
 use Zend\Form\Element;
 
 /**
- * Description of StudentProfessionalLifeForm
+ * Description of StudentBrotherForm
  *
  * @author Elder Mutzus <elmutzus@gmail.com>
  */
-class StudentProfessionalLifeForm extends Form
+class StudentBrotherForm extends Form
 {
 
     public function __construct()
     {
         // Define form name
-        parent::__construct('student-professional-life-form');
+        parent::__construct('student-brother-form');
 
         // Add form elements
         $this->addElements();
@@ -39,6 +39,19 @@ class StudentProfessionalLifeForm extends Form
 
     private function addElements()
     {
+        $this->add([
+            'type'       => Element\Submit::class,
+            'name'       => 'submit',
+            'attributes' => [
+                'class' => 'btn btn-primary btn-block',
+                'value' => 'Continuar',
+            ],
+            'options'    => [
+                'label' => 'Continuar',
+                'id'    => 'submit',
+            ],
+        ]);
+
         $this->add([
             'type'       => Element\Hidden::class,
             'name'       => 'week',
@@ -64,13 +77,61 @@ class StudentProfessionalLifeForm extends Form
         ]);
 
         $this->add([
+            'type'       => Element\Text::class,
+            'name'       => 'quantity',
+            'attributes' => [
+                'class'       => 'form-control',
+                'placeholder' => 'Especifique',
+            ],
+            'options'    => [
+                'label' => 'Cuántos hermanos(as) tiene?',
+            ],
+        ]);
+
+        $this->add([
+            'type'       => Element\Text::class,
+            'name'       => 'place',
+            'attributes' => [
+                'class'       => 'form-control',
+                'placeholder' => 'Especifique',
+            ],
+            'options'    => [
+                'label' => 'Qué lugar ocupa usted entre sus hermanos(as)?',
+            ],
+        ]);
+
+        $this->add([
+            'type'       => Element\Text::class,
+            'name'       => 'academicTitle',
+            'attributes' => [
+                'class'       => 'form-control',
+                'placeholder' => 'Especifique',
+            ],
+            'options'    => [
+                'label' => 'Títulos académicos',
+            ],
+        ]);
+
+        $this->add([
+            'type'       => Element\Textarea::class,
+            'name'       => 'communication',
+            'attributes' => [
+                'class'       => 'form-control',
+                'placeholder' => 'Especifique',
+            ],
+            'options'    => [
+                'label' => 'Tipo de comunicación entre ellos y usted',
+            ],
+        ]);
+
+        $this->add([
             'type'       => Element\Select::class,
-            'name'       => 'hasScholarship',
+            'name'       => 'hasChronicDisease',
             'attributes' => [
                 'class' => 'form-control',
             ],
             'options'    => [
-                'label'         => 'Cuenta con algún tipo de beca en la USAC para mantener sus estudios?',
+                'label'         => 'Alguno de ellos(as) padece(n) de alguna enfermedad crónica?',
                 'value_options' => [
                     '1' => 'Sí',
                     '0' => 'No',
@@ -80,24 +141,24 @@ class StudentProfessionalLifeForm extends Form
 
         $this->add([
             'type'       => Element\Text::class,
-            'name'       => 'scholarship',
+            'name'       => 'chronicDisease',
             'attributes' => [
                 'class'       => 'form-control',
                 'placeholder' => 'Especifique',
             ],
             'options'    => [
-                'label' => 'Especifique',
+                'label' => 'Cuál?',
             ],
         ]);
 
         $this->add([
             'type'       => Element\Select::class,
-            'name'       => 'studiesLanguages',
+            'name'       => 'hasLearningIllness',
             'attributes' => [
                 'class' => 'form-control',
             ],
             'options'    => [
-                'label'         => 'Cursa algún otro idioma o lengua?',
+                'label'         => 'Alguno de ellos(as) padece(n) de algún problema de aprendizaje?',
                 'value_options' => [
                     '1' => 'Sí',
                     '0' => 'No',
@@ -107,157 +168,24 @@ class StudentProfessionalLifeForm extends Form
 
         $this->add([
             'type'       => Element\Text::class,
-            'name'       => 'studiesWhichLanguages',
+            'name'       => 'learningIllness',
             'attributes' => [
                 'class'       => 'form-control',
                 'placeholder' => 'Especifique',
             ],
             'options'    => [
-                'label' => 'Cuál(es)?',
-            ],
-        ]);
-
-        $this->add([
-            'type'       => Element\Text::class,
-            'name'       => 'studiesLanguagesPercentage',
-            'attributes' => [
-                'class'       => 'form-control',
-                'placeholder' => 'Especifique',
-            ],
-            'options'    => [
-                'label' => 'En qué porcentaje lo(s) domina?',
-            ],
-        ]);
-
-        $this->add([
-            'type'       => Element\Select::class,
-            'name'       => 'handlesLanguages',
-            'attributes' => [
-                'class' => 'form-control',
-            ],
-            'options'    => [
-                'label'         => 'Maneja algún otro idioma o lengua?',
-                'value_options' => [
-                    '1' => 'Sí',
-                    '0' => 'No',
-                ],
-            ],
-        ]);
-
-        $this->add([
-            'type'       => Element\Text::class,
-            'name'       => 'handlesWhichLanguages',
-            'attributes' => [
-                'class'       => 'form-control',
-                'placeholder' => 'Especifique',
-            ],
-            'options'    => [
-                'label' => 'Cuál(es)?',
-            ],
-        ]);
-
-        $this->add([
-            'type'       => Element\Text::class,
-            'name'       => 'handlesLanguagesPercentage',
-            'attributes' => [
-                'class'       => 'form-control',
-                'placeholder' => 'Especifique',
-            ],
-            'options'    => [
-                'label' => 'En qué porcentaje lo(s) domina?',
-            ],
-        ]);
-
-        $this->add([
-            'type'       => Element\Select::class,
-            'name'       => 'careerId',
-            'attributes' => [
-                'class' => 'form-control',
-            ],
-            'options'    => [
-                'label'                     => 'Carrera a seguir',
-                'disable_inarray_validator' => true,
-                'value_options'             => [
-                ],
-            ],
-        ]);
-
-        $this->add([
-            'type'       => Element\Textarea::class,
-            'name'       => 'careerMotivation',
-            'attributes' => [
-                'class'       => 'form-control',
-                'placeholder' => 'Especifique',
-            ],
-            'options'    => [
-                'label' => 'Qué le motivó a seguir esta carrera?',
-            ],
-        ]);
-
-        $this->add([
-            'type'       => Element\Textarea::class,
-            'name'       => 'hobbies',
-            'attributes' => [
-                'class'       => 'form-control',
-                'placeholder' => 'Especifique',
-            ],
-            'options'    => [
-                'label' => 'Qué pasatiempos o actividades lúdicas practica?',
-            ],
-        ]);
-
-        $this->add([
-            'type'       => Element\Textarea::class,
-            'name'       => 'selfDescription',
-            'attributes' => [
-                'class'       => 'form-control',
-                'placeholder' => 'Especifique',
-            ],
-            'options'    => [
-                'label' => 'Cómo se describe a usted mismo?',
-            ],
-        ]);
-
-        $this->add([
-            'type'       => Element\Submit::class,
-            'name'       => 'submit',
-            'attributes' => [
-                'class' => 'btn btn-primary btn-block',
-                'value' => 'Continuar',
-            ],
-            'options'    => [
-                'label' => 'Continuar',
-                'id'    => 'submit',
+                'label' => 'Cuál?',
             ],
         ]);
     }
 
     private function addInputFilter()
     {
-
         $inputFilter = new InputFilter();
         $this->setInputFilter($inputFilter);
 
         $inputFilter->add([
-            'name'       => 'scholarship',
-            'filters'    => [
-                ['name' => 'StringTrim'],
-                ['name' => 'StripTags'],
-                ['name' => 'StripNewlines'],
-            ],
-            'validators' => [
-                [
-                    'name'    => 'StringLength',
-                    'options' => [
-                        'min' => 1,
-                        'max' => 200,
-                    ],
-                ],
-            ],
-        ]);
-        
-        $inputFilter->add([
-            'name'       => 'studiesLanguagesPercentage',
+            'name'       => 'quantity',
             'filters'    => [
                 ['name' => 'StringTrim'],
                 ['name' => 'StripTags'],
@@ -267,26 +195,11 @@ class StudentProfessionalLifeForm extends Form
                 [
                     'name' => 'digits',
                 ],
-                [
-                    'name'    => 'between',
-                    'options' => [
-                        'min'       => 0,
-                        'max'       => 100,
-                        'inclusive' => true,
-                    ],
-                ],
-                [
-                    'name'    => 'StringLength',
-                    'options' => [
-                        'min' => 1,
-                        'max' => 3,
-                    ],
-                ],
             ],
         ]);
 
         $inputFilter->add([
-            'name'       => 'studiesWhichLanguages',
+            'name'       => 'place',
             'filters'    => [
                 ['name' => 'StringTrim'],
                 ['name' => 'StripTags'],
@@ -304,38 +217,7 @@ class StudentProfessionalLifeForm extends Form
         ]);
 
         $inputFilter->add([
-            'name'       => 'handlesLanguagesPercentage',
-            'filters'    => [
-                ['name' => 'StringTrim'],
-                ['name' => 'StripTags'],
-                ['name' => 'StripNewlines'],
-            ],
-            'validators' => [
-                [
-                    'name' => 'digits',
-                ],
-                [
-                    'name'    => 'between',
-                    'options' => [
-                        'min'       => 0,
-                        'max'       => 100,
-                        'inclusive' => true,
-                    ],
-                ],
-                [
-                    'name'    => 'StringLength',
-                    'options' => [
-                        'min' => 1,
-                        'max' => 3,
-                    ],
-                ],
-            ],
-        ]);
-
-        
-
-        $inputFilter->add([
-            'name'       => 'handlesWhichLanguages',
+            'name'       => 'academicTitle',
             'filters'    => [
                 ['name' => 'StringTrim'],
                 ['name' => 'StripTags'],
@@ -346,14 +228,14 @@ class StudentProfessionalLifeForm extends Form
                     'name'    => 'StringLength',
                     'options' => [
                         'min' => 1,
-                        'max' => 200,
+                        'max' => 500,
                     ],
                 ],
             ],
         ]);
 
         $inputFilter->add([
-            'name'       => 'careerMotivation',
+            'name'       => 'communication',
             'filters'    => [
                 ['name' => 'StringTrim'],
                 ['name' => 'StripTags'],
@@ -364,14 +246,14 @@ class StudentProfessionalLifeForm extends Form
                     'name'    => 'StringLength',
                     'options' => [
                         'min' => 1,
-                        'max' => 250,
+                        'max' => 500,
                     ],
                 ],
             ],
         ]);
 
         $inputFilter->add([
-            'name'       => 'hobbies',
+            'name'       => 'chronicDisease',
             'filters'    => [
                 ['name' => 'StringTrim'],
                 ['name' => 'StripTags'],
@@ -382,14 +264,14 @@ class StudentProfessionalLifeForm extends Form
                     'name'    => 'StringLength',
                     'options' => [
                         'min' => 1,
-                        'max' => 200,
+                        'max' => 500,
                     ],
                 ],
             ],
         ]);
 
         $inputFilter->add([
-            'name'       => 'selfDescription',
+            'name'       => 'learningIllness',
             'filters'    => [
                 ['name' => 'StringTrim'],
                 ['name' => 'StripTags'],

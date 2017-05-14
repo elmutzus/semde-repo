@@ -20,11 +20,13 @@ use Survey\Form\StudentStatusForm;
 use Survey\Form\StudentAddressForm;
 use Survey\Form\StudentProfessionalLifeForm;
 use Survey\Form\StudentParentForm;
+use Survey\Form\StudentBrotherForm;
 use Survey\Controller\Helper\StudentControllerHelper;
 use Survey\Controller\Helper\StudentStatusControllerHelper;
 use Survey\Controller\Helper\StudentAddressControllerHelper;
 use Survey\Controller\Helper\StudentProfessionalLifeControllerHelper;
 use Survey\Controller\Helper\StudentParentControllerHelper;
+use Survey\Controller\Helper\StudentBrotherControllerHelper;
 
 /**
  * Description of SurveyController
@@ -77,6 +79,12 @@ class SurveyController extends AbstractActionController
     private $studentParentInstance;
 
     /**
+     *
+     * @var type 
+     */
+    private $studentBrotherInstance;
+
+    /**
      * 
      * @param type $roleManager
      * @param type $sessionContainer
@@ -90,6 +98,7 @@ class SurveyController extends AbstractActionController
         $this->studentAddressInstance          = new StudentAddressControllerHelper($this->surveyManager);
         $this->studentProfessionalLifeInstance = new StudentProfessionalLifeControllerHelper($this->surveyManager);
         $this->studentParentInstance           = new StudentParentControllerHelper($this->surveyManager);
+        $this->studentBrotherInstance          = new StudentBrotherControllerHelper($this->surveyManager);
     }
 
     private function setLayoutVariables()
@@ -320,7 +329,7 @@ class SurveyController extends AbstractActionController
 
         if ($this->getRequest()->isPost())
         {
-            $data = $this->params()->fromPost();
+            $data               = $this->params()->fromPost();
             $data['parentType'] = $parentType;
 
             $form->setData($data);
@@ -369,7 +378,7 @@ class SurveyController extends AbstractActionController
 
         if ($this->getRequest()->isPost())
         {
-            $data = $this->params()->fromPost();
+            $data               = $this->params()->fromPost();
             $data['parentType'] = $parentType;
 
             $form->setData($data);
@@ -392,6 +401,53 @@ class SurveyController extends AbstractActionController
             $existingData = $this->surveyManager->getStudentParentById($idUser, $parentType);
 
             $form = $this->studentParentInstance->fillFormData($form, $existingData, $idUser);
+        }
+
+        return new ViewModel([
+            'form' => $form,
+            'id'   => $idUser,
+        ]);
+    }
+
+    public function addOrUpdateStudentBrotherAction()
+    {
+        $this->setLayoutVariables();
+
+        $id       = $this->params()->fromRoute('id', '-');
+        $idUser   = $id;
+        $idSecret = '';
+
+        if (!$this->validateAuthentication($idUser, $idSecret))
+        {
+            throw new \Exception('No puede modificar la información solicitada');
+        }
+
+        $form = new StudentBrotherForm();
+
+        if ($this->getRequest()->isPost())
+        {
+            $data = $this->params()->fromPost();
+
+            $form->setData($data);
+
+            $form = $this->studentBrotherInstance->getUpdatedControlsBasedOnValidation($form);
+
+            if ($form->isvalid())
+            {
+                $data = $form->getData();
+
+                $data = $this->studentBrotherInstance->getUpdatedFormData($data);
+
+                $this->surveyManager->addOrUpdateStudentBrother($data);
+
+                return $this->redirect()->toRoute('surveyManagementRoute', ['action' => 'addOrUpdateStudentMate', 'id' => $data['studentId']]);
+            }
+        }
+        else
+        {
+            $existingData = $this->surveyManager->getStudentBrotherById($idUser);
+
+            $form = $this->studentBrotherInstance->fillFormData($form, $existingData, $idUser);
         }
 
         return new ViewModel([
