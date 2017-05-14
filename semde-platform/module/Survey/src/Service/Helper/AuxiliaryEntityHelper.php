@@ -22,6 +22,7 @@ use Survey\Entity\TravelTimeEntity;
 use Survey\Entity\DepartmentEntity;
 use Survey\Entity\TownEntity;
 use Survey\Entity\CareerEntity;
+use Survey\Entity\RelationshipEntity;
 
 /**
  * Description of AuxiliarEntityHelper
@@ -221,7 +222,7 @@ class AuxiliaryEntityHelper
 
         return $options;
     }
-    
+
     /**
      * 
      * @return type
@@ -229,6 +230,27 @@ class AuxiliaryEntityHelper
     public function getCareerOptions()
     {
         $allItems = $this->entityManager->getRepository(CareerEntity::class)->findAll();
+
+        $options = array();
+
+        if ($allItems != null)
+        {
+            foreach ($allItems as $item)
+            {
+                $options[$item->getId()] = $item->getDescription();
+            }
+        }
+
+        return $options;
+    }
+
+    /**
+     * 
+     * @return type
+     */
+    public function getRelationshipOptions()
+    {
+        $allItems = $this->entityManager->getRepository(RelationshipEntity::class)->findAll();
 
         $options = array();
 

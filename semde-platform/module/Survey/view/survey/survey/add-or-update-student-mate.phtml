@@ -1,0 +1,111 @@
+<?php
+/*
+ * Copyright (c) 2017 Elder Mutzus <elmutzus@gmail.com>.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *    Elder Mutzus <elmutzus@gmail.com> - initial API and implementation and/or initial documentation
+ */
+
+$form->setAttribute('action', $this->url('surveyManagementRoute', ['action' => 'addOrUpdateStudentMate', 'id' => $this->id]));
+$form->prepare();
+?>
+
+<section id="body">
+    <div class="text-center"><h3>Evaluaci&oacute;n Demogr&aacute;fica</h3></div>
+    <div class="panel panel-md panel-primary">
+        <div class="panel-heading">
+            <div class="text-center">
+                Informaci&oacute;n del estudiante - Datos del padre
+            </div>                
+        </div>
+        <div class="panel-body">
+            <?= $this->form()->openTag($form); ?>
+            <div class="form-group">
+                <?= $this->formElement($form->get('studentId')); ?>
+            </div>
+            <div class="col-sm-12 col-md-12 col-lg-12">
+                <div class="row">
+                    <div class="col-sm-2 col-md-2 col-lg-2">
+                        <div class="form-group">
+                            <?= $this->formLabel($form->get('relationshipId')); ?>
+                            <?= $this->formElement($form->get('relationshipId')); ?>
+                            <?= $this->formElementErrors($form->get('relationshipId'), ['class' => 'alert-danger']); ?>
+                        </div>
+                    </div>            
+                    <div class="col-sm-3 col-md-3 col-lg-3">
+                        <div class="form-group">
+                            <?= $this->formLabel($form->get('birthdate')); ?>
+                            <?= $this->formElement($form->get('birthdate')); ?>
+                            <?= $this->formElementErrors($form->get('birthdate'), ['class' => 'alert-danger']); ?>
+                        </div>
+                    </div>
+                    <div class="col-sm-7 col-md-7 col-lg-7">
+                        <div class="form-group">
+                            <?= $this->formLabel($form->get('occupation')); ?>
+                            <?= $this->formElement($form->get('occupation')); ?>
+                            <?= $this->formElementErrors($form->get('occupation'), ['class' => 'alert-danger']); ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-12 col-lg-12">
+                <div class="row">
+                    <div class="col-sm-2 col-md-2 col-lg-2">
+                        <div class="form-group">
+                            <?= $this->formLabel($form->get('works')); ?>
+                            <?= $this->formElement($form->get('works')); ?>
+                            <?= $this->formElementErrors($form->get('works'), ['class' => 'alert-danger']); ?>
+                        </div>
+                    </div>
+                    <div class="col-sm-10 col-md-10 col-lg-10">
+                        <div class="form-group">
+                            <?= $this->formLabel($form->get('academicTitle')); ?>
+                            <?= $this->formElement($form->get('academicTitle')); ?>
+                            <?= $this->formElementErrors($form->get('academicTitle'), ['class' => 'alert-danger']); ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-12 col-lg-12">
+                <div class="form-group">
+                    <?= $this->formLabel($form->get('timeTogether')); ?>
+                    <?= $this->formElement($form->get('timeTogether')); ?>
+                    <?= $this->formElementErrors($form->get('timeTogether'), ['class' => 'alert-danger']); ?>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-12 col-lg-12">
+                <div class="form-group">
+                    <?= $this->formLabel($form->get('communication')); ?>
+                    <?= $this->formElement($form->get('communication')); ?>
+                    <?= $this->formElementErrors($form->get('communication'), ['class' => 'alert-danger']); ?>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-12 col-lg-12">
+                <div class="row">
+                    <div class="col-sm-6 col-md-6 col-lg-6">
+                        <div class="form-group">
+                            <?= $this->formLabel($form->get('gender')); ?>
+                            <?= $this->formElement($form->get('gender')); ?>
+                            <?= $this->formElementErrors($form->get('gender'), ['class' => 'alert-danger']); ?>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-6 col-lg-6">
+                        <div class="form-group">
+                            <?= $this->formLabel($form->get('activeSexLife')); ?>
+                            <?= $this->formElement($form->get('activeSexLife')); ?>
+                            <?= $this->formElementErrors($form->get('activeSexLife'), ['class' => 'alert-danger']); ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pull-right">
+                <?= $this->formElement($form->get('submit')); ?>
+            </div>
+            <?= $this->form()->closeTag(); ?>
+        </div>
+    </div>
+</section>

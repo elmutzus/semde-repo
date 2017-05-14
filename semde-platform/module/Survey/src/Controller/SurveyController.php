@@ -21,12 +21,14 @@ use Survey\Form\StudentAddressForm;
 use Survey\Form\StudentProfessionalLifeForm;
 use Survey\Form\StudentParentForm;
 use Survey\Form\StudentBrotherForm;
+use Survey\Form\StudentMateForm;
 use Survey\Controller\Helper\StudentControllerHelper;
 use Survey\Controller\Helper\StudentStatusControllerHelper;
 use Survey\Controller\Helper\StudentAddressControllerHelper;
 use Survey\Controller\Helper\StudentProfessionalLifeControllerHelper;
 use Survey\Controller\Helper\StudentParentControllerHelper;
 use Survey\Controller\Helper\StudentBrotherControllerHelper;
+use Survey\Controller\Helper\StudentMateControllerHelper;
 
 /**
  * Description of SurveyController
@@ -83,6 +85,12 @@ class SurveyController extends AbstractActionController
      * @var type 
      */
     private $studentBrotherInstance;
+    
+    /**
+     *
+     * @var type 
+     */
+    private $studentMateInstance;
 
     /**
      * 
@@ -99,6 +107,7 @@ class SurveyController extends AbstractActionController
         $this->studentProfessionalLifeInstance = new StudentProfessionalLifeControllerHelper($this->surveyManager);
         $this->studentParentInstance           = new StudentParentControllerHelper($this->surveyManager);
         $this->studentBrotherInstance          = new StudentBrotherControllerHelper($this->surveyManager);
+        $this->studentMateInstance = new StudentMateControllerHelper($this->surveyManager);
     }
 
     private function setLayoutVariables()
@@ -455,5 +464,55 @@ class SurveyController extends AbstractActionController
             'id'   => $idUser,
         ]);
     }
+    
+    public function addOrUpdateStudentMateAction()
+    {
+        $this->setLayoutVariables();
 
+        $id       = $this->params()->fromRoute('id', '-');
+        $idUser   = $id;
+        $idSecret = '';
+
+        if (!$this->validateAuthentication($idUser, $idSecret))
+        {
+            throw new \Exception('No puede modificar la información solicitada');
+        }
+
+        $form = new StudentMateForm();
+
+        if ($this->getRequest()->isPost())
+        {
+            $data = $this->params()->fromPost();
+
+            $form->setData($data);
+
+            $form = $this->studentMateInstance->getUpdatedControlsBasedOnValidation($form);
+
+            if ($form->isvalid())
+            {
+                $data = $form->getData();
+
+                $data = $this->studentMateInstance->getUpdatedFormData($data);
+
+                $this->surveyManager->addOrUpdateStudentMate($data);
+
+                return $this->redirect()->toRoute('surveyManagementRoute', ['action' => 'addOrUpdateStudentSocialLife', 'id' => $data['studentId']]);
+            }
+            else
+            {
+                $this->studentMateInstance->fillOptionsData($form);
+            }
+        }
+        else
+        {
+            $existingData = $this->surveyManager->getStudentMateById($idUser);
+
+            $form = $this->studentMateInstance->fillFormData($form, $existingData, $idUser);
+        }
+
+        return new ViewModel([
+            'form' => $form,
+            'id'   => $idUser,
+        ]);
+    }
 }

@@ -20,6 +20,7 @@ use Survey\Service\Helper\AuxiliaryEntityHelper;
 use Survey\Service\Helper\StudentProfessionalLifeManagerHelper;
 use Survey\Service\Helper\StudentParentManagerHelper;
 use Survey\Service\Helper\StudentBrotherManagerHelper;
+use Survey\Service\Helper\StudentMateManagerHelper;
 
 /**
  * Description of SurveyManager
@@ -78,6 +79,12 @@ class SurveyManager
     private $studentBrotherHelper;
 
     /**
+     *
+     * @var type 
+     */
+    private $studentMateHelper;
+
+    /**
      * 
      * @param type $entityManager
      */
@@ -91,6 +98,7 @@ class SurveyManager
         $this->studentProfessionalLifeHelper = new StudentProfessionalLifeManagerHelper($entityManager);
         $this->studentParentHelper           = new StudentParentManagerHelper($entityManager);
         $this->studentBrotherHelper          = new StudentBrotherManagerHelper($entityManager);
+        $this->studentMateHelper             = new StudentMateManagerHelper($entityManager);
     }
 
     public function getEconomicHelpOptions()
@@ -170,6 +178,26 @@ class SurveyManager
     public function getCareerOptions()
     {
         return $this->auxiliaryEntityHelper->getCareerOptions();
+    }
+    
+    /**
+     * 
+     * @param type $id
+     * @return type
+     */
+    public function getRelationshipOptions()
+    {
+        return $this->auxiliaryEntityHelper->getRelationshipOptions();
+    }
+    
+    /**
+     * 
+     * @param type $id
+     * @return type
+     */
+    public function getSocialLifeTypeOptions()
+    {
+        return $this->auxiliaryEntityHelper->getSocialLifeTypeOptions();
     }
 
     /**
@@ -253,7 +281,7 @@ class SurveyManager
 
     /**
      * 
-     * @param type $newStudentProfessionalLife
+     * @param type $newStudentParent
      */
     public function addOrUpdateStudentParent($newStudentParent)
     {
@@ -272,11 +300,29 @@ class SurveyManager
 
     /**
      * 
-     * @param type $newStudentProfessionalLife
+     * @param type $newStudentBrother
      */
     public function addOrUpdateStudentBrother($newStudentBrother)
     {
         $this->studentBrotherHelper->addOrUpdateStudentBrother($newStudentBrother);
     }
 
+    /**
+     * 
+     * @param type $id
+     * @return type
+     */
+    public function getStudentMateById($id)
+    {
+        return $this->studentMateHelper->getStudentMateById($id);
+    }
+
+    /**
+     * 
+     * @param type $newStudentMate
+     */
+    public function addOrUpdateStudentMate($newStudentMate)
+    {
+        $this->studentMateHelper->addOrUpdateStudentMate($newStudentMate);
+    }
 }
