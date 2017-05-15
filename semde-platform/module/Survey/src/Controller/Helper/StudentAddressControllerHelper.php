@@ -18,8 +18,9 @@ namespace Survey\Controller\Helper;
  *
  * @author Elder Mutzus <elmutzus@gmail.com>
  */
-class StudentAddressControllerHelper 
+class StudentAddressControllerHelper
 {
+
     /**
      *
      * @var type 
@@ -34,7 +35,7 @@ class StudentAddressControllerHelper
     {
         $this->surveyManager = $entityManager;
     }
-    
+
     /**
      * 
      * @param type $form
@@ -47,7 +48,7 @@ class StudentAddressControllerHelper
 
         $selectElement->setValueOptions($options);
     }
-    
+
     /**
      * 
      * @param type $form
@@ -60,7 +61,7 @@ class StudentAddressControllerHelper
 
         $selectElement->setValueOptions($options);
     }
-    
+
     /**
      * 
      * @param type $form
@@ -80,12 +81,16 @@ class StudentAddressControllerHelper
      */
     public function fillFormData($form, $existingData, $studentId)
     {
-        $this->fillOptionsData($form);
-        
         $form->get('studentId')->setValue($studentId);
 
         if ($existingData == null)
         {
+            $this->fillDepartmentData($form);
+
+            $form->get('departmentId')->setValue('6');
+
+            $this->fillTownData($form);
+            
             return $form;
         }
 
@@ -94,9 +99,16 @@ class StudentAddressControllerHelper
 
         $form->get('zone')->setValue($existingData->getZone());
         $form->get('anotherSector')->setValue($existingData->getAnotherSector());
-        $form->get('townId')->setValue($existingData->getTownId());
+
+        $this->fillDepartmentData($form);
+
         $form->get('departmentId')->setValue($existingData->getDepartmentId());
+
+        $this->fillTownData($form);
+
+        $form->get('townId')->setValue($existingData->getTownId());
 
         return $form;
     }
+
 }
