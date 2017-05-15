@@ -28,7 +28,7 @@ class StudentSocialLifeForm extends Form
     public function __construct()
     {
         // Define form name
-        parent::__construct('student-social-life-form');
+        parent::__construct('student_social_life_form');
 
         // Add form elements
         $this->addElements();

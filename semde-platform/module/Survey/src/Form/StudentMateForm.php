@@ -27,7 +27,7 @@ class StudentMateForm extends Form
     public function __construct()
     {
         // Define form name
-        parent::__construct('student-mate-form');
+        parent::__construct('student_mate_form');
 
         // Add form elements
         $this->addElements();

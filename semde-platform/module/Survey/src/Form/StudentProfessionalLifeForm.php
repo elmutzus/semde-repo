@@ -28,7 +28,7 @@ class StudentProfessionalLifeForm extends Form
     public function __construct()
     {
         // Define form name
-        parent::__construct('student-professional-life-form');
+        parent::__construct('student_professional_life_form');
 
         // Add form elements
         $this->addElements();

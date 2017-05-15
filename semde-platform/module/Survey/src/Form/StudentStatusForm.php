@@ -28,7 +28,7 @@ class StudentStatusForm extends Form
     public function __construct()
     {
         // Define form name
-        parent::__construct('student-status-form');
+        parent::__construct('student_status_form');
 
         // Add form elements
         $this->addElements();

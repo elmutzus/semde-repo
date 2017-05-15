@@ -28,7 +28,7 @@ class StudentAddressForm extends Form
     public function __construct()
     {
         // Define form name
-        parent::__construct('student-form');
+        parent::__construct('student_address_form');
 
         // Add form elements
         $this->addElements();
