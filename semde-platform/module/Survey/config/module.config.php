@@ -19,7 +19,7 @@ use Doctrine\ORM\Mapping\Driver\AnnotationDriver;
 return [
     'router'             => [
         'routes' => [
-            'surveyManagementRoute'        => [
+            'surveyManagementRoute' => [
                 'type'    => Segment::class,
                 'options' => [
                     'route'       => '/surveyManagement[/:action[/:id]]',
@@ -42,7 +42,10 @@ return [
     ],
     'view_manager'       => [
         'template_path_stack' => [
-            'Authentication' => __DIR__ . '/../view',
+            'Survey' => __DIR__ . '/../view',
+        ],
+        'strategies'          => [
+            'ViewJsonStrategy',
         ],
     ],
     'doctrine'           => [
@@ -61,7 +64,7 @@ return [
     ],
     'service_manager'    => [
         'factories' => [
-            Service\SurveyManager::class                 => Service\Factory\SurveyManagerFactory::class,
+            Service\SurveyManager::class => Service\Factory\SurveyManagerFactory::class,
         ],
     ],
     'view_manager'       => [

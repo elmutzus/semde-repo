@@ -62,3 +62,22 @@ $form->prepare();
         </div>
     </div>
 </section>
+
+<script type="text/javascript">
+    $(function () {
+        $("[name='departmentId']").change(function () {
+            $.ajax({
+                url: '/surveyManagement/addOrUpdateStudentDepartments/' + $("[name='departmentId']").val(),
+                success: function (response) {
+
+                    $("[name='townId']")
+                            .find('option')
+                            .remove()
+                            .end()
+                            .append(response)
+                            .val('0');
+                }
+            });
+        });
+    });
+</script>

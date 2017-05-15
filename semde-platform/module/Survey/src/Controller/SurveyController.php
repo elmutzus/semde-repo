@@ -31,6 +31,7 @@ use Survey\Controller\Helper\StudentParentControllerHelper;
 use Survey\Controller\Helper\StudentBrotherControllerHelper;
 use Survey\Controller\Helper\StudentMateControllerHelper;
 use Survey\Controller\Helper\StudentSocialLifeControllerHelper;
+use Zend\View\Model\JsonModel;
 
 /**
  * Description of SurveyController
@@ -595,6 +596,24 @@ class SurveyController extends AbstractActionController
             'id'       => $student->getId(),
             'fullname' => $student->getLastname() . ', ' . $student->getName(),
         ]);
+    }
+
+    public function addOrUpdateStudentDepartmentsAction()
+    {
+        $id = $this->params()->fromRoute('id', '-');
+
+        if ($id == '-')
+        {
+            throw new \Exception('No se recibió el departamento correcto');
+        }
+
+        $towns = $this->surveyManager->getTownOptions($id);
+
+        $view = new ViewModel();
+        $view->setTerminal(true);
+        $view->setVariable('towns', $towns);
+
+        return $view;
     }
 
 }
