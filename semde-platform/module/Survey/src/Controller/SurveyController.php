@@ -576,4 +576,25 @@ class SurveyController extends AbstractActionController
         ]);
     }
 
+    public function addOrUpdateStudentFinishAction()
+    {
+        $this->setLayoutVariables();
+
+        $id       = $this->params()->fromRoute('id', '-');
+        $idUser   = $id;
+        $idSecret = '';
+
+        if (!$this->validateAuthentication($idUser, $idSecret))
+        {
+            throw new \Exception('No puede modificar la información solicitada');
+        }
+
+        $student = $this->surveyManager->getStudentById($idUser);
+
+        return new ViewModel([
+            'id'       => $student->getId(),
+            'fullname' => $student->getLastname() . ', ' . $student->getName(),
+        ]);
+    }
+
 }
