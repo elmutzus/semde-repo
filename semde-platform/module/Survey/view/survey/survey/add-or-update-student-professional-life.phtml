@@ -118,3 +118,52 @@ $form->prepare();
         </div>
     </div>
 </section>
+
+<script type="text/javascript">
+
+    function validateHasSholarship() {
+        if ($("[name='hasScholarship']").val() == '0') {
+            $("[name='scholarship']").attr("readonly", "true");
+        } else {
+            $("[name='scholarship']").removeAttr("readonly");
+        }
+    }
+    
+    function validateStudiesLanguages() {
+        if ($("[name='studiesLanguages']").val() == '0') {
+            $("[name='studiesLanguagesPercentage']").attr("readonly", "true");
+            $("[name='studiesWhichLanguages']").attr("readonly", "true");
+        } else {
+            $("[name='studiesLanguagesPercentage']").removeAttr("readonly");
+            $("[name='studiesWhichLanguages']").removeAttr("readonly");
+        }
+    }
+    
+    function validateHandlesLanguages() {
+        if ($("[name='handlesLanguages']").val() == '0') {
+            $("[name='handlesLanguagesPercentage']").attr("readonly", "true");
+            $("[name='handlesWhichLanguages']").attr("readonly", "true");
+        } else {
+            $("[name='handlesLanguagesPercentage']").removeAttr("readonly");
+            $("[name='handlesWhichLanguages']").removeAttr("readonly");
+        }
+    }
+
+    $(document).ready(function () {
+        validateHasSholarship();
+        validateStudiesLanguages();
+        validateHandlesLanguages();
+    });
+
+    $(function () {
+        $("[name='hasScholarship']").change(function () {
+            validateHasSholarship();
+        });
+        $("[name='studiesLanguages']").change(function () {
+            validateStudiesLanguages();
+        });
+        $("[name='handlesLanguages']").change(function () {
+            validateHandlesLanguages();
+        });
+    });
+</script>

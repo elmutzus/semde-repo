@@ -181,14 +181,12 @@ $form->prepare();
         }
     }
 
-// A $( document ).ready() block.
     $(document).ready(function () {
         validateWorks();
         validateLiving();
         validateEconomicHelp();
         validateMovedOn();
     });
-
 
     $(function () {
         $("[name='works']").change(function () {
@@ -204,5 +202,4 @@ $form->prepare();
             validateMovedOn();
         });
     });
-
 </script>
