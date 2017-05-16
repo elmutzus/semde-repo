@@ -355,8 +355,6 @@ class SurveyController extends AbstractActionController
             {
                 $data = $form->getData();
 
-                $data = $this->studentParentInstance->getUpdatedFormData($data);
-
                 $this->surveyManager->addOrUpdateStudentParent($data);
 
                 return $this->redirect()->toRoute('surveyManagementRoute', ['action' => 'addOrUpdateStudentMother', 'id' => $data['studentId']]);
@@ -404,8 +402,6 @@ class SurveyController extends AbstractActionController
             {
                 $data = $form->getData();
 
-                $data = $this->studentParentInstance->getUpdatedFormData($data);
-
                 $this->surveyManager->addOrUpdateStudentParent($data);
 
                 return $this->redirect()->toRoute('surveyManagementRoute', ['action' => 'addOrUpdateStudentBrother', 'id' => $data['studentId']]);
@@ -450,8 +446,6 @@ class SurveyController extends AbstractActionController
             if ($form->isvalid())
             {
                 $data = $form->getData();
-
-                $data = $this->studentBrotherInstance->getUpdatedFormData($data);
 
                 $this->surveyManager->addOrUpdateStudentBrother($data);
 

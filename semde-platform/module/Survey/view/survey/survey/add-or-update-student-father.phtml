@@ -121,3 +121,36 @@ $form->prepare();
         </div>
     </div>
 </section>
+
+<script type="text/javascript">
+
+    function validateHasChronicDisease() {
+        if ($("[name='hasChronicDisease']").val() == '0') {
+            $("[name='chronicDisease']").attr("readonly", "true");
+        } else {
+            $("[name='chronicDisease']").removeAttr("readonly");
+        }
+    }
+    
+    function validateHasLearningIllness() {
+        if ($("[name='hasLearningIllness']").val() == '0') {
+            $("[name='learningIllness']").attr("readonly", "true");
+        } else {
+            $("[name='learningIllness']").removeAttr("readonly");
+        }
+    }
+    
+    $(document).ready(function () {
+        validateHasChronicDisease();
+        validateHasLearningIllness();
+    });
+
+    $(function () {
+        $("[name='hasChronicDisease']").change(function () {
+            validateHasChronicDisease();
+        });
+        $("[name='hasLearningIllness']").change(function () {
+            validateHasLearningIllness();
+        });
+    });
+</script>

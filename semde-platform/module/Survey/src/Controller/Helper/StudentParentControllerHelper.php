@@ -55,30 +55,6 @@ class StudentParentControllerHelper
     }
     
     /**
-     * Updates the fields based on its requirements if selected options
-     * @param type $data
-     * @return type
-     */
-    public function getUpdatedFormData($data)
-    {
-        $chronicDisease = $data['hasChronicDisease'];
-
-        if ($chronicDisease != '1')
-        {
-            $data['chronicDisease'] = '';
-        }
-
-        $learningDisease = $data['hasLearningIllness'];
-
-        if ($learningDisease != '1')
-        {
-            $data['learningIllness'] = '';
-        }
-
-        return $data;
-    }
-    
-    /**
      * 
      * @param type $form
      * @param type $existingData
