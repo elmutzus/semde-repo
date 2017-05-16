@@ -99,7 +99,7 @@ class StudentMateManagerHelper
         $model->setYear($now->format('Y'));
         $model->setStudentId($entity['studentId']);
 
-        $model->setBirthdate($entity['birthdate']);
+        $model->setBirthdate(($entity['birthdate'] == '') ? null : $entity['birthdate']);
         $model->setOccupation($entity['occupation']);
         $model->setWorks($entity['works']);
         $model->setAcademicTitle($entity['academicTitle']);

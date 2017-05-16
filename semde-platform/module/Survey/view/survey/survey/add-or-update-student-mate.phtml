@@ -109,3 +109,31 @@ $form->prepare();
         </div>
     </div>
 </section>
+
+<script type="text/javascript">
+    function validateRelationship() {
+        if ($("[name='relationshipId']").val() == '0') {
+            $("[name='birthdate']").attr("readonly", "true");
+            $("[name='occupation']").attr("readonly", "true");
+            $("[name='academicTitle']").attr("readonly", "true");
+            $("[name='timeTogether']").attr("readonly", "true");
+            $("[name='communication']").attr("readonly", "true");
+        } else {
+            $("[name='birthdate']").removeAttr("readonly");
+            $("[name='occupation']").removeAttr("readonly");
+            $("[name='academicTitle']").removeAttr("readonly");
+            $("[name='timeTogether']").removeAttr("readonly");
+            $("[name='communication']").removeAttr("readonly");
+        }
+    }
+    
+    $(document).ready(function () {
+        validateRelationship();
+    });
+
+    $(function () {
+        $("[name='relationshipId']").change(function () {
+            validateRelationship();
+        });
+    });
+</script>
