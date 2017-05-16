@@ -94,59 +94,6 @@ class StudentSocialLifeControllerHelper
     }
 
     /**
-     * Updates the fields based on its requirements if selected options
-     * @param type $data
-     * @return type
-     */
-    public function getUpdatedFormData($data)
-    {
-        $socialLifeTypeId = $data['socialLifeTypeId'];
-
-        if ($socialLifeTypeId != '1')
-        {
-            $data['socialLifeOther'] = '';
-        }
-
-        $exercises = $data['exercises'];
-
-        if ($exercises != '1')
-        {
-            $data['exercisesWhich']     = '';
-            $data['exercisesFrequency'] = '';
-        }
-
-        $drinksAlcohol = $data['drinksAlcohol'];
-
-        if ($drinksAlcohol != '1')
-        {
-            $data['drinksAlcoholFrequency'] = '';
-        }
-
-        $smokes = $data['smokes'];
-
-        if ($smokes != '1')
-        {
-            $data['smokesFrequency'] = '';
-        }
-
-        $hasChronicDisease = $data['hasChronicDisease'];
-
-        if ($hasChronicDisease != '1')
-        {
-            $data['chronicDisease'] = '';
-        }
-
-        $hasLearningIllness = $data['hasLearningIllness'];
-
-        if ($hasLearningIllness != '1')
-        {
-            $data['learningIllness'] = '';
-        }
-
-        return $data;
-    }
-
-    /**
      * 
      * @param type $form
      * @param type $existingData

@@ -541,8 +541,6 @@ class SurveyController extends AbstractActionController
             {
                 $data = $form->getData();
 
-                $data = $this->studentSocialLifeInstance->getUpdatedFormData($data);
-
                 $this->surveyManager->addOrUpdateStudentSocialLife($data);
 
                 return $this->redirect()->toRoute('surveyManagementRoute', ['action' => 'addOrUpdateStudentFinish', 'id' => $data['studentId']]);

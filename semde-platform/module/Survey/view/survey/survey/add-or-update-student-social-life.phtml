@@ -219,3 +219,85 @@ $form->prepare();
         </div>
     </div>
 </section>
+
+<script type="text/javascript">
+    function validateSocialLifeType() {
+        if ($("[name='socialLifeTypeId']").val() != '6') {
+            $("[name='socialLifeOther']").attr("readonly", "true");
+        } else {
+            $("[name='socialLifeOther']").removeAttr("readonly");
+        }
+    }
+    
+    function validateExercises() {
+        if ($("[name='exercises']").val() == '0') {
+            $("[name='exercisesWhich']").attr("readonly", "true");
+            $("[name='exercisesFrequency']").attr("readonly", "true");
+        } else {
+            $("[name='exercisesWhich']").removeAttr("readonly");
+            $("[name='exercisesFrequency']").removeAttr("readonly");
+        }
+    }
+    
+    function validateDrinksAlcohol() {
+        if ($("[name='drinksAlcohol']").val() == '0') {
+            $("[name='drinksAlcoholFrequency']").attr("readonly", "true");
+        } else {
+            $("[name='drinksAlcoholFrequency']").removeAttr("readonly");
+        }
+    }
+    
+    function validateSmokes() {
+        if ($("[name='smokes']").val() == '0') {
+            $("[name='smokesFrequency']").attr("readonly", "true");
+        } else {
+            $("[name='smokesFrequency']").removeAttr("readonly");
+        }
+    }
+    
+    function validateHasChronicDisease() {
+        if ($("[name='hasChronicDisease']").val() == '0') {
+            $("[name='chronicDisease']").attr("readonly", "true");
+        } else {
+            $("[name='chronicDisease']").removeAttr("readonly");
+        }
+    }
+    
+    function validateHasLearningIllness() {
+        if ($("[name='hasLearningIllness']").val() == '0') {
+            $("[name='learningIllness']").attr("readonly", "true");
+        } else {
+            $("[name='learningIllness']").removeAttr("readonly");
+        }
+    }
+
+    $(document).ready(function () {
+        validateSocialLifeType();
+        validateExercises();
+        validateDrinksAlcohol();
+        validateSmokes();
+        validateHasChronicDisease();
+        validateHasLearningIllness();
+    });
+
+    $(function () {
+        $("[name='socialLifeTypeId']").change(function () {
+            validateSocialLifeType();
+        });
+        $("[name='exercises']").change(function () {
+            validateExercises();
+        });
+        $("[name='drinksAlcohol']").change(function () {
+            validateDrinksAlcohol();
+        });
+        $("[name='validateSmokes']").change(function () {
+            validateSmokes();
+        });
+        $("[name='hasChronicDisease']").change(function () {
+            validateHasChronicDisease();
+        });
+        $("[name='hasLearningIllness']").change(function () {
+            validateHasLearningIllness();
+        });
+    });
+</script>
