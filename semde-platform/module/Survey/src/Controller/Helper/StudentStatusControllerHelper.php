@@ -181,44 +181,5 @@ class StudentStatusControllerHelper
         $form->getInputFilter()->get('movedOnSolution')->setAllowEmpty(($movedOn == '1' ? false : true));
 
         return $form;
-    }
-
-    /**
-     * Updates the fields based on its requirements if selected options
-     * @param type $data
-     * @return type
-     */
-    public function getUpdatedFormData($data)
-    {
-        $works = $data['works'];
-
-        if ($works != '1')
-        {
-            $data['jobDescription'] = '';
-        }
-
-        $livingId = $data['livingId'];
-
-        if ($livingId != '12')
-        {
-            $data['livesWithOther'] = '';
-        }
-
-        $economicHelpId = $data['economicHelpId'];
-
-        if ($economicHelpId != '8')
-        {
-            $data['otherEconomicHelp'] = '';
-        }
-        
-        $movedOn = $data['movedOn'];
-
-        if ($movedOn != '1')
-        {
-            $data['movedOnSolution'] = '';
-        }
-
-        return $data;
-    }
-
+    }    
 }

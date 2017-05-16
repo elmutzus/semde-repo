@@ -132,7 +132,7 @@ $form->prepare();
                     <?= $this->formElementErrors($form->get('movedOn'), ['class' => 'alert-danger']); ?>
                 </div>
             </div>
-             <div class="col-sm-12 col-md-12 col-lg-12">
+            <div class="col-sm-12 col-md-12 col-lg-12">
                 <div class="form-group">
                     <?= $this->formLabel($form->get('movedOnSolution')); ?>
                     <?= $this->formElement($form->get('movedOnSolution')); ?>
@@ -146,3 +146,63 @@ $form->prepare();
         </div>
     </div>
 </section>
+
+<script type="text/javascript">
+
+    function validateWorks() {
+        if ($("[name='works']").val() == '0') {
+            $("[name='jobDescription']").attr("readonly", "true");
+        } else {
+            $("[name='jobDescription']").removeAttr("readonly");
+        }
+    }
+
+    function validateLiving() {
+        if ($("[name='livingId']").val() != '12') {
+            $("[name='livesWithOther']").attr("readonly", "true");
+        } else {
+            $("[name='livesWithOther']").removeAttr("readonly");
+        }
+    }
+
+    function validateEconomicHelp() {
+        if ($("[name='economicHelpId']").val() != '8') {
+            $("[name='otherEconomicHelp']").attr("readonly", "true");
+        } else {
+            $("[name='otherEconomicHelp']").removeAttr("readonly");
+        }
+    }
+
+    function validateMovedOn() {
+        if ($("[name='movedOn']").val() == '0') {
+            $("[name='movedOnSolution']").attr("readonly", "true");
+        } else {
+            $("[name='movedOnSolution']").removeAttr("readonly");
+        }
+    }
+
+// A $( document ).ready() block.
+    $(document).ready(function () {
+        validateWorks();
+        validateLiving();
+        validateEconomicHelp();
+        validateMovedOn();
+    });
+
+
+    $(function () {
+        $("[name='works']").change(function () {
+            validateWorks();
+        });
+        $("[name='livingId']").change(function () {
+            validateLiving();
+        });
+        $("[name='economicHelpId']").change(function () {
+            validateEconomicHelp();
+        });
+        $("[name='movedOn']").change(function () {
+            validateMovedOn();
+        });
+    });
+
+</script>
