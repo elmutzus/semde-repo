@@ -60,39 +60,6 @@ class StudentProfessionalLifeControllerHelper
     }
     
     /**
-     * Updates the fields based on its requirements if selected options
-     * @param type $data
-     * @return type
-     */
-    public function getUpdatedFormData($data)
-    {
-        $works = $data['hasScholarship'];
-
-        if ($works != '1')
-        {
-            $data['scholarship'] = '';
-        }
-
-        $studiesLanguages = $data['studiesLanguages'];
-
-        if ($studiesLanguages != '1')
-        {
-            $data['studiesLanguagesPercentage'] = null;
-            $data['studiesWhichLanguages'] = '';
-        }
-
-        $handlesLanguages = $data['handlesLanguages'];
-
-        if ($handlesLanguages != '1')
-        {
-            $data['handlesLanguagesPercentage'] = null;
-            $data['handlesWhichLanguages'] = '';
-        }
-
-        return $data;
-    }
-    
-    /**
      * 
      * @param type $form
      */
