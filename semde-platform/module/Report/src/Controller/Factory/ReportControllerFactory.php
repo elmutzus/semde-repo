@@ -14,8 +14,8 @@
 namespace Report\Controller\Factory;
 
 use Interop\Container\ContainerInterface;
-use Survey\Controller\ReportController;
-use Survey\Service\SurveyManager;
+use Report\Controller\ReportController;
+use Report\Service\ReportManager;
 use Zend\ServiceManager\Factory\FactoryInterface;
 
 /**

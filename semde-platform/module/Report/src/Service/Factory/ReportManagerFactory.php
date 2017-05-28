@@ -15,7 +15,7 @@ namespace Report\Service\Factory;
 
 use Interop\Container\ContainerInterface;
 use Zend\ServiceManager\Factory\FactoryInterface;
-use Survey\Service\ReportManager;
+use Report\Service\ReportManager;
 
 /**
  * Description of ReportManagerFactory

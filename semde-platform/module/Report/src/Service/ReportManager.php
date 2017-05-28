@@ -20,19 +20,20 @@ namespace Report\Service;
  */
 class ReportManager
 {
+
     /**
      *
      * @var type 
      */
     private $entityManager;
-    
+
     /**
      * 
      * @param type $entityManager
      */
     public function __construct($entityManager)
     {
-        $this->entityManager                 = $entityManager;
+        $this->entityManager = $entityManager;
     }
 
 }
