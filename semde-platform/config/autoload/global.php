@@ -41,6 +41,9 @@ return [
             'orm_survey'  => [
                 'connection' => 'orm_survey_connection',
             ],
+            'orm_report'  => [
+                'connection' => 'orm_report_connection',
+            ],
         ],
     ],
 ];

@@ -30,7 +30,8 @@
     "autoload": {
         "psr-4": {
             "Core\\": "module/Core/src",
-            "Survey\\": "module/Survey/src"
+            "Survey\\": "module/Survey/src",
+            "Report\\": "module/Report/src"
         }
     },
     "autoload-dev": {

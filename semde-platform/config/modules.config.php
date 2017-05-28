@@ -27,4 +27,5 @@ return [
     'DoctrineORMModule',
     'Core',
     'Survey',
+    'Report',
 ];
