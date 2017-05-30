@@ -15,6 +15,7 @@ namespace Report\Form;
 
 use Zend\Form\Form;
 use Zend\Form\Element;
+use Zend\InputFilter\InputFilter;
 
 /**
  * Description of Report1Form
@@ -26,10 +27,13 @@ class Report1Form extends Form
     public function __construct()
     {
         // Define form name
-        parent::__construct('student_form');
+        parent::__construct('report1_form');
 
         // Add form elements
         $this->addElements();
+        
+        // Add filters
+        $this->addInputFilter();
     }
     
     private function addElements()
@@ -166,6 +170,112 @@ class Report1Form extends Form
             ],
             'options'    => [
                 'label' => 'Apellido',
+            ],
+        ]);
+    }
+    
+    private function addInputFilter()
+    {
+        // Create main input filter
+        $inputFilter = new InputFilter();
+        $this->setInputFilter($inputFilter);
+
+        $inputFilter->add([
+            'name'       => 'year',
+            'filters'    => [
+                ['name' => 'StringTrim'],
+                ['name' => 'StripTags'],
+                ['name' => 'StripNewlines'],
+            ],
+            'validators' => [
+                [
+                    'name' => 'digits',
+                ],
+                [
+                    'name'    => 'StringLength',
+                    'options' => [
+                        'min' => 0,
+                        'max' => 4,
+                    ],
+                ],
+            ],
+        ]);
+        
+        $inputFilter->add([
+            'name'       => 'dpi',
+            'filters'    => [
+                ['name' => 'StringTrim'],
+                ['name' => 'StripTags'],
+                ['name' => 'StripNewlines'],
+            ],
+            'validators' => [
+                [
+                    'name' => 'digits',
+                ],
+                [
+                    'name'    => 'StringLength',
+                    'options' => [
+                        'min' => 0,
+                        'max' => 13,
+                    ],
+                ],
+            ],
+        ]);
+        
+        $inputFilter->add([
+            'name'       => 'nov',
+            'filters'    => [
+                ['name' => 'StringTrim'],
+                ['name' => 'StripTags'],
+                ['name' => 'StripNewlines'],
+            ],
+            'validators' => [
+                [
+                    'name' => 'digits',
+                ],
+                [
+                    'name'    => 'StringLength',
+                    'options' => [
+                        'min' => 0,
+                        'max' => 10,
+                    ],
+                ],
+            ],
+        ]);
+        
+        $inputFilter->add([
+            'name'       => 'name',
+            'filters'    => [
+                ['name' => 'StringTrim'],
+                ['name' => 'StripTags'],
+                ['name' => 'StripNewlines'],
+            ],
+            'validators' => [
+                [
+                    'name'    => 'StringLength',
+                    'options' => [
+                        'min' => 0,
+                        'max' => 100,
+                    ],
+                ],
+            ],
+        ]);
+        
+        $inputFilter->add([
+            'name'       => 'lastname',
+            'filters'    => [
+                ['name' => 'StringTrim'],
+                ['name' => 'StripTags'],
+                ['name' => 'StripNewlines'],
+            ],
+            'validators' => [
+                [
+                    'name'    => 'StringLength',
+                    'options' => [
+                        'min' => 0,
+                        'max' => 100,
+                    ],
+                ],
             ],
         ]);
     }

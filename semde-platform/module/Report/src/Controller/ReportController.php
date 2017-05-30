@@ -15,6 +15,7 @@ namespace Report\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
+use Report\Form\Report1Form;
 
 /**
  * Description of ReportController
@@ -23,6 +24,7 @@ use Zend\View\Model\ViewModel;
  */
 class ReportController extends AbstractActionController
 {
+
     /**
      *
      * @var type 
@@ -34,7 +36,7 @@ class ReportController extends AbstractActionController
      * @var type 
      */
     private $sessionContainer;
-    
+
     /**
      * 
      * @param type $roleManager
@@ -42,10 +44,10 @@ class ReportController extends AbstractActionController
      */
     public function __construct($roleManager, $sessionContainer)
     {
-        $this->reportManager                   = $roleManager;
-        $this->sessionContainer                = $sessionContainer;
+        $this->reportManager    = $roleManager;
+        $this->sessionContainer = $sessionContainer;
     }
-    
+
     private function setLayoutVariables()
     {
         $layout = $this->layout();
@@ -57,16 +59,44 @@ class ReportController extends AbstractActionController
         $layout->setVariable('currentUserRole', $this->sessionContainer->currentUserRole);
     }
 
-    private function validateAuthentication($id, $idSecret)
+    private function validateAuthentication()
     {
-        if ($id != '-')
-        {
-            return true;
-        }
+        return true;
     }
 
     public function indexAction()
     {
         
     }
+
+    public function report1Action()
+    {
+        $this->setLayoutVariables();
+
+        if (!$this->validateAuthentication())
+        {
+            throw new \Exception('No puede acceder a la información solicitada');
+        }
+
+        $form = new Report1Form();
+
+        if ($this->getRequest()->isPost())
+        {
+            $data = $this->params()->fromPost();
+
+            $form->setData($data);
+
+            if ($form->isvalid())
+            {
+                $reportData = $this->reportManager->getReport1Data($form->getData());
+
+                return new ViewModel([
+                    'reportData' => $reportData,
+                ]);
+            }
+        }
+
+        return new ViewModel();
+    }
+
 }
