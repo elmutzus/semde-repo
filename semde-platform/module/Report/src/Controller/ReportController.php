@@ -91,12 +91,15 @@ class ReportController extends AbstractActionController
                 $reportData = $this->reportManager->getReport1Data($form->getData());
 
                 return new ViewModel([
+                    'form' => $form,
                     'reportData' => $reportData,
                 ]);
             }
         }
 
-        return new ViewModel();
+        return new ViewModel([
+            'form' => $form,
+        ]);
     }
 
 }
