@@ -13,6 +13,8 @@
 
 namespace Report\Service;
 
+use Report\Service\Helper\Report1ManagerHelper;
+
 /**
  * Description of ReportManager
  *
@@ -28,12 +30,29 @@ class ReportManager
     private $entityManager;
 
     /**
+     *
+     * @var type 
+     */
+    private $report1Helper;
+
+    /**
      * 
      * @param type $entityManager
      */
     public function __construct($entityManager)
     {
         $this->entityManager = $entityManager;
+        $this->report1Helper = new Report1ManagerHelper($entityManager);
+    }
+
+    /**
+     * 
+     * @param type $data
+     * @return type
+     */
+    public function getReport1Data($data)
+    {
+        return $this->report1Helper->getQueryData($data);
     }
 
 }
