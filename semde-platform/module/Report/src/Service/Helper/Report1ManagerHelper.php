@@ -63,10 +63,10 @@ class Report1ManagerHelper
         // Search using Career
         if ($queryType == 'C')
         {
-            $queryString .= "               where (ri.career = " . $data['career'] . " or " . $data['career'] . " = 0)
-                                                and (ri.course = " . $data['course'] . " or " . $data['course'] . " = 0)
+            $queryString .= "               where (ri.career = " . $data['career'] . " or " . $data['career'] . " = -1)
+                                                and (ri.course = " . $data['course'] . " or " . $data['course'] . " = -1)
                                                 and (ri.year = " . $data['year'] . " or length(" . $data['year'] . ") = 0)
-                                                and (ri.semester = " . $data['semester'] . " or " . $data['semester'] . " = 0)";
+                                                and (ri.semester = " . $data['semester'] . " or " . $data['semester'] . " = -1)";
         }
         // Search using student
         else if ($queryType == 'S')

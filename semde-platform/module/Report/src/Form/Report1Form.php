@@ -79,6 +79,8 @@ class Report1Form extends Form
                 'label'                     => 'Carrera',
                 'disable_inarray_validator' => true,
                 'value_options'             => [
+                    '0' => 'Hola',
+                    '1' => 'Hi',
                 ],
             ],
         ]);
@@ -106,6 +108,7 @@ class Report1Form extends Form
             'options'    => [
                 'label'         => 'Filtrar por',
                 'value_options' => [
+                    '-1' => 'Todos',
                     '1' => 'Primer semestre',
                     '2' => 'Segundo semestre',
                 ],

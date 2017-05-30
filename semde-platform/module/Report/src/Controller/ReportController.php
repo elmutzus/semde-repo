@@ -16,6 +16,7 @@ namespace Report\Controller;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use Report\Form\Report1Form;
+use Report\Controller\Helper\Report1ControllerHelper;
 
 /**
  * Description of ReportController
@@ -36,16 +37,23 @@ class ReportController extends AbstractActionController
      * @var type 
      */
     private $sessionContainer;
+    
+    /**
+     *
+     * @var type 
+     */
+    private $report1Helper;
 
     /**
      * 
      * @param type $roleManager
      * @param type $sessionContainer
      */
-    public function __construct($roleManager, $sessionContainer)
+    public function __construct($entityManager, $sessionContainer)
     {
-        $this->reportManager    = $roleManager;
+        $this->reportManager    = $entityManager;
         $this->sessionContainer = $sessionContainer;
+        $this->report1Helper = new Report1ControllerHelper($entityManager);
     }
 
     private function setLayoutVariables()
@@ -97,6 +105,8 @@ class ReportController extends AbstractActionController
             }
         }
 
+        $form = $this->report1Helper->fillOptionsData($form);
+        
         return new ViewModel([
             'form' => $form,
         ]);
