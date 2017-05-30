@@ -24,6 +24,7 @@ use Zend\InputFilter\InputFilter;
  */
 class Report1Form extends Form
 {
+
     public function __construct()
     {
         // Define form name
@@ -31,11 +32,11 @@ class Report1Form extends Form
 
         // Add form elements
         $this->addElements();
-        
+
         // Add filters
         $this->addInputFilter();
     }
-    
+
     private function addElements()
     {
         $this->add([
@@ -50,7 +51,7 @@ class Report1Form extends Form
                 'id'    => 'submit',
             ],
         ]);
-        
+
         $this->add([
             'type'       => Element\Select::class,
             'name'       => 'filterBy',
@@ -65,9 +66,9 @@ class Report1Form extends Form
                 ],
             ],
         ]);
-        
+
         // Filtering by careers
-        
+
         $this->add([
             'type'       => Element\Select::class,
             'name'       => 'career',
@@ -81,7 +82,7 @@ class Report1Form extends Form
                 ],
             ],
         ]);
-        
+
         $this->add([
             'type'       => Element\Select::class,
             'name'       => 'course',
@@ -95,7 +96,7 @@ class Report1Form extends Form
                 ],
             ],
         ]);
-        
+
         $this->add([
             'type'       => Element\Select::class,
             'name'       => 'semester',
@@ -110,7 +111,7 @@ class Report1Form extends Form
                 ],
             ],
         ]);
-        
+
         $this->add([
             'type'       => Element\Number::class,
             'name'       => 'year',
@@ -122,9 +123,9 @@ class Report1Form extends Form
                 'label' => 'Año',
             ],
         ]);
-        
+
         // Filtering by students
-        
+
         $this->add([
             'type'       => Element\Number::class,
             'name'       => 'dpi',
@@ -136,7 +137,7 @@ class Report1Form extends Form
                 'label' => 'DPI',
             ],
         ]);
-        
+
         $this->add([
             'type'       => Element\Number::class,
             'name'       => 'nov',
@@ -148,7 +149,7 @@ class Report1Form extends Form
                 'label' => 'Número de Orientación Vocacional',
             ],
         ]);
-        
+
         $this->add([
             'type'       => Element\Text::class,
             'name'       => 'name',
@@ -160,7 +161,7 @@ class Report1Form extends Form
                 'label' => 'Nombre',
             ],
         ]);
-        
+
         $this->add([
             'type'       => Element\Text::class,
             'name'       => 'lastname',
@@ -173,7 +174,7 @@ class Report1Form extends Form
             ],
         ]);
     }
-    
+
     private function addInputFilter()
     {
         // Create main input filter
@@ -182,36 +183,22 @@ class Report1Form extends Form
 
         $inputFilter->add([
             'name'       => 'year',
-            'filters'    => [
-                ['name' => 'StringTrim'],
-                ['name' => 'StripTags'],
-                ['name' => 'StripNewlines'],
-            ],
+            'required'   => false,
             'validators' => [
-                [
-                    'name' => 'digits',
-                ],
                 [
                     'name'    => 'StringLength',
                     'options' => [
-                        'min' => 0,
+                        'min' => 4,
                         'max' => 4,
                     ],
                 ],
             ],
         ]);
-        
+
         $inputFilter->add([
             'name'       => 'dpi',
-            'filters'    => [
-                ['name' => 'StringTrim'],
-                ['name' => 'StripTags'],
-                ['name' => 'StripNewlines'],
-            ],
+            'required'   => false,
             'validators' => [
-                [
-                    'name' => 'digits',
-                ],
                 [
                     'name'    => 'StringLength',
                     'options' => [
@@ -221,18 +208,11 @@ class Report1Form extends Form
                 ],
             ],
         ]);
-        
+
         $inputFilter->add([
             'name'       => 'nov',
-            'filters'    => [
-                ['name' => 'StringTrim'],
-                ['name' => 'StripTags'],
-                ['name' => 'StripNewlines'],
-            ],
+            'required'   => false,
             'validators' => [
-                [
-                    'name' => 'digits',
-                ],
                 [
                     'name'    => 'StringLength',
                     'options' => [
@@ -242,14 +222,10 @@ class Report1Form extends Form
                 ],
             ],
         ]);
-        
+
         $inputFilter->add([
             'name'       => 'name',
-            'filters'    => [
-                ['name' => 'StringTrim'],
-                ['name' => 'StripTags'],
-                ['name' => 'StripNewlines'],
-            ],
+            'required'   => false,
             'validators' => [
                 [
                     'name'    => 'StringLength',
@@ -260,14 +236,10 @@ class Report1Form extends Form
                 ],
             ],
         ]);
-        
+
         $inputFilter->add([
             'name'       => 'lastname',
-            'filters'    => [
-                ['name' => 'StringTrim'],
-                ['name' => 'StripTags'],
-                ['name' => 'StripNewlines'],
-            ],
+            'required'   => false,
             'validators' => [
                 [
                     'name'    => 'StringLength',
@@ -279,4 +251,5 @@ class Report1Form extends Form
             ],
         ]);
     }
+
 }
