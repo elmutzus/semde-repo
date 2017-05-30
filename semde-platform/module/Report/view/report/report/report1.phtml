@@ -99,7 +99,11 @@ $form->prepare();
 
 
 
-
+    <?php 
+    if($this->reportData != null){
+        echo('Total elements: ' . sizeof($this->reportData));
+    }
+    ?>
 
 
 

@@ -45,7 +45,7 @@ class Report1ManagerHelper
         $queryString = "select rf.*
                             from (
                                     select ro.*,
-                                            (@num:=if(@student = student, @num + 1, if(@student := student, 1, 1))) row_number 
+                                            @num:=if(@student = student, @num + 1, if(@student := student, 1, 1)) row_number 
                                     from (
                                             select ri.student,
                                                     ri.year,
@@ -63,18 +63,18 @@ class Report1ManagerHelper
         // Search using Career
         if ($queryType == 'C')
         {
-            $queryString .= "               where (ri.career = " . $data['career'] . " or " . $data['career'] . " = -1)
-                                                and (ri.course = " . $data['course'] . " or " . $data['course'] . " = -1)
-                                                and (ri.year = " . $data['year'] . " or length(" . $data['year'] . ") = 0)
-                                                and (ri.semester = " . $data['semester'] . " or " . $data['semester'] . " = -1)";
+            $queryString .= "               where (ri.career = '" . $data['career'] . "' or " . $data['career'] . " = -1)
+                                                and (ri.course = '" . $data['course'] . "' or " . $data['course'] . " = -1)
+                                                and (ri.year = '" . $data['year'] . "' or length('" . $data['year'] . "') = 0)
+                                                and (ri.semester = '" . $data['semester'] . "' or " . $data['semester'] . " = -1)";
         }
         // Search using student
         else if ($queryType == 'S')
         {
-            $queryString .= "               where (s.dpi like '" . $data['dpi'] . "%' or length(" . $data['dpi'] . ") = 0)
-                                                and (s.vocational_id like '" . $data['nov'] . "%' or length(" . $data['nov'] . ") = 0)
-                                                and (s.name like '" . $data['name'] . "%' or length(" . $data['name'] . ") = 0)
-                                                and (s.name like '%" . $data['lastname'] . "%' or length(" . $data['lastname'] . ") = 0)";
+            $queryString .= "               where (s.dpi like '" . $data['dpi'] . "%' or length('" . $data['dpi'] . "') = 0)
+                                                and (s.vocational_id like '" . $data['nov'] . "%' or length('" . $data['nov'] . "') = 0)
+                                                and (s.name like '" . $data['name'] . "%' or length('" . $data['name'] . "') = 0)
+                                                and (s.name like '%" . $data['lastname'] . "%' or length('" . $data['lastname'] . "') = 0)";
         }
 
         $queryString .= "                   group by ri.student, ri.year, ri.semester
@@ -82,12 +82,11 @@ class Report1ManagerHelper
                                     ) as ro
                             ) as rf
                             where rf.row_number <= 2";
-
-        $query = $this->entityManager->createQuery($queryString);
+    
+        $statement = $this->entityManager->getConnection()->prepare($queryString);
+        $statement->execute();
         
-        $result = $query->getResult();
-
-        return $result;
+        return $statement->fetchAll();
     }
 
 }

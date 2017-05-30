@@ -87,6 +87,8 @@ class ReportController extends AbstractActionController
         }
 
         $form = new Report1Form();
+        
+        $form = $this->report1Helper->fillOptionsData($form);
 
         if ($this->getRequest()->isPost())
         {
@@ -104,8 +106,6 @@ class ReportController extends AbstractActionController
                 ]);
             }
         }
-
-        $form = $this->report1Helper->fillOptionsData($form);
         
         return new ViewModel([
             'form' => $form,
