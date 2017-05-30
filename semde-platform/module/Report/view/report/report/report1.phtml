@@ -84,8 +84,8 @@ $form->prepare();
             <div id="searcheableFilter" class="form-group">
                 <div class="form-group">
                     <?= $this->formLabel($form->get('filterBy')); ?>
-                            <?= $this->formElement($form->get('filterBy')); ?>
-                            <?= $this->formElementErrors($form->get('filterBy'), ['class' => 'alert-danger']); ?>
+                    <?= $this->formElement($form->get('filterBy')); ?>
+                    <?= $this->formElementErrors($form->get('filterBy'), ['class' => 'alert-danger']); ?>
                 </div>
             </div>
             <div class="form-group">
@@ -96,19 +96,19 @@ $form->prepare();
 
         <?= $this->form()->closeTag(); ?>
     </div>
-
-
-
-    <?php 
-    if($this->reportData != null){
-        echo('Total elements: ' . sizeof($this->reportData));
-    }
-    ?>
-
-
-
-
     <div class="panel panel-md panel-primary">
+        <div class="panel-heading">
+            Listado de Estudiantes
+        </div>
+        <div class="panel-body">
+            <?php echo $this->partial('partial-view/report1-table', ['rows' => $this->reportData]); ?>
+        </div>
+
+        <?php
+        if($this->reportData != null){
+            echo("Size: " . sizeof($this->reportData));
+        }
+        ?>
     </div>
 </section>
 

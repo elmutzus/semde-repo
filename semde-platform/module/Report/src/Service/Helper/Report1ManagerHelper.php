@@ -43,19 +43,19 @@ class Report1ManagerHelper
     public function getQueryData($data)
     {
         $queryString = "select rf.*
-                            from (
-                                    select ro.*,
-                                            @num:=if(@student = student, @num + 1, if(@student := student, 1, 1)) row_number 
-                                    from (
-                                            select ri.student,
-                                                    ri.year,
-                                                    ri.semester,
-                                                    sum(ri.official_note) / count(1) as average,
-                                                    s.dpi,
-                                                    s.vocational_id,
-                                                    s.name
-                                            from results ri
-                                            inner join student s
+                        from (
+                                select ro.*,
+                                        (@num:=if(@student = student, @num + 1, if(@student := student, 1, 1))) row_number 
+                                from (
+                                        select ri.student,
+                                                ri.year,
+                                                ri.semester,
+                                                sum(ri.official_note) / count(1) as average,
+                                    s.dpi,
+                                    s.vocational_id,
+                                    s.name
+                                        from results ri
+                                inner join student s
                                                 on ri.student = s.student";
 
         $queryType = $data['filterBy'];
@@ -81,7 +81,7 @@ class Report1ManagerHelper
                                             order by ri.student, ri.year desc, ri.semester desc
                                     ) as ro
                             ) as rf
-                            where rf.row_number <= 2";
+                            where rf.row_number <= 2 limit 50";
     
         $statement = $this->entityManager->getConnection()->prepare($queryString);
         $statement->execute();
