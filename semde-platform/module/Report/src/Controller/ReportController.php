@@ -111,5 +111,9 @@ class ReportController extends AbstractActionController
             'form' => $form,
         ]);
     }
+    
+    public function report1DetailAction(){
+        
+    }
 
 }

@@ -45,13 +45,9 @@ else
     <td> <?= round($currentAvg, 2); ?> </td>
     <td> <?= $percentageMsg; ?> </td>
     <td>         
-        <button type="button" 
-                class="btn btn-primary btn-xs" 
-                data-toggle="modal" 
-                data-target="#myModal" 
-                data-student-id="<?= $student; ?>"
-                data-student-name="<?= $name; ?>">
-            Detalle
-        </button>
+        <a class="btn btn-primary btn-xs" 
+           href="report1Detail?studentId=<?= $student; ?>&studentName=<?= $name ?>" 
+           onclick="window.open(this.href); return false;" 
+           onkeypress="window.open(this.href); return false;">Detalle</a>
     </td>
 </tr>

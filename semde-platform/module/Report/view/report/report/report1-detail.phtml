@@ -1,5 +1,6 @@
 <?php
-/*
+
+/* 
  * Copyright (c) 2017 Elder Mutzus <elmutzus@gmail.com>.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -9,32 +10,8 @@
  * Contributors:
  *    Elder Mutzus <elmutzus@gmail.com> - initial API and implementation and/or initial documentation
  */
+
 ?>
-
-<div class="col-sm-4 col-md-4 col-lg-4">
-    <div class="form-group">
-        <label for="identification" class="control-label">Carn&eacute;</label>
-        <input type="number" class="form-control" name="studentId" value="<?= $this->student; ?>" disabled="true" />
-    </div>
-</div>
-<div class="col-sm-8 col-md-8 col-lg-8">
-    <div class="form-group">
-        <label for="name" class="control-label">Nombre</label>
-        <input type="text" class="form-control" name="studentName" value="<?= $this->name; ?>" disabled="true" />
-    </div>
-</div>
-
-<script type="text/javascript">
-
-    $('#myModal').on('show.bs.modal', function (e) {
-        var studentId = $(e.relatedTarget).data('student-id');
-        var studentName = $(e.relatedTarget).data('student-name');
-
-        $(e.currentTarget).find('input[name="studentId"]').val(studentId);
-        $(e.currentTarget).find('input[name="studentName"]').val(studentName);
-    });
-
-</script>
 
 <script type="text/javascript">
     // Load the Visualization API and the corechart package.
