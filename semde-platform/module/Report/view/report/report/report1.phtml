@@ -103,12 +103,6 @@ $form->prepare();
         <div class="panel-body">
             <?php echo $this->partial('partial-view/report1-table', ['rows' => $this->reportData]); ?>
         </div>
-
-        <?php
-        if($this->reportData != null){
-            echo("Size: " . sizeof($this->reportData));
-        }
-        ?>
     </div>
 </section>
 
