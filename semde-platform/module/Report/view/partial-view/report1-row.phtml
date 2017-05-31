@@ -16,7 +16,7 @@ $name       = $this->latestRow['name'];
 $prevAvg    = $this->previousAvg;
 $currentAvg = $this->latestRow['average'];
 
-$percentageMsg = '';
+$percentageMsg = '-';
 
 if ($prevAvg > 0)
 {
@@ -30,10 +30,6 @@ if ($prevAvg > 0)
     }
 
     $percentageMsg = '<font color="' . $color . '">' . round($percentage, 2) . ' %</font>';
-}
-else
-{
-    $percentageMsg = '-';
 }
 ?>
 
