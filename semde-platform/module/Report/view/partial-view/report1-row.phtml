@@ -45,7 +45,12 @@ else
     <td> <?= round($currentAvg, 2); ?> </td>
     <td> <?= $percentageMsg; ?> </td>
     <td>         
-        <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#myModal">
+        <button type="button" 
+                class="btn btn-primary btn-xs" 
+                data-toggle="modal" 
+                data-target="#myModal" 
+                data-student-id="<?= $student; ?>"
+                data-student-name="<?= $name; ?>">
             Detalle
         </button>
     </td>

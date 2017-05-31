@@ -1,0 +1,74 @@
+<?php
+/*
+ * Copyright (c) 2017 Elder Mutzus <elmutzus@gmail.com>.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *    Elder Mutzus <elmutzus@gmail.com> - initial API and implementation and/or initial documentation
+ */
+?>
+
+<div class="col-sm-4 col-md-4 col-lg-4">
+    <div class="form-group">
+        <label for="identification" class="control-label">Carn&eacute;</label>
+        <input type="number" class="form-control" name="studentId" value="<?= $this->student; ?>" disabled="true" />
+    </div>
+</div>
+<div class="col-sm-8 col-md-8 col-lg-8">
+    <div class="form-group">
+        <label for="name" class="control-label">Nombre</label>
+        <input type="text" class="form-control" name="studentName" value="<?= $this->name; ?>" disabled="true" />
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    $('#myModal').on('show.bs.modal', function (e) {
+        var studentId = $(e.relatedTarget).data('student-id');
+        var studentName = $(e.relatedTarget).data('student-name');
+
+        $(e.currentTarget).find('input[name="studentId"]').val(studentId);
+        $(e.currentTarget).find('input[name="studentName"]').val(studentName);
+    });
+
+</script>
+
+<script type="text/javascript">
+    // Load the Visualization API and the corechart package.
+    google.charts.load("visualization", "1", {packages: ["corechart"]});
+
+    // Set a callback to run when the Google Visualization API is loaded.
+    google.charts.setOnLoadCallback(drawChart);
+
+    // Callback that creates and populates a data table,
+    // instantiates the pie chart, passes in the data and
+    // draws it.
+    function drawChart() {
+
+        // Create the data table.
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Nota');
+        data.addColumn('number', 'Nota');
+        data.addRows([
+            ['Anterior', 90],
+            ['Actual', 85]
+        ]);
+
+        // Set chart options
+        var options = {
+            title: 'Comparativo de notas',
+            hAxis: {title: 'Notas'}
+        };
+
+        // Instantiate and draw our chart, passing in some options.
+        var chart = new google.visualization.BarChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
+    }
+
+    $(window).resize(function () {
+        drawChart();
+    });
+</script>
