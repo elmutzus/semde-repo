@@ -29,7 +29,7 @@ if ($prevAvg > 0)
         $color = 'red';
     }
 
-    $percentageMsg = '<strong><font color="' . $color . '">' . round($percentage, 3) . ' %</font></strong>';
+    $percentageMsg = '<font color="' . $color . '">' . round($percentage, 2) . ' %</font>';
 }
 else
 {
@@ -41,8 +41,8 @@ else
     <td> <?= $student; ?> </td>
     <td> <?= $nov; ?> </td>
     <td> <?= $name; ?> </td>
-    <td> <?= $prevAvg; ?> </td>
-    <td> <?= $currentAvg; ?> </td>
+    <td> <?= round($prevAvg, 2); ?> </td>
+    <td> <?= round($currentAvg, 2); ?> </td>
     <td> <?= $percentageMsg; ?> </td>
     <td>         
         <a class="btn btn-primary btn-xs" href="">
