@@ -28,26 +28,21 @@
         if ($this->rows != null)
         {
             $limit = sizeof($this->rows);
-            
+
             for ($i = 0; $i < $limit; $i ++)
             {
-                $currentRow = $this->rows[$i];
-                
-                echo $this->partial('partial-view/report1-row', ['latestRow' => $currentRow, 'previousRow' => $currentRow]);
+                $actualData   = $this->rows[$i];
+                $prevData = $this->rows[$i + 1];
 
-                /*if ($currentRow['student'] == $nextRow['student'])
+                if ($prevData['student'] == $actualData['student'])
                 {
-                    echo $this->partial('partial-view/report1-row', ['latestRow' => $currentRow, 'previousRow' => $nextRow]);
-                    $i ++;
+                    echo $this->partial('partial-view/report1-row', ['latestRow' => $actualData, 'previousAvg' => $prevData['average']]);
+                    $i++;
                 }
                 else
                 {
-                    $previousRow = array();
-
-                    $previousRow['average'] = 0;
-
-                    echo $this->partial('partial-view/report1-row', ['latestRow' => $currentRow, 'previousRow' => $previousRow]);
-                }*/
+                    echo $this->partial('partial-view/report1-row', ['latestRow' => $actualData, 'previousAvg' => 0]);
+                }
             }
         }
         ?>  

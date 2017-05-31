@@ -1,6 +1,5 @@
 <?php
-
-/* 
+/*
  * Copyright (c) 2017 Elder Mutzus <elmutzus@gmail.com>.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -11,15 +10,40 @@
  *    Elder Mutzus <elmutzus@gmail.com> - initial API and implementation and/or initial documentation
  */
 
+$student    = $this->latestRow['student'];
+$nov        = $this->latestRow['vocational_id'];
+$name       = $this->latestRow['name'];
+$prevAvg    = $this->previousAvg;
+$currentAvg = $this->latestRow['average'];
+
+$percentageMsg = '';
+
+if ($prevAvg > 0)
+{
+    $percentage = (($currentAvg * 100) / $prevAvg) - 100;
+
+    $color = 'green';
+
+    if ($percentage < 0)
+    {
+        $color = 'red';
+    }
+
+    $percentageMsg = '<strong><font color="' . $color . '">' . round($percentage, 3) . ' %</font></strong>';
+}
+else
+{
+    $percentageMsg = '<strong>-</strong>';
+}
 ?>
-            
+
 <tr>
-    <td> <?= $this->latestRow['student'] ?> </td>
-    <td> <?= $this->latestRow['vocational_id'] ?> </td>
-    <td> <?= $this->latestRow['name'] ?> </td>
-    <td> <?= $this->latestRow['average'] ?> </td>
-    <td> <?= $this->latestRow['average'] ?> </td>
-    <td> 5% </td>
+    <td> <?= $student; ?> </td>
+    <td> <?= $nov; ?> </td>
+    <td> <?= $name; ?> </td>
+    <td> <?= $prevAvg; ?> </td>
+    <td> <?= $currentAvg; ?> </td>
+    <td> <?= $percentageMsg; ?> </td>
     <td>         
         <a class="btn btn-primary btn-xs" href="">
             Detalle

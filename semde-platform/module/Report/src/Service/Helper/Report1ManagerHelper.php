@@ -42,6 +42,7 @@ class Report1ManagerHelper
      */
     public function getQueryData($data)
     {
+        /*
         $queryString = "select rf.*
                         from (
                                 select ro.*,
@@ -87,6 +88,27 @@ class Report1ManagerHelper
         $statement->execute();
         
         return $statement->fetchAll();
+        */
+        
+        $storedProcedureQuery = 'CALL SP_RPT1_RETRIEVEDATA(:filterBy, :career, :course, :year, :semester, :dpi, :nov, :name, :lastname)';
+        
+        $statement = $this->entityManager->getConnection()->prepare($storedProcedureQuery);
+        $statement->bindParam(':filterBy', $data['filterBy']);
+        $statement->bindParam(':career', $data['career']);
+        $statement->bindParam(':course', $data['course']);
+        $statement->bindParam(':year', $data['year']);
+        $statement->bindParam(':semester', $data['semester']);
+        $statement->bindParam(':dpi', $data['dpi']);
+        $statement->bindParam(':nov', $data['nov']);
+        $statement->bindParam(':name', $data['name']);
+        $statement->bindParam(':lastname', $data['lastname']);
+        
+        $statement->execute();
+        
+        $result = $statement->fetchAll();
+        
+        return $result;
+      
     }
 
 }
