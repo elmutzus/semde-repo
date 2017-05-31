@@ -10,41 +10,42 @@
  *    Elder Mutzus <elmutzus@gmail.com> - initial API and implementation and/or initial documentation
  */
 ?>
-
-<table class="table table-hover table-striped table-condensed">
-    <thead>
-        <tr>
-            <th>Carn&eacute;</th>
-            <th>N.O.V.</th>
-            <th>Nombre</th>
-            <th>Prom. Anterior</th>
-            <th>Prom. Actual</th>
-            <th>Resultado</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        <?php
-        if ($this->rows != null)
-        {
-            $limit = sizeof($this->rows);
-
-            for ($i = 0; $i < $limit; $i ++)
+<div class="table-responsive">
+    <table class="table table-hover table-striped table-condensed">
+        <thead>
+            <tr>
+                <th>Carn&eacute;</th>
+                <th>N.O.V.</th>
+                <th>Nombre</th>
+                <th>Prom. Anterior</th>
+                <th>Prom. Actual</th>
+                <th>Resultado</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+            if ($this->rows != null)
             {
-                $actualData   = $this->rows[$i];
-                $prevData = $this->rows[$i + 1];
+                $limit = sizeof($this->rows);
 
-                if ($prevData['student'] == $actualData['student'])
+                for ($i = 0; $i < $limit; $i ++)
                 {
-                    echo $this->partial('partial-view/report1-row', ['latestRow' => $actualData, 'previousAvg' => $prevData['average']]);
-                    $i++;
-                }
-                else
-                {
-                    echo $this->partial('partial-view/report1-row', ['latestRow' => $actualData, 'previousAvg' => 0]);
+                    $actualData = $this->rows[$i];
+                    $prevData   = $this->rows[$i + 1];
+
+                    if ($prevData['student'] == $actualData['student'])
+                    {
+                        echo $this->partial('partial-view/report1-row', ['latestRow' => $actualData, 'previousAvg' => $prevData['average']]);
+                        $i++;
+                    }
+                    else
+                    {
+                        echo $this->partial('partial-view/report1-row', ['latestRow' => $actualData, 'previousAvg' => 0]);
+                    }
                 }
             }
-        }
-        ?>  
-    </tbody>
-</table>
+            ?>  
+        </tbody>
+    </table>
+</div>
