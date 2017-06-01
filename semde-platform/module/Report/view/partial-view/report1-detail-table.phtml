@@ -1,0 +1,48 @@
+<?php
+/*
+ * Copyright (c) 2017 Elder Mutzus <elmutzus@gmail.com>.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *    Elder Mutzus <elmutzus@gmail.com> - initial API and implementation and/or initial documentation
+ */
+?>
+
+<div class="panel panel-md panel-primary">
+    <div class="panel-heading">
+        Diferencias - <?= $this->sectionName; ?>
+    </div>
+    <div class="panel-body">
+
+        <div class="table-responsive">
+            <table class="table table-hover table-striped table-condensed">
+                <thead>
+                    <tr>
+                        <th>Campo</th>
+                        <th>Valor anterior</th>
+                        <th>Valor actual</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    if ($this->rows != null && sizeof($this->rows) == 2)
+                    {
+                        $currentRow = $this->rows[0];
+                        $previousRow = $this->rows[1];
+
+                        foreach ($currentRow as $fieldName => $fieldValue)
+                        {
+                            if($currentRow[$fieldName] != $previousRow[$fieldName]){
+                                echo $this->partial('partial-view/report1-detail-row', ['fieldName' => $fieldName, 'previousValue' => $previousRow[$fieldName], 'actualValue' => $fieldValue]);
+                            }                            
+                        }
+                    }
+                    ?>  
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

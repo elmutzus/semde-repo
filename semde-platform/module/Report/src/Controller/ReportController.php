@@ -37,7 +37,7 @@ class ReportController extends AbstractActionController
      * @var type 
      */
     private $sessionContainer;
-    
+
     /**
      *
      * @var type 
@@ -53,7 +53,7 @@ class ReportController extends AbstractActionController
     {
         $this->reportManager    = $entityManager;
         $this->sessionContainer = $sessionContainer;
-        $this->report1Helper = new Report1ControllerHelper($entityManager);
+        $this->report1Helper    = new Report1ControllerHelper($entityManager);
     }
 
     private function setLayoutVariables()
@@ -87,7 +87,7 @@ class ReportController extends AbstractActionController
         }
 
         $form = new Report1Form();
-        
+
         $form = $this->report1Helper->fillOptionsData($form);
 
         if ($this->getRequest()->isPost())
@@ -101,19 +101,38 @@ class ReportController extends AbstractActionController
                 $reportData = $this->reportManager->getReport1Data($form->getData());
 
                 return new ViewModel([
-                    'form' => $form,
+                    'form'       => $form,
                     'reportData' => $reportData,
                 ]);
             }
         }
-        
+
         return new ViewModel([
             'form' => $form,
         ]);
     }
-    
-    public function report1DetailAction(){
+
+    public function report1DetailAction()
+    {
+        $layout = $this->layout();
+
+        $layout->setTemplate('layout/report-detail');
         
+        if (!$this->validateAuthentication())
+        {
+            throw new \Exception('No puede acceder a la información solicitada');
+        }
+        
+        $student = $this->params()->fromQuery('studentId');
+        $studentName = $this->params()->fromQuery('studentName');
+        
+        $addressDifferences = $this->reportManager->getAddressDifferences($student);
+
+        return new ViewModel([
+            'studentId' => $student,
+            'studentName' => $studentName,
+            'addressDifferences' => $addressDifferences,
+        ]);
     }
 
 }
