@@ -29,7 +29,7 @@ class ReportManager
      * @var type 
      */
     private $entityManager;
-    
+
     /**
      *
      * @var type 
@@ -54,10 +54,10 @@ class ReportManager
      */
     public function __construct($entityManager, $surveyEntitymanager)
     {
-        $this->entityManager   = $entityManager;
+        $this->entityManager       = $entityManager;
         $this->surveyEntityManager = $surveyEntitymanager;
-        $this->report1Helper   = new Report1ManagerHelper($entityManager, $surveyEntitymanager);
-        $this->auxiliaryHelper = new AuxiliaryEntityHelper($entityManager);
+        $this->report1Helper       = new Report1ManagerHelper($entityManager, $surveyEntitymanager);
+        $this->auxiliaryHelper     = new AuxiliaryEntityHelper($entityManager);
     }
 
     /**
@@ -68,7 +68,7 @@ class ReportManager
     {
         return $this->auxiliaryHelper->getCareerOptions();
     }
-    
+
     /**
      * 
      * @return type
@@ -87,7 +87,7 @@ class ReportManager
     {
         return $this->report1Helper->getQueryData($data);
     }
-    
+
     /**
      * 
      * @param type $studentId
@@ -96,6 +96,16 @@ class ReportManager
     public function getAddressDifferences($studentId)
     {
         return $this->report1Helper->getAddressDifferences($studentId);
+    }
+
+    /**
+     * 
+     * @param type $studentId
+     * @return type
+     */
+    public function getBrothersDifferences($studentId)
+    {
+        return $this->report1Helper->getBrothersDifferences($studentId);
     }
 
 }

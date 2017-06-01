@@ -69,9 +69,33 @@ class Report1ManagerHelper
         return $result;
     }
 
+    /**
+     * 
+     * @param type $studentId
+     * @return type
+     */
     public function getAddressDifferences($studentId)
     {
         $storedProcedureQuery = 'CALL SP_DIFFERENCES_ADDRESS(:studentId)';
+
+        $statement = $this->surveyEntitymanager->getConnection()->prepare($storedProcedureQuery);
+        $statement->bindParam(':studentId',$studentId);
+
+        $statement->execute();
+
+        $result = $statement->fetchAll();
+
+        return $result;
+    }
+    
+    /**
+     * 
+     * @param type $studentId
+     * @return type
+     */
+    public function getBrothersDifferences($studentId)
+    {
+        $storedProcedureQuery = 'CALL SP_DIFFERENCES_BROTHERS(:studentId)';
 
         $statement = $this->surveyEntitymanager->getConnection()->prepare($storedProcedureQuery);
         $statement->bindParam(':studentId',$studentId);

@@ -127,11 +127,13 @@ class ReportController extends AbstractActionController
         $studentName = $this->params()->fromQuery('studentName');
         
         $addressDifferences = $this->reportManager->getAddressDifferences($student);
+        $brothersDifferences = $this->reportManager->getBrothersDifferences($student);
 
         return new ViewModel([
             'studentId' => $student,
             'studentName' => $studentName,
             'addressDifferences' => $addressDifferences,
+            'brothersDifferences' => $brothersDifferences,
         ]);
     }
 
