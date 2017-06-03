@@ -78,8 +78,8 @@
         data.addColumn('string', 'Nota');
         data.addColumn('number', 'Nota');
         data.addRows([
-            ['Anterior', 90],
-            ['Actual', 85]
+            ['Anterior', <?= $this->studentLower; ?>],
+            ['Actual', <?= $this->studentHigher; ?>]
         ]);
 
         // Set chart options

@@ -123,8 +123,10 @@ class ReportController extends AbstractActionController
             throw new \Exception('No puede acceder a la información solicitada');
         }
         
-        $student = $this->params()->fromQuery('studentId');
-        $studentName = $this->params()->fromQuery('studentName');
+        $student = $this->params()->fromQuery('si');
+        $studentName = $this->params()->fromQuery('sn');
+        $lowerValue = $this->params()->fromQuery('sl');
+        $topValue = $this->params()->fromQuery('st');
         
         $addressDifferences = $this->reportManager->getAddressDifferences($student);
         $brothersDifferences = $this->reportManager->getBrothersDifferences($student);
@@ -138,6 +140,8 @@ class ReportController extends AbstractActionController
         return new ViewModel([
             'studentId' => $student,
             'studentName' => $studentName,
+            'studentLower' => $lowerValue,
+            'studentHigher' => $topValue,
             'addressDifferences' => $addressDifferences,
             'brothersDifferences' => $brothersDifferences,
             'fatherDifferences'=>$fatherDifferences,

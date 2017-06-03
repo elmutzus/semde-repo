@@ -42,7 +42,7 @@ if ($prevAvg > 0)
     <td> <?= $percentageMsg; ?> </td>
     <td>         
         <a class="btn btn-primary btn-xs" 
-           href="report1Detail?studentId=<?= urlencode($student); ?>&studentName=<?= urlencode($name) ?>" 
+           href="report1Detail?si=<?= urlencode($student); ?>&sn=<?= urlencode($name); ?>&st=<?= urlencode($currentAvg); ?>&sl=<?= urlencode($prevAvg); ?>" 
            target="_blank">Detalle</a>
     </td>
 </tr>
