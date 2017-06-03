@@ -108,4 +108,63 @@ class ReportManager
         return $this->report1Helper->getBrothersDifferences($studentId);
     }
 
+    /**
+     * 
+     * @param type $studentId
+     * @return type
+     */
+    public function getFatherDifferences($studentId)
+    {
+        return $this->report1Helper->getFatherDifferences($studentId);
+    }
+    
+    /**
+     * 
+     * @param type $studentId
+     * @return type
+     */
+    public function getMateDifferences($studentId)
+    {
+        return $this->report1Helper->getMateDifferences($studentId);
+    }
+    
+    /**
+     * 
+     * @param type $studentId
+     * @return type
+     */
+    public function getMotherDifferences($studentId)
+    {
+        return $this->report1Helper->getMotherDifferences($studentId);
+    }
+    
+    /**
+     * 
+     * @param type $studentId
+     * @return type
+     */
+    public function getProfessionalLifeDifferences($studentId)
+    {
+        return $this->report1Helper->getProfessionalLifeDifferences($studentId);
+    }
+    
+    /**
+     * 
+     * @param type $studentId
+     * @return type
+     */
+    public function getSocialLifeDifferences($studentId)
+    {
+        return $this->report1Helper->getSocialLifeDifferences($studentId);
+    }
+    
+    /**
+     * 
+     * @param type $studentId
+     * @return type
+     */
+    public function getStudentStatusDifferences($studentId)
+    {
+        return $this->report1Helper->getStudentStatusDifferences($studentId);
+    }
 }

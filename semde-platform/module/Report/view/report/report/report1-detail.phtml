@@ -36,10 +36,28 @@
         <br>
         <div class="col-sm-6 col-md-6 col-lg-6">            
             <?php echo $this->partial('partial-view/report1-detail-table', ['sectionName' => 'Dirección de residencia', 'rows' => $this->addressDifferences]); ?>
+        </div>        
+        <div class="col-sm-6 col-md-4 col-lg-6">            
+            <?php echo $this->partial('partial-view/report1-detail-table', ['sectionName' => 'Padre', 'rows' => $this->fatherDifferences]); ?>
+        </div>
+        <div class="col-sm-6 col-md-4 col-lg-6">            
+            <?php echo $this->partial('partial-view/report1-detail-table', ['sectionName' => 'Madre', 'rows' => $this->motherDifferences]); ?>
         </div>
         <div class="col-sm-6 col-md-4 col-lg-6">            
             <?php echo $this->partial('partial-view/report1-detail-table', ['sectionName' => 'Hermanos(as)', 'rows' => $this->brothersDifferences]); ?>
         </div>
+        <div class="col-sm-6 col-md-4 col-lg-6">            
+            <?php echo $this->partial('partial-view/report1-detail-table', ['sectionName' => 'Pareja', 'rows' => $this->mateDifferences]); ?>
+        </div>
+        <div class="col-sm-6 col-md-4 col-lg-6">            
+            <?php echo $this->partial('partial-view/report1-detail-table', ['sectionName' => 'Vida Estudiantil', 'rows' => $this->studentStatusDifferences]); ?>
+        </div>
+        <div class="col-sm-6 col-md-4 col-lg-6">            
+            <?php echo $this->partial('partial-view/report1-detail-table', ['sectionName' => 'Vida Profesional', 'rows' => $this->professionalLifeDifferences]); ?>
+        </div>
+        <div class="col-sm-6 col-md-4 col-lg-6">            
+            <?php echo $this->partial('partial-view/report1-detail-table', ['sectionName' => 'Vida Social', 'rows' => $this->socialLifeDifferences]); ?>
+        </div>        
     </div>
 </div>
 

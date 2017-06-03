@@ -128,12 +128,24 @@ class ReportController extends AbstractActionController
         
         $addressDifferences = $this->reportManager->getAddressDifferences($student);
         $brothersDifferences = $this->reportManager->getBrothersDifferences($student);
+        $fatherDifferences = $this->reportManager->getFatherDifferences($student);
+        $mateDifferences = $this->reportManager->getMateDifferences($student);
+        $motherDifferences = $this->reportManager->getMotherDifferences($student);
+        $professionalLifeDifferences = $this->reportManager->getProfessionalLifeDifferences($student);
+        $socialLifeDifferences = $this->reportManager->getSocialLifeDifferences($student);
+        $studentStatusDifferences = $this->reportManager->getStudentStatusDifferences($student);
 
         return new ViewModel([
             'studentId' => $student,
             'studentName' => $studentName,
             'addressDifferences' => $addressDifferences,
             'brothersDifferences' => $brothersDifferences,
+            'fatherDifferences'=>$fatherDifferences,
+            'mateDifferences'=>$mateDifferences,
+            'motherDifferences'=>$motherDifferences,
+            'professionalLifeDifferences'=>$professionalLifeDifferences,
+            'socialLifeDifferences'=>$socialLifeDifferences,
+            'studentStatusDifferences'=>$studentStatusDifferences,
         ]);
     }
 

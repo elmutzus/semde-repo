@@ -106,5 +106,119 @@ class Report1ManagerHelper
 
         return $result;
     }
+    
+    /**
+     * 
+     * @param type $studentId
+     * @return type
+     */
+    public function getFatherDifferences($studentId)
+    {
+        $storedProcedureQuery = 'CALL SP_DIFFERENCES_FATHER(:studentId)';
+
+        $statement = $this->surveyEntitymanager->getConnection()->prepare($storedProcedureQuery);
+        $statement->bindParam(':studentId',$studentId);
+
+        $statement->execute();
+
+        $result = $statement->fetchAll();
+
+        return $result;
+    }
+    
+    /**
+     * 
+     * @param type $studentId
+     * @return type
+     */
+    public function getMateDifferences($studentId)
+    {
+        $storedProcedureQuery = 'CALL SP_DIFFERENCES_MATE(:studentId)';
+
+        $statement = $this->surveyEntitymanager->getConnection()->prepare($storedProcedureQuery);
+        $statement->bindParam(':studentId',$studentId);
+
+        $statement->execute();
+
+        $result = $statement->fetchAll();
+
+        return $result;
+    }
+    
+    /**
+     * 
+     * @param type $studentId
+     * @return type
+     */
+    public function getMotherDifferences($studentId)
+    {
+        $storedProcedureQuery = 'CALL SP_DIFFERENCES_MOTHER(:studentId)';
+
+        $statement = $this->surveyEntitymanager->getConnection()->prepare($storedProcedureQuery);
+        $statement->bindParam(':studentId',$studentId);
+
+        $statement->execute();
+
+        $result = $statement->fetchAll();
+
+        return $result;
+    }
+    
+    /**
+     * 
+     * @param type $studentId
+     * @return type
+     */
+    public function getProfessionalLifeDifferences($studentId)
+    {
+        $storedProcedureQuery = 'CALL SP_DIFFERENCES_PROFESSIONAL_LIFE(:studentId)';
+
+        $statement = $this->surveyEntitymanager->getConnection()->prepare($storedProcedureQuery);
+        $statement->bindParam(':studentId',$studentId);
+
+        $statement->execute();
+
+        $result = $statement->fetchAll();
+
+        return $result;
+    }
+    
+    /**
+     * 
+     * @param type $studentId
+     * @return type
+     */
+    public function getSocialLifeDifferences($studentId)
+    {
+        $storedProcedureQuery = 'CALL SP_DIFFERENCES_SOCIAL_LIFE(:studentId)';
+
+        $statement = $this->surveyEntitymanager->getConnection()->prepare($storedProcedureQuery);
+        $statement->bindParam(':studentId',$studentId);
+
+        $statement->execute();
+
+        $result = $statement->fetchAll();
+
+        return $result;
+    }
+    
+    /**
+     * 
+     * @param type $studentId
+     * @return type
+     */
+    public function getStudentStatusDifferences($studentId)
+    {
+        $storedProcedureQuery = 'CALL SP_DIFFERENCES_STUDENT_STATUS(:studentId)';
+
+        $statement = $this->surveyEntitymanager->getConnection()->prepare($storedProcedureQuery);
+        $statement->bindParam(':studentId',$studentId);
+
+        $statement->execute();
+
+        $result = $statement->fetchAll();
+
+        return $result;
+    }
 
 }
