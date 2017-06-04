@@ -53,4 +53,20 @@ class Report5ManagerHelper
 
         return $statement->fetchAll();
     }
+    
+    /**
+     * 
+     * @param type $student
+     * @return type
+     */
+    public function getDetail($student){
+        $storedProcedureQuery = 'CALL SP_RPT5_RETRIEVEDETAIL(:student)';
+
+        $statement = $this->entityManager->getConnection()->prepare($storedProcedureQuery);
+        $statement->bindParam(':student', $student);
+
+        $statement->execute();
+
+        return $statement->fetchAll();
+    }
 }

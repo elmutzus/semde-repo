@@ -59,6 +59,11 @@ class Report2ManagerHelper
         return $statement->fetchAll();
     }
     
+    /**
+     * 
+     * @param type $student
+     * @return type
+     */
     public function getDetail($student){
         $storedProcedureQuery = 'CALL SP_RPT2_RETRIEVEDETAIL(:student)';
 

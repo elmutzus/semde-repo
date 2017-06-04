@@ -213,4 +213,14 @@ class ReportManager
     {
         return $this->report5Helper->getQueryData($data);
     }
+    
+    /**
+     * 
+     * @param type $student
+     * @return type
+     */
+    public function getReport5Detail($student)
+    {
+        return $this->report5Helper->getDetail($student);
+    }
 }

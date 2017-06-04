@@ -281,5 +281,32 @@ class ReportController extends AbstractActionController
             'form' => $form,
         ]);
     }
+    
+    /**
+     * 
+     * @return ViewModel
+     * @throws \Exception
+     */
+    public function report5DetailAction()
+    {
+        $layout = $this->layout();
+
+        $layout->setTemplate('layout/report-detail');
+
+        if (!$this->validateAuthentication())
+        {
+            throw new \Exception('No puede acceder a la información solicitada');
+        }
+
+        $student      = $this->params()->fromQuery('si');
+        $studentName  = $this->params()->fromQuery('sn');
+        $reportDetail = $this->reportManager->getReport5Detail($student);
+
+        return new ViewModel([
+            'studentId'    => $student,
+            'studentName'  => $studentName,
+            'reportDetail' => $reportDetail,
+        ]);
+    }
 
 }
