@@ -12,6 +12,7 @@
 
 $student    = $this->latestRow['student'];
 $nov        = $this->latestRow['vocational_id'];
+$dpi        = $this->latestRow['dpi'];
 $name       = $this->latestRow['name'];
 $prevAvg    = $this->previousAvg;
 $currentAvg = $this->latestRow['average'];
@@ -36,6 +37,7 @@ if ($prevAvg > 0)
 <tr>
     <td> <?= $student; ?> </td>
     <td> <?= $nov; ?> </td>
+    <td> <?= $dpi; ?> </td>
     <td> <?= $name; ?> </td>
     <td> <?= round($prevAvg, 2); ?> </td>
     <td> <?= round($currentAvg, 2); ?> </td>

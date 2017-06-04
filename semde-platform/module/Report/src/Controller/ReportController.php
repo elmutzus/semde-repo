@@ -16,6 +16,7 @@ namespace Report\Controller;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use Report\Form\Report1Form;
+use Report\Form\Report2Form;
 use Report\Controller\Helper\AuxiliaryControllerHelper;
 
 /**
@@ -56,6 +57,9 @@ class ReportController extends AbstractActionController
         $this->auxiliaryHelper    = new AuxiliaryControllerHelper($entityManager);
     }
 
+    /**
+     * 
+     */
     private function setLayoutVariables()
     {
         $layout = $this->layout();
@@ -67,16 +71,28 @@ class ReportController extends AbstractActionController
         $layout->setVariable('currentUserRole', $this->sessionContainer->currentUserRole);
     }
 
+    /**
+     * 
+     * @return boolean
+     */
     private function validateAuthentication()
     {
         return true;
     }
 
+    /**
+     * 
+     */
     public function indexAction()
     {
         
     }
 
+    /**
+     * 
+     * @return ViewModel
+     * @throws \Exception
+     */
     public function report1Action()
     {
         $this->setLayoutVariables();
@@ -112,6 +128,11 @@ class ReportController extends AbstractActionController
         ]);
     }
 
+    /**
+     * 
+     * @return ViewModel
+     * @throws \Exception
+     */
     public function report1DetailAction()
     {
         $layout = $this->layout();
@@ -153,4 +174,68 @@ class ReportController extends AbstractActionController
         ]);
     }
 
+    /**
+     * 
+     * @return ViewModel
+     * @throws \Exception
+     */
+    public function report2Action()
+    {
+        $this->setLayoutVariables();
+
+        if (!$this->validateAuthentication())
+        {
+            throw new \Exception('No puede acceder a la información solicitada');
+        }
+
+        $form = new Report2Form();
+
+        $form = $this->auxiliaryHelper->fillOptionsData($form);
+
+        if ($this->getRequest()->isPost())
+        {
+            $data = $this->params()->fromPost();
+
+            $form->setData($data);
+
+            if ($form->isvalid())
+            {
+                $reportData = $this->reportManager->getReport2Data($form->getData());
+
+                return new ViewModel([
+                    'form'       => $form,
+                    'reportData' => $reportData,
+                ]);
+            }
+        }
+
+        return new ViewModel([
+            'form' => $form,
+        ]);
+    }
+    
+    /**
+     * 
+     * @return ViewModel
+     * @throws \Exception
+     */
+    public function report2DetailAction()
+    {
+        $layout = $this->layout();
+
+        $layout->setTemplate('layout/report-detail');
+        
+        if (!$this->validateAuthentication())
+        {
+            throw new \Exception('No puede acceder a la información solicitada');
+        }
+        
+        $student = $this->params()->fromQuery('si');
+        $studentName = $this->params()->fromQuery('sn');
+
+        return new ViewModel([
+            'studentId' => $student,
+            'studentName' => $studentName,
+        ]);
+    }
 }
