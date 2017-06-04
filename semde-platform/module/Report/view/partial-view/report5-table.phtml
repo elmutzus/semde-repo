@@ -1,0 +1,37 @@
+<?php
+/*
+ * Copyright (c) 2017 Elder Mutzus <elmutzus@gmail.com>.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *    Elder Mutzus <elmutzus@gmail.com> - initial API and implementation and/or initial documentation
+ */
+?>
+<div class="table-responsive">
+    <table class="table table-hover table-striped table-condensed">
+        <thead>
+            <tr>
+                <th>Carn&eacute;</th>
+                <th>N.O.V.</th>
+                <th>C.U.I.</th>
+                <th>Nombre</th>
+                <th>Promedio</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+            if ($this->rows != null)
+            {
+                foreach ($this->rows as $row)
+                {
+                    echo $this->partial('partial-view/report5-row', ['row' => $row]);
+                }
+            }
+            ?>  
+        </tbody>
+    </table>
+</div>

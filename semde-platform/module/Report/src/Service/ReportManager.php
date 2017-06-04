@@ -15,6 +15,7 @@ namespace Report\Service;
 
 use Report\Service\Helper\Report1ManagerHelper;
 use Report\Service\Helper\Report2ManagerHelper;
+use Report\Service\Helper\Report5ManagerHelper;
 use Report\Service\Helper\AuxiliaryEntityHelper;
 
 /**
@@ -48,6 +49,12 @@ class ReportManager
      * @var type 
      */
     private $report2Helper;
+    
+    /**
+     *
+     * @var type 
+     */
+    private $report5Helper;
 
     /**
      *
@@ -66,6 +73,7 @@ class ReportManager
         $this->report1Helper       = new Report1ManagerHelper($entityManager, $surveyEntitymanager);
         $this->auxiliaryHelper     = new AuxiliaryEntityHelper($entityManager);
         $this->report2Helper       = new Report2ManagerHelper($entityManager);
+        $this->report5Helper       = new Report5ManagerHelper($entityManager);
     }
 
     /**
@@ -196,4 +204,13 @@ class ReportManager
         return $this->report2Helper->getDetail($student);
     }
 
+    /**
+     * 
+     * @param type $data
+     * @return type
+     */
+    public function getReport5Data($data)
+    {
+        return $this->report5Helper->getQueryData($data);
+    }
 }

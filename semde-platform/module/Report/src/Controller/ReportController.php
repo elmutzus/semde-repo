@@ -17,6 +17,7 @@ use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use Report\Form\Report1Form;
 use Report\Form\Report2Form;
+use Report\Form\Report5Form;
 use Report\Controller\Helper\AuxiliaryControllerHelper;
 
 /**
@@ -238,6 +239,46 @@ class ReportController extends AbstractActionController
             'studentId'    => $student,
             'studentName'  => $studentName,
             'reportDetail' => $reportDetail,
+        ]);
+    }
+    
+    /**
+     * 
+     * @return ViewModel
+     * @throws \Exception
+     */
+    public function report5Action()
+    {
+        $this->setLayoutVariables();
+
+        if (!$this->validateAuthentication())
+        {
+            throw new \Exception('No puede acceder a la información solicitada');
+        }
+
+        $form = new Report5Form();
+
+        $form = $this->auxiliaryHelper->fillOptionsData($form);
+
+        if ($this->getRequest()->isPost())
+        {
+            $data = $this->params()->fromPost();
+
+            $form->setData($data);
+
+            if ($form->isvalid())
+            {
+                $reportData = $this->reportManager->getReport5Data($form->getData());
+
+                return new ViewModel([
+                    'form'       => $form,
+                    'reportData' => $reportData,
+                ]);
+            }
+        }
+
+        return new ViewModel([
+            'form' => $form,
         ]);
     }
 
