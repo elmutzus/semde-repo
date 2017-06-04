@@ -18,7 +18,7 @@ namespace Report\Controller\Helper;
  *
  * @author Elder Mutzus <elmutzus@gmail.com>
  */
-class Report1ControllerHelper
+class AuxiliaryControllerHelper
 {
     /**
      *
