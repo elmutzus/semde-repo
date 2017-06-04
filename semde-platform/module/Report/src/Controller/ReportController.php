@@ -18,6 +18,7 @@ use Zend\View\Model\ViewModel;
 use Report\Form\Report1Form;
 use Report\Form\Report2Form;
 use Report\Form\Report3Form;
+use Report\Form\Report4Form;
 use Report\Form\Report5Form;
 use Report\Controller\Helper\AuxiliaryControllerHelper;
 
@@ -302,6 +303,71 @@ class ReportController extends AbstractActionController
         $student      = $this->params()->fromQuery('si');
         $studentName  = $this->params()->fromQuery('sn');
         $reportDetail = $this->reportManager->getReport3Detail($student);
+
+        return new ViewModel([
+            'studentId'    => $student,
+            'studentName'  => $studentName,
+            'reportDetail' => $reportDetail,
+        ]);
+    }
+    
+    /**
+     * 
+     * @return ViewModel
+     * @throws \Exception
+     */
+    public function report4Action()
+    {
+        $this->setLayoutVariables();
+
+        if (!$this->validateAuthentication())
+        {
+            throw new \Exception('No puede acceder a la información solicitada');
+        }
+
+        $form = new Report4Form();
+
+        if ($this->getRequest()->isPost())
+        {
+            $data = $this->params()->fromPost();
+
+            $form->setData($data);
+
+            if ($form->isvalid())
+            {
+                $reportData = $this->reportManager->getReport4Data($form->getData());
+
+                return new ViewModel([
+                    'form'       => $form,
+                    'reportData' => $reportData,
+                ]);
+            }
+        }
+
+        return new ViewModel([
+            'form' => $form,
+        ]);
+    }
+
+    /**
+     * 
+     * @return ViewModel
+     * @throws \Exception
+     */
+    public function report4DetailAction()
+    {
+        $layout = $this->layout();
+
+        $layout->setTemplate('layout/report-detail');
+
+        if (!$this->validateAuthentication())
+        {
+            throw new \Exception('No puede acceder a la información solicitada');
+        }
+
+        $student      = $this->params()->fromQuery('si');
+        $studentName  = $this->params()->fromQuery('sn');
+        $reportDetail = $this->reportManager->getReport4Detail($student);
 
         return new ViewModel([
             'studentId'    => $student,

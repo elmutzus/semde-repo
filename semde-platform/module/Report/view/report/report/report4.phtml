@@ -1,0 +1,71 @@
+<?php
+
+/* 
+ * Copyright (c) 2017 Elder Mutzus <elmutzus@gmail.com>.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *    Elder Mutzus <elmutzus@gmail.com> - initial API and implementation and/or initial documentation
+ */
+
+$form->setAttribute('action', $this->url('reportsManagementRoute', ['action' => 'report4']));
+$form->prepare();
+?>
+
+<section id="body">
+    <div class="text-center"><h3>Reporte 4</h3> <strong>"Prueba específica VS. Rendimiento académico"</strong></div>
+
+    <div class="row">
+        <?= $this->form()->openTag($form); ?>
+
+        <div id="searchUsingStudents" name="searchUsingStudents" class="col-sm-10 col-md-10 col-lg-10">
+            <div class="col-sm-4 col-md-4 col-lg-4">
+                <div class="form-group">
+                    <?= $this->formLabel($form->get('dpi')); ?>
+                    <?= $this->formElement($form->get('dpi')); ?>
+                    <?= $this->formElementErrors($form->get('dpi'), ['class' => 'alert-danger']); ?>
+                </div>
+            </div>
+            <div class="col-sm-8 col-md-8 col-lg-8">
+                <div class="form-group">
+                    <?= $this->formLabel($form->get('name')); ?>
+                    <?= $this->formElement($form->get('name')); ?>
+                    <?= $this->formElementErrors($form->get('name'), ['class' => 'alert-danger']); ?>
+                </div>
+            </div>
+            <div class="col-sm-4 col-md-4 col-lg-4">
+                <div class="form-group">
+                    <?= $this->formLabel($form->get('nov')); ?>
+                    <?= $this->formElement($form->get('nov')); ?>
+                    <?= $this->formElementErrors($form->get('nov'), ['class' => 'alert-danger']); ?>
+                </div>
+            </div>
+            <div class="col-sm-8 col-md-8 col-lg-8">
+                <div class="form-group">
+                    <?= $this->formLabel($form->get('lastname')); ?>
+                    <?= $this->formElement($form->get('lastname')); ?>
+                    <?= $this->formElementErrors($form->get('lastname'), ['class' => 'alert-danger']); ?>
+                </div>
+            </div>
+        </div>
+        <div id="searcheableControls" name="searcheableControls" class="col-sm-2 col-md-2 col-lg-2">
+            <div class="form-group">
+                <label>&nbsp;</label>
+                <?= $this->formElement($form->get('submit')); ?>
+            </div>
+        </div>
+
+        <?= $this->form()->closeTag(); ?>
+    </div>
+    <div class="panel panel-md panel-primary">
+        <div class="panel-heading">
+            Listado de Estudiantes
+        </div>
+        <div class="panel-body">
+            <?php echo $this->partial('partial-view/report4-table', ['rows' => $this->reportData]); ?>
+        </div>
+    </div>
+</section>
