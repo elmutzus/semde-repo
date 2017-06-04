@@ -54,7 +54,7 @@ class ReportController extends AbstractActionController
     {
         $this->reportManager    = $entityManager;
         $this->sessionContainer = $sessionContainer;
-        $this->auxiliaryHelper    = new AuxiliaryControllerHelper($entityManager);
+        $this->auxiliaryHelper  = new AuxiliaryControllerHelper($entityManager);
     }
 
     /**
@@ -138,39 +138,39 @@ class ReportController extends AbstractActionController
         $layout = $this->layout();
 
         $layout->setTemplate('layout/report-detail');
-        
+
         if (!$this->validateAuthentication())
         {
             throw new \Exception('No puede acceder a la información solicitada');
         }
-        
-        $student = $this->params()->fromQuery('si');
+
+        $student     = $this->params()->fromQuery('si');
         $studentName = $this->params()->fromQuery('sn');
-        $lowerValue = $this->params()->fromQuery('sl');
-        $topValue = $this->params()->fromQuery('st');
-        
-        $addressDifferences = $this->reportManager->getAddressDifferences($student);
-        $brothersDifferences = $this->reportManager->getBrothersDifferences($student);
-        $fatherDifferences = $this->reportManager->getFatherDifferences($student);
-        $mateDifferences = $this->reportManager->getMateDifferences($student);
-        $motherDifferences = $this->reportManager->getMotherDifferences($student);
+        $lowerValue  = $this->params()->fromQuery('sl');
+        $topValue    = $this->params()->fromQuery('st');
+
+        $addressDifferences          = $this->reportManager->getAddressDifferences($student);
+        $brothersDifferences         = $this->reportManager->getBrothersDifferences($student);
+        $fatherDifferences           = $this->reportManager->getFatherDifferences($student);
+        $mateDifferences             = $this->reportManager->getMateDifferences($student);
+        $motherDifferences           = $this->reportManager->getMotherDifferences($student);
         $professionalLifeDifferences = $this->reportManager->getProfessionalLifeDifferences($student);
-        $socialLifeDifferences = $this->reportManager->getSocialLifeDifferences($student);
-        $studentStatusDifferences = $this->reportManager->getStudentStatusDifferences($student);
+        $socialLifeDifferences       = $this->reportManager->getSocialLifeDifferences($student);
+        $studentStatusDifferences    = $this->reportManager->getStudentStatusDifferences($student);
 
         return new ViewModel([
-            'studentId' => $student,
-            'studentName' => $studentName,
-            'studentLower' => $lowerValue,
-            'studentHigher' => $topValue,
-            'addressDifferences' => $addressDifferences,
-            'brothersDifferences' => $brothersDifferences,
-            'fatherDifferences'=>$fatherDifferences,
-            'mateDifferences'=>$mateDifferences,
-            'motherDifferences'=>$motherDifferences,
-            'professionalLifeDifferences'=>$professionalLifeDifferences,
-            'socialLifeDifferences'=>$socialLifeDifferences,
-            'studentStatusDifferences'=>$studentStatusDifferences,
+            'studentId'                   => $student,
+            'studentName'                 => $studentName,
+            'studentLower'                => $lowerValue,
+            'studentHigher'               => $topValue,
+            'addressDifferences'          => $addressDifferences,
+            'brothersDifferences'         => $brothersDifferences,
+            'fatherDifferences'           => $fatherDifferences,
+            'mateDifferences'             => $mateDifferences,
+            'motherDifferences'           => $motherDifferences,
+            'professionalLifeDifferences' => $professionalLifeDifferences,
+            'socialLifeDifferences'       => $socialLifeDifferences,
+            'studentStatusDifferences'    => $studentStatusDifferences,
         ]);
     }
 
@@ -213,7 +213,7 @@ class ReportController extends AbstractActionController
             'form' => $form,
         ]);
     }
-    
+
     /**
      * 
      * @return ViewModel
@@ -224,18 +224,21 @@ class ReportController extends AbstractActionController
         $layout = $this->layout();
 
         $layout->setTemplate('layout/report-detail');
-        
+
         if (!$this->validateAuthentication())
         {
             throw new \Exception('No puede acceder a la información solicitada');
         }
-        
-        $student = $this->params()->fromQuery('si');
-        $studentName = $this->params()->fromQuery('sn');
+
+        $student      = $this->params()->fromQuery('si');
+        $studentName  = $this->params()->fromQuery('sn');
+        $reportDetail = $this->reportManager->getReport2Detail($student);
 
         return new ViewModel([
-            'studentId' => $student,
-            'studentName' => $studentName,
+            'studentId'    => $student,
+            'studentName'  => $studentName,
+            'reportDetail' => $reportDetail,
         ]);
     }
+
 }

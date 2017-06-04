@@ -42,7 +42,7 @@ class ReportManager
      * @var type 
      */
     private $report1Helper;
-    
+
     /**
      *
      * @var type 
@@ -65,7 +65,7 @@ class ReportManager
         $this->surveyEntityManager = $surveyEntitymanager;
         $this->report1Helper       = new Report1ManagerHelper($entityManager, $surveyEntitymanager);
         $this->auxiliaryHelper     = new AuxiliaryEntityHelper($entityManager);
-        $this->report2Helper = new Report2ManagerHelper($entityManager);
+        $this->report2Helper       = new Report2ManagerHelper($entityManager);
     }
 
     /**
@@ -125,7 +125,7 @@ class ReportManager
     {
         return $this->report1Helper->getFatherDifferences($studentId);
     }
-    
+
     /**
      * 
      * @param type $studentId
@@ -135,7 +135,7 @@ class ReportManager
     {
         return $this->report1Helper->getMateDifferences($studentId);
     }
-    
+
     /**
      * 
      * @param type $studentId
@@ -145,7 +145,7 @@ class ReportManager
     {
         return $this->report1Helper->getMotherDifferences($studentId);
     }
-    
+
     /**
      * 
      * @param type $studentId
@@ -155,7 +155,7 @@ class ReportManager
     {
         return $this->report1Helper->getProfessionalLifeDifferences($studentId);
     }
-    
+
     /**
      * 
      * @param type $studentId
@@ -165,7 +165,7 @@ class ReportManager
     {
         return $this->report1Helper->getSocialLifeDifferences($studentId);
     }
-    
+
     /**
      * 
      * @param type $studentId
@@ -175,7 +175,7 @@ class ReportManager
     {
         return $this->report1Helper->getStudentStatusDifferences($studentId);
     }
-    
+
     /**
      * 
      * @param type $data
@@ -185,4 +185,15 @@ class ReportManager
     {
         return $this->report2Helper->getQueryData($data);
     }
+
+    /**
+     * 
+     * @param type $student
+     * @return type
+     */
+    public function getReport2Detail($student)
+    {
+        return $this->report2Helper->getDetail($student);
+    }
+
 }

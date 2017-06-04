@@ -56,8 +56,17 @@ class Report2ManagerHelper
 
         $statement->execute();
 
-        $result = $statement->fetchAll();
+        return $statement->fetchAll();
+    }
+    
+    public function getDetail($student){
+        $storedProcedureQuery = 'CALL SP_RPT2_RETRIEVEDETAIL(:student)';
 
-        return $result;
+        $statement = $this->entityManager->getConnection()->prepare($storedProcedureQuery);
+        $statement->bindParam(':student', $student);
+
+        $statement->execute();
+
+        return $statement->fetchAll();
     }
 }
