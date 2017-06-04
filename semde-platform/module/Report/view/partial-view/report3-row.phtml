@@ -1,0 +1,41 @@
+<?php
+
+/* 
+ * Copyright (c) 2017 Elder Mutzus <elmutzus@gmail.com>.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *    Elder Mutzus <elmutzus@gmail.com> - initial API and implementation and/or initial documentation
+ */
+
+$student    = $this->row['student'];
+$nov        = $this->row['vocational_id'];
+$dpi        = $this->row['dpi'];
+$name       = $this->row['name'];
+$currentAvg = $this->row['average'];
+
+$color = 'green';
+
+if ($currentAvg < 61)
+{
+    $color = 'red';
+}
+
+$averageMessage = '<font color="' . $color . '">' . round($currentAvg, 2) . '</font>';
+?>
+
+<tr>
+    <td> <?= $student; ?> </td>
+    <td> <?= $nov; ?> </td>
+    <td> <?= $dpi; ?> </td>
+    <td> <?= $name; ?> </td>
+    <td> <?= $averageMessage; ?> </td>
+    <td>         
+        <a class="btn btn-primary btn-xs" 
+           href="report3Detail?si=<?= urlencode($student); ?>&sn=<?= urlencode($name); ?>" 
+           target="_blank">Detalle</a>
+    </td>
+</tr>
