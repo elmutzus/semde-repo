@@ -28,4 +28,11 @@ $users = $this->users;
             </a>
         </div>
     </div>
+    <div class="row">
+        <div class="pull-right">
+            <?=
+            $this->paginationControl($users, 'Sliding', 'partial-view/paginator', ['route' => 'userManagementRoute']);
+            ?>
+        </div>
+    </div>
 </section>

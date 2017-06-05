@@ -74,8 +74,19 @@ class RolePerUserController extends AbstractActionController
 
         $items = $this->rolePerUserManager->getAll();
 
+        $collection = new \Doctrine\Common\Collections\ArrayCollection($items);
+        $paginator  = new \Zend\Paginator\Paginator(new \DoctrineModule\Paginator\Adapter\Collection($collection));
+        $paginator->setDefaultItemCountPerPage(10);
+
+        $page = (int) $this->params()->fromQuery('page');
+
+        if ($page)
+        {
+            $paginator->setCurrentPageNumber($page);
+        }
+        
         return new ViewModel([
-            'items' => $items,
+            'items' => $paginator,
         ]);
     }
 

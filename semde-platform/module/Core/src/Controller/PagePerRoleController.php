@@ -16,6 +16,9 @@ namespace Core\Controller;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use Core\Form\PagePerRoleForm;
+use DoctrineORMModule\Paginator\Adapter\DoctrinePaginator as DoctrineAdapter;
+use Doctrine\ORM\Tools\Pagination\Paginator as ORMPaginator;
+use Zend\Paginator\Paginator;
 
 /**
  * Description of PagePerRoleController
@@ -72,13 +75,23 @@ class PagePerRoleController extends AbstractActionController
     {
         $this->setLayoutVariables();
 
-        $items = $this->pagePerRoleManager->getAll();
+        $items      = $this->pagePerRoleManager->getAll();
+        $collection = new \Doctrine\Common\Collections\ArrayCollection($items);
+        $paginator  = new \Zend\Paginator\Paginator(new \DoctrineModule\Paginator\Adapter\Collection($collection));
+        $paginator->setDefaultItemCountPerPage(10);
+
+        $page = (int) $this->params()->fromQuery('page');
+
+        if ($page)
+        {
+            $paginator->setCurrentPageNumber($page);
+        }
 
         return new ViewModel([
-            'items' => $items,
+            'items' => $paginator,
         ]);
     }
-    
+
     public function addAction()
     {
         $form = new PagePerRoleForm();
@@ -128,7 +141,7 @@ class PagePerRoleController extends AbstractActionController
             'form' => $form,
         ]);
     }
-    
+
     public function deleteAction()
     {
         $this->setLayoutVariables();
@@ -165,4 +178,5 @@ class PagePerRoleController extends AbstractActionController
             'id' => $itemId,
         ]);
     }
+
 }

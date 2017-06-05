@@ -61,10 +61,21 @@ class UserController extends AbstractActionController
     {
         $this->setLayoutVariables();
 
-        $users = $this->userManager->getAll();
+        $items = $this->userManager->getAll();
+
+        $collection = new \Doctrine\Common\Collections\ArrayCollection($items);
+        $paginator  = new \Zend\Paginator\Paginator(new \DoctrineModule\Paginator\Adapter\Collection($collection));
+        $paginator->setDefaultItemCountPerPage(10);
+
+        $page = (int) $this->params()->fromQuery('page');
+
+        if ($page)
+        {
+            $paginator->setCurrentPageNumber($page);
+        }
 
         return new ViewModel([
-            'users' => $users,
+            'users' => $paginator,
         ]);
     }
 
@@ -166,7 +177,7 @@ class UserController extends AbstractActionController
             if ($del == 'Yes')
             {
                 $userId = $request->getPost('id');
-                
+
                 //@todo: Verify if the user has roles before deleting it
 
                 $this->userManager->delete($userId);

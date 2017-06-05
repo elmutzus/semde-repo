@@ -27,6 +27,13 @@ $items = $this->items;
             <a class="btn btn-primary btn-sm" href="<?= $this->url('roleManagementRoute', ['action' => 'add', 'id' => 'newItem']) ?>">
                 Agregar nuevo
             </a>
+        </div>        
+    </div>
+    <div class="row">
+        <div class="pull-right">
+            <?=
+            $this->paginationControl($items, 'Sliding', 'partial-view/paginator', ['route' => 'roleManagementRoute']);
+            ?>
         </div>
     </div>
 </section>

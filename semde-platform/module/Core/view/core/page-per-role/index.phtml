@@ -1,6 +1,5 @@
 <?php
-
-/* 
+/*
  * Copyright (c) 2017 Elder Mutzus <elmutzus@gmail.com>.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -27,6 +26,13 @@ $items = $this->items;
             <a class="btn btn-primary btn-sm" href="<?= $this->url('pagePerRoleManagementRoute', ['action' => 'add', 'id' => 'newItem']) ?>">
                 Agregar nuevo
             </a>
+        </div>
+    </div>  
+    <div class="row">
+        <div class="pull-right">
+            <?=
+            $this->paginationControl($items, 'Sliding', 'partial-view/paginator', ['route' => 'pagePerRoleManagementRoute']);
+            ?>
         </div>
     </div>
 </section>

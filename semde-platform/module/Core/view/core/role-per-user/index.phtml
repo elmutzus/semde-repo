@@ -29,4 +29,11 @@ $items = $this->items;
             </a>
         </div>
     </div>
+    <div class="row">
+        <div class="pull-right">
+            <?=
+            $this->paginationControl($items, 'Sliding', 'partial-view/paginator', ['route' => 'rolePerUserManagementRoute']);
+            ?>
+        </div>
+    </div>
 </section>
