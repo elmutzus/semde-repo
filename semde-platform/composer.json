@@ -26,7 +26,8 @@
         "zendframework/zend-inputfilter": "^2.7",
         "zendframework/zend-crypt": "^3.2",
         "zendframework/zend-navigation": "^2.8",
-        "zendframework/zend-paginator": "^2.7"
+        "zendframework/zend-paginator": "^2.7",
+        "phpoffice/phpexcel": "^1.8"
     },
     "autoload": {
         "psr-4": {
