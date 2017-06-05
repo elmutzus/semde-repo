@@ -89,7 +89,7 @@ class Report5Form extends Form
                 'class' => 'form-control',
             ],
             'options'    => [
-                'label'         => 'Filtrar por',
+                'label'         => 'Semestre',
                 'value_options' => [
                     '-1' => 'Todos',
                     '1'  => 'Primer semestre',
