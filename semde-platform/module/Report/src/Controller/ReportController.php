@@ -243,7 +243,7 @@ class ReportController extends AbstractActionController
             'reportDetail' => $reportDetail,
         ]);
     }
-    
+
     /**
      * 
      * @return ViewModel
@@ -310,7 +310,7 @@ class ReportController extends AbstractActionController
             'reportDetail' => $reportDetail,
         ]);
     }
-    
+
     /**
      * 
      * @return ViewModel
@@ -375,7 +375,7 @@ class ReportController extends AbstractActionController
             'reportDetail' => $reportDetail,
         ]);
     }
-    
+
     /**
      * 
      * @return ViewModel
@@ -415,7 +415,7 @@ class ReportController extends AbstractActionController
             'form' => $form,
         ]);
     }
-    
+
     /**
      * 
      * @return ViewModel
@@ -441,6 +441,136 @@ class ReportController extends AbstractActionController
             'studentName'  => $studentName,
             'reportDetail' => $reportDetail,
         ]);
+    }
+
+    public function reportExportAction()
+    {
+        $report = $this->params()->fromQuery('rpt');
+
+        if ($report == 1)
+        {
+            $data = array();
+
+            $data['career']   = $this->params()->fromQuery('crr');
+            $data['year']     = $this->params()->fromQuery('yr');
+            $data['course']   = $this->params()->fromQuery('crs');
+            $data['semester'] = $this->params()->fromQuery('smstr');
+            $data['dpi']      = $this->params()->fromQuery('dp');
+            $data['nov']      = $this->params()->fromQuery('nv');
+            $data['name']     = $this->params()->fromQuery('nm');
+            $data['lastname'] = $this->params()->fromQuery('lstnm');
+            $data['filterBy'] = $this->params()->fromQuery('fltrby');
+
+            $reportData = $this->reportManager->getReport1Data($data);
+
+            $filteredData = $this->createDataForReport1Export($reportData);
+
+            $this->createExcelFile($filteredData, 'Reporte 1', 'Comparativo del promedio de notas Vs. un valor anterior');
+
+            return $this->getResponse();
+        }
+    }
+
+    private function createDataForReport1Export($data)
+    {
+        $limit = sizeof($data);
+
+        $rootData = array();
+        
+        array_push($rootData, ['Carné', 'N.O.V.', 'C.U.I.', 'Nombre', 'Promedio Anterior', 'Promedio Actual', 'Resultado']);
+
+        for ($i = 0; $i < $limit; $i ++)
+        {
+            $rowData = array();
+
+            $actualData = $data[$i];
+            $prevData   = $data[$i + 1];
+
+            $percentage = 0;
+
+            array_push($rowData, $actualData['student']);
+            array_push($rowData, $actualData['vocational_id']);
+            array_push($rowData, $actualData['dpi']);
+            array_push($rowData, $actualData['name']);
+
+            if ($prevData['student'] == $actualData['student'])
+            {
+                array_push($rowData, $prevData['average']);
+
+                $percentage = (($actualData['average'] * 100) / $prevData['average']) - 100;
+                $i++;
+            }
+            else
+            {
+                array_push($rowData, '0');
+            }
+
+            array_push($rowData, $actualData['average']);
+            array_push($rowData, $percentage);
+
+            array_push($rootData, $rowData);
+        }
+
+        return $rootData;
+    }
+
+    private function createExcelFile($data, $reportName, $reportDescription)
+    {
+        header("Content-type: application/octet-stream");
+        header("Content-Disposition: attachment; filename=Reporte1.xls");
+        header("Pragma: no-cache");
+        header("Expires: 0");
+
+        $excel = new \PHPExcel();
+
+        $excel->getProperties()->setCreator("Elder Mutzus");
+        $excel->getProperties()->setLastModifiedBy("Elder Mutzus");
+        $excel->getProperties()->setTitle($reportName);
+        $excel->getProperties()->setSubject($reportName);
+        $excel->getProperties()->setDescription($reportDescription);
+
+        $excel->setActiveSheetIndex(0);
+
+        $rowCount = sizeof($data);
+
+        $activeSheet = $excel->getActiveSheet();
+
+        $i = 1;
+        $j = 1;
+
+        foreach ($data as $row)
+        {
+            $i++;
+            $j = 1;
+
+            foreach ($row as $column)
+            {
+                $excel->getActiveSheet()->setCellValueByColumnAndRow($j, $i, $column);
+                $j++;
+            }
+        }
+
+        /* for ($i = 0; $i < $rowCount; $i++)
+          {
+          $row = $data[$i];
+
+          $columnCount = sizeof($row);
+
+          for ($j = 0; $j < $columnCount; $j++)
+          {
+          $activeSheet->setCellValueByColumnAndRow(($j + 2), ($i + 2), $row[$j]);
+          }
+          } */
+
+        /* $excel->getActiveSheet()->SetCellValue('A1', 'Hello');
+          $excel->getActiveSheet()->SetCellValue('B2', 'world!');
+          $excel->getActiveSheet()->SetCellValue('C1', 'Hello');
+          $excel->getActiveSheet()->SetCellValue('D2', 'world!'); */
+
+        $excel->getActiveSheet()->setTitle($reportName);
+
+        $objWriter = new \PHPExcel_Writer_Excel2007($excel);
+        $objWriter->save('php://output');
     }
 
 }
