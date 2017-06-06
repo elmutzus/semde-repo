@@ -524,7 +524,7 @@ class ReportController extends AbstractActionController
         $centeredStyle = [
             'alignment' => [
                 'horizontal' => \PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
-            ]
+            ],
         ];
 
         $excel = new \PHPExcel();
@@ -543,16 +543,16 @@ class ReportController extends AbstractActionController
 
         $rowCount = sizeof($data);
 
-        $rowNumber    = 3;
-        $columnNumber = 0;
+        $rowNumber       = 3;
+        $columnNumber    = 0;
         $maxColumnNumber = 0;
 
         foreach ($data as $row)
         {
             $rowNumber++;
             $columnNumber = 0;
-            
-            if($maxColumnNumber == 0)
+
+            if ($maxColumnNumber == 0)
             {
                 $maxColumnNumber = sizeof($row);
             }
@@ -564,21 +564,43 @@ class ReportController extends AbstractActionController
                 $columnNumber++;
             }
         }
-        
+
         $excel->getActiveSheet()->mergeCellsByColumnAndRow(0, 1, $maxColumnNumber - 1, 1);
         $excel->getActiveSheet()->mergeCellsByColumnAndRow(0, 2, $maxColumnNumber - 1, 2);
-        
+
         $excel->getActiveSheet()->getStyle('A1')->applyFromArray($centeredStyle);
         $excel->getActiveSheet()->getStyle('A2')->applyFromArray($centeredStyle);
 
         $excel->getActiveSheet()->setTitle($reportName);
-        
+
         // Set borders
         $excel->getActiveSheet()
                 ->getStyleByColumnAndRow(0, 4, $maxColumnNumber - 1, $rowCount + 3)
                 ->getBorders()
                 ->getAllBorders()
-                ->setBorderStyle(\PHPExcel_Style_Border::BORDER_MEDIUM);
+                ->setBorderStyle(\PHPExcel_Style_Border::BORDER_THIN);
+
+        // Set table header colors
+        $excel->getActiveSheet()
+                ->getStyleByColumnAndRow(0, 4, $maxColumnNumber - 1, 4)
+                ->getFill()
+                ->applyFromArray([
+                    'type'       => \PHPExcel_Style_Fill::FILL_SOLID,
+                    'startcolor' => [
+                        'rgb' => '192949'
+                    ],
+        ]);
+
+        // Set the font text
+        $excel->getActiveSheet()
+                ->getStyleByColumnAndRow(0, 4, $maxColumnNumber - 1, 4)
+                ->applyFromArray([
+                    'font' => [
+                        'color' => [
+                            'rgb' => 'FFFFFF'
+                        ],
+                    ],
+        ]);
 
         $objWriter = new \PHPExcel_Writer_Excel2007($excel);
         $objWriter->save('php://output');
