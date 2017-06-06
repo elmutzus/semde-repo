@@ -67,5 +67,22 @@ $form->prepare();
         <div class="panel-body">
             <?php echo $this->partial('partial-view/report4-table', ['rows' => $this->reportData]); ?>
         </div>
+        <?php
+        if ($this->reportData != null)
+        {
+            ?>
+            <div class="panel-footer">
+                <div class="row">
+                    <div class="col-sm-12 col-md-12 col-lg-12">
+
+                        <div class="pull-right">
+                            <a id="exportReportBtn" class="btn btn-success btn-sm" target="_blank">Exportar a Excel</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <?php
+        }
+        ?>
     </div>
 </section>
