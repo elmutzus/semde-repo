@@ -469,8 +469,35 @@ class ReportController extends AbstractActionController
 
             return $this->getResponse();
         }
+        elseif ($report == 2)
+        {
+            $data = array();
+
+            $data['career']   = $this->params()->fromQuery('crr');
+            $data['year']     = $this->params()->fromQuery('yr');
+            $data['course']   = $this->params()->fromQuery('crs');
+            $data['semester'] = $this->params()->fromQuery('smstr');
+            $data['dpi']      = $this->params()->fromQuery('dp');
+            $data['nov']      = $this->params()->fromQuery('nv');
+            $data['name']     = $this->params()->fromQuery('nm');
+            $data['lastname'] = $this->params()->fromQuery('lstnm');
+            $data['filterBy'] = $this->params()->fromQuery('fltrby');
+
+            $reportData = $this->reportManager->getReport2Data($data);
+
+            $filteredData = $this->createDataForReport2Export($reportData);
+
+            $this->createExcelFile($filteredData, 'Reporte 2', 'Histórico');
+
+            return $this->getResponse();
+        }
     }
 
+    /**
+     * 
+     * @param type $data
+     * @return array
+     */
     private function createDataForReport1Export($data)
     {
         $limit = sizeof($data);
@@ -513,7 +540,25 @@ class ReportController extends AbstractActionController
 
         return $rootData;
     }
+    
+    /**
+     * 
+     * @param type $data
+     * @return array
+     */
+    private function createDataForReport2Export($data)
+    {
+        array_unshift($data, ['Carné', 'N.O.V.', 'C.U.I.', 'Nombre', 'Promedio']);
+        
+        return $data;
+    }
 
+    /**
+     * 
+     * @param type $data
+     * @param type $reportName
+     * @param type $reportDescription
+     */
     private function createExcelFile($data, $reportName, $reportDescription)
     {
         header("Content-type: application/octet-stream");
@@ -601,7 +646,7 @@ class ReportController extends AbstractActionController
                         ],
                     ],
         ]);
-        
+
         $excel->getActiveSheet()
                 ->getStyleByColumnAndRow(0, 1, 1, 2)
                 ->applyFromArray([

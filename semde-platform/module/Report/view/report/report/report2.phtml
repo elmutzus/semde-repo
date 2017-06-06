@@ -103,6 +103,8 @@ $form->prepare();
         </div>
         <div class="panel-body">
             <?php echo $this->partial('partial-view/report2-table', ['rows' => $this->reportData]); ?>
+            
+            <a id="exportReportBtn" class="btn btn-success btn-xs" target="_blank">Exportar a Excel</a>
         </div>
     </div>
 </section>
@@ -121,6 +123,20 @@ $form->prepare();
 
     $(document).ready(function () {
         showSearchFilters();
+        
+        document.getElementById("exportReportBtn").onclick = function () {
+            window.open("reportExport?rpt=2"
+                    + "&crr=" + $("[name='career']").val()
+                    + "&yr=" + $("[name='year']").val()
+                    + "&crs=" + $("[name='course']").val()
+                    + "&smstr=" + $("[name='semester']").val()
+                    + "&dp=" + $("[name='dpi']").val()
+                    + "&nv=" + $("[name='nov']").val()
+                    + "&nm=" + $("[name='name']").val()
+                    + "&lstnm=" + $("[name='lastname']").val()
+                    + "&fltrby=" + $("[name='filterBy']").val(),
+            "_blank");
+        };
     });
 
     $(function () {
