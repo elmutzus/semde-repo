@@ -601,6 +601,14 @@ class ReportController extends AbstractActionController
                         ],
                     ],
         ]);
+        
+        $excel->getActiveSheet()
+                ->getStyleByColumnAndRow(0, 1, 1, 2)
+                ->applyFromArray([
+                    'font' => [
+                        'bold' => true
+                    ],
+        ]);
 
         $objWriter = new \PHPExcel_Writer_Excel2007($excel);
         $objWriter->save('php://output');
