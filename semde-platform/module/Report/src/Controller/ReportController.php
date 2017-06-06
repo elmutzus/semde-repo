@@ -514,6 +514,27 @@ class ReportController extends AbstractActionController
 
             return $this->getResponse();
         }
+        elseif ($report == 4)
+        {
+            
+        }
+        elseif ($report == 5)
+        {
+            $data = array();
+
+            $data['career']   = $this->params()->fromQuery('crr');
+            $data['year']     = $this->params()->fromQuery('yr');
+            $data['course']   = $this->params()->fromQuery('crs');
+            $data['semester'] = $this->params()->fromQuery('smstr');
+
+            $reportData = $this->reportManager->getReport5Data($data);
+
+            $filteredData = $this->createDataForReport5Export($reportData);
+
+            $this->createExcelFile($filteredData, 'Reporte 5', 'Top de notas de estudiantes por curso');
+
+            return $this->getResponse();
+        }
     }
 
     /**
@@ -582,6 +603,30 @@ class ReportController extends AbstractActionController
      * @return array
      */
     private function createDataForReport3Export($data)
+    {
+        array_unshift($data, ['Carné', 'N.O.V.', 'C.U.I.', 'Nombre', 'Promedio']);
+        
+        return $data;
+    }
+    
+    /**
+     * 
+     * @param type $data
+     * @return array
+     */
+    private function createDataForReport4Export($data)
+    {
+        array_unshift($data, ['Carné', 'N.O.V.', 'C.U.I.', 'Nombre', 'Promedio']);
+        
+        return $data;
+    }
+    
+    /**
+     * 
+     * @param type $data
+     * @return array
+     */
+    private function createDataForReport5Export($data)
     {
         array_unshift($data, ['Carné', 'N.O.V.', 'C.U.I.', 'Nombre', 'Promedio']);
         
