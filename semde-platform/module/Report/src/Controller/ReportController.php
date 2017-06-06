@@ -476,7 +476,7 @@ class ReportController extends AbstractActionController
         $limit = sizeof($data);
 
         $rootData = array();
-        
+
         array_push($rootData, ['Carné', 'N.O.V.', 'C.U.I.', 'Nombre', 'Promedio Anterior', 'Promedio Actual', 'Resultado']);
 
         for ($i = 0; $i < $limit; $i ++)
@@ -517,9 +517,15 @@ class ReportController extends AbstractActionController
     private function createExcelFile($data, $reportName, $reportDescription)
     {
         header("Content-type: application/octet-stream");
-        header("Content-Disposition: attachment; filename=Reporte1.xls");
+        header("Content-Disposition: attachment; filename=Reporte.xls");
         header("Pragma: no-cache");
         header("Expires: 0");
+
+        $centeredStyle = [
+            'alignment' => [
+                'horizontal' => \PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
+            ]
+        ];
 
         $excel = new \PHPExcel();
 
@@ -531,43 +537,48 @@ class ReportController extends AbstractActionController
 
         $excel->setActiveSheetIndex(0);
 
+        // Set report title
+        $excel->getActiveSheet()->setCellValue('A1', $reportName);
+        $excel->getActiveSheet()->setCellValue('A2', $reportDescription);
+
         $rowCount = sizeof($data);
 
-        $activeSheet = $excel->getActiveSheet();
-
-        $i = 1;
-        $j = 1;
+        $rowNumber    = 3;
+        $columnNumber = 0;
+        $maxColumnNumber = 0;
 
         foreach ($data as $row)
         {
-            $i++;
-            $j = 1;
+            $rowNumber++;
+            $columnNumber = 0;
+            
+            if($maxColumnNumber == 0)
+            {
+                $maxColumnNumber = sizeof($row);
+            }
 
             foreach ($row as $column)
             {
-                $excel->getActiveSheet()->setCellValueByColumnAndRow($j, $i, $column);
-                $j++;
+                $excel->getActiveSheet()->setCellValueByColumnAndRow($columnNumber, $rowNumber, $column);
+                $excel->getActiveSheet()->getColumnDimensionByColumn($columnNumber)->setAutoSize(true);
+                $columnNumber++;
             }
         }
-
-        /* for ($i = 0; $i < $rowCount; $i++)
-          {
-          $row = $data[$i];
-
-          $columnCount = sizeof($row);
-
-          for ($j = 0; $j < $columnCount; $j++)
-          {
-          $activeSheet->setCellValueByColumnAndRow(($j + 2), ($i + 2), $row[$j]);
-          }
-          } */
-
-        /* $excel->getActiveSheet()->SetCellValue('A1', 'Hello');
-          $excel->getActiveSheet()->SetCellValue('B2', 'world!');
-          $excel->getActiveSheet()->SetCellValue('C1', 'Hello');
-          $excel->getActiveSheet()->SetCellValue('D2', 'world!'); */
+        
+        $excel->getActiveSheet()->mergeCellsByColumnAndRow(0, 1, $maxColumnNumber - 1, 1);
+        $excel->getActiveSheet()->mergeCellsByColumnAndRow(0, 2, $maxColumnNumber - 1, 2);
+        
+        $excel->getActiveSheet()->getStyle('A1')->applyFromArray($centeredStyle);
+        $excel->getActiveSheet()->getStyle('A2')->applyFromArray($centeredStyle);
 
         $excel->getActiveSheet()->setTitle($reportName);
+        
+        // Set borders
+        $excel->getActiveSheet()
+                ->getStyleByColumnAndRow(0, 4, $maxColumnNumber - 1, $rowCount + 3)
+                ->getBorders()
+                ->getAllBorders()
+                ->setBorderStyle(\PHPExcel_Style_Border::BORDER_MEDIUM);
 
         $objWriter = new \PHPExcel_Writer_Excel2007($excel);
         $objWriter->save('php://output');
