@@ -160,9 +160,11 @@ class SurveyController extends AbstractActionController
      */
     private function validateAuthentication($id, $idSecret)
     {
-        if(strlen($id) > 0)
+        if (strlen($id) > 0)
+        {
             return isIdSecretValid($id, $idSecret);
-        
+        }
+
         return false;
     }
 
