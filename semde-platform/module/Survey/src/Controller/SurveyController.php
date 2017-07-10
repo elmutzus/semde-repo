@@ -179,7 +179,7 @@ class SurveyController extends AbstractActionController
 
         $id       = $this->params()->fromRoute('id', '-');
         $idUser   = $id;
-        $idSecret = '';
+        $idSecret = $this->params()->fromRoute('idSecret', '-');
 
         if (!$this->validateAuthentication($idUser, $idSecret))
         {
@@ -223,7 +223,7 @@ class SurveyController extends AbstractActionController
 
         $id       = $this->params()->fromRoute('id', '-');
         $idUser   = $id;
-        $idSecret = '';
+        $idSecret = $this->params()->fromRoute('idSecret', '-');
 
         if (!$this->validateAuthentication($idUser, $idSecret))
         {
@@ -268,7 +268,7 @@ class SurveyController extends AbstractActionController
 
         $id       = $this->params()->fromRoute('id', '-');
         $idUser   = $id;
-        $idSecret = '';
+        $idSecret = $this->params()->fromRoute('idSecret', '-');
 
         if (!$this->validateAuthentication($idUser, $idSecret))
         {
@@ -317,7 +317,7 @@ class SurveyController extends AbstractActionController
 
         $id       = $this->params()->fromRoute('id', '-');
         $idUser   = $id;
-        $idSecret = '';
+        $idSecret = $this->params()->fromRoute('idSecret', '-');
 
         if (!$this->validateAuthentication($idUser, $idSecret))
         {
@@ -366,7 +366,7 @@ class SurveyController extends AbstractActionController
 
         $id         = $this->params()->fromRoute('id', '-');
         $idUser     = $id;
-        $idSecret   = '';
+        $idSecret = $this->params()->fromRoute('idSecret', '-');
         $parentType = 'F';
 
         if (!$this->validateAuthentication($idUser, $idSecret))
@@ -413,7 +413,7 @@ class SurveyController extends AbstractActionController
 
         $id         = $this->params()->fromRoute('id', '-');
         $idUser     = $id;
-        $idSecret   = '';
+        $idSecret = $this->params()->fromRoute('idSecret', '-');
         $parentType = 'M';
 
         if (!$this->validateAuthentication($idUser, $idSecret))
@@ -460,7 +460,7 @@ class SurveyController extends AbstractActionController
 
         $id       = $this->params()->fromRoute('id', '-');
         $idUser   = $id;
-        $idSecret = '';
+        $idSecret = $this->params()->fromRoute('idSecret', '-');
 
         if (!$this->validateAuthentication($idUser, $idSecret))
         {
@@ -505,7 +505,7 @@ class SurveyController extends AbstractActionController
 
         $id       = $this->params()->fromRoute('id', '-');
         $idUser   = $id;
-        $idSecret = '';
+        $idSecret = $this->params()->fromRoute('idSecret', '-');
 
         if (!$this->validateAuthentication($idUser, $idSecret))
         {
@@ -554,7 +554,7 @@ class SurveyController extends AbstractActionController
 
         $id       = $this->params()->fromRoute('id', '-');
         $idUser   = $id;
-        $idSecret = '';
+        $idSecret = $this->params()->fromRoute('idSecret', '-');
 
         if (!$this->validateAuthentication($idUser, $idSecret))
         {
@@ -603,7 +603,7 @@ class SurveyController extends AbstractActionController
 
         $id       = $this->params()->fromRoute('id', '-');
         $idUser   = $id;
-        $idSecret = '';
+        $idSecret = $this->params()->fromRoute('idSecret', '-');
 
         if (!$this->validateAuthentication($idUser, $idSecret))
         {
