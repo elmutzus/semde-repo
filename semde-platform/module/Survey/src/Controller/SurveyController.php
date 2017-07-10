@@ -31,7 +31,7 @@ use Survey\Controller\Helper\StudentParentControllerHelper;
 use Survey\Controller\Helper\StudentBrotherControllerHelper;
 use Survey\Controller\Helper\StudentMateControllerHelper;
 use Survey\Controller\Helper\StudentSocialLifeControllerHelper;
-use Zend\View\Model\JsonModel;
+use Zend\Crypt\Password\Bcrypt;
 
 /**
  * Description of SurveyController
@@ -120,6 +120,9 @@ class SurveyController extends AbstractActionController
         $this->studentSocialLifeInstance       = new StudentSocialLifeControllerHelper($this->surveyManager);
     }
 
+    /**
+     * 
+     */
     private function setLayoutVariables()
     {
         $layout = $this->layout();
@@ -130,15 +133,44 @@ class SurveyController extends AbstractActionController
         $layout->setVariable('currentUser', $this->sessionContainer->currentUserName);
         $layout->setVariable('currentUserRole', $this->sessionContainer->currentUserRole);
     }
-
-    private function validateAuthentication($id, $idSecret)
-    {
-        if ($id != '-')
-        {
-            return true;
-        }
+    
+    /**
+     * 
+     * @param type $id
+     * @param type $idSecret
+     * @return boolean
+     */
+    private function isIdSecretValid($id, $idSecret){
+        
+        $now = new DateTime();
+        
+        $realKeyString = 'Y' . $now->format('Y') . 'W' . $now->format('W') . 'C' . $id . 'GwH28';
+        
+        $bcrypt     = new Bcrypt();
+        $realKey = $bcrypt->create($realKeyString);
+        
+        return $realKey == $idSecret;
     }
 
+    /**
+     * 
+     * @param type $id
+     * @param type $idSecret
+     * @return boolean
+     */
+    private function validateAuthentication($id, $idSecret)
+    {
+        if(strlen($id) > 0)
+            return isIdSecretValid($idSecret);
+        
+        return false;
+    }
+
+    /**
+     * 
+     * @return ViewModel
+     * @throws \Exception
+     */
     public function addOrUpdateStudentAction()
     {
         $this->setLayoutVariables();
