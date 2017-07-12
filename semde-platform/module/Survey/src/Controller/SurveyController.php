@@ -142,7 +142,7 @@ class SurveyController extends AbstractActionController
      */
     private function isIdSecretValid($id, $idSecret){
         
-        $now = new DateTime();
+        $now = new \DateTime();
         
         $realKeyString = 'Y' . $now->format('Y') . 'W' . $now->format('W') . 'C' . $id . 'GwH28';
         
