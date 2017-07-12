@@ -172,7 +172,7 @@ class PageForm extends Form
                     'name'    => 'StringLength',
                     'options' => [
                         'min' => 1,
-                        'max' => 50,
+                        'max' => 500,
                     ],
                 ],
             ],

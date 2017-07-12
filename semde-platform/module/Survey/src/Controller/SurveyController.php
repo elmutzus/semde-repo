@@ -133,23 +133,23 @@ class SurveyController extends AbstractActionController
         $layout->setVariable('currentUser', $this->sessionContainer->currentUserName);
         $layout->setVariable('currentUserRole', $this->sessionContainer->currentUserRole);
     }
-    
+
     /**
      * 
      * @param type $id
      * @param type $idSecret
      * @return boolean
      */
-    private function isIdSecretValid($id, $idSecret){
-        
+    private function isIdSecretValid($id, $idSecret)
+    {
+
         $now = new \DateTime();
-        
+
         $realKeyString = 'Y' . $now->format('Y') . 'W' . $now->format('W') . 'C' . $id . 'GwH28';
         
-        $bcrypt     = new Bcrypt();
-        $realKey = $bcrypt->create($realKeyString);
+        $encryptedKey = base64_decode(urldecode($idSecret));
         
-        return $realKey == $idSecret;
+        return $realKeyString == $encryptedKey;
     }
 
     /**
@@ -177,9 +177,8 @@ class SurveyController extends AbstractActionController
     {
         $this->setLayoutVariables();
 
-        $id       = $this->params()->fromRoute('id', '-');
-        $idUser   = $id;
-        $idSecret = $this->params()->fromRoute('idSecret', '-');
+        $idUser   = $this->params()->fromRoute('id', '-');
+        $idSecret = $this->params()->fromQuery('idSecret', '-');
 
         if (!$this->validateAuthentication($idUser, $idSecret))
         {
@@ -221,9 +220,8 @@ class SurveyController extends AbstractActionController
     {
         $this->setLayoutVariables();
 
-        $id       = $this->params()->fromRoute('id', '-');
-        $idUser   = $id;
-        $idSecret = $this->params()->fromRoute('idSecret', '-');
+        $idUser   = $this->params()->fromRoute('id', '-');
+        $idSecret = $this->params()->fromQuery('idSecret', '-');
 
         if (!$this->validateAuthentication($idUser, $idSecret))
         {
@@ -266,9 +264,8 @@ class SurveyController extends AbstractActionController
     {
         $this->setLayoutVariables();
 
-        $id       = $this->params()->fromRoute('id', '-');
-        $idUser   = $id;
-        $idSecret = $this->params()->fromRoute('idSecret', '-');
+        $idUser   = $this->params()->fromRoute('id', '-');
+        $idSecret = $this->params()->fromQuery('idSecret', '-');
 
         if (!$this->validateAuthentication($idUser, $idSecret))
         {
@@ -315,9 +312,8 @@ class SurveyController extends AbstractActionController
     {
         $this->setLayoutVariables();
 
-        $id       = $this->params()->fromRoute('id', '-');
-        $idUser   = $id;
-        $idSecret = $this->params()->fromRoute('idSecret', '-');
+        $idUser   = $this->params()->fromRoute('id', '-');
+        $idSecret = $this->params()->fromQuery('idSecret', '-');
 
         if (!$this->validateAuthentication($idUser, $idSecret))
         {
@@ -364,9 +360,8 @@ class SurveyController extends AbstractActionController
     {
         $this->setLayoutVariables();
 
-        $id         = $this->params()->fromRoute('id', '-');
-        $idUser     = $id;
-        $idSecret = $this->params()->fromRoute('idSecret', '-');
+        $idUser     = $this->params()->fromRoute('id', '-');
+        $idSecret   = $this->params()->fromQuery('idSecret', '-');
         $parentType = 'F';
 
         if (!$this->validateAuthentication($idUser, $idSecret))
@@ -411,9 +406,8 @@ class SurveyController extends AbstractActionController
     {
         $this->setLayoutVariables();
 
-        $id         = $this->params()->fromRoute('id', '-');
-        $idUser     = $id;
-        $idSecret = $this->params()->fromRoute('idSecret', '-');
+        $idUser     = $this->params()->fromRoute('id', '-');
+        $idSecret   = $this->params()->fromQuery('idSecret', '-');
         $parentType = 'M';
 
         if (!$this->validateAuthentication($idUser, $idSecret))
@@ -458,9 +452,8 @@ class SurveyController extends AbstractActionController
     {
         $this->setLayoutVariables();
 
-        $id       = $this->params()->fromRoute('id', '-');
-        $idUser   = $id;
-        $idSecret = $this->params()->fromRoute('idSecret', '-');
+        $idUser   = $this->params()->fromRoute('id', '-');
+        $idSecret = $this->params()->fromQuery('idSecret', '-');
 
         if (!$this->validateAuthentication($idUser, $idSecret))
         {
@@ -503,9 +496,8 @@ class SurveyController extends AbstractActionController
     {
         $this->setLayoutVariables();
 
-        $id       = $this->params()->fromRoute('id', '-');
-        $idUser   = $id;
-        $idSecret = $this->params()->fromRoute('idSecret', '-');
+        $idUser   = $this->params()->fromRoute('id', '-');
+        $idSecret = $this->params()->fromQuery('idSecret', '-');
 
         if (!$this->validateAuthentication($idUser, $idSecret))
         {
@@ -552,9 +544,8 @@ class SurveyController extends AbstractActionController
     {
         $this->setLayoutVariables();
 
-        $id       = $this->params()->fromRoute('id', '-');
-        $idUser   = $id;
-        $idSecret = $this->params()->fromRoute('idSecret', '-');
+        $idUser   = $this->params()->fromRoute('id', '-');
+        $idSecret = $this->params()->fromQuery('idSecret', '-');
 
         if (!$this->validateAuthentication($idUser, $idSecret))
         {
@@ -601,9 +592,8 @@ class SurveyController extends AbstractActionController
     {
         $this->setLayoutVariables();
 
-        $id       = $this->params()->fromRoute('id', '-');
-        $idUser   = $id;
-        $idSecret = $this->params()->fromRoute('idSecret', '-');
+        $idUser   = $this->params()->fromRoute('id', '-');
+        $idSecret = $this->params()->fromQuery('idSecret', '-');
 
         if (!$this->validateAuthentication($idUser, $idSecret))
         {
