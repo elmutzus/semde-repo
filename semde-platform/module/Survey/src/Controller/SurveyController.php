@@ -162,7 +162,7 @@ class SurveyController extends AbstractActionController
     {
         if (\strlen($id) > 0)
         {
-            return isIdSecretValid($id, $idSecret);
+            return $this->isIdSecretValid($id, $idSecret);
         }
 
         return false;
