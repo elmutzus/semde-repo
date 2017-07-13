@@ -59,11 +59,12 @@ class Report4ManagerHelper
      * @param type $student
      * @return type
      */
-    public function getDetail($student){
-        $storedProcedureQuery = 'CALL SP_RPT4_RETRIEVEDETAIL(:student)';
+    public function getDetail($student, $nov){
+        $storedProcedureQuery = 'CALL SP_RPT4_RETRIEVEDETAIL(:student, :nov)';
 
         $statement = $this->entityManager->getConnection()->prepare($storedProcedureQuery);
         $statement->bindParam(':student', $student);
+        $statement->bindParam(':nov', $nov);
 
         $statement->execute();
 

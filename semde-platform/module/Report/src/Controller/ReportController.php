@@ -367,7 +367,9 @@ class ReportController extends AbstractActionController
 
         $student      = $this->params()->fromQuery('si');
         $studentName  = $this->params()->fromQuery('sn');
-        $reportDetail = $this->reportManager->getReport4Detail($student);
+        $studentNov   = $this->params()->fromQuery('nv');
+        
+        $reportDetail = $this->reportManager->getReport4Detail($student, $studentNov);
 
         return new ViewModel([
             'studentId'    => $student,
@@ -495,16 +497,16 @@ class ReportController extends AbstractActionController
         {
             $data = array();
 
-            $data['career']   = $this->params()->fromQuery('crr');
-            $data['year']     = $this->params()->fromQuery('yr');
-            $data['course']   = $this->params()->fromQuery('crs');
-            $data['semester'] = $this->params()->fromQuery('smstr');
-            $data['dpi']      = $this->params()->fromQuery('dp');
-            $data['nov']      = $this->params()->fromQuery('nv');
-            $data['name']     = $this->params()->fromQuery('nm');
-            $data['lastname'] = $this->params()->fromQuery('lstnm');
+            $data['career']      = $this->params()->fromQuery('crr');
+            $data['year']        = $this->params()->fromQuery('yr');
+            $data['course']      = $this->params()->fromQuery('crs');
+            $data['semester']    = $this->params()->fromQuery('smstr');
+            $data['dpi']         = $this->params()->fromQuery('dp');
+            $data['nov']         = $this->params()->fromQuery('nv');
+            $data['name']        = $this->params()->fromQuery('nm');
+            $data['lastname']    = $this->params()->fromQuery('lstnm');
             $data['performance'] = $this->params()->fromQuery('prfrmnc');
-            $data['filterBy'] = $this->params()->fromQuery('fltrby');
+            $data['filterBy']    = $this->params()->fromQuery('fltrby');
 
             $reportData = $this->reportManager->getReport3Data($data);
 
@@ -584,7 +586,7 @@ class ReportController extends AbstractActionController
 
         return $rootData;
     }
-    
+
     /**
      * 
      * @param type $data
@@ -593,10 +595,10 @@ class ReportController extends AbstractActionController
     private function createDataForReport2Export($data)
     {
         array_unshift($data, ['Carné', 'N.O.V.', 'C.U.I.', 'Nombre', 'Promedio']);
-        
+
         return $data;
     }
-    
+
     /**
      * 
      * @param type $data
@@ -605,10 +607,10 @@ class ReportController extends AbstractActionController
     private function createDataForReport3Export($data)
     {
         array_unshift($data, ['Carné', 'N.O.V.', 'C.U.I.', 'Nombre', 'Promedio']);
-        
+
         return $data;
     }
-    
+
     /**
      * 
      * @param type $data
@@ -617,10 +619,10 @@ class ReportController extends AbstractActionController
     private function createDataForReport4Export($data)
     {
         array_unshift($data, ['Carné', 'N.O.V.', 'C.U.I.', 'Nombre', 'Promedio']);
-        
+
         return $data;
     }
-    
+
     /**
      * 
      * @param type $data
@@ -629,7 +631,7 @@ class ReportController extends AbstractActionController
     private function createDataForReport5Export($data)
     {
         array_unshift($data, ['Carné', 'N.O.V.', 'C.U.I.', 'Nombre', 'Promedio']);
-        
+
         return $data;
     }
 

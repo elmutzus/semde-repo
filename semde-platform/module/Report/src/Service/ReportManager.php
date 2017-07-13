@@ -255,9 +255,9 @@ class ReportManager
      * @param type $student
      * @return type
      */
-    public function getReport4Detail($student)
+    public function getReport4Detail($student, $nov)
     {
-        return $this->report4Helper->getDetail($student);
+        return $this->report4Helper->getDetail($student, $nov);
     }
 
     /**
