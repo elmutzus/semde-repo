@@ -31,7 +31,6 @@ use Survey\Controller\Helper\StudentParentControllerHelper;
 use Survey\Controller\Helper\StudentBrotherControllerHelper;
 use Survey\Controller\Helper\StudentMateControllerHelper;
 use Survey\Controller\Helper\StudentSocialLifeControllerHelper;
-use Zend\Crypt\Password\Bcrypt;
 
 /**
  * Description of SurveyController
@@ -146,9 +145,9 @@ class SurveyController extends AbstractActionController
         $now = new \DateTime();
 
         $realKeyString = 'Y' . $now->format('Y') . 'W' . $now->format('W') . 'C' . $id . 'GwH28';
-        
+
         $encryptedKey = base64_decode(urldecode($idSecret));
-        
+
         return $realKeyString == $encryptedKey;
     }
 
@@ -624,6 +623,15 @@ class SurveyController extends AbstractActionController
         $view->setVariable('towns', $towns);
 
         return $view;
+    }
+
+    /**
+     * 
+     * @return type
+     */
+    public function validateWeekAction()
+    {
+        return $this->surveyManager->getWeekValidation();
     }
 
 }

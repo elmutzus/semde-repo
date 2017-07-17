@@ -14,6 +14,7 @@
 namespace Survey;
 
 use Zend\Router\Http\Segment;
+use Zend\Router\Http\Literal;
 use Doctrine\ORM\Mapping\Driver\AnnotationDriver;
 
 return [
@@ -30,6 +31,17 @@ return [
                     'defaults'    => [
                         'controller' => Controller\SurveyController::class,
                         'action'     => 'addOrUpdateStudent',
+                    ],
+                ],
+            ],
+            'surveyValidationRoute' => [
+                'type'    => Literal::class,
+                'options' => [
+                    'route'       => '/surveyValidation',
+                    'constraints' => [ ],
+                    'defaults'    => [
+                        'controller' => Controller\SurveyController::class,
+                        'action'     => 'validateWeek',
                     ],
                 ],
             ],

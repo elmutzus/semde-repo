@@ -22,6 +22,7 @@ use Survey\Service\Helper\StudentParentManagerHelper;
 use Survey\Service\Helper\StudentBrotherManagerHelper;
 use Survey\Service\Helper\StudentMateManagerHelper;
 use Survey\Service\Helper\StudentSocialLifeManagerHelper;
+use Survey\Service\Helper\ScheduleValidatorManagerHelper;
 
 /**
  * Description of SurveyManager
@@ -92,6 +93,12 @@ class SurveyManager
     private $studentSocialLifeHelper;
 
     /**
+     *
+     * @var type 
+     */
+    private $scheduleValidatorHelper;
+
+    /**
      * 
      * @param type $entityManager
      */
@@ -107,6 +114,7 @@ class SurveyManager
         $this->studentBrotherHelper          = new StudentBrotherManagerHelper($entityManager);
         $this->studentMateHelper             = new StudentMateManagerHelper($entityManager);
         $this->studentSocialLifeHelper       = new StudentSocialLifeManagerHelper($entityManager);
+        $this->scheduleValidatorHelper = new ScheduleValidatorManagerHelper($entityManager);
     }
 
     public function getEconomicHelpOptions()
@@ -352,4 +360,14 @@ class SurveyManager
     {
         $this->studentSocialLifeHelper->addOrUpdateStudentSocialLife($newStudentSocialLife);
     }
+
+    /**
+     * 
+     * @return type
+     */
+    public function getWeekValidation()
+    {
+        return $this->scheduleValidatorHelper->validateWeek();
+    }
+
 }
