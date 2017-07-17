@@ -522,8 +522,8 @@ class ReportController extends AbstractActionController
 
             $data['dpi'] = $this->params()->fromQuery('dpi');
             $data['nov'] = $this->params()->fromQuery('nov');
-            $data['nm']  = $this->params()->fromQuery('nm');
-            $data['lnm'] = $this->params()->fromQuery('lnm');
+            $data['name']  = $this->params()->fromQuery('nm');
+            $data['lastname'] = $this->params()->fromQuery('lnm');
 
             $reportData = $this->reportManager->getReport4Data($data);
 
