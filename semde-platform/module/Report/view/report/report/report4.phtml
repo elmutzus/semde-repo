@@ -86,3 +86,18 @@ $form->prepare();
         ?>
     </div>
 </section>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        document.getElementById("exportReportBtn").onclick = function () {
+            window.open("reportExport?rpt=4"
+                    + "&dpi=" + $("[name='dpi']").val()
+                    + "&nov=" + $("[name='nov']").val()
+                    + "&nm=" + $("[name='name']").val()
+                    + "&lnm=" + $("[name='lastname']").val(),
+                    "_blank");
+        };
+    });
+
+</script>

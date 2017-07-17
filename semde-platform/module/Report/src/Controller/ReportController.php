@@ -365,10 +365,10 @@ class ReportController extends AbstractActionController
             throw new \Exception('No puede acceder a la información solicitada');
         }
 
-        $student      = $this->params()->fromQuery('si');
-        $studentName  = $this->params()->fromQuery('sn');
-        $studentNov   = $this->params()->fromQuery('nv');
-        
+        $student     = $this->params()->fromQuery('si');
+        $studentName = $this->params()->fromQuery('sn');
+        $studentNov  = $this->params()->fromQuery('nv');
+
         $reportDetail = $this->reportManager->getReport4Detail($student, $studentNov);
 
         return new ViewModel([
@@ -518,7 +518,20 @@ class ReportController extends AbstractActionController
         }
         elseif ($report == 4)
         {
-            
+            $data = array();
+
+            $data['dpi'] = $this->params()->fromQuery('dpi');
+            $data['nov'] = $this->params()->fromQuery('nov');
+            $data['nm']  = $this->params()->fromQuery('nm');
+            $data['lnm'] = $this->params()->fromQuery('lnm');
+
+            $reportData = $this->reportManager->getReport4Data($data);
+
+            $filteredData = $this->createDataForReport4Export($reportData);
+
+            $this->createExcelFile($filteredData, 'Reporte 4', 'Prueba específica VS. Rendimiento académico');
+
+            return $this->getResponse();
         }
         elseif ($report == 5)
         {
@@ -618,7 +631,7 @@ class ReportController extends AbstractActionController
      */
     private function createDataForReport4Export($data)
     {
-        array_unshift($data, ['Carné', 'N.O.V.', 'C.U.I.', 'Nombre', 'Promedio']);
+        array_unshift($data, ['Carné', 'N.O.V.', 'C.U.I.', 'Nombre']);
 
         return $data;
     }
