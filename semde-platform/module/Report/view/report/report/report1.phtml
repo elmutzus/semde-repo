@@ -103,23 +103,16 @@ $form->prepare();
         <div class="panel-body">
             <?php echo $this->partial('partial-view/report1-table', ['rows' => $this->reportData]); ?>
         </div>
-        <?php
-        if ($this->reportData != null)
-        {
-            ?>
-            <div class="panel-footer">
-                <div class="row">
-                    <div class="col-sm-12 col-md-12 col-lg-12">
+        <div class="panel-footer">
+            <div class="row">
+                <div class="col-sm-12 col-md-12 col-lg-12">
 
-                        <div class="pull-right">
-                            <a id="exportReportBtn" class="btn btn-success btn-sm" target="_blank">Exportar a Excel</a>
-                        </div>
+                    <div class="pull-right">
+                        <a id="exportReportBtn" class="btn btn-success btn-sm" target="_blank">Exportar a Excel</a>
                     </div>
                 </div>
             </div>
-            <?php
-        }
-        ?>
+        </div>
     </div>
 </section>
 
@@ -140,15 +133,15 @@ $form->prepare();
 
         document.getElementById("exportReportBtn").onclick = function () {
             window.open("reportExport?rpt=1"
-                    + "&crr=" + $("[name='career']").val()
-                    + "&yr=" + $("[name='year']").val()
-                    + "&crs=" + $("[name='course']").val()
-                    + "&smstr=" + $("[name='semester']").val()
-                    + "&dp=" + $("[name='dpi']").val()
-                    + "&nv=" + $("[name='nov']").val()
-                    + "&nm=" + $("[name='name']").val()
-                    + "&lstnm=" + $("[name='lastname']").val()
-                    + "&fltrby=" + $("[name='filterBy']").val(),
+                        + "&crr=" + $("[name='career']").val()
+                        + "&yr=" + $("[name='year']").val()
+                        + "&crs=" + $("[name='course']").val()
+                        + "&smstr=" + $("[name='semester']").val()
+                        + "&dp=" + $("[name='dpi']").val()
+                        + "&nv=" + $("[name='nov']").val()
+                        + "&nm=" + $("[name='name']").val()
+                        + "&lstnm=" + $("[name='lastname']").val()
+                        + "&fltrby=" + $("[name='filterBy']").val(),
                     "_blank");
         };
     });
