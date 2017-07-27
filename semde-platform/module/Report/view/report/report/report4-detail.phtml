@@ -9,6 +9,12 @@
  * Contributors:
  *    Elder Mutzus <elmutzus@gmail.com> - initial API and implementation and/or initial documentation
  */
+$form->setAttribute('action', $this->url('reportsManagementRoute', ['action' => 'report4Detail',
+            'id'     => $this->id]) .
+        '?si=' . urlencode($this->studentId) .
+        '&sn=' . urlencode($this->studentName) .
+        '&nv=' . urlencode($this->studentNov));
+$form->prepare();
 ?>
 
 <div class="panel panel-md panel-primary">
@@ -20,15 +26,32 @@
             <div class="col-sm-4 col-md-4 col-lg-4">
                 <div class="form-group">
                     <label for="studentId" class="control-label">Carn&eacute;</label>
-                    <input id="studentId" name="studentId" class="form-control" type="number" value="<?= $this->studentId; ?>" disabled="true" />
+                    <input id="studentId" name="studentId" class="form-control" type="number" value="<?= urldecode($this->studentId); ?>" disabled="true" />
                 </div>
             </div>
             <div class="col-sm-8 col-md-8 col-lg-8">
                 <div class="form-group">
                     <label for="studentName" class="control-label">Nombre</label>
-                    <input type="text" class="form-control" id="studentName" name="studentName" value="<?= $this->studentName; ?>" disabled="true" />
+                    <input type="text" class="form-control" id="studentName" name="studentName" value="<?= urldecode($this->studentName); ?>" disabled="true" />
                 </div>
             </div>
+        </div>
+        <div class="row">
+            <?= $this->form()->openTag($form); ?>
+            <div class="col-sm-10 col-md-10 col-lg-10">
+                <div class="form-group">
+                    <?= $this->formLabel($form->get('areaType')); ?>
+                    <?= $this->formElement($form->get('areaType')); ?>
+                    <?= $this->formElementErrors($form->get('areaType'), ['class' => 'alert-danger']); ?>
+                </div>
+            </div>
+            <div class="col-sm-2 col-md-2 col-lg-2">
+                <div class="form-group">
+                    <label>&nbsp;</label>
+                    <?= $this->formElement($form->get('submit')); ?>
+                </div>
+            </div>
+            <?= $this->form()->closeTag(); ?>
         </div>
         <div class="row">
             <div id="chart_div" class="chart"></div>
@@ -51,8 +74,9 @@
         // Create the data table.
         var data = new google.visualization.DataTable();
         data.addColumn('string', 'Area');
-        data.addColumn('number', 'Promedio');
-        data.addColumn({ type: 'string', role: 'style' });
+        data.addColumn('number', 'Total obtenido');
+        data.addColumn({type: 'string', role: 'style'});
+        data.addColumn({type: 'string', role: 'tooltip'});
 
 <?php
 if ($this->reportDetail != null && sizeof($this->reportDetail) > 0)
@@ -61,26 +85,32 @@ if ($this->reportDetail != null && sizeof($this->reportDetail) > 0)
             data.addRows([
     <?php
     $limit = sizeof($this->reportDetail);
+    
+    $areaType = "";
 
     for ($i = 0; $i < $limit; $i++)
     {
         $row = $this->reportDetail[$i];
 
-        $type = $row['type'];
+        $type  = $row['type'];
         $color = '';
+        $description = '';
 
-        if ($type == 1)
+        if ($type == 2)
         {
-            $type = ' Actual';
+            $type  = '';
             $color = ', \'color: #2066C8\'';
+            $description = ', \'' . $row['description'] . '\'';
         }
         else
         {
-            $type = ' Esperado';
+            $type  = ' Esperado';
             $color = ', \'color: green\'';
+            $areaType = $row['name'];
+            $description = ', \'Obtenido en Pruebas Específicas: ' . $row['total'] . ' \'';
         }
 
-        echo('[\'' . $row['area'] . $type . '\',' . $row['total'] . $color . ']');
+        echo('[\'' . $row['name'] . $type . '\',' . $row['total'] . $color . $description . ']');
 
         if ($i != ($limit - 1))
         {
@@ -96,9 +126,10 @@ if ($this->reportDetail != null && sizeof($this->reportDetail) > 0)
 
         // Set chart options
         var options = {
-            title: 'Comparativo de resultados',
-            hAxis: {title: 'Promedios'},
-            height: 500,
+            title: 'Comparativo de resultados <?=$areaType?>',
+            hAxis: {title: 'Total obtenido'},
+            vAxis: {title: 'Cursos'},
+            height: 750,
         };
 
         // Instantiate and draw our chart, passing in some options.

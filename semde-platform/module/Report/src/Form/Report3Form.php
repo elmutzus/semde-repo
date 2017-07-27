@@ -27,7 +27,7 @@ class Report3Form extends Form
     public function __construct()
     {
         // Define form name
-        parent::__construct('report1_form');
+        parent::__construct('report3_form');
 
         // Add form elements
         $this->addElements();

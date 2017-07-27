@@ -20,12 +20,13 @@ namespace Report\Service\Helper;
  */
 class Report4ManagerHelper
 {
+
     /**
      *
      * @var type 
      */
     private $entityManager;
-    
+
     /**
      * 
      * @param type $entityManager
@@ -34,7 +35,7 @@ class Report4ManagerHelper
     {
         $this->entityManager = $entityManager;
     }
-    
+
     /**
      * 
      * @param type $form
@@ -53,16 +54,18 @@ class Report4ManagerHelper
 
         return $statement->fetchAll();
     }
-    
+
     /**
      * 
      * @param type $student
      * @return type
      */
-    public function getDetail($student, $nov){
-        $storedProcedureQuery = 'CALL SP_RPT4_RETRIEVEDETAIL(:student, :nov)';
+    public function getDetail($areaType, $student, $nov)
+    {
+        $storedProcedureQuery = 'CALL SP_RPT4_RETRIEVEDETAIL(:areaType, :student, :nov)';
 
         $statement = $this->entityManager->getConnection()->prepare($storedProcedureQuery);
+        $statement->bindParam(':areaType', $areaType);
         $statement->bindParam(':student', $student);
         $statement->bindParam(':nov', $nov);
 
@@ -70,4 +73,34 @@ class Report4ManagerHelper
 
         return $statement->fetchAll();
     }
+
+    /**
+     * 
+     * @param type $student
+     * @return type
+     */
+    public function getAvailableAreasPerStudent($student)
+    {
+        $storedProcedureQuery = 'CALL SP_RPT4_RETRIEVEAREAS(:student)';
+
+        $statement = $this->entityManager->getConnection()->prepare($storedProcedureQuery);
+        $statement->bindParam(':student', $student);
+
+        $statement->execute();
+
+        $allItems = $statement->fetchAll();
+                
+        $options = array();
+
+        if ($allItems != null)
+        {
+            foreach ($allItems as $item)
+            {
+                $options[$item['area']] = $item['area'];
+            }
+        }
+
+        return $options;
+    }
+
 }

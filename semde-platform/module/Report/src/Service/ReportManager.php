@@ -51,19 +51,19 @@ class ReportManager
      * @var type 
      */
     private $report2Helper;
-    
+
     /**
      *
      * @var type 
      */
     private $report3Helper;
-    
+
     /**
      *
      * @var type 
      */
     private $report4Helper;
-    
+
     /**
      *
      * @var type 
@@ -219,7 +219,7 @@ class ReportManager
     {
         return $this->report2Helper->getDetail($student);
     }
-    
+
     /**
      * 
      * @param type $data
@@ -239,7 +239,7 @@ class ReportManager
     {
         return $this->report3Helper->getDetail($student);
     }
-    
+
     /**
      * 
      * @param type $data
@@ -255,9 +255,19 @@ class ReportManager
      * @param type $student
      * @return type
      */
-    public function getReport4Detail($student, $nov)
+    public function getReport4Detail($areaType, $student, $nov)
     {
-        return $this->report4Helper->getDetail($student, $nov);
+        return $this->report4Helper->getDetail($areaType, $student, $nov);
+    }
+
+    /**
+     * 
+     * @param type $student
+     * @return type
+     */
+    public function getReport4AvailableAreas($student)
+    {
+        return $this->report4Helper->getAvailableAreasPerStudent($student);
     }
 
     /**
@@ -269,7 +279,7 @@ class ReportManager
     {
         return $this->report5Helper->getQueryData($data);
     }
-    
+
     /**
      * 
      * @param type $student
@@ -279,4 +289,5 @@ class ReportManager
     {
         return $this->report5Helper->getDetail($student);
     }
+
 }

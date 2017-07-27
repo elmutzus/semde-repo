@@ -20,6 +20,7 @@ namespace Report\Controller\Helper;
  */
 class AuxiliaryControllerHelper
 {
+
     /**
      *
      * @var type 
@@ -34,7 +35,7 @@ class AuxiliaryControllerHelper
     {
         $this->surveyManager = $entityManager;
     }
-    
+
     /**
      * 
      * @param type $form
@@ -47,7 +48,7 @@ class AuxiliaryControllerHelper
 
         $selectElement->setValueOptions($options);
     }
-    
+
     /**
      * 
      * @param type $form
@@ -60,7 +61,7 @@ class AuxiliaryControllerHelper
 
         $selectElement->setValueOptions($options);
     }
-    
+
     /**
      * 
      * @param type $form
@@ -69,7 +70,25 @@ class AuxiliaryControllerHelper
     {
         $this->fillCareerData($form);
         $this->fillCourseData($form);
-        
+
         return $form;
     }
+
+    /**
+     * 
+     * @param type $studentNov
+     * @param type $form
+     * @return type
+     */
+    public function fillAreasData($studentNov, $form)
+    {
+        $options = $this->surveyManager->getReport4AvailableAreas($studentNov);
+
+        $selectElement = $form->get('areaType');
+
+        $selectElement->setValueOptions($options);
+
+        return $form;
+    }
+
 }

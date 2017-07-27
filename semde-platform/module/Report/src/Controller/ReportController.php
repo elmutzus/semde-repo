@@ -19,6 +19,7 @@ use Report\Form\Report1Form;
 use Report\Form\Report2Form;
 use Report\Form\Report3Form;
 use Report\Form\Report4Form;
+use Report\Form\Report4DetailForm;
 use Report\Form\Report5Form;
 use Report\Controller\Helper\AuxiliaryControllerHelper;
 
@@ -369,12 +370,37 @@ class ReportController extends AbstractActionController
         $studentName = $this->params()->fromQuery('sn');
         $studentNov  = $this->params()->fromQuery('nv');
 
-        $reportDetail = $this->reportManager->getReport4Detail($student, $studentNov);
+        $form = new Report4DetailForm();
+
+        $form = $this->auxiliaryHelper->fillAreasData($studentNov, $form);
+
+        if ($this->getRequest()->isPost())
+        {
+            $data = $this->params()->fromPost();
+
+            $form->setData($data);
+
+            if ($form->isvalid())
+            {
+                $data = $form->getData();
+
+                $reportData = $this->reportManager->getReport4Detail($data['areaType'], $student, $studentNov);
+
+                return new ViewModel([
+                    'studentId'    => $student,
+                    'studentName'  => $studentName,
+                    'studentNov'   => $studentNov,
+                    'reportDetail' => $reportData,
+                    'form'         => $form,
+                ]);
+            }
+        }
 
         return new ViewModel([
-            'studentId'    => $student,
-            'studentName'  => $studentName,
-            'reportDetail' => $reportDetail,
+            'studentId'   => $student,
+            'studentNov'  => $studentNov,
+            'studentName' => $studentName,
+            'form'        => $form,
         ]);
     }
 
@@ -520,9 +546,9 @@ class ReportController extends AbstractActionController
         {
             $data = array();
 
-            $data['dpi'] = $this->params()->fromQuery('dpi');
-            $data['nov'] = $this->params()->fromQuery('nov');
-            $data['name']  = $this->params()->fromQuery('nm');
+            $data['dpi']      = $this->params()->fromQuery('dpi');
+            $data['nov']      = $this->params()->fromQuery('nov');
+            $data['name']     = $this->params()->fromQuery('nm');
             $data['lastname'] = $this->params()->fromQuery('lnm');
 
             $reportData = $this->reportManager->getReport4Data($data);
