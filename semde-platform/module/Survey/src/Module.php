@@ -27,7 +27,7 @@ use Zend\I18n\Translator\Loader\PhpArray;
  */
 class Module
 {
-    const VERSION = '1.0.17.0504';
+    const VERSION = '1.0.17.0728';
 
     public function getConfig()
     {
