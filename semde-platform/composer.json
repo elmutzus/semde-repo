@@ -27,7 +27,8 @@
         "zendframework/zend-crypt": "^3.2",
         "zendframework/zend-navigation": "^2.8",
         "zendframework/zend-paginator": "^2.7",
-        "phpoffice/phpexcel": "^1.8"
+        "phpoffice/phpexcel": "^1.8",
+        "zendframework/zend-i18n-resources": "^2.5"
     },
     "autoload": {
         "psr-4": {

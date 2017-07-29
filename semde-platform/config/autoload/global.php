@@ -38,12 +38,17 @@ return [
             'orm_authentication' => [
                 'connection' => 'orm_authentication_connection',
             ],
-            'orm_survey'  => [
+            'orm_survey'         => [
                 'connection' => 'orm_survey_connection',
             ],
-            'orm_report'  => [
+            'orm_report'         => [
                 'connection' => 'orm_report_connection',
             ],
+        ],
+    ],
+    'service_manager' => [
+        'aliases' => [
+            'translator' => 'MvcTranslator',
         ],
     ],
 ];

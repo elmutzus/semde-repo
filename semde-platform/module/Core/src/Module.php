@@ -13,24 +13,17 @@
 
 namespace Core;
 
-use Zend\Db\Adapter\AdapterInterface;
-use Zend\Db\ResultSet\ResultSet;
-use Zend\Db\TableGateway\TableGateway;
-use Zend\ModuleManager\Feature\ConfigProviderInterface;
 use Zend\Mvc\MvcEvent;
 use Zend\Mvc\Controller\AbstractActionController;
 use Core\Controller\AuthenticationController;
 use Core\Service\AuthenticationManager;
 use Zend\Session\SessionManager;
-use Zend\View\HelperPluginManager;
-use Zend\Permissions\Acl\Acl;
-use Zend\Permissions\Acl\Role\GenericRole;
-use Zend\Permissions\Acl\Resource\GenericResource;
+use Zend\I18n\Translator\Loader\PhpArray;
 
 class Module
 {
 
-    const VERSION = '1.0.17.0415';
+    const VERSION = '1.0.17.0728';
 
     public function getConfig()
     {
@@ -48,6 +41,18 @@ class Module
         $sharedEventManager = $eventManager->getSharedManager();
         // Register the event listener method. 
         $sharedEventManager->attach(AbstractActionController::class, MvcEvent::EVENT_DISPATCH, [$this, 'onDispatch'], 100);
+
+        date_default_timezone_set('America/Guatemala');
+
+        $translatorI = new \Zend\I18n\Translator\Translator();
+        $translatorI->setLocale('es');
+
+        $translator = new \Zend\Mvc\I18n\Translator($translatorI);
+        $translator->addTranslationFile(
+                PhpArray::class, './vendor/zendframework/zend-i18n-resources/languages/es/Zend_Validate.php', 'default', 'es'
+        );
+
+        \Zend\Validator\AbstractValidator::setDefaultTranslator($translator);
     }
 
     /**
@@ -69,8 +74,8 @@ class Module
 
         // Get the instance of AuthManager service.
         $authManager = $event->getApplication()->getServiceManager()->get(AuthenticationManager::class);
-        
-        $application = $event->getApplication();
+
+        $application    = $event->getApplication();
         $serviceManager = $application->getServiceManager();
         $sessionManager = $serviceManager->get(SessionManager::class);
 
@@ -93,42 +98,45 @@ class Module
             return $controller->redirect()->toRoute('loginRoute', [], ['query' => ['redirectUrl' => $redirectUrl]]);
         }
     }
-    
- 
+
     // Event listener method.
     public function onError(MvcEvent $event)
     {
         // Get the exception information.
         $exception = $event->getParam('exception');
-        if ($exception!=null) {
+        if ($exception != null)
+        {
             $exceptionName = $exception->getMessage();
-            $file = $exception->getFile();
-            $line = $exception->getLine();
-            $stackTrace = $exception->getTraceAsString();
+            $file          = $exception->getFile();
+            $line          = $exception->getLine();
+            $stackTrace    = $exception->getTraceAsString();
         }
-        $errorMessage = $event->getError();
+        $errorMessage   = $event->getError();
         $controllerName = $event->getController();
-        
+
         // Prepare email message.
-        $to = 'admin@yourdomain.com';
+        $to      = 'admin@yourdomain.com';
         $subject = 'Your Website Exception';
-        
+
         $body = '';
-        if(isset($_SERVER['REQUEST_URI'])) {
+        if (isset($_SERVER['REQUEST_URI']))
+        {
             $body .= "Request URI: " . $_SERVER['REQUEST_URI'] . "\n\n";
         }
         $body .= "Controller: $controllerName\n";
         $body .= "Error message: $errorMessage\n";
-        if ($exception!=null) {
+        if ($exception != null)
+        {
             $body .= "Exception: $exceptionName\n";
             $body .= "File: $file\n";
             $body .= "Line: $line\n";
             $body .= "Stack trace:\n\n" . $stackTrace;
         }
-        
+
         $body = str_replace("\n", "<br>", $body);
-        
+
         // Send an email about the error.
         mail($to, $subject, $body);
     }
+
 }

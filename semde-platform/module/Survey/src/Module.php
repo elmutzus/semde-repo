@@ -18,6 +18,7 @@ use Zend\Mvc\Controller\AbstractActionController;
 use Core\Controller\AuthenticationController;
 use Core\Service\AuthenticationManager;
 use Zend\Session\SessionManager;
+use Zend\I18n\Translator\Loader\PhpArray;
 
 /**
  * Description of Module
@@ -44,6 +45,18 @@ class Module
         $sharedEventManager = $eventManager->getSharedManager();
         // Register the event listener method. 
         $sharedEventManager->attach(AbstractActionController::class, MvcEvent::EVENT_DISPATCH, [$this, 'onDispatch'], 100);
+        
+        date_default_timezone_set('America/Guatemala');
+
+        $translatorI = new \Zend\I18n\Translator\Translator();
+        $translatorI->setLocale('es');
+
+        $translator = new \Zend\Mvc\I18n\Translator($translatorI);
+        $translator->addTranslationFile(
+                PhpArray::class, './vendor/zendframework/zend-i18n-resources/languages/es/Zend_Validate.php', 'default', 'es'
+        );
+
+        \Zend\Validator\AbstractValidator::setDefaultTranslator($translator);
     }
 
     /**
