@@ -34,7 +34,7 @@ $form->prepare();
                     <?= $this->formElementErrors($form->get('password'), ['class' => 'alert-danger']); ?>
                 </div>  
                 <div class="checkbox">
-                    <label>
+                    <label hidden="true">
                          <?=$this->formElement($form->get('rememberMe')); ?> Recordarme
                     </label>
                 </div>
