@@ -169,7 +169,7 @@ class RoleController extends AbstractActionController
 
             $del = $request->getPost('del', 'No');
 
-            if ($del == 'Yes')
+            if ($del == 'Si')
             {
                 $itemId = $request->getPost('id');
 

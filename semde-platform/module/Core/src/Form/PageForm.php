@@ -135,7 +135,7 @@ class PageForm extends Form
                     'options' => [
                         'pattern'  => '/^[\w]*$/',
                         'messages' => [
-                            'regexNotMatch' => 'El rol no es válido. No usar símbolos especiales',
+                            'regexNotMatch' => 'El identificador no es válido. No usar símbolos especiales ni espacios en blanco',
                         ],
                     ],
                 ],

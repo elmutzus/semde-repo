@@ -174,7 +174,7 @@ class UserController extends AbstractActionController
 
             $del = $request->getPost('del', 'No');
 
-            if ($del == 'Yes')
+            if ($del == 'Si')
             {
                 $userId = $request->getPost('id');
 
