@@ -159,7 +159,7 @@ class UserForm extends Form
                     'options' => [
                         'pattern'  => '/^[\w]*$/',
                         'messages' => [
-                            'regexNotMatch' => 'El usuario no es válido. No usar símbolos especiales',
+                            'regexNotMatch' => 'El usuario no es válido. No usar símbolos especiales ni espacios en blanco',
                         ],
                     ],
                 ],
