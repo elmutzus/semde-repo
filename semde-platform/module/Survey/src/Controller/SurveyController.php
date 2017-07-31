@@ -143,7 +143,7 @@ class SurveyController extends AbstractActionController
         $realKeyString = 'Y' . $now->format('Y') . 'W' . $now->format('W') . 'C' . $id . 'GwH28';
 
         $encryptedKey = base64_decode(urldecode($idSecret));
-        
+
         // uncomment to get the real key
         // $realEncrypted = urlencode(base64_encode($realKeyString));
 
@@ -200,7 +200,9 @@ class SurveyController extends AbstractActionController
             {
                 $this->surveyManager->addOrUpdateStudent($form->getData());
 
-                return $this->redirect()->toRoute('surveyManagementRoute', ['action' => 'addOrUpdateStudentAddress', 'id' => $data['id']]);
+                return $this->redirect()->toRoute('surveyManagementRoute', ['action' => 'addOrUpdateStudentAddress', 'id' => $data['id']], ['query' => [
+                                'idSecret' => urlencode($idSecret)]]
+                );
             }
         }
 
@@ -209,8 +211,9 @@ class SurveyController extends AbstractActionController
         $form = $this->studentInstance->fillFormData($form, $existingData, $idUser);
 
         return new ViewModel([
-            'form' => $form,
-            'id'   => $idUser,
+            'form'     => $form,
+            'idSecret' => $idSecret,
+            'id'       => $idUser,
         ]);
     }
 
@@ -238,7 +241,9 @@ class SurveyController extends AbstractActionController
             {
                 $this->surveyManager->addOrUpdateStudentAddress($form->getData());
 
-                return $this->redirect()->toRoute('surveyManagementRoute', ['action' => 'addOrUpdateStudentStatus', 'id' => $data['studentId']]);
+                return $this->redirect()->toRoute('surveyManagementRoute', ['action' => 'addOrUpdateStudentStatus', 'id' => $data['id']], ['query' => [
+                                'idSecret' => urlencode($idSecret)]]
+                );
             }
             else
             {
@@ -253,8 +258,9 @@ class SurveyController extends AbstractActionController
         }
 
         return new ViewModel([
-            'form' => $form,
-            'id'   => $idUser,
+            'form'     => $form,
+            'idSecret' => $idSecret,
+            'id'       => $idUser,
         ]);
     }
 
@@ -286,7 +292,9 @@ class SurveyController extends AbstractActionController
 
                 $this->surveyManager->addOrUpdateStudentStatus($data);
 
-                return $this->redirect()->toRoute('surveyManagementRoute', ['action' => 'addOrUpdateStudentProfessionalLife', 'id' => $data['studentId']]);
+                return $this->redirect()->toRoute('surveyManagementRoute', ['action' => 'addOrUpdateStudentProfessionalLife', 'id' => $data['id']], ['query' => [
+                                'idSecret' => urlencode($idSecret)]]
+                );
             }
             else
             {
@@ -301,8 +309,9 @@ class SurveyController extends AbstractActionController
         }
 
         return new ViewModel([
-            'form' => $form,
-            'id'   => $idUser,
+            'form'     => $form,
+            'idSecret' => $idSecret,
+            'id'       => $idUser,
         ]);
     }
 
@@ -334,7 +343,9 @@ class SurveyController extends AbstractActionController
 
                 $this->surveyManager->addOrUpdateStudentProfessionalLife($data);
 
-                return $this->redirect()->toRoute('surveyManagementRoute', ['action' => 'addOrUpdateStudentFather', 'id' => $data['studentId']]);
+                return $this->redirect()->toRoute('surveyManagementRoute', ['action' => 'addOrUpdateStudentFather', 'id' => $data['id']], ['query' => [
+                                'idSecret' => urlencode($idSecret)]]
+                );
             }
             else
             {
@@ -349,8 +360,9 @@ class SurveyController extends AbstractActionController
         }
 
         return new ViewModel([
-            'form' => $form,
-            'id'   => $idUser,
+            'form'     => $form,
+            'idSecret' => $idSecret,
+            'id'       => $idUser,
         ]);
     }
 
@@ -384,7 +396,9 @@ class SurveyController extends AbstractActionController
 
                 $this->surveyManager->addOrUpdateStudentParent($data);
 
-                return $this->redirect()->toRoute('surveyManagementRoute', ['action' => 'addOrUpdateStudentMother', 'id' => $data['studentId']]);
+                return $this->redirect()->toRoute('surveyManagementRoute', ['action' => 'addOrUpdateStudentMother', 'id' => $data['id']], ['query' => [
+                                'idSecret' => urlencode($idSecret)]]
+                );
             }
         }
         else
@@ -395,8 +409,9 @@ class SurveyController extends AbstractActionController
         }
 
         return new ViewModel([
-            'form' => $form,
-            'id'   => $idUser,
+            'form'     => $form,
+            'idSecret' => $idSecret,
+            'id'       => $idUser,
         ]);
     }
 
@@ -430,7 +445,9 @@ class SurveyController extends AbstractActionController
 
                 $this->surveyManager->addOrUpdateStudentParent($data);
 
-                return $this->redirect()->toRoute('surveyManagementRoute', ['action' => 'addOrUpdateStudentBrother', 'id' => $data['studentId']]);
+                return $this->redirect()->toRoute('surveyManagementRoute', ['action' => 'addOrUpdateStudentBrother', 'id' => $data['id']], ['query' => [
+                                'idSecret' => urlencode($idSecret)]]
+                );
             }
         }
         else
@@ -441,8 +458,9 @@ class SurveyController extends AbstractActionController
         }
 
         return new ViewModel([
-            'form' => $form,
-            'id'   => $idUser,
+            'form'     => $form,
+            'idSecret' => $idSecret,
+            'id'       => $idUser,
         ]);
     }
 
@@ -474,7 +492,9 @@ class SurveyController extends AbstractActionController
 
                 $this->surveyManager->addOrUpdateStudentBrother($data);
 
-                return $this->redirect()->toRoute('surveyManagementRoute', ['action' => 'addOrUpdateStudentMate', 'id' => $data['studentId']]);
+                return $this->redirect()->toRoute('surveyManagementRoute', ['action' => 'addOrUpdateStudentMate', 'id' => $data['id']], ['query' => [
+                                'idSecret' => urlencode($idSecret)]]
+                );
             }
         }
         else
@@ -485,8 +505,9 @@ class SurveyController extends AbstractActionController
         }
 
         return new ViewModel([
-            'form' => $form,
-            'id'   => $idUser,
+            'form'     => $form,
+            'idSecret' => $idSecret,
+            'id'       => $idUser,
         ]);
     }
 
@@ -518,7 +539,9 @@ class SurveyController extends AbstractActionController
 
                 $this->surveyManager->addOrUpdateStudentMate($data);
 
-                return $this->redirect()->toRoute('surveyManagementRoute', ['action' => 'addOrUpdateStudentSocialLife', 'id' => $data['studentId']]);
+                return $this->redirect()->toRoute('surveyManagementRoute', ['action' => 'addOrUpdateStudentSocialLife', 'id' => $data['id']], ['query' => [
+                                'idSecret' => urlencode($idSecret)]]
+                );
             }
             else
             {
@@ -533,8 +556,9 @@ class SurveyController extends AbstractActionController
         }
 
         return new ViewModel([
-            'form' => $form,
-            'id'   => $idUser,
+            'form'     => $form,
+            'idSecret' => $idSecret,
+            'id'       => $idUser,
         ]);
     }
 
@@ -566,7 +590,9 @@ class SurveyController extends AbstractActionController
 
                 $this->surveyManager->addOrUpdateStudentSocialLife($data);
 
-                return $this->redirect()->toRoute('surveyManagementRoute', ['action' => 'addOrUpdateStudentFinish', 'id' => $data['studentId']]);
+                return $this->redirect()->toRoute('surveyManagementRoute', ['action' => 'addOrUpdateStudentFinish', 'id' => $data['id']], ['query' => [
+                                'idSecret' => urlencode($idSecret)]]
+                );
             }
             else
             {
@@ -581,8 +607,9 @@ class SurveyController extends AbstractActionController
         }
 
         return new ViewModel([
-            'form' => $form,
-            'id'   => $idUser,
+            'form'     => $form,
+            'idSecret' => $idSecret,
+            'id'       => $idUser,
         ]);
     }
 

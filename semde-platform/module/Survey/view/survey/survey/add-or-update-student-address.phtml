@@ -10,7 +10,7 @@
  *    Elder Mutzus <elmutzus@gmail.com> - initial API and implementation and/or initial documentation
  */
 
-$form->setAttribute('action', $this->url('surveyManagementRoute', ['action' => 'addOrUpdateStudentAddress', 'id' => $this->id]));
+$form->setAttribute('action', $this->url('surveyManagementRoute', ['action' => 'addOrUpdateStudentAddress', 'id' => $this->id]). '?idSecret=' . urlencode($this->idSecret));
 $form->prepare();
 ?>
 
