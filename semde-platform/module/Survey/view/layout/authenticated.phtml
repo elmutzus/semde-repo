@@ -47,58 +47,9 @@ $this->doctype();
                     <button type="button" class="btn btn-success navbar-toggle" data-toggle="collapse" data-target="#collapseable-nav">
                         <span class="glyphicon glyphicon-chevron-down"></span>
                     </button>
-                    <a class="navbar-brand" href="<?= $this->url('mainDashboardRoute') ?>">
+                    <a class="navbar-brand" href="#">
                         SEMDE
                     </a> 
-                </div>
-                <div class="navbar-collapse collapse" id="collapseable-nav">
-                    <ul class="nav navbar-nav">
-                        <?php if (sizeof($reportPages) > 0): ?>
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-stats"></span> Reportes <span class="caret"></span></a>
-                                <ul class="dropdown-menu" role="menu">
-                                    <?php foreach ($reportPages as $key => $val): ?>
-                                        <li>
-                                            <a href="<?php echo($val) ?>"><?php echo($key) ?></a>
-                                        </li>
-                                    <?php endforeach; ?>
-                                </ul>
-                            </li> 
-                        <?php endif; ?>
-                        <?php if (sizeof($managementPages) > 0): ?>
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-cog"></span> Configuraciones <span class="caret"></span></a>
-                                <ul class="dropdown-menu" role="menu">
-                                    <?php foreach ($managementPages as $key => $val): ?>
-                                        <li>
-                                            <a href="<?php echo($val) ?>"><?php echo($key) ?></a>
-                                        </li>
-                                    <?php endforeach; ?>
-                                </ul>
-                            </li>
-                        <?php endif; ?>
-                    </ul>
-                    <ul class="nav navbar-nav navbar-right">
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <span class="glyphicon glyphicon-user"></span>&nbsp; <?= $this->currentUser ?>
-                                <span class="caret"></span>                          
-                            </a>
-                            <ul class="dropdown-menu" role="menu">
-                                <li class="disabled">
-                                    <a href="#"><span class="glyphicon glyphicon-lock"></span> Rol: <?= $this->currentUserRole ?></a>
-                                </li>
-                                <li class="divider"></li>
-                                <li class="disabled">
-                                    <a href="#"><span class="glyphicon glyphicon-refresh"></span> v.<?= \Core\Module::VERSION ?></a>
-                                </li>
-                                <li class="divider"></li>
-                                <li>
-                                    <a href="<?= $this->url('logoutRoute') ?>"><span class="glyphicon glyphicon-off"></span> Cerrar sesi&oacute;n</a>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
                 </div>
             </nav>
         </header>

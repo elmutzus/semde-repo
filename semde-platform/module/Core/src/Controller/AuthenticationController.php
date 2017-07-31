@@ -105,6 +105,21 @@ class AuthenticationController extends AbstractActionController
         ]);
     }
 
+    /**
+     * 
+     * @param type $haystack
+     * @param type $needle
+     * @return type
+     */
+    function startsWith($haystack, $needle)
+    {
+        return strncmp($haystack, $needle, strlen($needle)) === 0;
+    }
+
+    /**
+     * 
+     * @return ViewModel
+     */
     public function roleSelectionAction()
     {
         $this->verifySession();

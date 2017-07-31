@@ -127,10 +127,6 @@ class SurveyController extends AbstractActionController
         $layout = $this->layout();
 
         $layout->setTemplate('layout/authenticated');
-        $layout->setVariable('reportPages', $this->sessionContainer->reportPages);
-        $layout->setVariable('managementPages', $this->sessionContainer->managementPages);
-        $layout->setVariable('currentUser', $this->sessionContainer->currentUserName);
-        $layout->setVariable('currentUserRole', $this->sessionContainer->currentUserRole);
     }
 
     /**
@@ -147,6 +143,9 @@ class SurveyController extends AbstractActionController
         $realKeyString = 'Y' . $now->format('Y') . 'W' . $now->format('W') . 'C' . $id . 'GwH28';
 
         $encryptedKey = base64_decode(urldecode($idSecret));
+        
+        // uncomment to get the real key
+        // $realEncrypted = urlencode(base64_encode($realKeyString));
 
         return $realKeyString == $encryptedKey;
     }
