@@ -9,8 +9,8 @@
  * Contributors:
  *    Elder Mutzus <elmutzus@gmail.com> - initial API and implementation and/or initial documentation
  */
-
-$form->setAttribute('action', $this->url('surveyManagementRoute', ['action' => 'addOrUpdateStudentMate', 'id' => $this->id]). '?idSecret=' . urlencode($this->idSecret));
+$idSecret = urldecode($this->idSecret);
+$form->setAttribute('action', $this->url('surveyManagementRoute', ['action' => 'addOrUpdateStudentMate', 'id' => $this->id]) . '?idSecret=' . urlencode($idSecret));
 $form->prepare();
 ?>
 
@@ -126,7 +126,7 @@ $form->prepare();
             $("[name='communication']").removeAttr("readonly");
         }
     }
-    
+
     $(document).ready(function () {
         validateRelationship();
     });
