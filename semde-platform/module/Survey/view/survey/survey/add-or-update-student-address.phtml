@@ -10,7 +10,7 @@
  *    Elder Mutzus <elmutzus@gmail.com> - initial API and implementation and/or initial documentation
  */
 $idSecret = urldecode($this->idSecret);
-$form->setAttribute('action', $this->url('surveyManagementRoute', ['action' => 'addOrUpdateStudentAddress', 'id' => $this->id]). '?idSecret=' . urlencode($idSecret));
+$form->setAttribute('action', $this->basePath() . $this->url('surveyManagementRoute', ['action' => 'addOrUpdateStudentAddress', 'id' => $this->id]). '?idSecret=' . urlencode($idSecret));
 $form->prepare();
 ?>
 
@@ -67,7 +67,7 @@ $form->prepare();
     $(function () {
         $("[name='departmentId']").change(function () {
             $.ajax({
-                url: '/surveyManagement/addOrUpdateStudentDepartments/' + $("[name='departmentId']").val(),
+                url: '<?= $this->basePath()?>/surveyManagement/addOrUpdateStudentDepartments/' + $("[name='departmentId']").val(),
                 success: function (response) {
 
                     $("[name='townId']")

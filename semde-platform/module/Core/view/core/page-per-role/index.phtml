@@ -23,7 +23,7 @@ $items = $this->items;
             <?php echo $this->partial('partial-view/page-per-role-table', ['items' => $items]); ?>
         </div>
         <div class="panel-footer">
-            <a class="btn btn-primary btn-sm" href="<?= $this->url('pagePerRoleManagementRoute', ['action' => 'add', 'id' => 'newItem']) ?>">
+            <a class="btn btn-primary btn-sm" href="<?= $this->basePath() . $this->url('pagePerRoleManagementRoute', ['action' => 'add', 'id' => 'newItem']) ?>">
                 Agregar nuevo
             </a>
         </div>

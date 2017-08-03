@@ -51,7 +51,7 @@ class AuthenticationController extends AbstractActionController
     {
         if (!isset($this->sessionContainer->currentUserId))
         {
-            return $this->redirect()->toRoute('loginRoute');
+            return $this->redirect()->toUrl($this->getRequest()->getBaseUrl() . $this->url()->fromRoute('loginRoute'));
         }
     }
 
@@ -85,7 +85,7 @@ class AuthenticationController extends AbstractActionController
                     {
                         $this->sessionContainer->currentUserName = $userNameResult;
 
-                        return $this->redirect()->toRoute('roleSelectionRoute');
+                        return $this->redirect()->toUrl($this->getRequest()->getBaseUrl() . $this->url()->fromRoute('roleSelectionRoute'));
                     }
                     else
                     {
@@ -140,7 +140,7 @@ class AuthenticationController extends AbstractActionController
                 $this->sessionContainer->currentUserRole   = $this->authManager->getRoleDescription($data['availableRoles']);
                 $this->sessionContainer->currentUserRoleId = $data['availableRoles'];
 
-                return $this->redirect()->toRoute('mainDashboardRoute');
+                return $this->redirect()->toUrl($this->getRequest()->getBaseUrl() . $this->url()->fromRoute('mainDashboardRoute'));
             }
         }
         else
@@ -213,7 +213,7 @@ class AuthenticationController extends AbstractActionController
         $this->sessionContainer->managementPages   = null;
         $this->authManager->logout();
 
-        return $this->redirect()->toRoute('loginRoute');
+        return $this->redirect()->toUrl($this->getRequest()->getBaseUrl() . $this->url()->fromRoute('loginRoute'));
     }
 
 }

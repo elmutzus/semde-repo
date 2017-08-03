@@ -28,6 +28,9 @@ class Report4DetailForm extends Form
     {
         // Define form name
         parent::__construct('report4_detail_form');
+        
+        // Set POST method
+        $this->setAttribute('method', 'post');
 
         // Add form elements
         $this->addElements();

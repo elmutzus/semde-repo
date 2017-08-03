@@ -28,6 +28,9 @@ class RolePerUserForm extends Form
     {
         // Define form name
         parent::__construct('role-per-user-form');
+        
+        // Set POST method
+        $this->setAttribute('method', 'post');
 
         // Add form elements
         $this->addElements();

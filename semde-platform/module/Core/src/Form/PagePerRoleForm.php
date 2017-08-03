@@ -28,6 +28,9 @@ class PagePerRoleForm extends Form
     {
         // Define form name
         parent::__construct('page-per-role-form');
+        
+        // Set POST method
+        $this->setAttribute('method', 'post');
 
         // Add form elements
         $this->addElements();

@@ -28,6 +28,9 @@ class Report3Form extends Form
     {
         // Define form name
         parent::__construct('report3_form');
+        
+        // Set POST method
+        $this->setAttribute('method', 'post');
 
         // Add form elements
         $this->addElements();

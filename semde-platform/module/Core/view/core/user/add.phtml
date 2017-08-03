@@ -9,7 +9,7 @@
  * Contributors:
  *    Elder Mutzus <elmutzus@gmail.com> - initial API and implementation and/or initial documentation
  */
-$form->setAttribute('action', $this->url('userManagementRoute', ['action' => 'add', 'id' => 'id']));
+$form->setAttribute('action', $this->basePath() . $this->url('userManagementRoute', ['action' => 'add', 'id' => 'id']));
 $form->prepare();
 ?>
 

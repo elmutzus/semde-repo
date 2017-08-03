@@ -9,7 +9,7 @@
  * Contributors:
  *    Elder Mutzus <elmutzus@gmail.com> - initial API and implementation and/or initial documentation
  */
-$url = $this->url('userManagementRoute', ['action' => 'delete', 'id' => $id]);
+$url = $this->basePath() . $this->url('userManagementRoute', ['action' => 'delete', 'id' => $id]);
 ?>
 
 <section id="body">

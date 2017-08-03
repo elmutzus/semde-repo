@@ -23,7 +23,7 @@ $users = $this->users;
             <?php echo $this->partial('partial-view/user-table', ['users' => $users]); ?>
         </div>
         <div class="panel-footer">
-            <a class="btn btn-primary btn-sm" href="<?= $this->url('userManagementRoute', ['action' => 'add', 'id' => 'newItem']) ?>">
+            <a class="btn btn-primary btn-sm" href="<?= $this->basePath() . $this->url('userManagementRoute', ['action' => 'add', 'id' => 'newItem']) ?>">
                 Agregar nuevo
             </a>
         </div>

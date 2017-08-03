@@ -11,7 +11,7 @@
  *    Elder Mutzus <elmutzus@gmail.com> - initial API and implementation and/or initial documentation
  */
 
-$form->setAttribute('action', $this->url('pageManagementRoute', ['action' => 'add', 'id' => 'newItem']));
+$form->setAttribute('action', $this->basePath() . $this->url('pageManagementRoute', ['action' => 'add', 'id' => 'newItem']));
 $form->prepare();
 ?>
 

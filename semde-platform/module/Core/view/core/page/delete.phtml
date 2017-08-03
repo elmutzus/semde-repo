@@ -11,7 +11,7 @@
  *    Elder Mutzus <elmutzus@gmail.com> - initial API and implementation and/or initial documentation
  */
 
-$url = $this->url('pageManagementRoute', ['action' => 'delete', 'id' => $id]);
+$url = $this->basePath() . $this->url('pageManagementRoute', ['action' => 'delete', 'id' => $id]);
 ?>
 
 <section id="body">

@@ -26,8 +26,9 @@ class RoleSelectionForm extends Form
 
         // Set POST method
         $this->setAttribute('method', 'post');
-        // Set action attribute
-        $this->setAttribute('action', '/roleSelection');
+        
+        // Set POST method
+        $this->setAttribute('method', 'post');
 
         // Add form elements
         $this->addElements();

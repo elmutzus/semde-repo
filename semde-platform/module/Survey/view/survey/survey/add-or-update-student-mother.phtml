@@ -10,7 +10,7 @@
  *    Elder Mutzus <elmutzus@gmail.com> - initial API and implementation and/or initial documentation
  */
 $idSecret = urldecode($this->idSecret);
-$form->setAttribute('action', $this->url('surveyManagementRoute', ['action' => 'addOrUpdateStudentMother', 'id' => $this->id]). '?idSecret=' . urlencode($idSecret));
+$form->setAttribute('action', $this->basePath() . $this->url('surveyManagementRoute', ['action' => 'addOrUpdateStudentMother', 'id' => $this->id]). '?idSecret=' . urlencode($idSecret));
 $form->prepare();
 ?>
 

@@ -109,7 +109,7 @@ class RolePerUserController extends AbstractActionController
             {
                 $this->rolePerUserManager->create($form->getData());
 
-                return $this->redirect()->toRoute('rolePerUserManagementRoute');
+                return $this->redirect()->toUrl($this->getRequest()->getBaseUrl() . $this->url()->fromRoute('rolePerUserManagementRoute'));
             }
         }
 
@@ -148,7 +148,7 @@ class RolePerUserController extends AbstractActionController
 
         if ($itemId == '-')
         {
-            return $this->redirect()->toRoute('rolePerUserManagementRoute');
+            return $this->redirect()->toUrl($this->getRequest()->getBaseUrl() . $this->url()->fromRoute('rolePerUserManagementRoute'));
         }
 
         $request = $this->getRequest();
@@ -170,7 +170,7 @@ class RolePerUserController extends AbstractActionController
                 }
             }
 
-            return $this->redirect()->toRoute('rolePerUserManagementRoute');
+            return $this->redirect()->toUrl($this->getRequest()->getBaseUrl() . $this->url()->fromRoute('rolePerUserManagementRoute'));
         }
 
         return new ViewModel([

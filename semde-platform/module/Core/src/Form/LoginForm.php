@@ -26,8 +26,6 @@ class LoginForm extends Form
 
         // Set POST method
         $this->setAttribute('method', 'post');
-        // Set action attribute
-        $this->setAttribute('action', '/login');
 
         // Add form elements
         $this->addElements();

@@ -29,6 +29,9 @@ class PageForm extends Form
     {
         // Define form name
         parent::__construct('page-form');
+        
+        // Set POST method
+        $this->setAttribute('method', 'post');
 
         // Add form elements
         $this->addElements();
