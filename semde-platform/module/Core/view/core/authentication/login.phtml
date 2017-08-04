@@ -10,7 +10,7 @@
  *    Elder Mutzus <elmutzus@gmail.com> - initial API and implementation and/or initial documentation
  */
 
-$form->setAttribute('action', $this->basePath() . $this->url('loginRoute', []));
+$form->setAttribute('action', $this->url('loginRoute', []));
 $form->prepare();
 ?>
 
@@ -33,11 +33,6 @@ $form->prepare();
                     <?= $this->formElement($form->get('password')); ?>
                     <?= $this->formElementErrors($form->get('password'), ['class' => 'alert-danger']); ?>
                 </div>  
-                <div class="checkbox">
-                    <label hidden="true">
-                         <?=$this->formElement($form->get('rememberMe')); ?> Recordarme
-                    </label>
-                </div>
                 <?= $this->formElement($form->get('submit')); ?>
                 <?= $this->form()->closeTag(); ?>
                 <br>

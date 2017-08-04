@@ -97,7 +97,7 @@ class RoleController extends AbstractActionController
             {
                 $this->roleManager->create($form->getData());
 
-                return $this->redirect()->toUrl($this->getRequest()->getBaseUrl() . $this->url()->fromRoute('roleManagementRoute'));
+                return $this->redirect()->toUrl($this->url()->fromRoute('roleManagementRoute'));
             }
         }
 
@@ -114,7 +114,7 @@ class RoleController extends AbstractActionController
 
         if ($itemId == '-')
         {
-            return $this->redirect()->toUrl($this->getRequest()->getBaseUrl() . $this->url()->fromRoute('roleManagementRoute', ['action' => 'index']));
+            return $this->redirect()->toUrl($this->url()->fromRoute('roleManagementRoute', ['action' => 'index']));
         }
 
         $existingItem = $this->roleManager->get($itemId);
@@ -150,7 +150,7 @@ class RoleController extends AbstractActionController
 
         $this->roleManager->update($form->getData());
 
-        return $this->redirect()->toUrl($this->getRequest()->getBaseUrl() . $this->url()->fromRoute('roleManagementRoute'));
+        return $this->redirect()->toUrl($this->url()->fromRoute('roleManagementRoute'));
     }
 
     public function deleteAction()
@@ -159,7 +159,7 @@ class RoleController extends AbstractActionController
 
         if ($itemId == '-')
         {
-            return $this->redirect()->toUrl($this->getRequest()->getBaseUrl() . $this->url()->fromRoute('roleManagementRoute'));
+            return $this->redirect()->toUrl($this->url()->fromRoute('roleManagementRoute'));
         }
 
         $request = $this->getRequest();
@@ -178,7 +178,7 @@ class RoleController extends AbstractActionController
                 $this->roleManager->delete($itemId);
             }
 
-            return $this->redirect()->toUrl($this->getRequest()->getBaseUrl() . $this->url()->fromRoute('roleManagementRoute'));
+            return $this->redirect()->toUrl($this->url()->fromRoute('roleManagementRoute'));
         }
 
         return new ViewModel([

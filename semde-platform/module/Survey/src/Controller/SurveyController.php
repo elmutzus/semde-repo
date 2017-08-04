@@ -200,7 +200,7 @@ class SurveyController extends AbstractActionController
             {
                 $this->surveyManager->addOrUpdateStudent($form->getData());
 
-                return $this->redirect()->toUrl($this->getRequest()->getBaseUrl() . 
+                return $this->redirect()->toUrl(
                         $this->url()->fromRoute('surveyManagementRoute', ['action' => 'addOrUpdateStudentAddress', 'id' => $idUser], ['query' => ['idSecret' => $idSecret]]));
             }
         }
@@ -240,7 +240,7 @@ class SurveyController extends AbstractActionController
             {
                 $this->surveyManager->addOrUpdateStudentAddress($form->getData());
 
-                return $this->redirect()->toUrl($this->getRequest()->getBaseUrl() . $this->url()->fromRoute('surveyManagementRoute', ['action' => 'addOrUpdateStudentStatus', 'id' => $idUser], ['query' => [
+                return $this->redirect()->toUrl($this->url()->fromRoute('surveyManagementRoute', ['action' => 'addOrUpdateStudentStatus', 'id' => $idUser], ['query' => [
                                 'idSecret' => $idSecret]]
                 ));
             }
@@ -291,7 +291,7 @@ class SurveyController extends AbstractActionController
 
                 $this->surveyManager->addOrUpdateStudentStatus($data);
 
-                return $this->redirect()->toUrl($this->getRequest()->getBaseUrl() . $this->url()->fromRoute('surveyManagementRoute', ['action' => 'addOrUpdateStudentProfessionalLife', 'id' => $idUser], ['query' => [
+                return $this->redirect()->toUrl($this->url()->fromRoute('surveyManagementRoute', ['action' => 'addOrUpdateStudentProfessionalLife', 'id' => $idUser], ['query' => [
                                 'idSecret' => $idSecret]]
                 ));
             }
@@ -342,7 +342,7 @@ class SurveyController extends AbstractActionController
 
                 $this->surveyManager->addOrUpdateStudentProfessionalLife($data);
 
-                return $this->redirect()->toUrl($this->getRequest()->getBaseUrl() . $this->url()->fromRoute('surveyManagementRoute', ['action' => 'addOrUpdateStudentFather', 'id' => $idUser], ['query' => [
+                return $this->redirect()->toUrl($this->url()->fromRoute('surveyManagementRoute', ['action' => 'addOrUpdateStudentFather', 'id' => $idUser], ['query' => [
                                 'idSecret' => $idSecret]]
                 ));
             }
@@ -395,7 +395,7 @@ class SurveyController extends AbstractActionController
 
                 $this->surveyManager->addOrUpdateStudentParent($data);
 
-                return $this->redirect()->toUrl($this->getRequest()->getBaseUrl() . $this->url()->fromRoute('surveyManagementRoute', ['action' => 'addOrUpdateStudentMother', 'id' => $idUser], ['query' => [
+                return $this->redirect()->toUrl($this->url()->fromRoute('surveyManagementRoute', ['action' => 'addOrUpdateStudentMother', 'id' => $idUser], ['query' => [
                                 'idSecret' => $idSecret]]
                 ));
             }
@@ -444,7 +444,7 @@ class SurveyController extends AbstractActionController
 
                 $this->surveyManager->addOrUpdateStudentParent($data);
 
-                return $this->redirect()->toUrl($this->getRequest()->getBaseUrl() . $this->url()->fromRoute('surveyManagementRoute', ['action' => 'addOrUpdateStudentBrother', 'id' => $idUser], ['query' => [
+                return $this->redirect()->toUrl($this->url()->fromRoute('surveyManagementRoute', ['action' => 'addOrUpdateStudentBrother', 'id' => $idUser], ['query' => [
                                 'idSecret' => $idSecret]]
                 ));
             }
@@ -491,7 +491,7 @@ class SurveyController extends AbstractActionController
 
                 $this->surveyManager->addOrUpdateStudentBrother($data);
 
-                return $this->redirect()->toUrl($this->getRequest()->getBaseUrl() . $this->url()->fromRoute('surveyManagementRoute', ['action' => 'addOrUpdateStudentMate', 'id' => $idUser], ['query' => [
+                return $this->redirect()->toUrl($this->url()->fromRoute('surveyManagementRoute', ['action' => 'addOrUpdateStudentMate', 'id' => $idUser], ['query' => [
                                 'idSecret' => $idSecret]]
                 ));
             }
@@ -538,7 +538,7 @@ class SurveyController extends AbstractActionController
 
                 $this->surveyManager->addOrUpdateStudentMate($data);
 
-                return $this->redirect()->toUrl($this->getRequest()->getBaseUrl() . $this->url()->fromRoute('surveyManagementRoute', ['action' => 'addOrUpdateStudentSocialLife', 'id' => $idUser], ['query' => [
+                return $this->redirect()->toUrl($this->url()->fromRoute('surveyManagementRoute', ['action' => 'addOrUpdateStudentSocialLife', 'id' => $idUser], ['query' => [
                                 'idSecret' => $idSecret]]
                 ));
             }
@@ -589,7 +589,7 @@ class SurveyController extends AbstractActionController
 
                 $this->surveyManager->addOrUpdateStudentSocialLife($data);
 
-                return $this->redirect()->toUrl($this->getRequest()->getBaseUrl() . $this->url()->fromRoute('surveyManagementRoute', ['action' => 'addOrUpdateStudentFinish', 'id' => $idUser], ['query' => [
+                return $this->redirect()->toUrl($this->url()->fromRoute('surveyManagementRoute', ['action' => 'addOrUpdateStudentFinish', 'id' => $idUser], ['query' => [
                                 'idSecret' => $idSecret]]
                 ));
             }

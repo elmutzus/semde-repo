@@ -23,7 +23,7 @@ $items = $this->items;
             <?php echo $this->partial('partial-view/page-table', ['items' => $items]); ?>
         </div>
         <div class="panel-footer">
-            <a class="btn btn-primary btn-sm" href="<?= $this->basePath() . $this->url('pageManagementRoute', ['action' => 'add', 'id' => 'newItem']) ?>">
+            <a class="btn btn-primary btn-sm" href="<?=  $this->url('pageManagementRoute', ['action' => 'add', 'id' => 'newItem']) ?>">
                 Agregar nueva
             </a>
         </div>

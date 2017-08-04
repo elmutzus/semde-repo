@@ -18,13 +18,13 @@
     <td> <?= $this->user['email'] ?> </td>
     <td> <?= $this->user['phone'] ?> </td>
     <td>         
-        <a class="btn btn-primary btn-xs" href="<?= $this->basePath() . $this->url('userManagementRoute', ['action' => 'modify', 'id' => $this->user['id']]) ?>">
+        <a class="btn btn-primary btn-xs" href="<?=  $this->url('userManagementRoute', ['action' => 'modify', 'id' => $this->user['id']]) ?>">
             Modificar
         </a>
         <?php if ($this->user['id'] != 'admin')
         {
             ?>
-            <a class="btn btn-danger btn-xs" href="<?= $this->basePath() . $this->url('userManagementRoute', ['action' => 'delete', 'id' => $this->user['id']]) ?>">
+            <a class="btn btn-danger btn-xs" href="<?=  $this->url('userManagementRoute', ['action' => 'delete', 'id' => $this->user['id']]) ?>">
                 Eliminar
             </a>
             <?php }

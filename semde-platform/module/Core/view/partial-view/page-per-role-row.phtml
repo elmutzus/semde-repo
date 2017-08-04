@@ -19,7 +19,7 @@ $comopsedKey = $this->item['page'] . '-' . $this->item['role']
     <td> <?= $this->item['role'] ?> </td>
     <td> <?= $this->item['description'] ?> </td>
     <td>         
-        <a class="btn btn-danger btn-xs" href="<?= $this->basePath() . $this->url('pagePerRoleManagementRoute', ['action' => 'delete', 'id' => $comopsedKey]) ?>">
+        <a class="btn btn-danger btn-xs" href="<?=  $this->url('pagePerRoleManagementRoute', ['action' => 'delete', 'id' => $comopsedKey]) ?>">
             Eliminar
         </a>
     </td>

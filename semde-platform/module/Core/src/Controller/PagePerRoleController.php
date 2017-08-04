@@ -108,7 +108,7 @@ class PagePerRoleController extends AbstractActionController
             {
                 $this->pagePerRoleManager->create($form->getData());
 
-                return $this->redirect()->toUrl($this->getRequest()->getBaseUrl() . $this->url()->fromRoute('pagePerRoleManagementRoute'));
+                return $this->redirect()->toUrl($this->url()->fromRoute('pagePerRoleManagementRoute'));
             }
         }
 
@@ -147,7 +147,7 @@ class PagePerRoleController extends AbstractActionController
 
         if ($itemId == '-')
         {
-            return $this->redirect()->toUrl($this->getRequest()->getBaseUrl() . $this->url()->fromRoute('pagePerRoleManagementRoute'));
+            return $this->redirect()->toUrl($this->url()->fromRoute('pagePerRoleManagementRoute'));
         }
 
         $request = $this->getRequest();
@@ -168,7 +168,7 @@ class PagePerRoleController extends AbstractActionController
                 }
             }
 
-            return $this->redirect()->toUrl($this->getRequest()->getBaseUrl() . $this->url()->fromRoute('pagePerRoleManagementRoute'));
+            return $this->redirect()->toUrl($this->url()->fromRoute('pagePerRoleManagementRoute'));
         }
 
         return new ViewModel([

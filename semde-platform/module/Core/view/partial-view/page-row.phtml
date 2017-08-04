@@ -19,10 +19,10 @@
     <td> <?= $this->item['route'] ?> </td>
     <td> <?= $this->item['type'] ?> </td>
     <td>         
-        <a class="btn btn-primary btn-xs" href="<?= $this->basePath() . $this->url('pageManagementRoute', ['action' => 'modify', 'id' => $this->item['id']]) ?>">
+        <a class="btn btn-primary btn-xs" href="<?=  $this->url('pageManagementRoute', ['action' => 'modify', 'id' => $this->item['id']]) ?>">
             Modificar
         </a>
-        <a class="btn btn-danger btn-xs" href="<?= $this->basePath() . $this->url('pageManagementRoute', ['action' => 'delete', 'id' => $this->item['id']]) ?>">
+        <a class="btn btn-danger btn-xs" href="<?=  $this->url('pageManagementRoute', ['action' => 'delete', 'id' => $this->item['id']]) ?>">
             Eliminar
         </a>
     </td>

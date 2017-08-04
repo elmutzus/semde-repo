@@ -17,10 +17,10 @@
     <td> <?= $this->item['id'] ?> </td>
     <td> <?= $this->item['description'] ?> </td>
     <td>         
-        <a class="btn btn-primary btn-xs" href="<?= $this->basePath() . $this->url('roleManagementRoute', ['action' => 'modify', 'id' => $this->item['id']]) ?>">
+        <a class="btn btn-primary btn-xs" href="<?=  $this->url('roleManagementRoute', ['action' => 'modify', 'id' => $this->item['id']]) ?>">
             Modificar
         </a>
-        <a class="btn btn-danger btn-xs" href="<?= $this->basePath() . $this->url('roleManagementRoute', ['action' => 'delete', 'id' => $this->item['id']]) ?>">
+        <a class="btn btn-danger btn-xs" href="<?=  $this->url('roleManagementRoute', ['action' => 'delete', 'id' => $this->item['id']]) ?>">
             Eliminar
         </a>
     </td>
