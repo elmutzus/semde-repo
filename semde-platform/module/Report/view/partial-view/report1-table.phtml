@@ -30,7 +30,7 @@
             {
                 $limit = sizeof($this->rows);
 
-                for ($i = 0; $i < $limit; $i ++)
+                for ($i = 0; $i < $limit - 1; $i ++)
                 {
                     $actualData = $this->rows[$i];
                     $prevData   = $this->rows[$i + 1];
@@ -53,7 +53,7 @@
 <script type="text/javascript">
     $('#paginatedTable').each(function () {
         var currentPage = 0;
-        var numPerPage = 10;
+        var numPerPage = 30;
         var $table = $(this);
         
         $table.bind('repaginate', function () {

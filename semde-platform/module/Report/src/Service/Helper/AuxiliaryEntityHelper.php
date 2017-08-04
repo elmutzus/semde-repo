@@ -77,7 +77,7 @@ class AuxiliaryEntityHelper
             
             foreach ($allItems as $item)
             {
-                $options[$item->getCourse()] = $item->getSection() . " - " . $item->getName();
+                $options[$item->getCourse()] = "Pensum " . $item->getPensum() . " - Nombre " . $item->getName();
             }
         }
 

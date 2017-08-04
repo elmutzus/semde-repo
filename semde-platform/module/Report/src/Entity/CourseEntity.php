@@ -29,22 +29,18 @@ class CourseEntity
      * @ORM\Column(name="course")   
      */
     protected $course;
+    
+    /**
+     * @ORM\Id
+     * @ORM\Column(name="pensum")   
+     */
+    protected $pensum;
 
     /**
      * @ORM\Column(name="name")   
      */
     protected $name;
-
-    /**
-     * @ORM\Column(name="section")   
-     */
-    protected $section;
-
-    /**
-     * @ORM\Column(name="description")   
-     */
-    protected $description;
-
+    
     /**
      * 
      * @return type
@@ -67,18 +63,9 @@ class CourseEntity
      * 
      * @return type
      */
-    public function getSection()
+    public function getPensum()
     {
-        return $this->section;
-    }
-
-    /**
-     * 
-     * @return type
-     */
-    public function getDescription()
-    {
-        return $this->description;
+        return $this->pensum;
     }
 
 }
