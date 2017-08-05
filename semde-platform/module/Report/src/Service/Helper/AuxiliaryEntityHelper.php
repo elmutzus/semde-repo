@@ -44,7 +44,7 @@ class AuxiliaryEntityHelper
      */
     public function getCareerOptions()
     {
-        $allItems = $this->entityManager->getRepository(CareerEntity::class)->findAll();
+        $allItems = $this->entityManager->getRepository(CareerEntity::class)->findBy([], ['name' => 'asc']);
 
         $options = array();
 
@@ -67,7 +67,7 @@ class AuxiliaryEntityHelper
      */
     public function getCourseOptions()
     {
-        $allItems = $this->entityManager->getRepository(CourseEntity::class)->findAll();
+        $allItems = $this->entityManager->getRepository(CourseEntity::class)->findBy([], ['name' => 'asc']);
 
         $options = array();
 
@@ -77,7 +77,7 @@ class AuxiliaryEntityHelper
             
             foreach ($allItems as $item)
             {
-                $options[$item->getCourse()] = "Pensum " . $item->getPensum() . " - Nombre " . $item->getName();
+                $options[$item->getCourse()] = $item->getName() . " (Pensum: " . $item->getPensum() . ")";
             }
         }
 
