@@ -59,7 +59,7 @@ class AuthenticationManager
      * Performs a login attempt. If $rememberMe argument is true, it forces the session
      * to last for one month (otherwise the session expires on one hour).
      */
-    public function login($user, $password, $rememberMe)
+    public function login($user, $password)
     {
         if ($this->authService->getIdentity() != null)
         {
@@ -71,15 +71,6 @@ class AuthenticationManager
         $authAdapter->setId($user);
         $authAdapter->setPassword($password);
         $result      = $this->authService->authenticate();
-
-        // If user wants to "remember him", we will make session to expire in 
-        // one month. By default session expires in 1 hour (as specified in our 
-        // config/global.php file).
-        if ($result->getCode() == Result::SUCCESS && $rememberMe)
-        {
-            // Session cookie will expire in 1 month (30 days).
-            $this->sessionContainer->rememberMe(60 * 60 * 24 * 30);
-        }
 
         return $result;
     }

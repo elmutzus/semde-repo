@@ -73,7 +73,7 @@ class AuthenticationController extends AbstractActionController
                 // Get filtered and validated data
                 $data = $form->getData();
 
-                $result = $this->authManager->login($data['id'], $data['password'], $data['rememberMe']);
+                $result = $this->authManager->login($data['id'], $data['password']);
 
                 if ($result->getCode() == Result::SUCCESS)
                 {
