@@ -89,7 +89,7 @@ class Report4ManagerHelper
         $statement->execute();
 
         $allItems = $statement->fetchAll();
-                
+
         $options = array();
 
         if ($allItems != null)
@@ -98,6 +98,10 @@ class Report4ManagerHelper
             {
                 $options[$item['area']] = $item['area'];
             }
+        }
+        else
+        {
+            $options['-1'] = 'El (la) estudiante no cuenta con pruebas específicas.';
         }
 
         return $options;

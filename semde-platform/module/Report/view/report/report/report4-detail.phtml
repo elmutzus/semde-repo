@@ -9,7 +9,7 @@
  * Contributors:
  *    Elder Mutzus <elmutzus@gmail.com> - initial API and implementation and/or initial documentation
  */
-$form->setAttribute('action',  $this->url('reportsManagementRoute', ['action' => 'report4Detail',
+$form->setAttribute('action', $this->url('reportsManagementRoute', ['action' => 'report4Detail',
             'id'     => $this->id]) .
         '?si=' . urlencode($this->studentId) .
         '&sn=' . urlencode($this->studentName) .
@@ -85,28 +85,28 @@ if ($this->reportDetail != null && sizeof($this->reportDetail) > 0)
             data.addRows([
     <?php
     $limit = sizeof($this->reportDetail);
-    
+
     $areaType = "";
 
     for ($i = 0; $i < $limit; $i++)
     {
         $row = $this->reportDetail[$i];
 
-        $type  = $row['type'];
-        $color = '';
+        $type        = $row['type'];
+        $color       = '';
         $description = '';
 
         if ($type == 2)
         {
-            $type  = '';
-            $color = ', \'color: #2066C8\'';
+            $type        = '';
+            $color       = ', \'color: #2066C8\'';
             $description = ', \'' . $row['description'] . '\'';
         }
         else
         {
-            $type  = ' Esperado';
-            $color = ', \'color: green\'';
-            $areaType = $row['name'];
+            $type        = ' Esperado';
+            $color       = ', \'color: green\'';
+            $areaType    = $row['name'];
             $description = ', \'Obtenido en Pruebas Específicas: ' . $row['total'] . ' \'';
         }
 
@@ -120,24 +120,24 @@ if ($this->reportDetail != null && sizeof($this->reportDetail) > 0)
     ?>
             ]);
 
+            // Set chart options
+            var options = {
+                title: 'Comparativo de resultados <?= $areaType ?>',
+                hAxis: {title: 'Total obtenido'},
+                vAxis: {title: 'Cursos'},
+                height: 750,
+            };
+
+            // Instantiate and draw our chart, passing in some options.
+            var chart = new google.visualization.BarChart(document.getElementById('chart_div'));
+            chart.draw(data, options);
+        }
+
+        $(window).resize(function () {
+            drawChart();
+        });
+
     <?php
 }
 ?>
-
-        // Set chart options
-        var options = {
-            title: 'Comparativo de resultados <?=$areaType?>',
-            hAxis: {title: 'Total obtenido'},
-            vAxis: {title: 'Cursos'},
-            height: 750,
-        };
-
-        // Instantiate and draw our chart, passing in some options.
-        var chart = new google.visualization.BarChart(document.getElementById('chart_div'));
-        chart.draw(data, options);
-    }
-
-    $(window).resize(function () {
-        drawChart();
-    });
 </script>
