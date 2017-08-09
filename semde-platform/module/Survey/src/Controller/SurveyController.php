@@ -121,16 +121,6 @@ class SurveyController extends AbstractActionController
 
     /**
      * 
-     */
-    private function setLayoutVariables()
-    {
-        $layout = $this->layout();
-
-        $layout->setTemplate('layout/authenticated');
-    }
-
-    /**
-     * 
      * @param type $id
      * @param type $idSecret
      * @return boolean
@@ -145,7 +135,7 @@ class SurveyController extends AbstractActionController
         $encryptedKey = base64_decode(urldecode($idSecret));
 
         // uncomment to get the real key
-        // $realEncrypted = urlencode(base64_encode($realKeyString));
+        //$realEncrypted = urlencode(base64_encode($realKeyString));
 
         return $realKeyString == $encryptedKey;
     }
@@ -173,8 +163,6 @@ class SurveyController extends AbstractActionController
      */
     public function addOrUpdateStudentAction()
     {
-        $this->setLayoutVariables();
-
         $idUser   = $this->params()->fromRoute('id', '-');
         $idSecret = $this->params()->fromQuery('idSecret', '-');
 
@@ -218,8 +206,6 @@ class SurveyController extends AbstractActionController
 
     public function addOrUpdateStudentAddressAction()
     {
-        $this->setLayoutVariables();
-
         $idUser   = $this->params()->fromRoute('id', '-');
         $idSecret = $this->params()->fromQuery('idSecret', '-');
 
@@ -265,8 +251,6 @@ class SurveyController extends AbstractActionController
 
     public function addOrUpdateStudentStatusAction()
     {
-        $this->setLayoutVariables();
-
         $idUser   = $this->params()->fromRoute('id', '-');
         $idSecret = $this->params()->fromQuery('idSecret', '-');
 
@@ -316,8 +300,6 @@ class SurveyController extends AbstractActionController
 
     public function addOrUpdateStudentProfessionalLifeAction()
     {
-        $this->setLayoutVariables();
-
         $idUser   = $this->params()->fromRoute('id', '-');
         $idSecret = $this->params()->fromQuery('idSecret', '-');
 
@@ -367,8 +349,6 @@ class SurveyController extends AbstractActionController
 
     public function addOrUpdateStudentFatherAction()
     {
-        $this->setLayoutVariables();
-
         $idUser     = $this->params()->fromRoute('id', '-');
         $idSecret   = $this->params()->fromQuery('idSecret', '-');
         $parentType = 'F';
@@ -416,8 +396,6 @@ class SurveyController extends AbstractActionController
 
     public function addOrUpdateStudentMotherAction()
     {
-        $this->setLayoutVariables();
-
         $idUser     = $this->params()->fromRoute('id', '-');
         $idSecret   = $this->params()->fromQuery('idSecret', '-');
         $parentType = 'M';
@@ -465,8 +443,6 @@ class SurveyController extends AbstractActionController
 
     public function addOrUpdateStudentBrotherAction()
     {
-        $this->setLayoutVariables();
-
         $idUser   = $this->params()->fromRoute('id', '-');
         $idSecret = $this->params()->fromQuery('idSecret', '-');
 
@@ -512,8 +488,6 @@ class SurveyController extends AbstractActionController
 
     public function addOrUpdateStudentMateAction()
     {
-        $this->setLayoutVariables();
-
         $idUser   = $this->params()->fromRoute('id', '-');
         $idSecret = $this->params()->fromQuery('idSecret', '-');
 
@@ -563,8 +537,6 @@ class SurveyController extends AbstractActionController
 
     public function addOrUpdateStudentSocialLifeAction()
     {
-        $this->setLayoutVariables();
-
         $idUser   = $this->params()->fromRoute('id', '-');
         $idSecret = $this->params()->fromQuery('idSecret', '-');
 
@@ -614,8 +586,6 @@ class SurveyController extends AbstractActionController
 
     public function addOrUpdateStudentFinishAction()
     {
-        $this->setLayoutVariables();
-
         $idUser   = $this->params()->fromRoute('id', '-');
         $idSecret = $this->params()->fromQuery('idSecret', '-');
 
