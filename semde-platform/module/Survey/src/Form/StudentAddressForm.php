@@ -62,7 +62,7 @@ class StudentAddressForm extends Form
                 'class' => 'form-control',
             ],
         ]);
-        
+
         $this->add([
             'type'       => Element\Text::class,
             'name'       => 'zone',
@@ -94,13 +94,13 @@ class StudentAddressForm extends Form
                 'class' => 'form-control',
             ],
             'options'    => [
-                'label'         => 'Departamento',
+                'label'                     => 'Departamento',
                 'disable_inarray_validator' => true,
-                'value_options' => [
+                'value_options'             => [
                 ],
             ],
         ]);
-        
+
         $this->add([
             'type'       => Element\Select::class,
             'name'       => 'townId',
@@ -108,9 +108,9 @@ class StudentAddressForm extends Form
                 'class' => 'form-control',
             ],
             'options'    => [
-                'label'         => 'Municipio',
+                'label'                     => 'Municipio',
                 'disable_inarray_validator' => true,
-                'value_options' => [
+                'value_options'             => [
                 ],
             ],
         ]);
@@ -125,6 +125,20 @@ class StudentAddressForm extends Form
             'options'    => [
                 'label' => 'Continuar',
                 'id'    => 'submit',
+            ],
+        ]);
+
+        $this->add([
+            'type'       => Element\Checkbox::class,
+            'name'       => 'acceptTerms',
+            'options'    => [
+                'label'              => 'Label',
+                'use_hidden_element' => true,
+                'checked_value'      => 'yes',
+                'unchecked_value'    => 'no',
+            ],
+            'attributes' => [
+                'value' => 'yes',
             ],
         ]);
     }

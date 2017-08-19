@@ -177,19 +177,27 @@ class SurveyController extends AbstractActionController
         {
             $data = $this->params()->fromPost();
 
-            if ($data['hiddenGender'] != '')
+            if ($data["acceptTerms"] == "yes")
             {
-                $data['gender'] = $data['hiddenGender'];
+                if ($data['hiddenGender'] != '')
+                {
+                    $data['gender'] = $data['hiddenGender'];
+                }
+
+                $form->setData($data);
+
+                if ($form->isvalid())
+                {
+                    $this->surveyManager->addOrUpdateStudent($form->getData());
+
+                    return $this->redirect()->toUrl(
+                                    $this->url()->fromRoute('surveyManagementRoute', ['action' => 'addOrUpdateStudentAddress', 'id' => $idUser], ['query' => ['idSecret' => $idSecret]]));
+                }
             }
-
-            $form->setData($data);
-
-            if ($form->isvalid())
+            else
             {
-                $this->surveyManager->addOrUpdateStudent($form->getData());
-
                 return $this->redirect()->toUrl(
-                        $this->url()->fromRoute('surveyManagementRoute', ['action' => 'addOrUpdateStudentAddress', 'id' => $idUser], ['query' => ['idSecret' => $idSecret]]));
+                                $this->url()->fromRoute('surveyManagementRoute', ['action' => 'addOrUpdateStudentAddress', 'id' => $idUser], ['query' => ['idSecret' => $idSecret]]));
             }
         }
 
@@ -220,19 +228,28 @@ class SurveyController extends AbstractActionController
         {
             $data = $this->params()->fromPost();
 
-            $form->setData($data);
-
-            if ($form->isvalid())
+            if ($data["acceptTerms"] == "yes")
             {
-                $this->surveyManager->addOrUpdateStudentAddress($form->getData());
+                $form->setData($data);
 
-                return $this->redirect()->toUrl($this->url()->fromRoute('surveyManagementRoute', ['action' => 'addOrUpdateStudentStatus', 'id' => $idUser], ['query' => [
-                                'idSecret' => $idSecret]]
-                ));
+                if ($form->isvalid())
+                {
+                    $this->surveyManager->addOrUpdateStudentAddress($form->getData());
+
+                    return $this->redirect()->toUrl($this->url()->fromRoute('surveyManagementRoute', ['action' => 'addOrUpdateStudentStatus', 'id' => $idUser], ['query' => [
+                                            'idSecret' => $idSecret]]
+                    ));
+                }
+                else
+                {
+                    $this->studentAddressInstance->fillOptionsData($form);
+                }
             }
             else
             {
-                $this->studentAddressInstance->fillOptionsData($form);
+                return $this->redirect()->toUrl($this->url()->fromRoute('surveyManagementRoute', ['action' => 'addOrUpdateStudentStatus', 'id' => $idUser], ['query' => [
+                                        'idSecret' => $idSecret]]
+                ));
             }
         }
         else
@@ -265,23 +282,32 @@ class SurveyController extends AbstractActionController
         {
             $data = $this->params()->fromPost();
 
-            $form->setData($data);
-
-            $form = $this->studentStatusInstance->getUpdatedControlsBasedOnValidation($form);
-
-            if ($form->isvalid())
+            if ($data["acceptTerms"] == "yes")
             {
-                $data = $form->getData();
+                $form->setData($data);
 
-                $this->surveyManager->addOrUpdateStudentStatus($data);
+                $form = $this->studentStatusInstance->getUpdatedControlsBasedOnValidation($form);
 
-                return $this->redirect()->toUrl($this->url()->fromRoute('surveyManagementRoute', ['action' => 'addOrUpdateStudentProfessionalLife', 'id' => $idUser], ['query' => [
-                                'idSecret' => $idSecret]]
-                ));
+                if ($form->isvalid())
+                {
+                    $data = $form->getData();
+
+                    $this->surveyManager->addOrUpdateStudentStatus($data);
+
+                    return $this->redirect()->toUrl($this->url()->fromRoute('surveyManagementRoute', ['action' => 'addOrUpdateStudentProfessionalLife', 'id' => $idUser], ['query' => [
+                                            'idSecret' => $idSecret]]
+                    ));
+                }
+                else
+                {
+                    $this->studentStatusInstance->fillOptionsData($form);
+                }
             }
             else
             {
-                $this->studentStatusInstance->fillOptionsData($form);
+                return $this->redirect()->toUrl($this->url()->fromRoute('surveyManagementRoute', ['action' => 'addOrUpdateStudentProfessionalLife', 'id' => $idUser], ['query' => [
+                                        'idSecret' => $idSecret]]
+                ));
             }
         }
         else
@@ -314,23 +340,32 @@ class SurveyController extends AbstractActionController
         {
             $data = $this->params()->fromPost();
 
-            $form->setData($data);
-
-            $form = $this->studentProfessionalLifeInstance->getUpdatedControlsBasedOnValidation($form);
-
-            if ($form->isvalid())
+            if ($data["acceptTerms"] == "yes")
             {
-                $data = $form->getData();
+                $form->setData($data);
 
-                $this->surveyManager->addOrUpdateStudentProfessionalLife($data);
+                $form = $this->studentProfessionalLifeInstance->getUpdatedControlsBasedOnValidation($form);
 
-                return $this->redirect()->toUrl($this->url()->fromRoute('surveyManagementRoute', ['action' => 'addOrUpdateStudentFather', 'id' => $idUser], ['query' => [
-                                'idSecret' => $idSecret]]
-                ));
+                if ($form->isvalid())
+                {
+                    $data = $form->getData();
+
+                    $this->surveyManager->addOrUpdateStudentProfessionalLife($data);
+
+                    return $this->redirect()->toUrl($this->url()->fromRoute('surveyManagementRoute', ['action' => 'addOrUpdateStudentFather', 'id' => $idUser], ['query' => [
+                                            'idSecret' => $idSecret]]
+                    ));
+                }
+                else
+                {
+                    $this->studentProfessionalLifeInstance->fillOptionsData($form);
+                }
             }
             else
             {
-                $this->studentProfessionalLifeInstance->fillOptionsData($form);
+                return $this->redirect()->toUrl($this->url()->fromRoute('surveyManagementRoute', ['action' => 'addOrUpdateStudentFather', 'id' => $idUser], ['query' => [
+                                        'idSecret' => $idSecret]]
+                ));
             }
         }
         else
@@ -362,21 +397,31 @@ class SurveyController extends AbstractActionController
 
         if ($this->getRequest()->isPost())
         {
-            $data               = $this->params()->fromPost();
-            $data['parentType'] = $parentType;
+            $data = $this->params()->fromPost();
 
-            $form->setData($data);
-
-            $form = $this->studentParentInstance->getUpdatedControlsBasedOnValidation($form);
-
-            if ($form->isvalid())
+            if ($data["acceptTerms"] == "yes")
             {
-                $data = $form->getData();
+                $data['parentType'] = $parentType;
 
-                $this->surveyManager->addOrUpdateStudentParent($data);
+                $form->setData($data);
 
+                $form = $this->studentParentInstance->getUpdatedControlsBasedOnValidation($form);
+
+                if ($form->isvalid())
+                {
+                    $data = $form->getData();
+
+                    $this->surveyManager->addOrUpdateStudentParent($data);
+
+                    return $this->redirect()->toUrl($this->url()->fromRoute('surveyManagementRoute', ['action' => 'addOrUpdateStudentMother', 'id' => $idUser], ['query' => [
+                                            'idSecret' => $idSecret]]
+                    ));
+                }
+            }
+            else
+            {
                 return $this->redirect()->toUrl($this->url()->fromRoute('surveyManagementRoute', ['action' => 'addOrUpdateStudentMother', 'id' => $idUser], ['query' => [
-                                'idSecret' => $idSecret]]
+                                        'idSecret' => $idSecret]]
                 ));
             }
         }
@@ -409,21 +454,31 @@ class SurveyController extends AbstractActionController
 
         if ($this->getRequest()->isPost())
         {
-            $data               = $this->params()->fromPost();
-            $data['parentType'] = $parentType;
+            $data = $this->params()->fromPost();
 
-            $form->setData($data);
-
-            $form = $this->studentParentInstance->getUpdatedControlsBasedOnValidation($form);
-
-            if ($form->isvalid())
+            if ($data["acceptTerms"] == "yes")
             {
-                $data = $form->getData();
+                $data['parentType'] = $parentType;
 
-                $this->surveyManager->addOrUpdateStudentParent($data);
+                $form->setData($data);
 
+                $form = $this->studentParentInstance->getUpdatedControlsBasedOnValidation($form);
+
+                if ($form->isvalid())
+                {
+                    $data = $form->getData();
+
+                    $this->surveyManager->addOrUpdateStudentParent($data);
+
+                    return $this->redirect()->toUrl($this->url()->fromRoute('surveyManagementRoute', ['action' => 'addOrUpdateStudentBrother', 'id' => $idUser], ['query' => [
+                                            'idSecret' => $idSecret]]
+                    ));
+                }
+            }
+            else
+            {
                 return $this->redirect()->toUrl($this->url()->fromRoute('surveyManagementRoute', ['action' => 'addOrUpdateStudentBrother', 'id' => $idUser], ['query' => [
-                                'idSecret' => $idSecret]]
+                                        'idSecret' => $idSecret]]
                 ));
             }
         }
@@ -457,18 +512,27 @@ class SurveyController extends AbstractActionController
         {
             $data = $this->params()->fromPost();
 
-            $form->setData($data);
-
-            $form = $this->studentBrotherInstance->getUpdatedControlsBasedOnValidation($form);
-
-            if ($form->isvalid())
+            if ($data["acceptTerms"] == "yes")
             {
-                $data = $form->getData();
+                $form->setData($data);
 
-                $this->surveyManager->addOrUpdateStudentBrother($data);
+                $form = $this->studentBrotherInstance->getUpdatedControlsBasedOnValidation($form);
 
+                if ($form->isvalid())
+                {
+                    $data = $form->getData();
+
+                    $this->surveyManager->addOrUpdateStudentBrother($data);
+
+                    return $this->redirect()->toUrl($this->url()->fromRoute('surveyManagementRoute', ['action' => 'addOrUpdateStudentMate', 'id' => $idUser], ['query' => [
+                                            'idSecret' => $idSecret]]
+                    ));
+                }
+            }
+            else
+            {
                 return $this->redirect()->toUrl($this->url()->fromRoute('surveyManagementRoute', ['action' => 'addOrUpdateStudentMate', 'id' => $idUser], ['query' => [
-                                'idSecret' => $idSecret]]
+                                        'idSecret' => $idSecret]]
                 ));
             }
         }
@@ -502,23 +566,32 @@ class SurveyController extends AbstractActionController
         {
             $data = $this->params()->fromPost();
 
-            $form->setData($data);
-
-            $form = $this->studentMateInstance->getUpdatedControlsBasedOnValidation($form);
-
-            if ($form->isvalid())
+            if ($data["acceptTerms"] == "yes")
             {
-                $data = $form->getData();
+                $form->setData($data);
 
-                $this->surveyManager->addOrUpdateStudentMate($data);
+                $form = $this->studentMateInstance->getUpdatedControlsBasedOnValidation($form);
 
-                return $this->redirect()->toUrl($this->url()->fromRoute('surveyManagementRoute', ['action' => 'addOrUpdateStudentSocialLife', 'id' => $idUser], ['query' => [
-                                'idSecret' => $idSecret]]
-                ));
+                if ($form->isvalid())
+                {
+                    $data = $form->getData();
+
+                    $this->surveyManager->addOrUpdateStudentMate($data);
+
+                    return $this->redirect()->toUrl($this->url()->fromRoute('surveyManagementRoute', ['action' => 'addOrUpdateStudentSocialLife', 'id' => $idUser], ['query' => [
+                                            'idSecret' => $idSecret]]
+                    ));
+                }
+                else
+                {
+                    $this->studentMateInstance->fillOptionsData($form);
+                }
             }
             else
             {
-                $this->studentMateInstance->fillOptionsData($form);
+                return $this->redirect()->toUrl($this->url()->fromRoute('surveyManagementRoute', ['action' => 'addOrUpdateStudentSocialLife', 'id' => $idUser], ['query' => [
+                                        'idSecret' => $idSecret]]
+                ));
             }
         }
         else
@@ -551,23 +624,32 @@ class SurveyController extends AbstractActionController
         {
             $data = $this->params()->fromPost();
 
-            $form->setData($data);
-
-            $form = $this->studentSocialLifeInstance->getUpdatedControlsBasedOnValidation($form);
-
-            if ($form->isvalid())
+            if ($data["acceptTerms"] == "yes")
             {
-                $data = $form->getData();
+                $form->setData($data);
 
-                $this->surveyManager->addOrUpdateStudentSocialLife($data);
+                $form = $this->studentSocialLifeInstance->getUpdatedControlsBasedOnValidation($form);
 
-                return $this->redirect()->toUrl($this->url()->fromRoute('surveyManagementRoute', ['action' => 'addOrUpdateStudentFinish', 'id' => $idUser], ['query' => [
-                                'idSecret' => $idSecret]]
-                ));
+                if ($form->isvalid())
+                {
+                    $data = $form->getData();
+
+                    $this->surveyManager->addOrUpdateStudentSocialLife($data);
+
+                    return $this->redirect()->toUrl($this->url()->fromRoute('surveyManagementRoute', ['action' => 'addOrUpdateStudentFinish', 'id' => $idUser], ['query' => [
+                                            'idSecret' => $idSecret]]
+                    ));
+                }
+                else
+                {
+                    $this->studentSocialLifeInstance->fillOptionsData($form);
+                }
             }
             else
             {
-                $this->studentSocialLifeInstance->fillOptionsData($form);
+                return $this->redirect()->toUrl($this->url()->fromRoute('surveyManagementRoute', ['action' => 'addOrUpdateStudentFinish', 'id' => $idUser], ['query' => [
+                                        'idSecret' => $idSecret]]
+                ));
             }
         }
         else

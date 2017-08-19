@@ -24,6 +24,7 @@ use Zend\Form\Element;
  */
 class StudentMateForm extends Form
 {
+
     public function __construct()
     {
         // Define form name
@@ -35,7 +36,7 @@ class StudentMateForm extends Form
         // Add filters
         $this->addInputFilter();
     }
-    
+
     private function addElements()
     {
         $this->add([
@@ -74,7 +75,7 @@ class StudentMateForm extends Form
                 'class' => 'form-control',
             ],
         ]);
-        
+
         $this->add([
             'type'       => Element\Date::class,
             'name'       => 'birthdate',
@@ -88,7 +89,7 @@ class StudentMateForm extends Form
                 'step' => '1', // days; default step interval is 1 day
             ],
         ]);
-        
+
         $this->add([
             'type'       => Element\Text::class,
             'name'       => 'occupation',
@@ -115,7 +116,7 @@ class StudentMateForm extends Form
                 ],
             ],
         ]);
-        
+
         $this->add([
             'type'       => Element\Text::class,
             'name'       => 'academicTitle',
@@ -127,7 +128,7 @@ class StudentMateForm extends Form
                 'label' => 'Estudios realizados / Título Académico',
             ],
         ]);
-        
+
         $this->add([
             'type'       => Element\Text::class,
             'name'       => 'timeTogether',
@@ -139,7 +140,7 @@ class StudentMateForm extends Form
                 'label' => 'Tiempo de estar juntos',
             ],
         ]);
-        
+
         $this->add([
             'type'       => Element\Textarea::class,
             'name'       => 'communication',
@@ -151,7 +152,7 @@ class StudentMateForm extends Form
                 'label' => 'Tipo de relación entre su pareja y usted',
             ],
         ]);
-        
+
         $this->add([
             'type'       => Element\Select::class,
             'name'       => 'gender',
@@ -166,7 +167,7 @@ class StudentMateForm extends Form
                 ],
             ],
         ]);
-        
+
         $this->add([
             'type'       => Element\Select::class,
             'name'       => 'activeSexLife',
@@ -181,7 +182,7 @@ class StudentMateForm extends Form
                 ],
             ],
         ]);
-        
+
         $this->add([
             'type'       => Element\Select::class,
             'name'       => 'relationshipId',
@@ -189,14 +190,28 @@ class StudentMateForm extends Form
                 'class' => 'form-control',
             ],
             'options'    => [
-                'label'         => 'Tipo de relación',
+                'label'                     => 'Tipo de relación',
                 'disable_inarray_validator' => true,
-                'value_options' => [
+                'value_options'             => [
                 ],
             ],
         ]);
+
+        $this->add([
+            'type'       => Element\Checkbox::class,
+            'name'       => 'acceptTerms',
+            'options'    => [
+                'label'              => 'Label',
+                'use_hidden_element' => true,
+                'checked_value'      => 'yes',
+                'unchecked_value'    => 'no',
+            ],
+            'attributes' => [
+                'value' => 'yes',
+            ],
+        ]);
     }
-    
+
     private function addInputFilter()
     {
         $inputFilter = new InputFilter();
@@ -237,7 +252,7 @@ class StudentMateForm extends Form
                 ],
             ],
         ]);
-        
+
         $inputFilter->add([
             'name'       => 'timeTogether',
             'filters'    => [
@@ -255,7 +270,7 @@ class StudentMateForm extends Form
                 ],
             ],
         ]);
-        
+
         $inputFilter->add([
             'name'       => 'communication',
             'filters'    => [
@@ -274,4 +289,5 @@ class StudentMateForm extends Form
             ],
         ]);
     }
+
 }

@@ -10,7 +10,7 @@
  *    Elder Mutzus <elmutzus@gmail.com> - initial API and implementation and/or initial documentation
  */
 $idSecret = urldecode($this->idSecret);
-$form->setAttribute('action',  $this->url('surveyManagementRoute', ['action' => 'addOrUpdateStudentProfessionalLife', 'id' => $this->id]). '?idSecret=' . urlencode($idSecret));
+$form->setAttribute('action', $this->url('surveyManagementRoute', ['action' => 'addOrUpdateStudentProfessionalLife', 'id' => $this->id]) . '?idSecret=' . urlencode($idSecret));
 $form->prepare();
 ?>
 
@@ -109,9 +109,12 @@ $form->prepare();
                 <?= $this->formElement($form->get('selfDescription')); ?>
                 <?= $this->formElementErrors($form->get('selfDescription'), ['class' => 'alert-danger']); ?>
             </div>
-
-
-            <div class="pull-right">
+            <div class="col-sm-10 col-md-10 col-lg-10">
+                <div class="form-group">
+                    <?= $this->formElement($form->get('acceptTerms')); ?> <i>Acepto que la informaci&oacute;n proporcionada en esta secci&oacute;n sea utilizada para an&aacute;lisis confidencial por parte de Asesores y/o Psic&oacute;logos de la Facultad de Arquitectura de la Universidad de San Carlos de Guatemala.</i>
+                </div>
+            </div>
+            <div class="col-sm-2 col-md-2 col-lg-2">
                 <?= $this->formElement($form->get('submit')); ?>
             </div>
             <?= $this->form()->closeTag(); ?>
@@ -128,7 +131,7 @@ $form->prepare();
             $("[name='scholarship']").removeAttr("readonly");
         }
     }
-    
+
     function validateStudiesLanguages() {
         if ($("[name='studiesLanguages']").val() == '0') {
             $("[name='studiesLanguagesPercentage']").attr("readonly", "true");
@@ -138,7 +141,7 @@ $form->prepare();
             $("[name='studiesWhichLanguages']").removeAttr("readonly");
         }
     }
-    
+
     function validateHandlesLanguages() {
         if ($("[name='handlesLanguages']").val() == '0') {
             $("[name='handlesLanguagesPercentage']").attr("readonly", "true");

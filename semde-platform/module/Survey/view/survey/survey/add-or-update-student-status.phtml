@@ -139,7 +139,12 @@ $form->prepare();
                     <?= $this->formElementErrors($form->get('movedOnSolution'), ['class' => 'alert-danger']); ?>
                 </div>
             </div>
-            <div class="pull-right">
+            <div class="col-sm-10 col-md-10 col-lg-10">
+                <div class="form-group">
+                    <?= $this->formElement($form->get('acceptTerms')); ?> <i>Acepto que la informaci&oacute;n proporcionada en esta secci&oacute;n sea utilizada para an&aacute;lisis confidencial por parte de Asesores y/o Psic&oacute;logos de la Facultad de Arquitectura de la Universidad de San Carlos de Guatemala.</i>
+                </div>
+            </div>
+            <div class="col-sm-2 col-md-2 col-lg-2">
                 <?= $this->formElement($form->get('submit')); ?>
             </div>
             <?= $this->form()->closeTag(); ?>

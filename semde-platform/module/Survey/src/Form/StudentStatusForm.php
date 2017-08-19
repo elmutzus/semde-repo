@@ -160,9 +160,9 @@ class StudentStatusForm extends Form
                 'class' => 'form-control',
             ],
             'options'    => [
-                'label'         => 'Con quién vive actualmente?',
+                'label'                     => 'Con quién vive actualmente?',
                 'disable_inarray_validator' => true,
-                'value_options' => [
+                'value_options'             => [
                 ],
             ],
         ]);
@@ -186,9 +186,9 @@ class StudentStatusForm extends Form
                 'class' => 'form-control',
             ],
             'options'    => [
-                'label'         => 'De quién depende su sostenimiento económico?',
+                'label'                     => 'De quién depende su sostenimiento económico?',
                 'disable_inarray_validator' => true,
-                'value_options' => [
+                'value_options'             => [
                 ],
             ],
         ]);
@@ -212,9 +212,9 @@ class StudentStatusForm extends Form
                 'class' => 'form-control',
             ],
             'options'    => [
-                'label'         => 'Estado civil',
+                'label'                     => 'Estado civil',
                 'disable_inarray_validator' => true,
-                'value_options' => [
+                'value_options'             => [
                 ],
             ],
         ]);
@@ -226,9 +226,9 @@ class StudentStatusForm extends Form
                 'class' => 'form-control',
             ],
             'options'    => [
-                'label'         => 'Cuánto tiempo le lleva trasladarse de su residencia a la USAC?',
+                'label'                     => 'Cuánto tiempo le lleva trasladarse de su residencia a la USAC?',
                 'disable_inarray_validator' => true,
-                'value_options' => [
+                'value_options'             => [
                 ],
             ],
         ]);
@@ -240,13 +240,13 @@ class StudentStatusForm extends Form
                 'class' => 'form-control',
             ],
             'options'    => [
-                'label'         => 'Cómo se transporta para llegar a la USAC?',
+                'label'                     => 'Cómo se transporta para llegar a la USAC?',
                 'disable_inarray_validator' => true,
-                'value_options' => [
+                'value_options'             => [
                 ],
             ],
         ]);
-        
+
         $this->add([
             'type'       => Element\Select::class,
             'name'       => 'movedOn',
@@ -254,9 +254,9 @@ class StudentStatusForm extends Form
                 'class' => 'form-control',
             ],
             'options'    => [
-                'label'         => 'Tuvo que migrar del interior del pais a la capital para realizar sus estudios universitarios?',
+                'label'                     => 'Tuvo que migrar del interior del pais a la capital para realizar sus estudios universitarios?',
                 'disable_inarray_validator' => true,
-                'value_options' => [
+                'value_options'             => [
                     '1' => 'Sí',
                     '0' => 'No',
                 ],
@@ -285,6 +285,20 @@ class StudentStatusForm extends Form
             'options'    => [
                 'label' => 'Continuar',
                 'id'    => 'submit',
+            ],
+        ]);
+
+        $this->add([
+            'type'       => Element\Checkbox::class,
+            'name'       => 'acceptTerms',
+            'options'    => [
+                'label'              => 'Label',
+                'use_hidden_element' => true,
+                'checked_value'      => 'yes',
+                'unchecked_value'    => 'no',
+            ],
+            'attributes' => [
+                'value' => 'yes',
             ],
         ]);
     }
@@ -426,7 +440,7 @@ class StudentStatusForm extends Form
                 ],
             ],
         ]);
-        
+
         $inputFilter->add([
             'name'       => 'movedOnSolution',
             'filters'    => [

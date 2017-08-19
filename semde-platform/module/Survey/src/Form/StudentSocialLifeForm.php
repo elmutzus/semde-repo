@@ -116,7 +116,7 @@ class StudentSocialLifeForm extends Form
                 ],
             ],
         ]);
-        
+
         $this->add([
             'type'       => Element\Text::class,
             'name'       => 'exercisesWhich',
@@ -128,7 +128,7 @@ class StudentSocialLifeForm extends Form
                 'label' => 'Cuál(es)?',
             ],
         ]);
-        
+
         $this->add([
             'type'       => Element\Text::class,
             'name'       => 'exercisesFrequency',
@@ -140,7 +140,7 @@ class StudentSocialLifeForm extends Form
                 'label' => 'Con qué frecuencia?',
             ],
         ]);
-        
+
         $this->add([
             'type'       => Element\Select::class,
             'name'       => 'drinksAlcohol',
@@ -155,7 +155,7 @@ class StudentSocialLifeForm extends Form
                 ],
             ],
         ]);
-        
+
         $this->add([
             'type'       => Element\Text::class,
             'name'       => 'drinksAlcoholFrequency',
@@ -167,7 +167,7 @@ class StudentSocialLifeForm extends Form
                 'label' => 'Con qué frecuencia?',
             ],
         ]);
-        
+
         $this->add([
             'type'       => Element\Select::class,
             'name'       => 'smokes',
@@ -182,7 +182,7 @@ class StudentSocialLifeForm extends Form
                 ],
             ],
         ]);
-        
+
         $this->add([
             'type'       => Element\Text::class,
             'name'       => 'smokesFrequency',
@@ -194,7 +194,7 @@ class StudentSocialLifeForm extends Form
                 'label' => 'Con qué frecuencia?',
             ],
         ]);
-        
+
         $this->add([
             'type'       => Element\Select::class,
             'name'       => 'hasChronicDisease',
@@ -209,7 +209,7 @@ class StudentSocialLifeForm extends Form
                 ],
             ],
         ]);
-        
+
         $this->add([
             'type'       => Element\Text::class,
             'name'       => 'chronicDisease',
@@ -221,7 +221,7 @@ class StudentSocialLifeForm extends Form
                 'label' => 'Cuál?',
             ],
         ]);
-        
+
         $this->add([
             'type'       => Element\Select::class,
             'name'       => 'hasLearningIllness',
@@ -236,7 +236,7 @@ class StudentSocialLifeForm extends Form
                 ],
             ],
         ]);
-        
+
         $this->add([
             'type'       => Element\Text::class,
             'name'       => 'learningIllness',
@@ -248,7 +248,7 @@ class StudentSocialLifeForm extends Form
                 'label' => 'Cuál?',
             ],
         ]);
-        
+
         $this->add([
             'type'       => Element\Text::class,
             'name'       => 'studyTime',
@@ -260,7 +260,7 @@ class StudentSocialLifeForm extends Form
                 'label' => 'Cuánto tiempo dedica al estudio a diario?',
             ],
         ]);
-        
+
         $this->add([
             'type'       => Element\Textarea::class,
             'name'       => 'studyMethodology',
@@ -272,7 +272,7 @@ class StudentSocialLifeForm extends Form
                 'label' => 'Qué metodologías utiliza para sus estudios y tareas?',
             ],
         ]);
-        
+
         $this->add([
             'type'       => Element\Number::class,
             'name'       => 'sleepHours',
@@ -284,7 +284,7 @@ class StudentSocialLifeForm extends Form
                 'label' => 'Cuántas horas durme diariamente?',
             ],
         ]);
-        
+
         $this->add([
             'type'       => Element\Number::class,
             'name'       => 'familyHours',
@@ -296,7 +296,7 @@ class StudentSocialLifeForm extends Form
                 'label' => 'Cuánto tiempo dedica para compartir con su familia?',
             ],
         ]);
-        
+
         $this->add([
             'type'       => Element\Textarea::class,
             'name'       => 'familyCommunication',
@@ -308,7 +308,7 @@ class StudentSocialLifeForm extends Form
                 'label' => 'Cómo describe su dinámica familiar?',
             ],
         ]);
-        
+
         $this->add([
             'type'       => Element\Number::class,
             'name'       => 'friendsHours',
@@ -320,7 +320,7 @@ class StudentSocialLifeForm extends Form
                 'label' => 'Cuánto tiempo dedica para compartir con sus amistades?',
             ],
         ]);
-        
+
         $this->add([
             'type'       => Element\Number::class,
             'name'       => 'mateHours',
@@ -332,7 +332,7 @@ class StudentSocialLifeForm extends Form
                 'label' => 'Cuánto tiempo dedica para estar con su pareja?',
             ],
         ]);
-        
+
         $this->add([
             'type'       => Element\Text::class,
             'name'       => 'anotherActivityTime',
@@ -344,8 +344,22 @@ class StudentSocialLifeForm extends Form
                 'label' => 'Cuánto tiempo dedica a otra actividad?',
             ],
         ]);
+
+        $this->add([
+            'type'       => Element\Checkbox::class,
+            'name'       => 'acceptTerms',
+            'options'    => [
+                'label'              => 'Label',
+                'use_hidden_element' => true,
+                'checked_value'      => 'yes',
+                'unchecked_value'    => 'no',
+            ],
+            'attributes' => [
+                'value' => 'yes',
+            ],
+        ]);
     }
-    
+
     private function addInputFilter()
     {
         $inputFilter = new InputFilter();
@@ -368,7 +382,7 @@ class StudentSocialLifeForm extends Form
                 ],
             ],
         ]);
-        
+
         $inputFilter->add([
             'name'       => 'exercisesWhich',
             'filters'    => [
@@ -386,7 +400,7 @@ class StudentSocialLifeForm extends Form
                 ],
             ],
         ]);
-        
+
         $inputFilter->add([
             'name'       => 'exercisesFrequency',
             'filters'    => [
@@ -404,7 +418,7 @@ class StudentSocialLifeForm extends Form
                 ],
             ],
         ]);
-        
+
         $inputFilter->add([
             'name'       => 'drinksAlcoholFrequency',
             'filters'    => [
@@ -422,7 +436,7 @@ class StudentSocialLifeForm extends Form
                 ],
             ],
         ]);
-        
+
         $inputFilter->add([
             'name'       => 'smokesFrequency',
             'filters'    => [
@@ -440,7 +454,7 @@ class StudentSocialLifeForm extends Form
                 ],
             ],
         ]);
-        
+
         $inputFilter->add([
             'name'       => 'chronicDisease',
             'filters'    => [
@@ -458,7 +472,7 @@ class StudentSocialLifeForm extends Form
                 ],
             ],
         ]);
-        
+
         $inputFilter->add([
             'name'       => 'learningIllness',
             'filters'    => [
@@ -476,7 +490,7 @@ class StudentSocialLifeForm extends Form
                 ],
             ],
         ]);
-        
+
         $inputFilter->add([
             'name'       => 'studyTime',
             'filters'    => [
@@ -494,7 +508,7 @@ class StudentSocialLifeForm extends Form
                 ],
             ],
         ]);
-        
+
         $inputFilter->add([
             'name'       => 'studyMethodology',
             'filters'    => [
@@ -512,7 +526,7 @@ class StudentSocialLifeForm extends Form
                 ],
             ],
         ]);
-        
+
         $inputFilter->add([
             'name'       => 'anotherActivityTime',
             'filters'    => [
@@ -530,7 +544,7 @@ class StudentSocialLifeForm extends Form
                 ],
             ],
         ]);
-        
+
         $inputFilter->add([
             'name'       => 'familyCommunication',
             'filters'    => [

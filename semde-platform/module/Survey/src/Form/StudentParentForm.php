@@ -217,6 +217,20 @@ class StudentParentForm extends Form
                 'label' => 'Cuál?',
             ],
         ]);
+
+        $this->add([
+            'type'       => Element\Checkbox::class,
+            'name'       => 'acceptTerms',
+            'options'    => [
+                'label'              => 'Label',
+                'use_hidden_element' => true,
+                'checked_value'      => 'yes',
+                'unchecked_value'    => 'no',
+            ],
+            'attributes' => [
+                'value' => 'yes',
+            ],
+        ]);
     }
 
     private function addInputFilter()

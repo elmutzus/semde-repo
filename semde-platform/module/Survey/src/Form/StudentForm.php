@@ -99,10 +99,10 @@ class StudentForm extends Form
                 'label' => 'Apellidos',
             ],
         ]);
-        
+
         $this->add([
-            'type'       => Element\Hidden::class,
-            'name'       => 'hiddenGender',
+            'type' => Element\Hidden::class,
+            'name' => 'hiddenGender',
         ]);
 
         $this->add([
@@ -134,7 +134,7 @@ class StudentForm extends Form
                 'step' => '1', // days; default step interval is 1 day
             ],
         ]);
-        
+
         $this->add([
             'type'       => Element\Text::class,
             'name'       => 'birthplace',
@@ -157,6 +157,20 @@ class StudentForm extends Form
             'options'    => [
                 'label' => 'Continuar',
                 'id'    => 'submit',
+            ],
+        ]);
+
+        $this->add([
+            'type'       => Element\Checkbox::class,
+            'name'       => 'acceptTerms',
+            'options'    => [
+                'label'              => 'Label',
+                'use_hidden_element' => true,
+                'checked_value'      => 'yes',
+                'unchecked_value'    => 'no',
+            ],
+            'attributes' => [
+                'value' => 'yes',
             ],
         ]);
     }
@@ -247,7 +261,7 @@ class StudentForm extends Form
                 ],
             ],
         ]);
-        
+
         $inputFilter->add([
             'name'       => 'lastname',
             'filters'    => [
@@ -265,7 +279,7 @@ class StudentForm extends Form
                 ],
             ],
         ]);
-        
+
         $inputFilter->add([
             'name'       => 'birthplace',
             'filters'    => [
