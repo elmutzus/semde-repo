@@ -174,7 +174,7 @@ class StudentMateForm extends Form
                 'class' => 'form-control',
             ],
             'options'    => [
-                'label'         => 'Tienen una vida sexual activa?',
+                'label'         => 'Tiene buena comunicación con su familia política?',
                 'value_options' => [
                     '1' => 'Sí',
                     '0' => 'No',
