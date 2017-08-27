@@ -252,12 +252,14 @@ class ReportManager
 
     /**
      * 
+     * @param type $areaType
      * @param type $student
+     * @param type $studentName
      * @return type
      */
-    public function getReport4Detail($areaType, $student, $nov)
+    public function getReport4Detail($areaType, $student, $studentName)
     {
-        return $this->report4Helper->getDetail($areaType, $student, $nov);
+        return $this->report4Helper->getDetail($areaType, $student, $studentName);
     }
 
     /**

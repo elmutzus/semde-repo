@@ -76,13 +76,13 @@ class AuxiliaryControllerHelper
 
     /**
      * 
-     * @param type $studentNov
+     * @param type $studentName
      * @param type $form
      * @return type
      */
-    public function fillAreasData($studentNov, $form)
+    public function fillAreasData($studentName, $form)
     {
-        $options = $this->surveyManager->getReport4AvailableAreas($studentNov);
+        $options = $this->surveyManager->getReport4AvailableAreas($studentName);
 
         $selectElement = $form->get('areaType');
 

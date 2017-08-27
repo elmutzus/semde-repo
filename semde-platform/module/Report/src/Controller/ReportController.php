@@ -368,11 +368,10 @@ class ReportController extends AbstractActionController
 
         $student     = $this->params()->fromQuery('si');
         $studentName = $this->params()->fromQuery('sn');
-        $studentNov  = $this->params()->fromQuery('nv');
 
         $form = new Report4DetailForm();
 
-        $form = $this->auxiliaryHelper->fillAreasData($studentNov, $form);
+        $form = $this->auxiliaryHelper->fillAreasData($studentName, $form);
 
         if ($this->getRequest()->isPost())
         {
@@ -384,12 +383,11 @@ class ReportController extends AbstractActionController
             {
                 $data = $form->getData();
 
-                $reportData = $this->reportManager->getReport4Detail($data['areaType'], $student, $studentNov);
+                $reportData = $this->reportManager->getReport4Detail($data['areaType'], $student, $studentName);
 
                 return new ViewModel([
                     'studentId'    => $student,
                     'studentName'  => $studentName,
-                    'studentNov'   => $studentNov,
                     'reportDetail' => $reportData,
                     'form'         => $form,
                 ]);
@@ -398,7 +396,6 @@ class ReportController extends AbstractActionController
 
         return new ViewModel([
             'studentId'   => $student,
-            'studentNov'  => $studentNov,
             'studentName' => $studentName,
             'form'        => $form,
         ]);
